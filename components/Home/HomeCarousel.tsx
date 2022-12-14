@@ -80,6 +80,8 @@ export default function HomeCarousel() {
 
 namespace S {
 	export const HomeCarouselLayout = styled.section`
+		margin-bottom: 7.6rem;
+
 		> div:first-of-type {
 			padding: 3.4rem 6.2rem;
 			display: flex;
