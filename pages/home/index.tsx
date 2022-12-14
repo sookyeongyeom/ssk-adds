@@ -1,6 +1,8 @@
+import { ReactElement } from 'react';
 import HomePage from '../../components/Home/HomePage';
 import CustomHead from '../../components/Seo/CustomHead';
 import { Seo } from '../../constants/seo';
+import HomeLayout from '../../components/Layout/HomeLayout';
 
 export default function index() {
 	return (
@@ -10,3 +12,7 @@ export default function index() {
 		</>
 	);
 }
+
+index.getLayout = function getLayout(page: ReactElement) {
+	return <HomeLayout>{page}</HomeLayout>;
+};
