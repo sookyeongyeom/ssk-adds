@@ -1,3 +1,8 @@
+import Header from '../Shared/Header';
 export default function HomePage() {
-	return <>홈페이지</>;
+	return (
+		<>
+			<Header />
+		</>
+	);
 }
