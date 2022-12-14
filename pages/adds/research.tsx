@@ -1,10 +1,11 @@
-import ResearchPage from '../../components/Adds/Research.tsx/ResearchPage';
+import ResearchPage from '../../components/Adds/Research/ResearchPage';
 import CustomHead from '../../components/Seo/CustomHead';
+import { Seo } from '../../constants/seo';
 
 export default function research() {
 	return (
 		<>
-			<CustomHead title={'조사설계'} />
+			<CustomHead title={Seo.Title.research} />
 			<ResearchPage />
 		</>
 	);
