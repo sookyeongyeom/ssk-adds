@@ -68,6 +68,7 @@ namespace S {
 		display: flex;
 		justify-content: center;
 		gap: 31.3rem;
+		min-width: 120rem;
 
 		> section {
 			display: flex;
@@ -95,6 +96,7 @@ namespace S {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			white-space: nowrap;
 		}
 
 		> ul {
