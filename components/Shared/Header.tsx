@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { Sizes } from '../../styles/sizes';
 import { BoxShadows } from '../../styles/shadows';
 import { Fonts } from '../../styles/fonts';
+import Link from 'next/link';
+import { Paths } from '../../constants/paths';
+import { Seo } from '../../constants/seo';
 
 export default function Header() {
 	return (
@@ -12,31 +15,31 @@ export default function Header() {
 					<S.MenuBox>
 						<h3>ADDS소개</h3>
 						<ul>
-							<li>ADDS 소개</li>
-							<li>연구진 소개</li>
-							<li>조사설계</li>
+							<MenuLinkItem href={Paths.adds + Paths.intro} menu={Seo.Title.intro} />
+							<MenuLinkItem href={Paths.adds + Paths.member} menu={Seo.Title.member} />
+							<MenuLinkItem href={Paths.adds + Paths.research} menu={Seo.Title.research} />
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
 						<h3>발간물</h3>
 						<ul>
-							<li>발간물</li>
+							<MenuLinkItem href={Paths.adds + Paths.publication} menu={Seo.Title.publication} />
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
 						<h3>데이터</h3>
 						<ul>
-							<li>자료안내</li>
-							<li>데이터활용논문</li>
+							<MenuLinkItem href={Paths.adds + Paths.resource} menu={Seo.Title.resource} />
+							<MenuLinkItem href={Paths.adds + Paths.paper} menu={Seo.Title.paper} />
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
 						<h3>소통공간</h3>
 						<ul>
-							<li>공지사항</li>
-							<li>보도자료</li>
-							<li>FAQ</li>
-							<li>Contact</li>
+							<MenuLinkItem href={Paths.adds + Paths.notice} menu={Seo.Title.notice} />
+							<MenuLinkItem href={Paths.adds + Paths.news} menu={Seo.Title.news} />
+							<MenuLinkItem href={Paths.adds + Paths.faq} menu={Seo.Title.faq} />
+							<MenuLinkItem href={Paths.adds + Paths.contact} menu={Seo.Title.contact} />
 						</ul>
 					</S.MenuBox>
 				</S.MenuWrapper>
@@ -48,6 +51,14 @@ export default function Header() {
 		</S.HeaderLayout>
 	);
 }
+
+const MenuLinkItem = ({ href, menu }: MenuLinkItemProps) => {
+	return (
+		<Link href={href}>
+			<li>{menu}</li>
+		</Link>
+	);
+};
 
 namespace S {
 	export const HeaderLayout = styled.header`
@@ -96,7 +107,7 @@ namespace S {
 			white-space: nowrap;
 			border-top: 0.3rem solid black;
 
-			> li {
+			li {
 				height: 4.3rem;
 				display: flex;
 				align-items: center;
