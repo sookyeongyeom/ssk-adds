@@ -121,6 +121,7 @@ namespace S {
 				align-items: center;
 				justify-content: center;
 				width: 15rem;
+				background-color: white;
 
 				&:hover {
 					background-color: lightgray;
