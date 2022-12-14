@@ -1,0 +1,15 @@
+export const Paths = {
+	adds: '/adds',
+	admin: '/admin',
+	intro: '/intro',
+	member: '/member',
+	research: '/research',
+	publication: '/publication',
+	resource: '/resource',
+	paper: '/paper',
+	notice: '/notice',
+	news: '/news',
+	faq: '/faq',
+	contact: '/contact',
+	login: '/login',
+};
