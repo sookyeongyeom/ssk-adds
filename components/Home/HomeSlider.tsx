@@ -74,6 +74,7 @@ namespace S {
 		overflow: hidden;
 		position: relative;
 		z-index: -10;
+		margin-bottom: 7.1rem;
 	`;
 
 	export const SliderImageWrapper = styled.div<SliderImageWrapperProps>`
@@ -136,7 +137,7 @@ namespace S {
 		}
 	`;
 
-	export const SliderIndicator = styled.div<SliderIndicatorProps>`
+	export const SliderIndicator = styled.div<IndicatorProps>`
 		width: 1.2rem;
 		height: 1.2rem;
 		border-radius: 50%;
