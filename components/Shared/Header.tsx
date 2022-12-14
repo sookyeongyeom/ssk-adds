@@ -9,11 +9,13 @@ import { Seo } from '../../constants/seo';
 export default function Header() {
 	return (
 		<S.HeaderLayout>
-			<S.Logo src='/assets/header_logo.png' />
+			<S.LogoLink href='/home'>
+				<img src='/assets/header_logo.png' />
+			</S.LogoLink>
 			<section>
 				<S.MenuWrapper>
 					<S.MenuBox>
-						<h3>ADDS소개</h3>
+						<MenuLinkItem href={Paths.adds + Paths.intro} menu={Seo.Title.intro} />
 						<ul>
 							<MenuLinkItem href={Paths.adds + Paths.intro} menu={Seo.Title.intro} />
 							<MenuLinkItem href={Paths.adds + Paths.member} menu={Seo.Title.member} />
@@ -21,20 +23,20 @@ export default function Header() {
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
-						<h3>발간물</h3>
+						<MenuLinkItem href={Paths.adds + Paths.publication} menu={Seo.Title.publication} />
 						<ul>
 							<MenuLinkItem href={Paths.adds + Paths.publication} menu={Seo.Title.publication} />
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
-						<h3>데이터</h3>
+						<MenuLinkItem href={Paths.adds + Paths.resource} menu={'데이터'} />
 						<ul>
 							<MenuLinkItem href={Paths.adds + Paths.resource} menu={Seo.Title.resource} />
 							<MenuLinkItem href={Paths.adds + Paths.paper} menu={Seo.Title.paper} />
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
-						<h3>소통공간</h3>
+						<MenuLinkItem href={Paths.adds + Paths.notice} menu={'소통공간'} />
 						<ul>
 							<MenuLinkItem href={Paths.adds + Paths.notice} menu={Seo.Title.notice} />
 							<MenuLinkItem href={Paths.adds + Paths.news} menu={Seo.Title.news} />
@@ -75,9 +77,13 @@ namespace S {
 		}
 	`;
 
-	export const Logo = styled.img`
-		width: 18rem;
+	export const LogoLink = styled(Link)`
 		align-self: center;
+		display: flex;
+
+		> img {
+			width: 18rem;
+		}
 	`;
 
 	export const MenuWrapper = styled.div`
@@ -88,15 +94,15 @@ namespace S {
 	export const MenuBox = styled.div`
 		cursor: pointer;
 		position: relative;
-		padding: 0 3.5rem;
 
-		> h3 {
+		> a > li {
 			${Fonts.regular18}
 			height: ${Sizes.desktopHeaderHeight};
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			white-space: nowrap;
+			padding: 0 3.5rem;
 		}
 
 		> ul {
