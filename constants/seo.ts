@@ -1,4 +1,4 @@
-export const Seo = {
+export const Seo: SeoType = {
 	Title: {
 		home: 'Home',
 		contact: 'Contact',
