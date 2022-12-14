@@ -1,4 +1,4 @@
-export const Paths = {
+export const Paths: PathsType = {
 	adds: '/adds',
 	admin: '/admin',
 	intro: '/intro',
