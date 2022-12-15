@@ -36,19 +36,30 @@ export const svgDoubleRight7 = (
 	</svg>
 );
 
-export const svgUp = (
+export const svgUp11 = (
 	<svg width='11' height='7' viewBox='0 0 11 7' fill='none' xmlns='http://www.w3.org/2000/svg'>
 		<path opacity='0.6' d='M10 6L5.5 1L1 6' stroke='#333333' />
 	</svg>
 );
 
-export const svgDown = (
+export const svgDown12 = (
 	<svg width='12' height='6' viewBox='0 0 12 6' fill='none' xmlns='http://www.w3.org/2000/svg'>
 		<path
 			fillRule='evenodd'
 			clipRule='evenodd'
 			d='M0.646447 0.146447C0.841709 -0.0488155 1.15829 -0.0488155 1.35355 0.146447L6 4.79289L10.6464 0.146447C10.8417 -0.0488155 11.1583 -0.0488155 11.3536 0.146447C11.5488 0.341709 11.5488 0.658291 11.3536 0.853553L6.35355 5.85355C6.15829 6.04882 5.84171 6.04882 5.64645 5.85355L0.646447 0.853553C0.451184 0.658291 0.451184 0.341709 0.646447 0.146447Z'
 			fill='#757575'
+		/>
+	</svg>
+);
+
+export const svgDown23 = (
+	<svg width='23' height='12' viewBox='0 0 23 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<path
+			fillRule='evenodd'
+			clipRule='evenodd'
+			d='M0.792893 0.292893C1.18342 -0.0976311 1.81658 -0.0976311 2.20711 0.292893L11.5 9.58579L20.7929 0.292893C21.1834 -0.0976311 21.8166 -0.0976311 22.2071 0.292893C22.5976 0.683417 22.5976 1.31658 22.2071 1.70711L12.2071 11.7071C11.8166 12.0976 11.1834 12.0976 10.7929 11.7071L0.792893 1.70711C0.402369 1.31658 0.402369 0.683417 0.792893 0.292893Z'
+			fill='#767676'
 		/>
 	</svg>
 );
