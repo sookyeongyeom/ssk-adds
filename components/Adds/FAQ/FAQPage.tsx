@@ -5,40 +5,29 @@ import { Fonts } from '../../../styles/fonts';
 import { BoxShadows } from '../../../styles/shadows';
 import { svgDown23 } from '../../../styles/svgs';
 import useSlide from '../../../hooks/useSlide';
+import { ResponseFAQ } from '../../../@types/api/faq';
+import useGet from '../../../hooks/useGet';
+import { getFAQ } from '../../../api/faq';
 
 export default function FAQPage() {
+	const [faqs, setFaqs] = useState<ResponseFAQ.Get>();
+
+	useEffect(() => {
+		useGet(() => getFAQ(1, 5), setFaqs);
+	}, []);
+
 	return (
 		<S.FAQPageLayout>
-			<FAQBoxElement
-				idx={25}
-				category={'OOOOOO프로젝트'}
-				question={
-					'OOOOOO프로젝트에 참여하는 사람입니다.\n하루에 세 번 OOOO을 하라고 안내 받았는데, 놓친 날이 있다면 어떻게 해야할까요?'
-				}
-				answer={
-					'OOOOOO프로젝트에 참여하시는 분들은 하루에 세 번 OOOO을 하시기를 권장드립니다.\n그러나 놓친 날이 있는 경우엔 데일리 설문조사에서 놓친 날짜, 시간에 대한 정보를 꼭 기입해주시기 바랍니다.\n혹시 설문조사에서 쓰지 않은 경우엔 reaiqwhl@yonsei.ac.kr로 연락 주세요.'
-				}
-			/>
-			<FAQBoxElement
-				idx={25}
-				category={'OOOOOO프로젝트'}
-				question={
-					'OOOOOO프로젝트에 참여하는 사람입니다.\n하루에 세 번 OOOO을 하라고 안내 받았는데, 놓친 날이 있다면 어떻게 해야할까요?'
-				}
-				answer={
-					'OOOOOO프로젝트에 참여하시는 분들은 하루에 세 번 OOOO을 하시기를 권장드립니다.\n그러나 놓친 날이 있는 경우엔 데일리 설문조사에서 놓친 날짜, 시간에 대한 정보를 꼭 기입해주시기 바랍니다.\n혹시 설문조사에서 쓰지 않은 경우엔 reaiqwhl@yonsei.ac.kr로 연락 주세요.'
-				}
-			/>
-			<FAQBoxElement
-				idx={25}
-				category={'OOOOOO프로젝트'}
-				question={
-					'OOOOOO프로젝트에 참여하는 사람입니다.\n하루에 세 번 OOOO을 하라고 안내 받았는데, 놓친 날이 있다면 어떻게 해야할까요?'
-				}
-				answer={
-					'OOOOOO프로젝트에 참여하시는 분들은 하루에 세 번 OOOO을 하시기를 권장드립니다.\n그러나 놓친 날이 있는 경우엔 데일리 설문조사에서 놓친 날짜, 시간에 대한 정보를 꼭 기입해주시기 바랍니다.\n혹시 설문조사에서 쓰지 않은 경우엔 reaiqwhl@yonsei.ac.kr로 연락 주세요.'
-				}
-			/>
+			{faqs &&
+				faqs.items.map((faq, i) => (
+					<FAQBoxElement
+						idx={faq.id + 1}
+						category={faq.category}
+						question={faq.title}
+						answer={faq.reply}
+						key={i}
+					/>
+				))}
 		</S.FAQPageLayout>
 	);
 }
