@@ -31,3 +31,9 @@ type TopProps = IsCurrentType & {};
 type CustomLinkProps = {
 	isCurrent?: boolean;
 };
+
+/**
+ * @in FAQPage */
+type FAQBoxProps = {
+	isOpen: boolean;
+};
