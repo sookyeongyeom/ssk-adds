@@ -1,19 +1,33 @@
 /**
- * @by HomeSlider */
+ * @base */
+type IsCurrentType = {
+	isCurrent: boolean;
+};
+
+/**
+ * @in HomeSlider */
 type SliderImageWrapperProps = {
 	slideIdx: number;
 	isFlashed: boolean;
 };
 
 /**
- * @by HomeSlider
- * @by HomeCarousel */
-type IndicatorProps = {
-	isCurrent: boolean;
+ * @in HomeSlider
+ * @in HomeCarousel */
+type IndicatorProps = IsCurrentType & {};
+
+/**
+ * @in HomeCarousel */
+type CarouselWrapperProps = {
+	itemIdx: number;
 };
 
 /**
- * @by HomeCarousel */
-type CarouselWrapperProps = {
-	itemIdx: number;
+ * @in Sidebar */
+type TopProps = IsCurrentType & {};
+
+/**
+ * @in LinkItem */
+type CustomLinkProps = {
+	isCurrent?: boolean;
 };

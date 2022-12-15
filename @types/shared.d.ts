@@ -1,4 +1,13 @@
-type MenuLinkItemProps = {
+/**
+ * @for LinkItem */
+type LinkItemProps = {
 	href: string;
-	menu: string;
+	title: string;
+	isCurrent?: boolean;
+};
+
+/**
+ * @for Sidebar */
+type SidebarProps = {
+	path: string;
 };
