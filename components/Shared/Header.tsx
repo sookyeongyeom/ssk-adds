@@ -5,6 +5,7 @@ import { Fonts } from '../../styles/fonts';
 import Link from 'next/link';
 import { Paths } from '../../constants/paths';
 import { Seo } from '../../constants/seo';
+import LinkItem from './LinkItem';
 
 export default function Header() {
 	return (
@@ -15,33 +16,33 @@ export default function Header() {
 			<section>
 				<S.MenuWrapper>
 					<S.MenuBox>
-						<MenuLinkItem href={Paths.adds + Paths.intro} menu={Seo.Title.intro} />
+						<LinkItem href={Paths.adds + Paths.intro} title={Seo.Title.intro} />
 						<ul>
-							<MenuLinkItem href={Paths.adds + Paths.intro} menu={Seo.Title.intro} />
-							<MenuLinkItem href={Paths.adds + Paths.member} menu={Seo.Title.member} />
-							<MenuLinkItem href={Paths.adds + Paths.research} menu={Seo.Title.research} />
+							<LinkItem href={Paths.adds + Paths.intro} title={Seo.Title.intro} />
+							<LinkItem href={Paths.adds + Paths.member} title={Seo.Title.member} />
+							<LinkItem href={Paths.adds + Paths.research} title={Seo.Title.research} />
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
-						<MenuLinkItem href={Paths.adds + Paths.publication} menu={Seo.Title.publication} />
+						<LinkItem href={Paths.adds + Paths.publication} title={Seo.Title.publication} />
 						<ul>
-							<MenuLinkItem href={Paths.adds + Paths.publication} menu={Seo.Title.publication} />
+							<LinkItem href={Paths.adds + Paths.publication} title={Seo.Title.publication} />
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
-						<MenuLinkItem href={Paths.adds + Paths.resource} menu={'데이터'} />
+						<LinkItem href={Paths.adds + Paths.resource} title={'데이터'} />
 						<ul>
-							<MenuLinkItem href={Paths.adds + Paths.resource} menu={Seo.Title.resource} />
-							<MenuLinkItem href={Paths.adds + Paths.paper} menu={Seo.Title.paper} />
+							<LinkItem href={Paths.adds + Paths.resource} title={Seo.Title.resource} />
+							<LinkItem href={Paths.adds + Paths.paper} title={Seo.Title.paper} />
 						</ul>
 					</S.MenuBox>
 					<S.MenuBox>
-						<MenuLinkItem href={Paths.adds + Paths.notice} menu={'소통공간'} />
+						<LinkItem href={Paths.adds + Paths.notice} title={'소통공간'} />
 						<ul>
-							<MenuLinkItem href={Paths.adds + Paths.notice} menu={Seo.Title.notice} />
-							<MenuLinkItem href={Paths.adds + Paths.news} menu={Seo.Title.news} />
-							<MenuLinkItem href={Paths.adds + Paths.faq} menu={Seo.Title.faq} />
-							<MenuLinkItem href={Paths.adds + Paths.contact} menu={Seo.Title.contact} />
+							<LinkItem href={Paths.adds + Paths.notice} title={Seo.Title.notice} />
+							<LinkItem href={Paths.adds + Paths.news} title={Seo.Title.news} />
+							<LinkItem href={Paths.adds + Paths.faq} title={Seo.Title.faq} />
+							<LinkItem href={Paths.adds + Paths.contact} title={Seo.Title.contact} />
 						</ul>
 					</S.MenuBox>
 				</S.MenuWrapper>
@@ -53,14 +54,6 @@ export default function Header() {
 		</S.HeaderLayout>
 	);
 }
-
-const MenuLinkItem = ({ href, menu }: MenuLinkItemProps) => {
-	return (
-		<Link href={href}>
-			<li>{menu}</li>
-		</Link>
-	);
-};
 
 namespace S {
 	export const HeaderLayout = styled.header`
