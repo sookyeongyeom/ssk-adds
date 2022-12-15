@@ -6,6 +6,7 @@ export default function CustomHead({ title, isAdmin }: CustomHeadProps) {
 			<meta charSet='UTF-8' />
 			<meta name='viewport' content='user-scalable=no, width=device-width, initial-scale=1' />
 			<meta httpEquiv='x-ua-compatible' content='ie=edge' />
+			<meta http-equiv='Content-Security-Policy' content='upgrade-insecure-requests' />
 			<title>{isAdmin ? `${title} | ADMIN` : `${title} | 연세대학교 ADDS`}</title>
 		</Head>
 	);
