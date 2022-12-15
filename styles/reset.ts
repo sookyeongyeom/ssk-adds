@@ -156,4 +156,9 @@ export const ResetCSS = css`
 		color: inherit;
 		text-decoration: none;
 	}
+
+	pre {
+		white-space: pre-wrap;
+		font-family: inherit;
+	}
 `;
