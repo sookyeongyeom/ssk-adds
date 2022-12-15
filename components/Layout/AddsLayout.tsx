@@ -34,6 +34,7 @@ namespace S {
 		column-gap: 6.6rem;
 		row-gap: 3.8rem;
 		padding-top: 3.9rem;
+		padding-bottom: 10rem;
 
 		> aside {
 			grid-row: 2/3;
