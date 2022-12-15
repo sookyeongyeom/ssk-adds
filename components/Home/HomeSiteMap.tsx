@@ -40,8 +40,10 @@ function SiteMapElement({ title, paths, iconSrc }: SiteMapElementProps) {
 	return (
 		<S.SiteMapBox>
 			<h2>{title}</h2>
-			{paths.map((path) => (
-				<p onClick={() => routeTo(Paths.adds + path)}>{Seo.Title[path.slice(1)]}</p>
+			{paths.map((path, i) => (
+				<p onClick={() => routeTo(Paths.adds + path)} key={i}>
+					{Seo.Title[path.slice(1)]}
+				</p>
 			))}
 			<img src={iconSrc} />
 		</S.SiteMapBox>
