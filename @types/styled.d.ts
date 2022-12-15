@@ -28,9 +28,7 @@ type TopProps = IsCurrentType & {};
 
 /**
  * @in LinkItem */
-type CustomLinkProps = {
-	isCurrent?: boolean;
-};
+type ItemProps = Partial<IsCurrentType> & {};
 
 /**
  * @in FAQPage */

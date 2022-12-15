@@ -4,16 +4,16 @@ import { Colors } from '../../styles/colors';
 
 export default function LinkItem({ href, title, isCurrent }: LinkItemProps) {
 	return (
-		<S.CustomLink href={href} isCurrent={isCurrent}>
-			<li id={href}>{title}</li>
-		</S.CustomLink>
+		<Link href={href}>
+			<S.Item id={href} isCurrent={isCurrent}>
+				{title}
+			</S.Item>
+		</Link>
 	);
 }
 
 namespace S {
-	export const CustomLink = styled(Link)<CustomLinkProps>`
-		> li {
-			color: ${(props) => props.isCurrent && Colors.blue300};
-		}
+	export const Item = styled.li<ItemProps>`
+		color: ${(props) => props.isCurrent && Colors.blue300};
 	`;
 }
