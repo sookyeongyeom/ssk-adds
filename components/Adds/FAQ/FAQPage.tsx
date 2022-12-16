@@ -120,6 +120,7 @@ namespace S {
 			/* 토글 */
 			> pre:last-of-type {
 				overflow: hidden;
+				padding-bottom: 0.2rem;
 				margin-bottom: ${(props) => (props.isOpen ? '2.6rem' : '0')};
 				transition: 0.3s ease;
 			}
