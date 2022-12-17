@@ -4,8 +4,15 @@ import styled from 'styled-components';
 import { Fonts } from '../../styles/fonts';
 import { Colors } from '../../styles/colors';
 import { svgDownload } from '../../styles/svgs';
+import BoardButton from './BoardButton';
+import AdjacentNavigator from './AdjacentNavigator';
 
-export default function View<T extends ResponseResource.GetById>({ data }: ViewProps<T>) {
+export default function View<T extends ResponseResource.GetById>({
+	data,
+	boardPath,
+	prev,
+	next,
+}: ViewProps<T>) {
 	return (
 		<S.ViewLayout>
 			{data && (
@@ -19,10 +26,14 @@ export default function View<T extends ResponseResource.GetById>({ data }: ViewP
 					<S.Content dangerouslySetInnerHTML={{ __html: data.body }} />
 					<S.File>
 						<h3>첨부파일</h3>
-						<p>
-							{svgDownload} {data.file}
-						</p>
+						{data.file && (
+							<p>
+								{svgDownload} {data.file}
+							</p>
+						)}
 					</S.File>
+					<BoardButton boardPath={boardPath} />
+					<AdjacentNavigator prev={prev} next={next} />
 				</>
 			)}
 		</S.ViewLayout>
@@ -53,9 +64,12 @@ namespace S {
 
 	export const File = styled.div`
 		background-color: ${Colors.blue100};
-		padding: 1.8rem 3rem;
+		height: 5.5rem;
+		padding: 0 3rem;
 		display: flex;
+		align-items: center;
 		gap: 3rem;
+		margin-bottom: 9.1rem;
 
 		> h3 {
 			${Fonts.medium16}
