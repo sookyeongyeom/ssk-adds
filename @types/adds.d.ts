@@ -38,3 +38,15 @@ type MemberBoxElementProps = {
 type ViewPageProps = {
 	id: number;
 };
+
+/**
+ * @for PaperBoxElement
+ * @in PaperPage */
+type PaperBoxElementProps = {
+	id: number;
+	title: string;
+	year: string;
+	keywords: string;
+	researcherName: string;
+	doi: string;
+};
