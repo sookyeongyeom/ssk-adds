@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Fonts } from '../../styles/fonts';
 import { Sizes } from '../../styles/sizes';
+
 export default function Footer() {
 	return (
 		<S.FooterLayout>

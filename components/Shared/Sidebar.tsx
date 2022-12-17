@@ -5,6 +5,7 @@ import { Fonts } from '../../styles/fonts';
 import { Paths } from '../../constants/paths';
 import LinkItem from './LinkItem';
 import { useRouter } from 'next/router';
+import { SidebarProps } from '../../@types/shared';
 
 export default function Sidebar({ path }: SidebarProps) {
 	const router = useRouter();
