@@ -5,8 +5,12 @@ import { BoardProps } from '../../@types/shared';
 import { Colors } from '../../styles/colors';
 import { Fonts } from '../../styles/fonts';
 import { Paths } from '../../constants/paths';
+import { ResponseNotice } from '../../@types/api/notice';
 
-export default function Board<T extends ResponseResource.Get>({ datas }: BoardProps<T>) {
+export default function Board<T extends ResponseResource.Get | ResponseNotice.Get>({
+	datas,
+	isNotice,
+}: BoardProps<T>) {
 	return (
 		<S.BoardLayout>
 			<thead>
@@ -23,7 +27,10 @@ export default function Board<T extends ResponseResource.Get>({ datas }: BoardPr
 						<tr key={i}>
 							<td>{data.id}</td>
 							<td>
-								<Link href={Paths.adds + Paths.resource + `/${data.id}`}>{data.title}</Link>
+								<Link
+									href={Paths.adds + (isNotice ? Paths.notice : Paths.resource) + `/${data.id}`}>
+									{data.title}
+								</Link>
 							</td>
 							<td>{data.writer}</td>
 							<td>{data.created_date}</td>
