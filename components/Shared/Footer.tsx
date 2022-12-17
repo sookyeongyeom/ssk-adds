@@ -23,6 +23,7 @@ export default function Footer() {
 namespace S {
 	export const FooterLayout = styled.footer`
 		width: 100vw;
+		min-width: ${Sizes.desktopAddsWidth};
 		min-height: ${Sizes.desktopFooterHeight};
 		background-color: lightgray;
 		display: flex;
