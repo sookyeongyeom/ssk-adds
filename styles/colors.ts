@@ -16,4 +16,8 @@ export const Colors = {
 	blue400: '#6E98D4',
 	blue450: '#366fbf',
 	blue500: '#003276',
+
+	headerDefault: 'rgba(226, 237, 251, 0.9)',
+	headerHover: 'rgba(141, 188, 255, 0.5)',
+	headerBorder: '#8dbcff',
 } as const;

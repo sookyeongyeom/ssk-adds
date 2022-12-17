@@ -72,6 +72,7 @@ namespace S {
 		grid-template-columns: 3rem 64rem 1fr;
 		column-gap: 1rem;
 		row-gap: 0.4rem;
+		z-index: -10;
 
 		> h2 {
 			${Fonts.medium18}

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Paths } from '../../constants/paths';
 import { Seo } from '../../constants/seo';
 import LinkItem from './LinkItem';
+import { Colors } from '../../styles/colors';
 
 export default function Header() {
 	return (
@@ -57,13 +58,12 @@ export default function Header() {
 
 namespace S {
 	export const HeaderLayout = styled.header`
-		width: 100vw;
+		min-width: ${Sizes.desktopAddsWidth};
 		height: ${Sizes.desktopHeaderHeight};
 		box-shadow: ${BoxShadows.smooth};
 		display: flex;
 		justify-content: center;
 		gap: 31.3rem;
-		min-width: 120rem;
 
 		> section {
 			display: flex;
@@ -104,20 +104,21 @@ namespace S {
 			position: absolute;
 			bottom: 0;
 			left: 50%;
-			transform: translate(-50%, calc(100% - 0.2rem));
+			transform: translate(-50%, calc(100% - 0.4rem));
 			white-space: nowrap;
-			border-top: 0.3rem solid black;
+			border-top: 0.4rem solid ${Colors.headerBorder};
+			background-color: ${Colors.white};
 
 			li {
-				height: 4.3rem;
+				height: 6rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				width: 15rem;
-				background-color: white;
+				background-color: ${Colors.headerDefault};
 
 				&:hover {
-					background-color: lightgray;
+					background-color: ${Colors.headerHover};
 				}
 			}
 		}
