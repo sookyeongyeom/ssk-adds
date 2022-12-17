@@ -84,7 +84,7 @@ namespace S {
 		}
 
 		> tbody td {
-			padding: 1.2rem;
+			padding: 1.3rem;
 
 			&:first-of-type {
 				${Fonts.medium16}
