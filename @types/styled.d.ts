@@ -5,6 +5,12 @@ type IsCurrentType = {
 };
 
 /**
+ * @base */
+type IsHoverType = {
+	isHover: boolean;
+};
+
+/**
  * @in HomeSlider */
 type SliderImageWrapperProps = {
 	slideIdx: number;
@@ -35,3 +41,7 @@ type ItemProps = Partial<IsCurrentType> & {};
 type FAQBoxProps = {
 	isOpen: boolean;
 };
+
+/**
+ * @in ResearchPage */
+type ResearchBoxProps = IsHoverType & {};

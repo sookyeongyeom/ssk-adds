@@ -7,3 +7,11 @@ type FAQBoxElementProps = {
 	question: string;
 	answer: string;
 };
+
+/**
+ * @for ResearchBoxElement
+ * @in ResearchPage */
+type ResearchBoxElementProps = {
+	title: string;
+	description: string;
+};
