@@ -6,7 +6,7 @@ import View from '../../Shared/View';
 import { getResourceById } from '../../../api/resource';
 import { Paths } from '../../../constants/paths';
 
-export default function ResourceViewPage({ id }: ResourceViewPageProps) {
+export default function ResourceViewPage({ id }: ViewPageProps) {
 	const [resource, setResource] = useState<ResponseResource.GetById>();
 	const [prev, setPrev] = useState<ResponseResource.GetById>();
 	const [next, setNext] = useState<ResponseResource.GetById>();

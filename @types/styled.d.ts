@@ -52,3 +52,9 @@ type AdjacentNavigatorLayoutProps = {
 	isPrevExist: boolean;
 	isNextExist: boolean;
 };
+
+/**
+ * @in View */
+type ViewLayoutProps = {
+	isNotice: boolean;
+};

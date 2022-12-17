@@ -1,3 +1,4 @@
+import { ResponseNotice } from './api/notice';
 import { ResponseResource } from './api/resource';
 
 /**
@@ -25,18 +26,21 @@ type SidebarProps = {
 
 /**
  * @for Board */
-type BoardProps<T extends ResponseResource.Get> = {
+type BoardProps<T extends ResponseResource.Get | ResponseNotice.Get> = {
 	datas: T;
+	isNotice?: boolean;
 };
 
 /**
  * @for View
- * @by ResourceViewPage */
-type ViewProps<T extends ResponseResource.GetById> = {
+ * @by ResourceViewPage
+ * @by NoticeViewPage */
+type ViewProps<T extends ResponseResource.GetById | ResponseNotice.GetById> = {
 	data: T;
 	boardPath: string;
 	prev: AdjacentItemType;
 	next: AdjacentItemType;
+	isNotice?: boolean;
 };
 
 /**
