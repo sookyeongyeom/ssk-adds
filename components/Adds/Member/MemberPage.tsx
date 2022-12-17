@@ -1,31 +1,47 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { ResponseMember } from '../../../@types/api/member';
+import useGet from '../../../hooks/useGet';
 import { Colors } from '../../../styles/colors';
 import { Fonts } from '../../../styles/fonts';
 import { BoxShadows } from '../../../styles/shadows';
+import { getMember } from '../../../api/member';
 
 export default function MemberPage() {
+	const [members, setMembers] = useState<ResponseMember.Get>();
+
+	useEffect(() => {
+		useGet(() => getMember({}), setMembers);
+	}, []);
+
 	return (
 		<S.MemberPageLayout>
-			<MemberBoxElement
-				name={'김현경 교수님'}
-				email={'yonsei@gmail.com'}
-				homepage={'https://www.naver.com'}
-				phoneNumber={'010-0000-0000'}
-				jobTitle={'연세대학교 아동가족학과 인간생애와 혁신적 디자인 교수'}
-				introBody={'청소년, 바이오마커 수집, 양적 연구 설계 전문성'}
-				img={'/assets/members_example.png'}
-				responsibility={'연구책임자'}
-			/>
-			<MemberBoxElement
-				name={'김현경 교수님'}
-				email={'yonsei@gmail.com'}
-				homepage={'https://www.naver.com'}
-				phoneNumber={'010-0000-0000'}
-				jobTitle={'연세대학교 아동가족학과 인간생애와 혁신적 디자인 교수'}
-				introBody={'청소년, 바이오마커 수집, 양적 연구 설계 전문성'}
-				img={'/assets/members_example.png'}
-				responsibility={'연구책임자'}
-			/>
+			{members ? (
+				members.items.map((member, i) => (
+					<MemberBoxElement
+						name={member.name}
+						email={member.email}
+						homepage={member.homepage}
+						phoneNumber={member.phone_number}
+						introBody={member.intro_body}
+						jobTitle={member.job_title}
+						img={'/assets/members_example.png'}
+						responsibility={member.responsibility}
+						key={i}
+					/>
+				))
+			) : (
+				<MemberBoxElement
+					name={'김현경 교수님'}
+					email={'yonsei@gmail.com'}
+					homepage={'https://www.naver.com'}
+					phoneNumber={'010-0000-0000'}
+					jobTitle={'연세대학교 아동가족학과 인간생애와 혁신적 디자인 교수'}
+					introBody={'청소년, 바이오마커 수집, 양적 연구 설계 전문성'}
+					img={'/assets/members_example.png'}
+					responsibility={'연구책임자'}
+				/>
+			)}
 		</S.MemberPageLayout>
 	);
 }
