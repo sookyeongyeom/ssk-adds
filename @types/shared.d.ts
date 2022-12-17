@@ -1,6 +1,15 @@
 import { ResponseResource } from './api/resource';
 
 /**
+ * @base */
+type AdjacentItemType =
+	| {
+			title: string;
+			path: string;
+	  }
+	| undefined;
+
+/**
  * @for LinkItem */
 type LinkItemProps = {
 	href: string;
@@ -21,16 +30,21 @@ type BoardProps<T extends ResponseResource.Get> = {
 };
 
 /**
- * @for View */
+ * @for View
+ * @by ResourceViewPage */
 type ViewProps<T extends ResponseResource.GetById> = {
 	data: T;
-	boardPath?: string;
-	prev?: {
-		title: string;
-		id: number;
-	};
-	next?: {
-		title: string;
-		id: number;
-	};
+	boardPath: string;
+	prev: AdjacentItemType;
+	next: AdjacentItemType;
 };
+
+/**
+ * @for BoardButton
+ * @by View */
+type BoardButtonProps = Pick<ViewProps<T>, 'boardPath'> & {};
+
+/**
+ * @for AdjacentNavigator
+ * @by View */
+type AdjacentNavigatorProps = Pick<ViewProps<T>, 'prev' | 'next'> & {};
