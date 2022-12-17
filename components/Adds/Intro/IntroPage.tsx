@@ -125,6 +125,8 @@ namespace S {
 			margin-top: 2.4rem;
 			cursor: pointer;
 			transition: 0.3s ease;
+			border-radius: 0.6rem;
+			box-shadow: ${BoxShadows.smooth};
 
 			&:hover {
 				background-color: ${Colors.blue350};
