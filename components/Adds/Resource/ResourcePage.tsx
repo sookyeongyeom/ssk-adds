@@ -14,7 +14,7 @@ export default function ResourcePage() {
 
 	return (
 		<S.ResourcePageLayout>
-			<Board datas={resource} />
+			<Board datas={resource!} />
 		</S.ResourcePageLayout>
 	);
 }
