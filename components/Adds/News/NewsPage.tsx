@@ -1,3 +1,17 @@
+import styled from 'styled-components';
+import { Recipes } from '../../../styles/recipes';
+import SelectBox from '../../Shared/SelectBox';
+
 export default function NewsPage() {
-	return <>보도자료</>;
+	return (
+		<S.NewsPageLayout>
+			<SelectBox options={['최신순 정렬']} />
+		</S.NewsPageLayout>
+	);
+}
+
+namespace S {
+	export const NewsPageLayout = styled.div`
+		${Recipes.AlignSelectBoxForBoard}
+	`;
 }

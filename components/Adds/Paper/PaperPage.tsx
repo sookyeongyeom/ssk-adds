@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { ResponsePaper } from '../../../@types/api/paper';
 import useGet from '../../../hooks/useGet';
 import { getPaper } from '../../../api/paper';
+import SelectBox from '../../Shared/SelectBox';
+import { Recipes } from '../../../styles/recipes';
 
 export default function PaperPage() {
 	const [paper, setPaper] = useState<ResponsePaper.Get>();
@@ -15,30 +17,33 @@ export default function PaperPage() {
 
 	return (
 		<S.PaperPageLayout>
-			{paper ? (
-				paper.items.map((paper, i) => (
+			<SelectBox options={['최신순 정렬']} />
+			<div>
+				{paper ? (
+					paper.items.map((paper, i) => (
+						<PaperBoxElement
+							id={paper.id}
+							title={paper.title}
+							year={paper.year}
+							keywords={paper.keywords}
+							researcherName={paper.researcher_name}
+							doi={paper.doi}
+							key={i}
+						/>
+					))
+				) : (
 					<PaperBoxElement
-						id={paper.id}
-						title={paper.title}
-						year={paper.year}
-						keywords={paper.keywords}
-						researcherName={paper.researcher_name}
-						doi={paper.doi}
-						key={i}
+						id={1}
+						title={
+							'유아기 어머니의 양육스트레스, 모-자녀 상호작용 활동 및 양육행동과 유아의 학습준비도가 학령진입기 아동의 학업수행능력에 미치는 영향'
+						}
+						year={'2018'}
+						keywords={'키워드,논문 키워드,길어지면,아랫줄로 내려가게,딱 요정도 넓이 내'}
+						researcherName={'홍길동, 홍길동'}
+						doi={'https://doi.org/00.0000/j.aip.2017.10.007'}
 					/>
-				))
-			) : (
-				<PaperBoxElement
-					id={1}
-					title={
-						'유아기 어머니의 양육스트레스, 모-자녀 상호작용 활동 및 양육행동과 유아의 학습준비도가 학령진입기 아동의 학업수행능력에 미치는 영향'
-					}
-					year={'2018'}
-					keywords={'키워드,논문 키워드,길어지면,아랫줄로 내려가게,딱 요정도 넓이 내'}
-					researcherName={'홍길동, 홍길동'}
-					doi={'https://doi.org/00.0000/j.aip.2017.10.007'}
-				/>
-			)}
+				)}
+			</div>
 		</S.PaperPageLayout>
 	);
 }
@@ -62,9 +67,14 @@ function PaperBoxElement({ id, title, year, keywords, researcherName, doi }: Pap
 
 namespace S {
 	export const PaperPageLayout = styled.div`
-		display: flex;
-		flex-direction: column;
-		gap: 3rem;
+		${Recipes.AlignSelectBoxForBoard}
+
+		>div:last-of-type {
+			display: flex;
+			flex-direction: column;
+			gap: 3rem;
+			margin-top: 2rem;
+		}
 	`;
 
 	export const PaperBox = styled.div`

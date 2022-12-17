@@ -7,6 +7,7 @@ import { Paths } from '../../constants/paths';
 import { Seo } from '../../constants/seo';
 import LinkItem from './LinkItem';
 import { Colors } from '../../styles/colors';
+import SelectBox from './SelectBox';
 
 export default function Header() {
 	return (
@@ -47,10 +48,7 @@ export default function Header() {
 						</ul>
 					</S.MenuBox>
 				</S.MenuWrapper>
-				<S.LangSelect>
-					<option>한국어</option>
-					<option>영어</option>
-				</S.LangSelect>
+				<SelectBox options={['한국어', '영어']} />
 			</section>
 		</S.HeaderLayout>
 	);
@@ -108,6 +106,7 @@ namespace S {
 			white-space: nowrap;
 			border-top: 0.4rem solid ${Colors.headerBorder};
 			background-color: ${Colors.white};
+			z-index: 10;
 
 			li {
 				height: 6rem;
@@ -128,13 +127,5 @@ namespace S {
 				display: block;
 			}
 		}
-	`;
-
-	export const LangSelect = styled.select`
-		${Fonts.regular14}
-		align-self: center;
-		width: 11.6rem;
-		padding: 0.4rem;
-		border-radius: 0;
 	`;
 }

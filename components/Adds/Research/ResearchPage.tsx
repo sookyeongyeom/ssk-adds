@@ -88,7 +88,6 @@ namespace S {
 		padding: ${(props) => (!props.isHover ? '7rem' : '4.3rem 4.8rem')};
 		position: relative;
 		box-shadow: ${BoxShadows.smooth};
-		z-index: -10;
 	`;
 
 	export const Title = styled.h2<ResearchBoxProps>`

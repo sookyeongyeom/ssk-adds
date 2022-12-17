@@ -52,3 +52,9 @@ type BoardButtonProps = Pick<ViewProps<T>, 'boardPath'> & {};
  * @for AdjacentNavigator
  * @by View */
 type AdjacentNavigatorProps = Pick<ViewProps<T>, 'prev' | 'next'> & {};
+
+/**
+ * @for SelectBox */
+type SelectBoxProps = {
+	options: string[];
+};
