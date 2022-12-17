@@ -4,6 +4,7 @@ import { ResponseResource } from '../../@types/api/resource';
 import { BoardProps } from '../../@types/shared';
 import { Colors } from '../../styles/colors';
 import { Fonts } from '../../styles/fonts';
+import { Paths } from '../../constants/paths';
 
 export default function Board<T extends ResponseResource.Get>({ datas }: BoardProps<T>) {
 	return (
@@ -18,11 +19,11 @@ export default function Board<T extends ResponseResource.Get>({ datas }: BoardPr
 			</thead>
 			<tbody>
 				{datas ? (
-					datas.items.map((data) => (
-						<tr>
+					datas.items.map((data, i) => (
+						<tr key={i}>
 							<td>{data.id}</td>
 							<td>
-								<Link href={`${data.id}`}>{data.title}</Link>
+								<Link href={Paths.adds + Paths.resource + `/${data.id}`}>{data.title}</Link>
 							</td>
 							<td>{data.writer}</td>
 							<td>{data.created_date}</td>
@@ -83,7 +84,7 @@ namespace S {
 		}
 
 		> tbody td {
-			padding: 1.2rem;
+			padding: 1.3rem;
 
 			&:first-of-type {
 				${Fonts.medium16}

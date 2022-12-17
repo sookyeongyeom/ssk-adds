@@ -3,6 +3,10 @@ export namespace RequestResource {
 		page: number;
 		size?: number;
 	};
+
+	type GetById = {
+		id: number;
+	};
 }
 
 export namespace ResponseResource {
@@ -20,5 +24,14 @@ export namespace ResponseResource {
 		total: number;
 		page: number;
 		size: number;
+	};
+
+	type GetById = {
+		id: 0;
+		writer: string;
+		title: string;
+		body: string;
+		file: string;
+		created_date: string;
 	};
 }

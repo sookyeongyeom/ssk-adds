@@ -45,3 +45,10 @@ type FAQBoxProps = {
 /**
  * @in ResearchPage */
 type ResearchBoxProps = IsHoverType & {};
+
+/**
+ * @in AdjacentNavigator */
+type AdjacentNavigatorLayoutProps = {
+	isPrevExist: boolean;
+	isNextExist: boolean;
+};
