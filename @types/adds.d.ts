@@ -15,3 +15,17 @@ type ResearchBoxElementProps = {
 	title: string;
 	description: string;
 };
+
+/**
+ * @for MemberBoxElement
+ * @in MemberPage */
+type MemberBoxElementProps = {
+	name: string;
+	email: string;
+	homepage: string;
+	phoneNumber: string;
+	introBody: string;
+	jobTitle: string;
+	img: string;
+	responsibility: string;
+};
