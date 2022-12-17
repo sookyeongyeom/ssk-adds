@@ -29,3 +29,10 @@ type MemberBoxElementProps = {
 	img: string;
 	responsibility: string;
 };
+
+/**
+ * @for ResourceViewPage
+ * @by page/resource/[id].tsx */
+type ResourceViewPageProps = {
+	id: number;
+};
