@@ -1,3 +1,5 @@
+import { ResponseResource } from './api/resource';
+
 /**
  * @for LinkItem */
 type LinkItemProps = {
@@ -10,4 +12,10 @@ type LinkItemProps = {
  * @for Sidebar */
 type SidebarProps = {
 	path: string;
+};
+
+/**
+ * @for Board */
+type BoardProps<T extends ResponseResource.Get> = {
+	datas?: T;
 };
