@@ -13,7 +13,7 @@ export default function FAQPage() {
 	const [faqs, setFaqs] = useState<ResponseFAQ.Get>();
 
 	useEffect(() => {
-		useGet(() => getFAQ(1, 5), setFaqs);
+		useGet(() => getFAQ({ page: 1, size: 5 }), setFaqs);
 	}, []);
 
 	return (
