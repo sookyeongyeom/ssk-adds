@@ -32,7 +32,9 @@ type MemberBoxElementProps = {
 
 /**
  * @for ResourceViewPage
- * @by page/resource/[id].tsx */
-type ResourceViewPageProps = {
+ * @for NoticeViewPage
+ * @by page/resource/[id].tsx
+ * @by page/notice/[id].tsx */
+type ViewPageProps = {
 	id: number;
 };
