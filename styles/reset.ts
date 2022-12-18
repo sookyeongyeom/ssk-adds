@@ -162,4 +162,8 @@ export const ResetCSS = css`
 		white-space: pre-wrap;
 		font-family: inherit;
 	}
+
+	button {
+		box-sizing: border-box;
+	}
 `;
