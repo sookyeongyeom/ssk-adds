@@ -1,4 +1,6 @@
+import { ReactElement } from 'react';
 import NewsPage from '../../components/Admin/News/NewsPage';
+import AdminLayout from '../../components/Layout/AdminLayout';
 import CustomHead from '../../components/Seo/CustomHead';
 import { Seo } from '../../constants/seo';
 
@@ -10,3 +12,7 @@ export default function news() {
 		</>
 	);
 }
+
+news.getLayout = function getLayout(page: ReactElement) {
+	return <AdminLayout>{page}</AdminLayout>;
+};
