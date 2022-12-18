@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import AdminSidebar from '../Shared/AdminSidebar';
+import StoreProvider from '../Provider/StoreProvider';
 
 export default function AdminLayout({ children }: ChildrenType) {
 	return (
-		<S.Layout>
-			<AdminSidebar />
-			<main>{children}</main>
-		</S.Layout>
+		<StoreProvider>
+			<S.Layout>
+				<AdminSidebar />
+				<main>{children}</main>
+			</S.Layout>
+		</StoreProvider>
 	);
 }
 

@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import StoreProvider from '../Provider/StoreProvider';
 
 export default function LoginLayout({ children }: ChildrenType) {
 	return (
-		<S.Layout>
-			<main>{children}</main>
-		</S.Layout>
+		<StoreProvider>
+			<S.Layout>
+				<main>{children}</main>
+			</S.Layout>
+		</StoreProvider>
 	);
 }
 
