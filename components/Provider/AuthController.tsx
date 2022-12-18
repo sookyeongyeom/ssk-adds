@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { requestAuth } from '../../modules/auth';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,8 +17,14 @@ export default function AuthController() {
 
 	useEffect(() => {
 		/* 주소 혹은 스토어 토큰 상태가 변하면 조건부 라우팅 */
-		if (!authToken && router.pathname !== '/admin/login') router.push('/admin/login');
-		if (authToken && router.pathname === '/admin/login') router.push('/admin/member');
+		/* authToken 복원 전 깜빡임 방지 위해 세션 기준 검증 추가 */
+		const sessionAuthToken = sessionStorage.getItem('authToken');
+
+		if (!authToken && !sessionAuthToken && router.pathname !== '/admin/login')
+			router.push('/admin/login');
+
+		if (authToken && (router.pathname === '/admin/login' || router.pathname === '/admin'))
+			router.push('/admin/member');
 	}, [router.pathname, authToken]);
 
 	return <></>;

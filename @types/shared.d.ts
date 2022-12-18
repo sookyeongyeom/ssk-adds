@@ -25,7 +25,9 @@ type SidebarProps = {
 };
 
 /**
- * @for Board */
+ * @for Board
+ * @by Adds/ResourcePage
+ * @by Adds/NoticePage */
 type BoardProps<T extends ResponseResource.Get | ResponseNotice.Get> = {
 	datas: T;
 	isNotice?: boolean;

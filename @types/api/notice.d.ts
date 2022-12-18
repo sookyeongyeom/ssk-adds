@@ -11,23 +11,16 @@ export namespace RequestNotice {
 
 export namespace ResponseNotice {
 	type Get = {
-		items: [
-			{
-				id: number;
-				writer: string;
-				title: string;
-				body: string;
-				file: string;
-				created_date: string;
-			},
-		];
+		items: Item[];
 		total: number;
 		page: number;
 		size: number;
 	};
 
-	type GetById = {
-		id: 0;
+	type GetById = Item;
+
+	type Item = {
+		id: number;
 		writer: string;
 		title: string;
 		body: string;

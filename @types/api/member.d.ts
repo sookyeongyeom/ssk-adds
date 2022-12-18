@@ -7,21 +7,22 @@ export namespace RequestMember {
 
 export namespace ResponseMember {
 	type Get = {
-		items: [
-			{
-				id: number;
-				name: string;
-				email: string;
-				homepage: string;
-				phone_number: string;
-				intro_body: string;
-				job_title: string;
-				img: string;
-				responsibility: string;
-			},
-		];
+		items: Item[];
 		total: number;
 		page: number;
 		size: number;
+	};
+
+	type Item = {
+		id: number;
+		name: string;
+		email: string;
+		homepage: string;
+		phone_number: string;
+		intro_body: string;
+		job_title: string;
+		img: string;
+		responsibility: string;
+		[key: string]: string | number;
 	};
 }

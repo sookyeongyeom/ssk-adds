@@ -1,3 +1,31 @@
+import AdminBoard from '../../Shared/AdminBoard';
+import { useState, useEffect } from 'react';
+import useGet from '../../../hooks/useGet';
+import useBoard from '../../../hooks/useBoard';
+import { Paths } from '../../../constants/paths';
+import { ResponseNewsKeys } from '../../../constants/responseKeys';
+import { ResponseNews } from '../../../@types/api/news';
+import { getNews } from '../../../api/news';
+
 export default function NewsPage() {
-	return <>Admin 보도자료</>;
+	const [maps, setMaps] = useState<Map<string, string>[]>();
+	const [news, setNews] = useState<ResponseNews.Get>();
+
+	const order = new Map() //
+		.set(ResponseNewsKeys.id, '번호')
+		.set(ResponseNewsKeys.title, '제목')
+		.set(ResponseNewsKeys.created_date, '날짜');
+
+	useEffect(() => {
+		useGet(() => getNews({ page: 1 }), setNews);
+	}, []);
+
+	useBoard({ dispatch: setMaps, dep: news, order });
+
+	return (
+		<>
+			<h1>Admin 보도자료</h1>
+			<AdminBoard dataMaps={maps} basePath={Paths.admin + Paths.news} order={order} />
+		</>
+	);
 }
