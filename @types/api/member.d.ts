@@ -18,6 +18,7 @@ export namespace ResponseMember {
 				job_title: string;
 				img: string;
 				responsibility: string;
+				[key: string]: string;
 			},
 		];
 		total: number;
