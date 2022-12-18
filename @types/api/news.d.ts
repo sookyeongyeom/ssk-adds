@@ -1,11 +1,15 @@
-export namespace RequestFAQ {
+export namespace RequestNews {
 	type Get = {
-		page: number;
+		page?: number;
 		size?: number;
+	};
+
+	type GetById = {
+		id: number;
 	};
 }
 
-export namespace ResponseFAQ {
+export namespace ResponseNews {
 	type Get = {
 		items: Item[];
 		total: number;
@@ -13,12 +17,13 @@ export namespace ResponseFAQ {
 		size: number;
 	};
 
+	type GetById = Item;
+
 	type Item = {
-		writer: string;
 		id: number;
 		title: string;
-		category: string;
-		reply: string;
+		body: string;
+		url: string;
 		created_date: string;
 	};
 }
