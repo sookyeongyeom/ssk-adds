@@ -1,15 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { postLogin } from '../../../api/login';
 import useInput from '../../../hooks/useInput';
+import { requestAuth } from '../../../modules/auth';
 
 export default function LoginPage() {
 	const { value: username, onChange: onChangeUsername } = useInput();
 	const { value: password, onChange: onChangePassword } = useInput();
+	const dispatch = useDispatch();
 
 	const onLogin = async () => {
-		const res = await postLogin({ username, password });
-		console.log(res);
+		try {
+			const res = await postLogin({ username, password });
+			dispatch(requestAuth({ authToken: res.access_token }));
+		} catch (e) {
+			alert('아이디와 비밀번호를 확인해주세요.');
+		}
 	};
 
 	return (

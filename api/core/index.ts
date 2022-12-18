@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { GenericInstance } from '../../@types/api/core';
+import { store } from '../../components/Provider/StoreProvider';
 
 const request: GenericInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_BACK_END_BASE_URL,
@@ -9,6 +10,9 @@ const request: GenericInstance = axios.create({
 
 request.interceptors.request.use(
 	(config) => {
+		const authToken = store.getState().auth.authToken;
+		if (authToken) request.defaults.headers.common['Authorization'] = authToken;
+		else request.defaults.headers.common['Authorization'] = '';
 		return config;
 	},
 	(error) => {

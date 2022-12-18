@@ -2,8 +2,13 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Colors } from '../../styles/colors';
 import { Paths } from '../../constants/paths';
+import { useDispatch } from 'react-redux';
+import { revokeAuth } from '../../modules/auth';
 
 export default function AdminSidebar() {
+	const dispatch = useDispatch();
+	const onLogout = () => dispatch(revokeAuth());
+
 	return (
 		<S.AdminSidebarLayout>
 			<Link href={Paths.admin + Paths.member}>연구진소개</Link>
@@ -14,7 +19,7 @@ export default function AdminSidebar() {
 			<Link href={Paths.admin + Paths.news}>보도자료</Link>
 			<Link href={Paths.admin + Paths.faq}>FAQ</Link>
 			<Link href={Paths.admin + Paths.contact}>Contact</Link>
-			<button>로그아웃</button>
+			<button onClick={onLogout}>로그아웃</button>
 		</S.AdminSidebarLayout>
 	);
 }
