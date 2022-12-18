@@ -60,3 +60,9 @@ type AdjacentNavigatorProps = Pick<ViewProps<T>, 'prev' | 'next'> & {};
 type SelectBoxProps = {
 	options: string[];
 };
+
+/**
+ * @for AdminButton */
+type AdminButtonProps = ChildrenType & {
+	onClick: () => void;
+};
