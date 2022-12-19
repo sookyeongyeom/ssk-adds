@@ -1,6 +1,6 @@
 export namespace RequestNews {
 	type Get = {
-		page?: number;
+		page: number;
 		size?: number;
 	};
 
