@@ -7,6 +7,15 @@ export namespace RequestResource {
 	type GetById = {
 		id: number;
 	};
+
+	type Post = {
+		id?: number;
+		writer: string;
+		title: string;
+		body: string;
+		file: string;
+		created_date: string;
+	};
 }
 
 export namespace ResponseResource {
@@ -24,6 +33,15 @@ export namespace ResponseResource {
 		writer: string;
 		title: string;
 		body: string;
+		file: string;
+		created_date: string;
+	};
+
+	type Post = {
+		id: number;
+		title: string;
+		body: string;
+		writer: string;
 		file: string;
 		created_date: string;
 	};
