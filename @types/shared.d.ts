@@ -28,7 +28,7 @@ type SidebarProps = {
  * @for Board
  * @by Adds/ResourcePage
  * @by Adds/NoticePage */
-type BoardProps<T extends ResponseResource.Get | ResponseNotice.Get> = {
+type BoardProps<T extends ResponseResource.Get | ResponseNotice.Get> = PageButtonProps & {
 	datas: T;
 	isNotice?: boolean;
 };
@@ -80,4 +80,12 @@ type InputProps = {
 	label: string;
 	value: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+/**
+ * @for PageButton */
+type PageButtonProps = {
+	currentPage: number;
+	totalPosts: number | undefined;
+	onChangePage: (page: number) => void;
 };
