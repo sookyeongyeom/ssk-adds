@@ -6,14 +6,11 @@ import Board from '../../Shared/Board';
 import { getResource } from '../../../api/resource';
 import SelectBox from '../../Shared/SelectBox';
 import { Recipes } from '../../../styles/recipes';
+import useChangePage from '../../../hooks/useChangePage';
 
 export default function ResourcePage() {
 	const [resource, setResource] = useState<ResponseResource.Get>();
-	const [page, setPage] = useState(1);
-
-	const onChangePage = (page: number) => {
-		setPage(page);
-	};
+	const { page, onChangePage } = useChangePage();
 
 	useEffect(() => {
 		useGet(() => getResource({ page }), setResource);

@@ -7,6 +7,7 @@ import { Fonts } from '../../styles/fonts';
 import { Paths } from '../../constants/paths';
 import { ResponseNotice } from '../../@types/api/notice';
 import PageButton from './PageButton';
+import { Sizes } from '../../styles/sizes';
 
 export default function Board<T extends ResponseResource.Get | ResponseNotice.Get>({
 	datas,
@@ -63,7 +64,9 @@ export default function Board<T extends ResponseResource.Get | ResponseNotice.Ge
 					)}
 				</tbody>
 			</S.BoardLayout>
-			<PageButton currentPage={currentPage} totalPosts={totalPosts} onChangePage={onChangePage} />
+			<div>
+				<PageButton currentPage={currentPage} totalPosts={totalPosts} onChangePage={onChangePage} />
+			</div>
 		</>
 	);
 }
@@ -72,7 +75,10 @@ namespace S {
 	export const BoardLayout = styled.table`
 		width: 100%;
 		text-align: center;
-		margin-bottom: 6.4rem;
+
+		+ div {
+			margin-top: ${Sizes.desktopPageButtonMarginTop};
+		}
 
 		> thead {
 			background-color: ${Colors.blue100};

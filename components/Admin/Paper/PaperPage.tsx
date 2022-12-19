@@ -6,10 +6,12 @@ import { Paths } from '../../../constants/paths';
 import { ResponsePaperKeys } from '../../../constants/responseKeys';
 import { ResponsePaper } from '../../../@types/api/paper';
 import { getPaper } from '../../../api/paper';
+import useChangePage from '../../../hooks/useChangePage';
 
 export default function PaperPage() {
 	const [maps, setMaps] = useState<Map<string, string>[]>();
 	const [paper, setPaper] = useState<ResponsePaper.Get>();
+	const { page, onChangePage } = useChangePage();
 
 	const order = new Map() //
 		.set(ResponsePaperKeys.id, '번호')
@@ -18,15 +20,22 @@ export default function PaperPage() {
 		.set(ResponsePaperKeys.doi, 'DOI');
 
 	useEffect(() => {
-		useGet(() => getPaper({ page: 1 }), setPaper);
-	}, []);
+		useGet(() => getPaper({ page }), setPaper);
+	}, [page]);
 
 	useBoard({ dispatch: setMaps, dep: paper, order });
 
 	return (
 		<>
 			<h1>Admin 데이터활용논문</h1>
-			<AdminBoard dataMaps={maps} basePath={Paths.admin + Paths.paper} order={order} />
+			<AdminBoard
+				dataMaps={maps}
+				basePath={Paths.admin + Paths.paper}
+				order={order}
+				currentPage={page}
+				totalPosts={paper?.total}
+				onChangePage={onChangePage}
+			/>
 		</>
 	);
 }

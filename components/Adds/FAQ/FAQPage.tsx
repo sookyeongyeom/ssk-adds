@@ -8,13 +8,17 @@ import useSlide from '../../../hooks/useSlide';
 import { ResponseFAQ } from '../../../@types/api/faq';
 import useGet from '../../../hooks/useGet';
 import { getFAQ } from '../../../api/faq';
+import PageButton from '../../Shared/PageButton';
+import useChangePage from '../../../hooks/useChangePage';
+import { Sizes } from '../../../styles/sizes';
 
 export default function FAQPage() {
 	const [faqs, setFaqs] = useState<ResponseFAQ.Get>();
+	const { page, onChangePage } = useChangePage();
 
 	useEffect(() => {
-		useGet(() => getFAQ({ page: 1 }), setFaqs);
-	}, []);
+		useGet(() => getFAQ({ page }), setFaqs);
+	}, [page]);
 
 	return (
 		<S.FAQPageLayout>
@@ -40,6 +44,9 @@ export default function FAQPage() {
 					}
 				/>
 			)}
+			<div>
+				<PageButton currentPage={page} totalPosts={faqs?.total} onChangePage={onChangePage} />
+			</div>
 		</S.FAQPageLayout>
 	);
 }
@@ -74,7 +81,11 @@ namespace S {
 	export const FAQPageLayout = styled.div`
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 4rem;
+
+		> div:last-of-type {
+			margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 4rem);
+		}
 	`;
 
 	export const FAQBox = styled.div<FAQBoxProps>`
@@ -145,6 +156,6 @@ namespace S {
 		${Fonts.bold28}
 		color: ${Colors.blue300};
 		display: inline-block;
-		margin: 0 0.2rem 0 0.3rem;
+		margin: 0 0.2rem;
 	`;
 }

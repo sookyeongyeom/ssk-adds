@@ -6,13 +6,17 @@ import { Colors } from '../../../styles/colors';
 import { Fonts } from '../../../styles/fonts';
 import { BoxShadows } from '../../../styles/shadows';
 import { getMember } from '../../../api/member';
+import useChangePage from '../../../hooks/useChangePage';
+import PageButton from '../../Shared/PageButton';
+import { Sizes } from '../../../styles/sizes';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();
+	const { page, onChangePage } = useChangePage();
 
 	useEffect(() => {
-		useGet(() => getMember({}), setMembers);
-	}, []);
+		useGet(() => getMember({ page }), setMembers);
+	}, [page]);
 
 	return (
 		<S.MemberPageLayout>
@@ -42,6 +46,9 @@ export default function MemberPage() {
 					responsibility={'연구책임자'}
 				/>
 			)}
+			<div>
+				<PageButton currentPage={page} totalPosts={members?.total} onChangePage={onChangePage} />
+			</div>
 		</S.MemberPageLayout>
 	);
 }
@@ -96,6 +103,10 @@ namespace S {
 		display: flex;
 		flex-direction: column;
 		gap: 3rem;
+
+		> div:last-of-type {
+			margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 3rem);
+		}
 	`;
 
 	export const MemberBox = styled.div`

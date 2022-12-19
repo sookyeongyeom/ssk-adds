@@ -6,10 +6,12 @@ import { Paths } from '../../../constants/paths';
 import { ResponseResourceKeys } from '../../../constants/responseKeys';
 import { ResponseResource } from '../../../@types/api/resource';
 import { getResource } from '../../../api/resource';
+import useChangePage from '../../../hooks/useChangePage';
 
 export default function ResourcePage() {
 	const [maps, setMaps] = useState<Map<string, string>[]>();
 	const [resource, setResource] = useState<ResponseResource.Get>();
+	const { page, onChangePage } = useChangePage();
 
 	const order = new Map() //
 		.set(ResponseResourceKeys.id, '번호')
@@ -18,15 +20,22 @@ export default function ResourcePage() {
 		.set(ResponseResourceKeys.created_date, '날짜');
 
 	useEffect(() => {
-		useGet(() => getResource({ page: 1 }), setResource);
-	}, []);
+		useGet(() => getResource({ page }), setResource);
+	}, [page]);
 
 	useBoard({ dispatch: setMaps, dep: resource, order });
 
 	return (
 		<>
 			<h1>Admin 자료안내</h1>
-			<AdminBoard dataMaps={maps} basePath={Paths.admin + Paths.resource} order={order} />
+			<AdminBoard
+				dataMaps={maps}
+				basePath={Paths.admin + Paths.resource}
+				order={order}
+				currentPage={page}
+				totalPosts={resource?.total}
+				onChangePage={onChangePage}
+			/>
 		</>
 	);
 }

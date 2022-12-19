@@ -7,13 +7,17 @@ import useGet from '../../../hooks/useGet';
 import { getPaper } from '../../../api/paper';
 import SelectBox from '../../Shared/SelectBox';
 import { Recipes } from '../../../styles/recipes';
+import useChangePage from '../../../hooks/useChangePage';
+import PageButton from '../../Shared/PageButton';
+import { Sizes } from '../../../styles/sizes';
 
 export default function PaperPage() {
 	const [paper, setPaper] = useState<ResponsePaper.Get>();
+	const { page, onChangePage } = useChangePage();
 
 	useEffect(() => {
-		useGet(() => getPaper({ page: 1 }), setPaper);
-	}, []);
+		useGet(() => getPaper({ page }), setPaper);
+	}, [page]);
 
 	return (
 		<S.PaperPageLayout>
@@ -43,6 +47,9 @@ export default function PaperPage() {
 						doi={'https://doi.org/00.0000/j.aip.2017.10.007'}
 					/>
 				)}
+				<div>
+					<PageButton currentPage={page} totalPosts={paper?.total} onChangePage={onChangePage} />
+				</div>
 			</div>
 		</S.PaperPageLayout>
 	);
@@ -69,11 +76,15 @@ namespace S {
 	export const PaperPageLayout = styled.div`
 		${Recipes.AlignSelectBoxForBoard}
 
-		>div:last-of-type {
+		>div:nth-of-type(2) {
 			display: flex;
 			flex-direction: column;
-			gap: 3rem;
+			gap: 4rem;
 			margin-top: 2rem;
+
+			> div:last-of-type {
+				margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 4rem);
+			}
 		}
 	`;
 

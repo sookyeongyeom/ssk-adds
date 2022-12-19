@@ -6,17 +6,14 @@ import { ResponseNotice } from '../../../@types/api/notice';
 import { getNotice } from '../../../api/notice';
 import { Recipes } from '../../../styles/recipes';
 import SelectBox from '../../Shared/SelectBox';
+import useChangePage from '../../../hooks/useChangePage';
 
 export default function NoticePage() {
 	const [notice, setNotice] = useState<ResponseNotice.Get>();
-	const [page, setPage] = useState(1);
-
-	const onChangePage = (page: number) => {
-		setPage(page);
-	};
+	const { page, onChangePage } = useChangePage();
 
 	useEffect(() => {
-		useGet(() => getNotice({ page: 1 }), setNotice);
+		useGet(() => getNotice({ page }), setNotice);
 	}, [page]);
 
 	return (
