@@ -89,3 +89,15 @@ type PageButtonProps = {
 	totalPosts: number | undefined;
 	onChangePage: (page: number) => void;
 };
+
+/**
+ * @for NewEditorPost */
+type NewEditorPostProps = {
+	title: string;
+	body: string;
+	writer: string;
+	onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChangeBody: (text: string) => void;
+	onSubmit: () => void;
+};
