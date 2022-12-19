@@ -12,4 +12,5 @@ export const Paths: PathsType = {
 	faq: '/faq',
 	contact: '/contact',
 	login: '/login',
+	new: '/new',
 };

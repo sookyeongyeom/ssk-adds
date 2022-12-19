@@ -11,8 +11,14 @@ const request: GenericInstance = axios.create({
 request.interceptors.request.use(
 	(config) => {
 		const authToken = store.getState().auth.authToken;
-		if (authToken) request.defaults.headers.common['Authorization'] = authToken;
-		else request.defaults.headers.common['Authorization'] = '';
+		if (authToken) {
+			config.headers = {
+				Authorization: `Bearer ${authToken}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			};
+			config.withCredentials = true;
+		}
 		return config;
 	},
 	(error) => {

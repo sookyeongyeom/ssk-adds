@@ -3,34 +3,45 @@ import styled from 'styled-components';
 import { Colors } from '../../styles/colors';
 import { Fonts } from '../../styles/fonts';
 import { ResponseCommonKeys } from '../../constants/responseKeys';
+import AdminButton from './AdminButton';
+import { useRouter } from 'next/router';
+import { Paths } from '../../constants/paths';
 
 export default function AdminBoard({ dataMaps, basePath, order }: AdminBoardProps) {
+	const router = useRouter();
+	const onNew = () => router.push(basePath + Paths.new);
+
 	return (
-		<S.BoardLayout>
-			<thead>
-				<tr>
+		<div>
+			<AdminButton onClick={onNew}>새 글 작성</AdminButton>
+			<S.BoardLayout>
+				<thead>
+					<tr>
+						{!!dataMaps?.length &&
+							Array.from(dataMaps[0]).map(([key]) => <th key={key}>{order.get(key)}</th>)}
+					</tr>
+				</thead>
+				<tbody>
 					{!!dataMaps?.length &&
-						Array.from(dataMaps[0]).map(([key]) => <th key={key}>{order.get(key)}</th>)}
-				</tr>
-			</thead>
-			<tbody>
-				{!!dataMaps?.length &&
-					dataMaps.map((dataMap, i) => (
-						<tr key={i}>
-							{Array.from(dataMap).map(([key, value], i) => (
-								<td key={key}>
-									{/* 두번째 컬럼이면 View 링크 생성 */}
-									{i === 1 ? (
-										<Link href={`${basePath}/${dataMap.get(ResponseCommonKeys.id)}`}>{value}</Link>
-									) : (
-										value
-									)}
-								</td>
-							))}
-						</tr>
-					))}
-			</tbody>
-		</S.BoardLayout>
+						dataMaps.map((dataMap, i) => (
+							<tr key={i}>
+								{Array.from(dataMap).map(([key, value], i) => (
+									<td key={key}>
+										{/* 두번째 컬럼이면 View 링크 생성 */}
+										{i === 1 ? (
+											<Link href={`${basePath}/${dataMap.get(ResponseCommonKeys.id)}`}>
+												{value}
+											</Link>
+										) : (
+											value
+										)}
+									</td>
+								))}
+							</tr>
+						))}
+				</tbody>
+			</S.BoardLayout>
+		</div>
 	);
 }
 

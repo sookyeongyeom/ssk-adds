@@ -64,6 +64,41 @@ namespace S {
 
 	export const Content = styled.pre`
 		padding: 5.8rem 3rem;
+
+		p {
+			margin: 1rem 0;
+		}
+
+		h1 {
+			${Fonts.bold32}
+		}
+
+		h2 {
+			${Fonts.bold28}
+		}
+
+		blockquote {
+			border-left: 0.5rem solid ${Colors.blue100};
+			padding: 0.5rem 1rem;
+			margin: 1rem 0;
+		}
+
+		iframe {
+			width: 56rem;
+			height: 31.5rem;
+		}
+
+		ul > li {
+			list-style-type: disc;
+		}
+
+		ol > li {
+			list-style-type: decimal;
+		}
+
+		li {
+			line-height: 120%;
+		}
 	`;
 
 	export const File = styled.div<ViewLayoutProps>`

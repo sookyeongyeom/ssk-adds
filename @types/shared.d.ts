@@ -60,3 +60,24 @@ type AdjacentNavigatorProps = Pick<ViewProps<T>, 'prev' | 'next'> & {};
 type SelectBoxProps = {
 	options: string[];
 };
+
+/**
+ * @for AdminButton */
+type AdminButtonProps = ChildrenType & {
+	onClick: () => void;
+};
+
+/**
+ * @for Editor */
+type EditorProps = {
+	value: string;
+	onChange: (text: string) => void;
+};
+
+/**
+ * @for Input */
+type InputProps = {
+	label: string;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
