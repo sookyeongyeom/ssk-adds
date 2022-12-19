@@ -6,58 +6,65 @@ import { Colors } from '../../styles/colors';
 import { Fonts } from '../../styles/fonts';
 import { Paths } from '../../constants/paths';
 import { ResponseNotice } from '../../@types/api/notice';
+import PageButton from './PageButton';
 
 export default function Board<T extends ResponseResource.Get | ResponseNotice.Get>({
 	datas,
 	isNotice,
+	currentPage,
+	totalPosts,
+	onChangePage,
 }: BoardProps<T>) {
 	return (
-		<S.BoardLayout>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>날짜</th>
-				</tr>
-			</thead>
-			<tbody>
-				{datas ? (
-					datas.items.map((data, i) => (
-						<tr key={i}>
-							<td>{data.id}</td>
-							<td>
-								<Link
-									href={Paths.adds + (isNotice ? Paths.notice : Paths.resource) + `/${data.id}`}>
-									{data.title}
-								</Link>
-							</td>
-							<td>{data.writer}</td>
-							<td>{data.created_date}</td>
-						</tr>
-					))
-				) : (
-					<>
-						<tr>
-							<td>2</td>
-							<td>
-								<Link href=''>ADDS 데이터</Link>
-							</td>
-							<td>관리자</td>
-							<td>2022-12-08</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>
-								<Link href=''>ADDS 데이터</Link>
-							</td>
-							<td>관리자</td>
-							<td>2022-12-08</td>
-						</tr>
-					</>
-				)}
-			</tbody>
-		</S.BoardLayout>
+		<>
+			<S.BoardLayout>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					{datas ? (
+						datas.items.map((data, i) => (
+							<tr key={i}>
+								<td>{data.id}</td>
+								<td>
+									<Link
+										href={Paths.adds + (isNotice ? Paths.notice : Paths.resource) + `/${data.id}`}>
+										{data.title}
+									</Link>
+								</td>
+								<td>{data.writer}</td>
+								<td>{data.created_date}</td>
+							</tr>
+						))
+					) : (
+						<>
+							<tr>
+								<td>2</td>
+								<td>
+									<Link href=''>ADDS 데이터</Link>
+								</td>
+								<td>관리자</td>
+								<td>2022-12-08</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>
+									<Link href=''>ADDS 데이터</Link>
+								</td>
+								<td>관리자</td>
+								<td>2022-12-08</td>
+							</tr>
+						</>
+					)}
+				</tbody>
+			</S.BoardLayout>
+			<PageButton currentPage={currentPage} totalPosts={totalPosts} onChangePage={onChangePage} />
+		</>
 	);
 }
 
@@ -65,6 +72,7 @@ namespace S {
 	export const BoardLayout = styled.table`
 		width: 100%;
 		text-align: center;
+		margin-bottom: 6.4rem;
 
 		> thead {
 			background-color: ${Colors.blue100};
