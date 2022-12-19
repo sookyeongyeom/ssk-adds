@@ -1,5 +1,6 @@
 import { ResponseNotice } from './api/notice';
 import { ResponseResource } from './api/resource';
+import { MutableRefObject } from 'react';
 
 /**
  * @base */
@@ -78,7 +79,9 @@ type EditorProps = {
  * @for Input */
 type InputProps = {
 	label: string;
-	value: string;
+	value?: string;
+	type?: string;
+	inputRef?: MutableRefObject<HTMLInputElement>;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -96,8 +99,12 @@ type NewEditorPostProps = {
 	title: string;
 	body: string;
 	writer: string;
+	files: File[];
+	fileRef: MutableRefObject<HTMLInputElement>;
 	onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeBody: (text: string) => void;
+	onAddFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onRemoveFile: (targetLastModified: number) => void;
 	onSubmit: () => void;
 };
