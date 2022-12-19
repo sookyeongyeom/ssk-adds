@@ -18,9 +18,12 @@ namespace S {
 		min-height: 100vh;
 		display: flex;
 
+		> aside {
+			flex-shrink: 0;
+		}
+
 		> main {
 			flex-grow: 1;
-			background-color: pink;
 		}
 	`;
 }
