@@ -10,3 +10,15 @@ export const getNoticeById = ({ id }: RequestNotice.GetById) => {
 	const url = `/community/notice/${id}`;
 	return request.get<ResponseNotice.GetById>(url);
 };
+
+export const postNotice = ({ writer, title, body, file, created_date }: RequestNotice.Post) => {
+	const url = '/community/notice';
+	return request.post<ResponseNotice.Post, RequestNotice.Post>(url, {
+		id: 0,
+		writer,
+		title,
+		body,
+		file,
+		created_date,
+	});
+};
