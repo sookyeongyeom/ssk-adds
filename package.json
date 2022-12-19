@@ -9,6 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"aws-sdk": "^2.1277.0",
 		"axios": "^1.2.1",
 		"next": "13.0.6",
 		"react": "18.2.0",
@@ -20,9 +21,11 @@
 		"redux-devtools-extension": "^2.13.9",
 		"redux-logger": "^3.0.6",
 		"redux-saga": "^1.2.2",
-		"styled-components": "^5.3.6"
+		"styled-components": "^5.3.6",
+		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
+		"@types/aws-sdk": "^2.7.0",
 		"@types/axios": "^0.14.0",
 		"@types/node": "^18.11.15",
 		"@types/react": "^18.0.26",
@@ -34,6 +37,7 @@
 		"@types/redux-logger": "^3.0.9",
 		"@types/redux-saga": "^0.10.5",
 		"@types/styled-components": "^5.1.26",
+		"@types/uuid": "^9.0.0",
 		"babel-plugin-styled-components": "^2.0.7",
 		"eslint": "^8.29.0",
 		"eslint-config-next": "^13.0.6",
