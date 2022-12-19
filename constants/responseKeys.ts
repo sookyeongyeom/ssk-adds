@@ -29,7 +29,7 @@ export const ResponsePublicationKeys: ResponsePublication.Item = {
 	title: 'title',
 	pdf: 'pdf',
 	img: 'img',
-};
+} as const;
 
 export const ResponseResourceKeys: ResponseResource.Item = {
 	id: 'id' as any,
@@ -47,7 +47,7 @@ export const ResponsePaperKeys: ResponsePaper.Item = {
 	keywords: 'keywords',
 	researcher_name: 'researcher_name',
 	doi: 'doi',
-};
+} as const;
 
 export const ResponseNoticeKeys: ResponseNotice.Item = {
 	id: 'id' as any,
@@ -64,7 +64,7 @@ export const ResponseNewsKeys: ResponseNews.Item = {
 	body: 'body',
 	url: 'url',
 	created_date: 'created_date',
-};
+} as const;
 
 export const ResponseFAQKeys: ResponseFAQ.Item = {
 	id: 'id' as any,
@@ -73,7 +73,7 @@ export const ResponseFAQKeys: ResponseFAQ.Item = {
 	category: 'category',
 	reply: 'reply',
 	created_date: 'created_date',
-};
+} as const;
 
 export const ResponseContactKeys: ResponseContact.Item = {
 	id: 'id' as any,
@@ -81,4 +81,4 @@ export const ResponseContactKeys: ResponseContact.Item = {
 	email: 'email',
 	phone_number: 'phone_number',
 	way_to_lab: 'way_to_lab',
-};
+} as const;

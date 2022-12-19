@@ -9,7 +9,7 @@ export namespace RequestResource {
 	};
 
 	type Post = {
-		id?: number;
+		id?: 0;
 		writer: string;
 		title: string;
 		body: string;
