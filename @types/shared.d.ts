@@ -99,12 +99,12 @@ type NewEditorPostProps = {
 	title: string;
 	body: string;
 	writer: string;
-	files: File[];
-	fileRef: MutableRefObject<HTMLInputElement>;
+	files?: File[];
+	fileRef?: MutableRefObject<HTMLInputElement>;
 	onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeBody: (text: string) => void;
-	onAddFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onRemoveFile: (targetLastModified: number) => void;
+	onAddFile?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onRemoveFile?: (targetLastModified: number) => void;
 	onSubmit: () => void;
 };
