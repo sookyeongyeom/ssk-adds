@@ -6,8 +6,18 @@ import { ResponseCommonKeys } from '../../constants/responseKeys';
 import AdminButton from './AdminButton';
 import { useRouter } from 'next/router';
 import { Paths } from '../../constants/paths';
+import PageButton from './PageButton';
+import { AdminBoardProps } from '../../@types/admin';
+import { Sizes } from '../../styles/sizes';
 
-export default function AdminBoard({ dataMaps, basePath, order }: AdminBoardProps) {
+export default function AdminBoard({
+	dataMaps,
+	basePath,
+	order,
+	currentPage,
+	totalPosts,
+	onChangePage,
+}: AdminBoardProps) {
 	const router = useRouter();
 	const onNew = () => router.push(basePath + Paths.new);
 
@@ -41,6 +51,9 @@ export default function AdminBoard({ dataMaps, basePath, order }: AdminBoardProp
 						))}
 				</tbody>
 			</S.BoardLayout>
+			<div>
+				<PageButton currentPage={currentPage} totalPosts={totalPosts} onChangePage={onChangePage} />
+			</div>
 		</div>
 	);
 }
@@ -49,6 +62,10 @@ namespace S {
 	export const BoardLayout = styled.table`
 		width: 100%;
 		text-align: center;
+
+		+ div {
+			margin-top: ${Sizes.desktopPageButtonMarginTop};
+		}
 
 		> thead {
 			background-color: ${Colors.blue100};
