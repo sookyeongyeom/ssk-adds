@@ -6,10 +6,12 @@ import { Paths } from '../../../constants/paths';
 import { ResponseFAQKeys } from '../../../constants/responseKeys';
 import { ResponseFAQ } from '../../../@types/api/faq';
 import { getFAQ } from '../../../api/faq';
+import useChangePage from '../../../hooks/useChangePage';
 
 export default function FAQPage() {
 	const [maps, setMaps] = useState<Map<string, string>[]>();
 	const [faq, setFaq] = useState<ResponseFAQ.Get>();
+	const { page, onChangePage } = useChangePage();
 
 	const order = new Map() //
 		.set(ResponseFAQKeys.id, '번호')
@@ -19,15 +21,22 @@ export default function FAQPage() {
 		.set(ResponseFAQKeys.created_date, '날짜');
 
 	useEffect(() => {
-		useGet(() => getFAQ({ page: 1 }), setFaq);
-	}, []);
+		useGet(() => getFAQ({ page }), setFaq);
+	}, [page]);
 
 	useBoard({ dispatch: setMaps, dep: faq, order });
 
 	return (
 		<>
 			<h1>Admin FAQ</h1>
-			<AdminBoard dataMaps={maps} basePath={Paths.admin + Paths.faq} order={order} />
+			<AdminBoard
+				dataMaps={maps}
+				basePath={Paths.admin + Paths.faq}
+				order={order}
+				currentPage={page}
+				totalPosts={faq?.total}
+				onChangePage={onChangePage}
+			/>
 		</>
 	);
 }

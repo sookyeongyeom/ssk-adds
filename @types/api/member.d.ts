@@ -1,6 +1,6 @@
 export namespace RequestMember {
 	type Get = {
-		page?: number;
+		page: number;
 		size?: number;
 	};
 }

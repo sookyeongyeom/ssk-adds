@@ -6,10 +6,12 @@ import { ResponseMember } from '../../../@types/api/member';
 import useBoard from '../../../hooks/useBoard';
 import { Paths } from '../../../constants/paths';
 import { ResponseMemberKeys } from '../../../constants/responseKeys';
+import useChangePage from '../../../hooks/useChangePage';
 
 export default function MemberPage() {
 	const [maps, setMaps] = useState<Map<string, string>[]>();
 	const [member, setMember] = useState<ResponseMember.Get>();
+	const { page, onChangePage } = useChangePage();
 
 	const order = new Map() //
 		.set(ResponseMemberKeys.id, '번호')
@@ -17,15 +19,22 @@ export default function MemberPage() {
 		.set(ResponseMemberKeys.responsibility, '역할');
 
 	useEffect(() => {
-		useGet(() => getMember({}), setMember);
-	}, []);
+		useGet(() => getMember({ page }), setMember);
+	}, [page]);
 
 	useBoard({ dispatch: setMaps, dep: member, order });
 
 	return (
 		<>
 			<h1>Admin 연구진소개</h1>
-			<AdminBoard dataMaps={maps} basePath={Paths.admin + Paths.member} order={order} />
+			<AdminBoard
+				dataMaps={maps}
+				basePath={Paths.admin + Paths.member}
+				order={order}
+				currentPage={page}
+				totalPosts={member?.total}
+				onChangePage={onChangePage}
+			/>
 		</>
 	);
 }

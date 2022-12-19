@@ -58,3 +58,7 @@ type AdjacentNavigatorLayoutProps = {
 type ViewLayoutProps = {
 	isNotice: boolean;
 };
+
+/**
+ * @in PageButton */
+type NumberButtonProps = IsCurrentType & {};

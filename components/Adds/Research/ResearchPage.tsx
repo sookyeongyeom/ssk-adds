@@ -66,15 +66,15 @@ namespace S {
 
 		/* 생체지표 */
 		> div:last-of-type {
-			height: 27.4rem;
+			height: 30rem;
 			gap: 2.5rem;
-			line-height: 120%;
+			line-height: 130%;
 		}
 	`;
 
 	export const ResearchBox = styled.div<ResearchBoxProps>`
 		width: 100%;
-		height: 21.1rem;
+		height: 24rem;
 		background-image: ${(props) =>
 			!props.isHover ? 'url(/assets/pattern_white.png)' : 'url(/assets/pattern_blue.png)'};
 		background-repeat: no-repeat;
@@ -84,8 +84,8 @@ namespace S {
 		display: flex;
 		flex-direction: column;
 		gap: 3rem;
-		justify-content: ${(props) => (!props.isHover ? 'center' : 'flex-start')};
-		padding: ${(props) => (!props.isHover ? '7rem' : '4.3rem 4.8rem')};
+		justify-content: center;
+		padding: ${(props) => (!props.isHover ? '7rem' : '4.5rem 4.8rem 5.5rem 4.8rem')};
 		position: relative;
 		box-shadow: ${BoxShadows.smooth};
 	`;
