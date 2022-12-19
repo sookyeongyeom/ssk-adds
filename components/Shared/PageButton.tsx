@@ -7,6 +7,39 @@ import { useState, useEffect } from 'react';
 
 export default function PageButton({ currentPage, totalPosts, onChangePage }: PageButtonProps) {
 	const [pages, setPages] = useState<number[]>([]);
+	const [block, setBlock] = useState(1);
+
+	const getLastBlock = () => Math.ceil(pages.length / 5);
+
+	const getPagesInCurrentBlock = () => pages.slice((block - 1) * 5, (block - 1) * 5 + 5);
+
+	const onFirst = () => {
+		setBlock(1);
+		onChangePage(1);
+	};
+
+	const onLast = () => {
+		setBlock(getLastBlock());
+		onChangePage(pages.length);
+	};
+
+	const onPrev = () => {
+		if (block !== 1) {
+			const prevBlock = block - 1;
+			setBlock(prevBlock);
+			/* 이전 블록의 마지막 페이지로 이동 */
+			onChangePage((prevBlock - 1) * 5 + 5);
+		}
+	};
+
+	const onNext = () => {
+		if (block !== getLastBlock()) {
+			const nextBlock = block + 1;
+			setBlock(nextBlock);
+			/* 다음 블록의 첫 페이지로 이동 */
+			onChangePage((nextBlock - 1) * 5 + 1);
+		}
+	};
 
 	useEffect(() => {
 		if (totalPosts) {
@@ -17,17 +50,16 @@ export default function PageButton({ currentPage, totalPosts, onChangePage }: Pa
 					.map((v, i) => i + 1),
 			];
 			setPages(pages);
-			console.log(pages);
 		}
 	}, [totalPosts]);
 
 	return (
 		<S.PageButtonLayout>
-			<button onClick={() => onChangePage(1)}>{svgDoubleLeft7}</button>
-			<button>{svgLeft7}</button>
+			<button onClick={onFirst}>{svgDoubleLeft7}</button>
+			<button onClick={onPrev}>{svgLeft7}</button>
 			<S.NumberWrapper>
 				{pages &&
-					pages.map((page, i) => (
+					getPagesInCurrentBlock().map((page, i) => (
 						<S.NumberButton
 							key={i}
 							isCurrent={currentPage === page}
@@ -36,8 +68,8 @@ export default function PageButton({ currentPage, totalPosts, onChangePage }: Pa
 						</S.NumberButton>
 					))}
 			</S.NumberWrapper>
-			<button>{svgRight7}</button>
-			<button onClick={() => onChangePage(pages?.length)}>{svgDoubleRight7}</button>
+			<button onClick={onNext}>{svgRight7}</button>
+			<button onClick={onLast}>{svgDoubleRight7}</button>
 		</S.PageButtonLayout>
 	);
 }
