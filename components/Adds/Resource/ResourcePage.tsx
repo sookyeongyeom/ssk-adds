@@ -13,6 +13,7 @@ export default function ResourcePage() {
 	const { page, onChangePage } = useChangePage();
 
 	useEffect(() => {
+		// eslint-disable-next-line react-hooks/rules-of-hooks
 		useGet(() => getResource({ page }), setResource);
 	}, [page]);
 
