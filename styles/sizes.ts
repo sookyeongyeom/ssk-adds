@@ -7,5 +7,6 @@ export const Sizes = {
 	desktopCarouselItemWidth: '30.7rem',
 	desktopCarouselItemHeight: '9.1rem',
 	desktopCarouselWrapperGap: '3.45rem',
+	desktopPageButtonMarginTop: '6.4rem',
 	mobileFooterHeight: '23.9rem',
 } as const;
