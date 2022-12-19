@@ -10,3 +10,15 @@ export const getResourceById = ({ id }: RequestResource.GetById) => {
 	const url = `/data/intro/${id}`;
 	return request.get<ResponseResource.GetById>(url);
 };
+
+export const postResource = ({ writer, title, body, file, created_date }: RequestResource.Post) => {
+	const url = '/data/intro';
+	return request.post<ResponseResource.Post, RequestResource.Post>(url, {
+		id: 0,
+		writer,
+		title,
+		body,
+		file,
+		created_date,
+	});
+};
