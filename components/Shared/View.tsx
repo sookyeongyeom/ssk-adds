@@ -7,6 +7,9 @@ import { svgDownload } from '../../styles/svgs';
 import BoardButton from './BoardButton';
 import AdjacentNavigator from './AdjacentNavigator';
 import { ResponseNotice } from '../../@types/api/notice';
+import Link from 'next/link';
+import { getDownloadLinkFromS3 } from '../../s3';
+import { S3Folders } from '../../constants/s3';
 
 export default function View<T extends ResponseResource.GetById | ResponseNotice.GetById>({
 	data,
@@ -15,6 +18,7 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 	next,
 	isNotice = false,
 }: ViewProps<T>) {
+	const folder = isNotice ? S3Folders.notice : S3Folders.resource;
 	return (
 		<S.ViewLayout>
 			{data && (
@@ -28,11 +32,15 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 					<S.Content dangerouslySetInnerHTML={{ __html: data.body }} />
 					<S.File isNotice={isNotice}>
 						<h3>첨부파일</h3>
-						{data.file && (
-							<p>
-								{svgDownload} {data.file}
-							</p>
-						)}
+						<div>
+							{data.file &&
+								data.file.split(',').map((file, i) => (
+									<p key={i}>
+										{svgDownload}{' '}
+										<Link href={`${getDownloadLinkFromS3(folder, file)}`}>{file}</Link>
+									</p>
+								))}
+						</div>
 					</S.File>
 					<BoardButton boardPath={boardPath} />
 					<AdjacentNavigator prev={prev} next={next} />
@@ -105,10 +113,10 @@ namespace S {
 		background-color: ${(props) => (props.isNotice ? '' : Colors.blue100)};
 		border-top: ${(props) => (props.isNotice ? `0.1rem solid ${Colors.gray150}` : '')};
 		border-bottom: ${(props) => (props.isNotice ? `0.1rem solid ${Colors.gray150}` : '')};
-		height: 5.5rem;
-		padding: 0 3rem;
+		min-height: 4.9rem;
+		padding: 1.5rem 3rem;
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 3rem;
 		margin-bottom: 9.1rem;
 
@@ -116,10 +124,29 @@ namespace S {
 			${Fonts.medium16}
 		}
 
-		> p {
+		> div {
 			display: flex;
-			gap: 0.5rem;
-			cursor: pointer;
+			flex-direction: column;
+			gap: 1rem;
+
+			> p {
+				display: flex;
+				gap: 0.5rem;
+				cursor: pointer;
+				transition: 0.5s ease;
+
+				> svg > path {
+					transition: 0.5s ease;
+				}
+
+				&:hover {
+					color: ${Colors.blue300};
+
+					> svg > path {
+						fill: ${Colors.blue300};
+					}
+				}
+			}
 		}
 	`;
 }
