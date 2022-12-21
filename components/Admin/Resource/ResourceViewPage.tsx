@@ -5,11 +5,16 @@ import useGet from '../../../hooks/useGet';
 import View from '../../Shared/View';
 import { getResourceById } from '../../../api/resource';
 import { Paths } from '../../../constants/paths';
+import AdminButton from '../../Shared/AdminButton';
+import { useRouter } from 'next/router';
 
 export default function ResourceViewPage({ id }: ViewPageProps) {
 	const [resource, setResource] = useState<ResponseResource.GetById>();
 	const [prev, setPrev] = useState<ResponseResource.GetById>();
 	const [next, setNext] = useState<ResponseResource.GetById>();
+
+	const router = useRouter();
+	const onEdit = () => router.push(Paths.admin + Paths.resource + Paths.edit + `/${id}`);
 
 	useEffect(() => {
 		if (!isNaN(id)) {
@@ -20,14 +25,21 @@ export default function ResourceViewPage({ id }: ViewPageProps) {
 	}, [id]);
 
 	return (
-		<S.ResourceViewPageLayout>
-			<View
-				data={resource!}
-				boardPath={Paths.admin + Paths.resource}
-				prev={prev && { title: prev?.title!, path: Paths.admin + Paths.resource + `/${prev?.id}` }}
-				next={next && { title: next?.title!, path: Paths.admin + Paths.resource + `/${next?.id}` }}
-			/>
-		</S.ResourceViewPageLayout>
+		<>
+			<AdminButton onClick={onEdit}>수정</AdminButton>
+			<S.ResourceViewPageLayout>
+				<View
+					data={resource!}
+					boardPath={Paths.admin + Paths.resource}
+					prev={
+						prev && { title: prev?.title!, path: Paths.admin + Paths.resource + `/${prev?.id}` }
+					}
+					next={
+						next && { title: next?.title!, path: Paths.admin + Paths.resource + `/${next?.id}` }
+					}
+				/>
+			</S.ResourceViewPageLayout>
+		</>
 	);
 }
 
