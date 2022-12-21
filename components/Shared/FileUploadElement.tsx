@@ -51,6 +51,7 @@ export default function FileUploadElement({
 		<S.FileUploadElementLayout>
 			<input type={'file'} ref={fileRef} onChange={onSelectFile} multiple />
 			{prevFileKeys &&
+				onToggleToDelete &&
 				prevFileKeys.map((fileKey, i) => (
 					<div onClick={() => onToggleToDelete(fileKey)} key={i}>
 						{fileKey}

@@ -110,8 +110,8 @@ type NewEditorPostProps = FileUploadElementProps & {
  * @in NewEditorPost */
 type FileUploadElementProps = {
 	files: File[];
-	prevFileKeys: string[];
+	prevFileKeys?: string[];
 	onAddFile: (files: File[]) => void;
 	onRemoveFile?: (targetLastModified: number) => void;
-	onToggleToDelete: (targetFileKey: string) => void;
+	onToggleToDelete?: (targetFileKey: string) => void;
 };

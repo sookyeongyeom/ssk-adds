@@ -10,5 +10,6 @@ type ViewPageProps = {
 };
 
 type EditPageInnerShellProps<T> = ViewPageProps & {
-	['resource']: T | undefined;
+	['resource']?: T | undefined;
+	['notice']?: T | undefined;
 };

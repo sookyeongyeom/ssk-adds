@@ -2,8 +2,8 @@ import { ReactElement } from 'react';
 import CustomHead from '../../../../components/Seo/CustomHead';
 import { Seo } from '../../../../constants/seo';
 import { useRouter } from 'next/router';
-import NoticeViewPage from '../../../../components/Admin/Notice/NoticeViewPage';
 import AdminLayout from '../../../../components/Layout/AdminLayout';
+import NoticeEditPage from '../../../../components/Admin/Notice/NoticeEditPage';
 
 export default function noticeEdit() {
 	const router = useRouter();
@@ -12,7 +12,7 @@ export default function noticeEdit() {
 	return (
 		<>
 			<CustomHead title={Seo.Title.notice} />
-			<NoticeViewPage id={Number(id)} />
+			<NoticeEditPage id={Number(id)} />
 		</>
 	);
 }
