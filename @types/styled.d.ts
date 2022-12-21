@@ -62,3 +62,9 @@ type ViewLayoutProps = {
 /**
  * @in PageButton */
 type NumberButtonProps = IsCurrentType & {};
+
+/**
+ * @in FileUploadElement */
+type DragAndDropProps = {
+	isDragOver: boolean;
+};
