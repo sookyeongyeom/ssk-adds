@@ -8,3 +8,7 @@
 type ViewPageProps = {
 	id: number;
 };
+
+type EditPageInnerShellProps<T> = ViewPageProps & {
+	['resource']: T | undefined;
+};
