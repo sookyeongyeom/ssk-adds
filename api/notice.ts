@@ -24,3 +24,15 @@ export const postNotice = ({ writer, title, body, file, created_date }: RequestN
 		created_date,
 	});
 };
+
+export const putNotice = ({ id, writer, title, body, file, created_date }: RequestNotice.Put) => {
+	const url = `${baseUrl}/${id}`;
+	return request.put<ResponseNotice.Put, RequestNotice.Put>(url, {
+		id,
+		writer,
+		title,
+		body,
+		file,
+		created_date,
+	});
+};

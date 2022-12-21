@@ -16,6 +16,15 @@ export namespace RequestResource {
 		file: string;
 		created_date: string;
 	};
+
+	type Put = {
+		id: number;
+		writer: string;
+		title: string;
+		body: string;
+		file: string;
+		created_date: string;
+	};
 }
 
 export namespace ResponseResource {
@@ -45,4 +54,6 @@ export namespace ResponseResource {
 		file: string;
 		created_date: string;
 	};
+
+	type Put = string;
 }

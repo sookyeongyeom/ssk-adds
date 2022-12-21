@@ -14,18 +14,26 @@ export default function NewEditorPost({
 	writer,
 	body,
 	files,
+	prevFileKeys,
 	onChangeTitle,
 	onChangeWriter,
 	onChangeBody,
 	onAddFile,
 	onRemoveFile,
 	onSubmit,
+	onToggleToDelete,
 }: NewEditorPostProps) {
 	return (
 		<>
 			<Input label={'제목'} value={title} onChange={onChangeTitle} />
 			<Editor value={body} onChange={onChangeBody} />
-			<FileUploadElement files={files} onAddFile={onAddFile} onRemoveFile={onRemoveFile} />
+			<FileUploadElement
+				files={files}
+				prevFileKeys={prevFileKeys}
+				onAddFile={onAddFile}
+				onRemoveFile={onRemoveFile}
+				onToggleToDelete={onToggleToDelete}
+			/>
 			<Input label={'관리자'} value={writer} onChange={onChangeWriter} />
 			<AdminButton onClick={onSubmit}>완료</AdminButton>
 		</>

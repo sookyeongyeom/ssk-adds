@@ -13,4 +13,5 @@ export const Paths: PathsType = {
 	contact: '/contact',
 	login: '/login',
 	new: '/new',
+	edit: '/edit',
 };

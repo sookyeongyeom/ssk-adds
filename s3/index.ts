@@ -16,14 +16,14 @@ const s3 = new AWS.S3({ apiVersion: '2006-03-01', params: { Bucket: bucketName }
  * S3 파일 업로드 */
 export const uploadFileToS3 = (
 	folder: typeof S3Folders[keyof typeof S3Folders],
-	fileName: string,
+	fileKey: string,
 	file: File,
 ) => {
-	const fileKey = encodeURIComponent(folder) + '/' + fileName;
+	const fullKey = encodeURIComponent(folder) + '/' + fileKey;
 	const upload = new AWS.S3.ManagedUpload({
 		params: {
 			Bucket: bucketName!,
-			Key: fileKey,
+			Key: fullKey,
 			Body: file,
 		},
 	});
@@ -34,14 +34,16 @@ export const uploadFileToS3 = (
 
 /**
  * S3 파일 다운로드 링크 반환 */
-export const getDownloadLinkFromS3 = (folder: string, fileName: string) => {
-	const fileKey = encodeURIComponent(folder) + '/' + fileName;
-	return `https://s3.${region}.amazonaws.com/${bucketName}/${fileKey}`;
+export const getDownloadLinkFromS3 = (folder: string, fileKey: string) => {
+	const fullKey = encodeURIComponent(folder) + '/' + fileKey;
+	return `https://s3.${region}.amazonaws.com/${bucketName}/${fullKey}`;
 };
 
 /**
  * S3 파일 삭제 */
-export const deleteFileFromS3 = (folder: string, fileName: string) => {
-	let fileKey = encodeURIComponent(folder) + '/' + fileName;
-	s3.deleteObject({ Bucket: bucketName!, Key: fileKey }, console.log);
+export const deleteFileFromS3 = (folder: string, fileKey: string) => {
+	let fullKey = encodeURIComponent(folder) + '/' + fileKey;
+	const promise = s3.deleteObject({ Bucket: bucketName!, Key: fullKey }).promise();
+	promise.then(console.log, console.log);
+	return promise;
 };

@@ -31,15 +31,6 @@ type MemberBoxElementProps = {
 };
 
 /**
- * @for ResourceViewPage
- * @for NoticeViewPage
- * @by page/resource/[id].tsx
- * @by page/notice/[id].tsx */
-type ViewPageProps = {
-	id: number;
-};
-
-/**
  * @for PaperBoxElement
  * @in PaperPage */
 type PaperBoxElementProps = {

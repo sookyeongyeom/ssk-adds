@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { uploadFileToS3 } from '../s3';
 import { S3Folders } from '../constants/s3';
+import { deleteFileFromS3 } from '../s3/index';
 
 export default function useFiles(folder: typeof S3Folders[keyof typeof S3Folders]) {
 	const [files, setFiles] = useState<File[]>([]);
+	const [wishToDeleteFileKeys, setWishToDeleteFileKeys] = useState<Set<string>>(new Set<string>());
 
 	const onAddFile = (targetFiles: File[]) => {
 		const includeTargetFiles = [...files];
@@ -21,15 +23,22 @@ export default function useFiles(folder: typeof S3Folders[keyof typeof S3Folders
 		setFiles(excludeTargetFile);
 	};
 
+	const onToggleToDelete = (targetFileKey: string) => {
+		const manipulatedKeys = new Set(wishToDeleteFileKeys);
+		if (wishToDeleteFileKeys.has(targetFileKey)) manipulatedKeys.delete(targetFileKey);
+		else manipulatedKeys.add(targetFileKey);
+		setWishToDeleteFileKeys(manipulatedKeys);
+	};
+
 	/**
 	 * @성공 {파일키:파일이름}[] 반환
 	 * @실패 throw e */
 	const onUploadFile = async () => {
 		let fileData: FileDataType[] = [];
 		const promises = files.map((file) => {
-			const fileName = uuidv4();
-			fileData.push({ key: fileName, name: file.name });
-			return uploadFileToS3(folder, fileName, file);
+			const fileKey = uuidv4();
+			fileData.push({ key: fileKey, name: file.name });
+			return uploadFileToS3(folder, fileKey, file);
 		});
 		try {
 			await Promise.all(promises);
@@ -39,5 +48,29 @@ export default function useFiles(folder: typeof S3Folders[keyof typeof S3Folders
 		}
 	};
 
-	return { files, onAddFile, onRemoveFile, onUploadFile };
+	/**
+	 * @성공 파일키[] 반환
+	 * @실패 throw e */
+	const onDeleteFile = async () => {
+		if (wishToDeleteFileKeys) {
+			const promises = Array.from(wishToDeleteFileKeys).map((fileKey) => {
+				return deleteFileFromS3(folder, fileKey);
+			});
+			try {
+				await Promise.all(promises);
+				return Array.from(wishToDeleteFileKeys);
+			} catch (e) {
+				throw e;
+			}
+		}
+	};
+
+	return {
+		files,
+		onAddFile,
+		onRemoveFile,
+		onUploadFile,
+		onDeleteFile,
+		onToggleToDelete,
+	};
 }
