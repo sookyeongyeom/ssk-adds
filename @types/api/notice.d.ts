@@ -16,6 +16,15 @@ export namespace RequestNotice {
 		file: string;
 		created_date: string;
 	};
+
+	type Put = {
+		id: number;
+		writer: string;
+		title: string;
+		body: string;
+		file: string;
+		created_date: string;
+	};
 }
 
 export namespace ResponseNotice {
@@ -45,4 +54,6 @@ export namespace ResponseNotice {
 		file: string;
 		created_date: string;
 	};
+
+	type Put = string;
 }
