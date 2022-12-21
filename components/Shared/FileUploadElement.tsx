@@ -5,8 +5,10 @@ import AdminButton from './AdminButton';
 
 export default function FileUploadElement({
 	files,
+	prevFileKeys,
 	onAddFile,
 	onRemoveFile,
+	onToggleToDelete,
 }: FileUploadElementProps) {
 	const [isDragOver, setIsDragOver] = useState(false);
 	const fileRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -48,6 +50,12 @@ export default function FileUploadElement({
 	return (
 		<S.FileUploadElementLayout>
 			<input type={'file'} ref={fileRef} onChange={onSelectFile} multiple />
+			{prevFileKeys &&
+				prevFileKeys.map((fileKey, i) => (
+					<div onClick={() => onToggleToDelete(fileKey)} key={i}>
+						{fileKey}
+					</div>
+				))}
 			<S.DragAndDrop
 				onDragOver={onDragOverFile}
 				isDragOver={isDragOver}
