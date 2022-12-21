@@ -24,3 +24,16 @@ export const postResource = ({ writer, title, body, file, created_date }: Reques
 		created_date,
 	});
 };
+
+/* prettier-ignore */
+export const putResource = ({ id, writer, title, body, file, created_date }: RequestResource.Put) => {
+	const url = `${baseUrl}/${id}`;
+	return request.put<ResponseResource.Put, RequestResource.Put>(url, {
+		id,
+		writer,
+		title,
+		body,
+		file,
+		created_date,
+	});
+};
