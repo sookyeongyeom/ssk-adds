@@ -34,10 +34,10 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 						<h3>첨부파일</h3>
 						<div>
 							{data.file &&
-								data.file.split(',').map((file, i) => (
+								JSON.parse(data.file).map((file: FileDataType, i: number) => (
 									<p key={i}>
 										{svgDownload}{' '}
-										<Link href={`${getDownloadLinkFromS3(folder, file)}`}>{file}</Link>
+										<Link href={`${getDownloadLinkFromS3(folder, file.key)}`}>{file.name}</Link>
 									</p>
 								))}
 						</div>

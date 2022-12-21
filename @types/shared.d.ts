@@ -95,16 +95,21 @@ type PageButtonProps = {
 
 /**
  * @for NewEditorPost */
-type NewEditorPostProps = {
+type NewEditorPostProps = FileUploadElementProps & {
 	title: string;
 	body: string;
 	writer: string;
-	files?: File[];
-	fileRef?: MutableRefObject<HTMLInputElement>;
 	onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeBody: (text: string) => void;
-	onAddFile?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onRemoveFile?: (targetLastModified: number) => void;
 	onSubmit: () => void;
+};
+
+/**
+ * @for FileUploadElement
+ * @in NewEditorPost */
+type FileUploadElementProps = {
+	files: File[];
+	onAddFile: (files: File[]) => void;
+	onRemoveFile?: (targetLastModified: number) => void;
 };

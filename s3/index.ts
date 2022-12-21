@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk';
+import { S3Folders } from '../constants/s3';
 
 const bucketName = process.env.NEXT_PUBLIC_S3_BUCKET_NAME;
 const region = process.env.NEXT_PUBLIC_S3_REGION;
@@ -13,7 +14,11 @@ const s3 = new AWS.S3({ apiVersion: '2006-03-01', params: { Bucket: bucketName }
 
 /**
  * S3 파일 업로드 */
-export const uploadFileToS3 = (folder: string, fileName: string, file: File) => {
+export const uploadFileToS3 = (
+	folder: typeof S3Folders[keyof typeof S3Folders],
+	fileName: string,
+	file: File,
+) => {
 	const fileKey = encodeURIComponent(folder) + '/' + fileName;
 	const upload = new AWS.S3.ManagedUpload({
 		params: {
