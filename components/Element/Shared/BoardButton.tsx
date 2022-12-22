@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 
 export default function BoardButton({ boardPath }: BoardButtonProps) {
 	const router = useRouter();
-
 	const onClick = () => router.push(boardPath);
 
 	return <S.BoardButtonLayout onClick={onClick}>{svgMenu}목록</S.BoardButtonLayout>;

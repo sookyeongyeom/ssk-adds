@@ -14,4 +14,5 @@ export const Paths: PathsType = {
 	login: '/login',
 	new: '/new',
 	edit: '/edit',
+	delete: '/delete',
 };

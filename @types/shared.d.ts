@@ -39,17 +39,21 @@ type BoardProps = PageButtonProps & {
  * @by ResourceViewPage
  * @by NoticeViewPage */
 type ViewProps<T extends ResponseResource.GetById | ResponseNotice.GetById> = {
+	id?: number;
 	data: T;
-	boardPath: string;
+	basePath: string;
 	prev: AdjacentItemType;
 	next: AdjacentItemType;
 	isNotice?: boolean;
+	isAdmin?: boolean;
 };
 
 /**
  * @for BoardButton
  * @by View */
-type BoardButtonProps = Pick<ViewProps<T>, 'boardPath'> & {};
+type BoardButtonProps = {
+	boardPath: string;
+};
 
 /**
  * @for AdjacentNavigator

@@ -5,4 +5,5 @@ export interface GenericInstance extends AxiosInstance {
 	post<T, U>(url: string, data: U, config?: AxiosRequestConfig): Promise<T>;
 	put<T, U>(url: string, data: U, config?: AxiosRequestConfig): Promise<T>;
 	patch<T, U>(url: string, data: U, config?: AxiosRequestConfig): Promise<T>;
+	delete<T, U>(url: string, data: U, config?: AxiosRequestConfig): Promise<T>;
 }
