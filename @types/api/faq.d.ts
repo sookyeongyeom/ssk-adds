@@ -19,6 +19,6 @@ export namespace ResponseFAQ {
 		title: string;
 		category: string;
 		reply: string;
-		created_date: string;
+		createdDate: string;
 	};
 }

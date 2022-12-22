@@ -14,7 +14,7 @@ export namespace RequestNotice {
 		title: string;
 		body: string;
 		file: string;
-		created_date: string;
+		createdDate: string;
 	};
 
 	type Put = {
@@ -23,7 +23,7 @@ export namespace RequestNotice {
 		title: string;
 		body: string;
 		file: string;
-		created_date: string;
+		createdDate: string;
 	};
 
 	type Delete = {
@@ -47,7 +47,7 @@ export namespace ResponseNotice {
 		title: string;
 		body: string;
 		file: string;
-		created_date: string;
+		createdDate: string;
 	};
 
 	type Post = {
@@ -56,7 +56,7 @@ export namespace ResponseNotice {
 		body: string;
 		writer: string;
 		file: string;
-		created_date: string;
+		createdDate: string;
 	};
 
 	type Put = string;

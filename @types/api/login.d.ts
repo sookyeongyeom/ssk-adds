@@ -7,7 +7,7 @@ export namespace RequestLogin {
 
 export namespace ResponseLogin {
 	type Post = {
-		access_token: string;
-		token_type: string;
+		accessToken: string;
+		tokenType: string;
 	};
 }
