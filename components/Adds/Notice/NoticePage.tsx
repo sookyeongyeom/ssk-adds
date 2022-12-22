@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useGet from '../../../hooks/useGet';
-import Board from '../../Shared/Board';
+import Board from '../../Element/Shared/Board';
 import { ResponseNotice } from '../../../@types/api/notice';
 import { getNotice } from '../../../api/notice';
 import { Recipes } from '../../../styles/recipes';
-import SelectBox from '../../Shared/SelectBox';
+import SelectBox from '../../Element/Adds/SelectBox';
 import useChangePage from '../../../hooks/useChangePage';
+import useBoard from '../../../hooks/useBoard';
+import { Paths } from '../../../constants/paths';
+import { BoardColumnOrders } from '../../../constants/boardColumnOrders';
 
 export default function NoticePage() {
 	const [notice, setNotice] = useState<ResponseNotice.Get>();
 	const { page, onChangePage } = useChangePage();
+	const maps = useBoard({ dep: notice, order: BoardColumnOrders.notice });
 
 	useEffect(() => {
 		useGet(() => getNotice({ page }), setNotice);
@@ -20,11 +24,12 @@ export default function NoticePage() {
 		<S.NoticePageLayout>
 			<SelectBox options={['최신순 정렬']} />
 			<Board
-				datas={notice!}
+				dataMaps={maps}
+				basePath={Paths.adds + Paths.notice}
+				order={BoardColumnOrders.notice}
 				currentPage={page}
-				totalPosts={notice && notice.total}
+				totalPosts={notice?.total}
 				onChangePage={onChangePage}
-				isNotice
 			/>
 		</S.NoticePageLayout>
 	);

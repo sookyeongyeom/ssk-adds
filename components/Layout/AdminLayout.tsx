@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import AdminSidebar from '../Shared/AdminSidebar';
+import AdminSidebar from '../Element/Admin/AdminSidebar';
 import StoreProvider from '../Provider/StoreProvider';
 
 export default function AdminLayout({ children }: ChildrenType) {

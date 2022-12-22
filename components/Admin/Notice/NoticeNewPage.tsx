@@ -1,6 +1,6 @@
 import useInput from '../../../hooks/useInput';
 import useEditorBody from '../../../hooks/useEditorBody';
-import NewEditorPost from '../../Shared/NewEditorPost';
+import NewEditorPost from '../../Element/Admin/NewEditorPost';
 import { postNotice } from '../../../api/notice';
 import useFiles from '../../../hooks/useFiles';
 import { S3Folders } from '../../../constants/s3';

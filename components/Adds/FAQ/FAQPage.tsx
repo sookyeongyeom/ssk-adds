@@ -8,7 +8,7 @@ import useSlide from '../../../hooks/useSlide';
 import { ResponseFAQ } from '../../../@types/api/faq';
 import useGet from '../../../hooks/useGet';
 import { getFAQ } from '../../../api/faq';
-import PageButton from '../../Shared/PageButton';
+import PageButton from '../../Element/Shared/PageButton';
 import useChangePage from '../../../hooks/useChangePage';
 import { Sizes } from '../../../styles/sizes';
 

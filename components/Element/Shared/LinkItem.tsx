@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { LinkItemProps } from '../../@types/shared';
-import { Colors } from '../../styles/colors';
+import { LinkItemProps } from '../../../@types/shared';
+import { Colors } from '../../../styles/colors';
 
 export default function LinkItem({ href, title, isCurrent }: LinkItemProps) {
 	return (

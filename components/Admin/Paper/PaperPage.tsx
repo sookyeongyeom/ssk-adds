@@ -1,40 +1,33 @@
-import AdminBoard from '../../Shared/AdminBoard';
 import { useState, useEffect } from 'react';
 import useGet from '../../../hooks/useGet';
 import useBoard from '../../../hooks/useBoard';
 import { Paths } from '../../../constants/paths';
-import { ResponsePaperKeys } from '../../../constants/responseKeys';
 import { ResponsePaper } from '../../../@types/api/paper';
 import { getPaper } from '../../../api/paper';
 import useChangePage from '../../../hooks/useChangePage';
+import Board from '../../Element/Shared/Board';
+import { BoardColumnOrders } from '../../../constants/boardColumnOrders';
 
 export default function PaperPage() {
-	const [maps, setMaps] = useState<Map<string, string>[]>();
 	const [paper, setPaper] = useState<ResponsePaper.Get>();
 	const { page, onChangePage } = useChangePage();
-
-	const order = new Map() //
-		.set(ResponsePaperKeys.id, '번호')
-		.set(ResponsePaperKeys.title, '제목')
-		.set(ResponsePaperKeys.researcher_name, '연구자')
-		.set(ResponsePaperKeys.doi, 'DOI');
+	const maps = useBoard({ dep: paper, order: BoardColumnOrders.paper });
 
 	useEffect(() => {
 		useGet(() => getPaper({ page }), setPaper);
 	}, [page]);
 
-	useBoard({ dispatch: setMaps, dep: paper, order });
-
 	return (
 		<>
 			<h1>Admin 데이터활용논문</h1>
-			<AdminBoard
+			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.paper}
-				order={order}
+				order={BoardColumnOrders.paper}
 				currentPage={page}
 				totalPosts={paper?.total}
 				onChangePage={onChangePage}
+				isAdmin
 			/>
 		</>
 	);

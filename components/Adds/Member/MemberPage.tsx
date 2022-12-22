@@ -7,7 +7,7 @@ import { Fonts } from '../../../styles/fonts';
 import { BoxShadows } from '../../../styles/shadows';
 import { getMember } from '../../../api/member';
 import useChangePage from '../../../hooks/useChangePage';
-import PageButton from '../../Shared/PageButton';
+import PageButton from '../../Element/Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
 
 export default function MemberPage() {

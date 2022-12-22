@@ -1,39 +1,33 @@
-import AdminBoard from '../../Shared/AdminBoard';
 import { useState, useEffect } from 'react';
 import useGet from '../../../hooks/useGet';
 import { getMember } from '../../../api/member';
 import { ResponseMember } from '../../../@types/api/member';
 import useBoard from '../../../hooks/useBoard';
 import { Paths } from '../../../constants/paths';
-import { ResponseMemberKeys } from '../../../constants/responseKeys';
 import useChangePage from '../../../hooks/useChangePage';
+import Board from '../../Element/Shared/Board';
+import { BoardColumnOrders } from '../../../constants/boardColumnOrders';
 
 export default function MemberPage() {
-	const [maps, setMaps] = useState<Map<string, string>[]>();
 	const [member, setMember] = useState<ResponseMember.Get>();
 	const { page, onChangePage } = useChangePage();
-
-	const order = new Map() //
-		.set(ResponseMemberKeys.id, '번호')
-		.set(ResponseMemberKeys.name, '이름')
-		.set(ResponseMemberKeys.responsibility, '역할');
+	const maps = useBoard({ dep: member, order: BoardColumnOrders.member });
 
 	useEffect(() => {
 		useGet(() => getMember({ page }), setMember);
 	}, [page]);
 
-	useBoard({ dispatch: setMaps, dep: member, order });
-
 	return (
 		<>
 			<h1>Admin 연구진소개</h1>
-			<AdminBoard
+			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.member}
-				order={order}
+				order={BoardColumnOrders.member}
 				currentPage={page}
 				totalPosts={member?.total}
 				onChangePage={onChangePage}
+				isAdmin
 			/>
 		</>
 	);

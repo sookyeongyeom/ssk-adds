@@ -1,6 +1,6 @@
 import { useState, useRef, MutableRefObject } from 'react';
 import styled from 'styled-components';
-import { FileUploadElementProps } from '../../@types/shared';
+import { FileUploadElementProps } from '../../../@types/shared';
 import AdminButton from './AdminButton';
 
 export default function FileUploadElement({

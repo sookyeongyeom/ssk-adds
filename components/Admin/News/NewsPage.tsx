@@ -1,39 +1,33 @@
-import AdminBoard from '../../Shared/AdminBoard';
 import { useState, useEffect } from 'react';
 import useGet from '../../../hooks/useGet';
 import useBoard from '../../../hooks/useBoard';
 import { Paths } from '../../../constants/paths';
-import { ResponseNewsKeys } from '../../../constants/responseKeys';
 import { ResponseNews } from '../../../@types/api/news';
 import { getNews } from '../../../api/news';
 import useChangePage from '../../../hooks/useChangePage';
+import Board from '../../Element/Shared/Board';
+import { BoardColumnOrders } from '../../../constants/boardColumnOrders';
 
 export default function NewsPage() {
-	const [maps, setMaps] = useState<Map<string, string>[]>();
 	const [news, setNews] = useState<ResponseNews.Get>();
 	const { page, onChangePage } = useChangePage();
-
-	const order = new Map() //
-		.set(ResponseNewsKeys.id, '번호')
-		.set(ResponseNewsKeys.title, '제목')
-		.set(ResponseNewsKeys.created_date, '날짜');
+	const maps = useBoard({ dep: news, order: BoardColumnOrders.news });
 
 	useEffect(() => {
 		useGet(() => getNews({ page }), setNews);
 	}, [page]);
 
-	useBoard({ dispatch: setMaps, dep: news, order });
-
 	return (
 		<>
 			<h1>Admin 보도자료</h1>
-			<AdminBoard
+			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.news}
-				order={order}
+				order={BoardColumnOrders.news}
 				currentPage={page}
 				totalPosts={news?.total}
 				onChangePage={onChangePage}
+				isAdmin
 			/>
 		</>
 	);

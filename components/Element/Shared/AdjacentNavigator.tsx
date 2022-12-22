@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Colors } from '../../styles/colors';
-import { svgUp11, svgDown12 } from '../../styles/svgs';
-import { Fonts } from '../../styles/fonts';
-import { AdjacentNavigatorProps } from '../../@types/shared';
+import { Colors } from '../../../styles/colors';
+import { svgUp11, svgDown12 } from '../../../styles/svgs';
+import { Fonts } from '../../../styles/fonts';
+import { AdjacentNavigatorProps } from '../../../@types/shared';
 import Link from 'next/link';
 
 export default function AdjacentNavigator({ prev, next }: AdjacentNavigatorProps) {

@@ -10,7 +10,6 @@ type useSlideParams<T extends HTMLElement> = {
 /**
  * @for useBoard */
 type useBoard<T> = {
-	dispatch: Dispatch<SetStateAction<Map<string, string>[] | undefined>>;
 	dep: T | undefined;
 	order: Map<string, string>;
 };

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { Fonts } from '../../styles/fonts';
-import { Sizes } from '../../styles/sizes';
+import { Colors } from '../../../styles/colors';
+import { Fonts } from '../../../styles/fonts';
+import { Sizes } from '../../../styles/sizes';
 
 export default function Footer() {
 	return (
@@ -25,7 +26,7 @@ namespace S {
 		width: 100vw;
 		min-width: ${Sizes.desktopAddsWidth};
 		min-height: ${Sizes.desktopFooterHeight};
-		background-color: lightgray;
+		background-color: ${Colors.blue100};
 		display: flex;
 		align-items: center;
 		justify-content: center;

@@ -1,15 +1,15 @@
-import { ResponseResource } from '../../@types/api/resource';
-import { ViewProps } from '../../@types/shared';
+import { ResponseResource } from '../../../@types/api/resource';
+import { ViewProps } from '../../../@types/shared';
 import styled from 'styled-components';
-import { Fonts } from '../../styles/fonts';
-import { Colors } from '../../styles/colors';
-import { svgDownload } from '../../styles/svgs';
+import { Fonts } from '../../../styles/fonts';
+import { Colors } from '../../../styles/colors';
+import { svgDownload } from '../../../styles/svgs';
 import BoardButton from './BoardButton';
 import AdjacentNavigator from './AdjacentNavigator';
-import { ResponseNotice } from '../../@types/api/notice';
+import { ResponseNotice } from '../../../@types/api/notice';
 import Link from 'next/link';
-import { getDownloadLinkFromS3 } from '../../s3';
-import { S3Folders } from '../../constants/s3';
+import { getDownloadLinkFromS3 } from '../../../s3';
+import { S3Folders } from '../../../constants/s3';
 
 export default function View<T extends ResponseResource.GetById | ResponseNotice.GetById>({
 	data,

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
-import { NewEditorPostProps } from '../../@types/shared';
+import { NewEditorPostProps } from '../../../@types/shared';
 import AdminButton from './AdminButton';
-import Input from './Input';
+import Input from '../Shared/Input';
 import React from 'react';
 import FileUploadElement from './FileUploadElement';
 

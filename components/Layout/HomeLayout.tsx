@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Footer from '../Shared/Footer';
-import Header from '../Shared/Header';
+import Footer from '../Element/Adds/Footer';
+import Header from '../Element/Adds/Header';
 import { Sizes } from '../../styles/sizes';
 
 export default function HomeLayout({ children }: ChildrenType) {

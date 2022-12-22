@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { Sizes } from '../../styles/sizes';
-import { BoxShadows } from '../../styles/shadows';
-import { Fonts } from '../../styles/fonts';
+import { Sizes } from '../../../styles/sizes';
+import { BoxShadows } from '../../../styles/shadows';
+import { Fonts } from '../../../styles/fonts';
 import Link from 'next/link';
-import { Paths } from '../../constants/paths';
-import { Seo } from '../../constants/seo';
-import LinkItem from './LinkItem';
-import { Colors } from '../../styles/colors';
+import { Paths } from '../../../constants/paths';
+import { Seo } from '../../../constants/seo';
+import LinkItem from '../Shared/LinkItem';
+import { Colors } from '../../../styles/colors';
 import SelectBox from './SelectBox';
 
 export default function Header() {

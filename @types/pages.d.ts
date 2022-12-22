@@ -1,3 +1,7 @@
+import notice from '../pages/adds/notice/index';
+import resource from '../pages/adds/resource/index';
+import { Paths } from '../constants/paths';
+
 /**
  * @for ResourceViewPage
  * @for NoticeViewPage
@@ -9,7 +13,9 @@ type ViewPageProps = {
 	id: number;
 };
 
+/**
+ * @for EditPageInnerShell */
 type EditPageInnerShellProps<T> = ViewPageProps & {
-	['resource']?: T | undefined;
-	['notice']?: T | undefined;
+	data: T | undefined;
+	path: string;
 };

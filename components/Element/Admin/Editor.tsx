@@ -1,7 +1,7 @@
 import QuillEditor from 'react-quill';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
-import { EditorProps } from '../../@types/shared';
+import { EditorProps } from '../../../@types/shared';
 
 const modules = {
 	toolbar: [

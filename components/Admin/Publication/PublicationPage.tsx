@@ -1,39 +1,33 @@
-import AdminBoard from '../../Shared/AdminBoard';
 import { useState, useEffect } from 'react';
 import useGet from '../../../hooks/useGet';
 import useBoard from '../../../hooks/useBoard';
 import { Paths } from '../../../constants/paths';
-import { ResponsePublicationKeys } from '../../../constants/responseKeys';
 import { ResponsePublication } from '../../../@types/api/publication';
 import { getPublication } from '../../../api/publication';
 import useChangePage from '../../../hooks/useChangePage';
+import Board from '../../Element/Shared/Board';
+import { BoardColumnOrders } from '../../../constants/boardColumnOrders';
 
 export default function PublicationPage() {
-	const [maps, setMaps] = useState<Map<string, string>[]>();
 	const [publication, setPublication] = useState<ResponsePublication.Get>();
 	const { page, onChangePage } = useChangePage();
-
-	const order = new Map() //
-		.set(ResponsePublicationKeys.id, '번호')
-		.set(ResponsePublicationKeys.title, '제목')
-		.set(ResponsePublicationKeys.writer, '작성자');
+	const maps = useBoard({ dep: publication, order: BoardColumnOrders.publication });
 
 	useEffect(() => {
 		useGet(() => getPublication({ page }), setPublication);
 	}, [page]);
 
-	useBoard({ dispatch: setMaps, dep: publication, order });
-
 	return (
 		<>
 			<h1>Admin 발간물</h1>
-			<AdminBoard
+			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.publication}
-				order={order}
+				order={BoardColumnOrders.publication}
 				currentPage={page}
 				totalPosts={publication?.total}
 				onChangePage={onChangePage}
+				isAdmin
 			/>
 		</>
 	);

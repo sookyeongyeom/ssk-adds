@@ -26,12 +26,12 @@ type SidebarProps = {
 };
 
 /**
- * @for Board
- * @by Adds/ResourcePage
- * @by Adds/NoticePage */
-type BoardProps<T extends ResponseResource.Get | ResponseNotice.Get> = PageButtonProps & {
-	datas: T;
-	isNotice?: boolean;
+ * @for Board */
+type BoardProps = PageButtonProps & {
+	dataMaps?: Map<string, string>[];
+	basePath: string;
+	order: Map<string, string>;
+	isAdmin?: boolean;
 };
 
 /**

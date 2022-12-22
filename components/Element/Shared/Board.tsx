@@ -1,29 +1,30 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Colors } from '../../styles/colors';
-import { Fonts } from '../../styles/fonts';
-import { ResponseCommonKeys } from '../../constants/responseKeys';
-import AdminButton from './AdminButton';
+import { Colors } from '../../../styles/colors';
+import { Fonts } from '../../../styles/fonts';
+import { ResponseCommonKeys } from '../../../constants/responseKeys';
+import AdminButton from '../Admin/AdminButton';
 import { useRouter } from 'next/router';
-import { Paths } from '../../constants/paths';
-import PageButton from './PageButton';
-import { AdminBoardProps } from '../../@types/admin';
-import { Sizes } from '../../styles/sizes';
+import { Paths } from '../../../constants/paths';
+import PageButton from '../Shared/PageButton';
+import { Sizes } from '../../../styles/sizes';
+import { BoardProps } from '../../../@types/shared';
 
-export default function AdminBoard({
+export default function Board({
 	dataMaps,
 	basePath,
 	order,
 	currentPage,
 	totalPosts,
 	onChangePage,
-}: AdminBoardProps) {
+	isAdmin = false,
+}: BoardProps) {
 	const router = useRouter();
 	const onNew = () => router.push(basePath + Paths.new);
 
 	return (
 		<div>
-			<AdminButton onClick={onNew}>새 글 작성</AdminButton>
+			{isAdmin && <AdminButton onClick={onNew}>새 글 작성</AdminButton>}
 			<S.BoardLayout>
 				<thead>
 					<tr>

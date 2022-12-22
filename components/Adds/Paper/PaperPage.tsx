@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 import { ResponsePaper } from '../../../@types/api/paper';
 import useGet from '../../../hooks/useGet';
 import { getPaper } from '../../../api/paper';
-import SelectBox from '../../Shared/SelectBox';
+import SelectBox from '../../Element/Adds/SelectBox';
 import { Recipes } from '../../../styles/recipes';
 import useChangePage from '../../../hooks/useChangePage';
-import PageButton from '../../Shared/PageButton';
+import PageButton from '../../Element/Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
 
 export default function PaperPage() {
