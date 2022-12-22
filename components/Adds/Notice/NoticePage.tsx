@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useGet from '../../../hooks/useGet';
-import Board from '../../Shared/Board';
+import Board from '../../Element/Adds/Board';
 import { ResponseNotice } from '../../../@types/api/notice';
 import { getNotice } from '../../../api/notice';
 import { Recipes } from '../../../styles/recipes';
-import SelectBox from '../../Shared/SelectBox';
+import SelectBox from '../../Element/Adds/SelectBox';
 import useChangePage from '../../../hooks/useChangePage';
 
 export default function NoticePage() {

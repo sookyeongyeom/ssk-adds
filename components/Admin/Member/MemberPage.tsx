@@ -1,4 +1,4 @@
-import AdminBoard from '../../Shared/AdminBoard';
+import AdminBoard from '../../Element/Admin/AdminBoard';
 import { useState, useEffect } from 'react';
 import useGet from '../../../hooks/useGet';
 import { getMember } from '../../../api/member';

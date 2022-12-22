@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { AdminButtonProps } from '../../@types/shared';
-import { Colors } from '../../styles/colors';
+import { AdminButtonProps } from '../../../@types/shared';
+import { Colors } from '../../../styles/colors';
 
 export default function AdminButton({ children, onClick }: AdminButtonProps) {
 	return <S.AdminButtonLayout onClick={onClick}>{children}</S.AdminButtonLayout>;

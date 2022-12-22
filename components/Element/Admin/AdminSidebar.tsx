@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Colors } from '../../styles/colors';
-import { Paths } from '../../constants/paths';
+import { Colors } from '../../../styles/colors';
+import { Paths } from '../../../constants/paths';
 import { useDispatch } from 'react-redux';
-import { revokeAuth } from '../../modules/auth';
+import { revokeAuth } from '../../../modules/auth';
 
 export default function AdminSidebar() {
 	const dispatch = useDispatch();

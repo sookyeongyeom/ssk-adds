@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { svgMenu } from '../../styles/svgs';
-import { Colors } from '../../styles/colors';
-import { Fonts } from '../../styles/fonts';
-import { BoardButtonProps } from '../../@types/shared';
+import { svgMenu } from '../../../styles/svgs';
+import { Colors } from '../../../styles/colors';
+import { Fonts } from '../../../styles/fonts';
+import { BoardButtonProps } from '../../../@types/shared';
 import { useRouter } from 'next/router';
 
 export default function BoardButton({ boardPath }: BoardButtonProps) {

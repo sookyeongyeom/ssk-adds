@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Colors } from '../../styles/colors';
-import { svgDoubleLeft7, svgLeft7, svgRight7, svgDoubleRight7 } from '../../styles/svgs';
-import { Fonts } from '../../styles/fonts';
-import { PageButtonProps } from '../../@types/shared';
+import { Colors } from '../../../styles/colors';
+import { svgDoubleLeft7, svgLeft7, svgRight7, svgDoubleRight7 } from '../../../styles/svgs';
+import { Fonts } from '../../../styles/fonts';
+import { PageButtonProps } from '../../../@types/shared';
 import { useState, useEffect } from 'react';
 
 export default function PageButton({ currentPage, totalPosts, onChangePage }: PageButtonProps) {

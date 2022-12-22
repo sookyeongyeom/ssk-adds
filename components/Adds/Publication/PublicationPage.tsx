@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Recipes } from '../../../styles/recipes';
-import SelectBox from '../../Shared/SelectBox';
+import SelectBox from '../../Element/Adds/SelectBox';
 
 export default function PublicationPage() {
 	return (

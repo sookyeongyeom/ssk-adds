@@ -1,7 +1,7 @@
 import useInput from '../../../hooks/useInput';
 import { postResource } from '../../../api/resource';
 import useEditorBody from '../../../hooks/useEditorBody';
-import NewEditorPost from '../../Shared/NewEditorPost';
+import NewEditorPost from '../../Element/Admin/NewEditorPost';
 import useFiles from '../../../hooks/useFiles';
 import { S3Folders } from '../../../constants/s3';
 

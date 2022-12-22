@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Colors } from '../../styles/colors';
-import { Fonts } from '../../styles/fonts';
-import { ResponseCommonKeys } from '../../constants/responseKeys';
+import { Colors } from '../../../styles/colors';
+import { Fonts } from '../../../styles/fonts';
+import { ResponseCommonKeys } from '../../../constants/responseKeys';
 import AdminButton from './AdminButton';
 import { useRouter } from 'next/router';
-import { Paths } from '../../constants/paths';
-import PageButton from './PageButton';
-import { AdminBoardProps } from '../../@types/admin';
-import { Sizes } from '../../styles/sizes';
+import { Paths } from '../../../constants/paths';
+import PageButton from '../Shared/PageButton';
+import { AdminBoardProps } from '../../../@types/admin';
+import { Sizes } from '../../../styles/sizes';
 
 export default function AdminBoard({
 	dataMaps,

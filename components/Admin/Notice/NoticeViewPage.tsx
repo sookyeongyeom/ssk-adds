@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useGet from '../../../hooks/useGet';
-import View from '../../Shared/View';
+import View from '../../Element/Shared/View';
 import { Paths } from '../../../constants/paths';
 import { ResponseNotice } from '../../../@types/api/notice';
 import { getNoticeById } from '../../../api/notice';
-import AdminButton from '../../Shared/AdminButton';
+import AdminButton from '../../Element/Admin/AdminButton';
 import { useRouter } from 'next/router';
 
 export default function NoticeViewPage({ id }: ViewPageProps) {

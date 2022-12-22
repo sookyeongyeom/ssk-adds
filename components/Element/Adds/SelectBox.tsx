@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { SelectBoxProps } from '../../@types/shared';
-import { Colors } from '../../styles/colors';
-import { Fonts } from '../../styles/fonts';
-import { svgDown12 } from '../../styles/svgs';
+import { SelectBoxProps } from '../../../@types/shared';
+import { Colors } from '../../../styles/colors';
+import { Fonts } from '../../../styles/fonts';
+import { svgDown12 } from '../../../styles/svgs';
 
 export default function SelectBox({ options }: SelectBoxProps) {
 	return (

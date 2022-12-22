@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { ResponseResource } from '../../@types/api/resource';
-import { BoardProps } from '../../@types/shared';
-import { Colors } from '../../styles/colors';
-import { Fonts } from '../../styles/fonts';
-import { Paths } from '../../constants/paths';
-import { ResponseNotice } from '../../@types/api/notice';
-import PageButton from './PageButton';
-import { Sizes } from '../../styles/sizes';
+import { ResponseResource } from '../../../@types/api/resource';
+import { BoardProps } from '../../../@types/shared';
+import { Colors } from '../../../styles/colors';
+import { Fonts } from '../../../styles/fonts';
+import { Paths } from '../../../constants/paths';
+import { ResponseNotice } from '../../../@types/api/notice';
+import PageButton from '../Shared/PageButton';
+import { Sizes } from '../../../styles/sizes';
 
 export default function Board<T extends ResponseResource.Get | ResponseNotice.Get>({
 	datas,
@@ -106,6 +106,8 @@ namespace S {
 
 		> tbody td {
 			padding: 1.3rem;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 
 			&:first-of-type {
 				${Fonts.medium16}

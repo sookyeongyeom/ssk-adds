@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ResponseResource } from '../../../@types/api/resource';
 import useGet from '../../../hooks/useGet';
-import Board from '../../Shared/Board';
+import Board from '../../Element/Adds/Board';
 import { getResource } from '../../../api/resource';
-import SelectBox from '../../Shared/SelectBox';
+import SelectBox from '../../Element/Adds/SelectBox';
 import { Recipes } from '../../../styles/recipes';
 import useChangePage from '../../../hooks/useChangePage';
 

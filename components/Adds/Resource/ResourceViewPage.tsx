@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ResponseResource } from '../../../@types/api/resource';
 import useGet from '../../../hooks/useGet';
-import View from '../../Shared/View';
+import View from '../../Element/Shared/View';
 import { getResourceById } from '../../../api/resource';
 import { Paths } from '../../../constants/paths';
 
