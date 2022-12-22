@@ -60,6 +60,4 @@ export namespace ResponseResource {
 	};
 
 	type Put = string;
-
-	type Delete = {};
 }

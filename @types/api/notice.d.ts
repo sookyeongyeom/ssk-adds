@@ -60,6 +60,4 @@ export namespace ResponseNotice {
 	};
 
 	type Put = string;
-
-	type Delete = {};
 }

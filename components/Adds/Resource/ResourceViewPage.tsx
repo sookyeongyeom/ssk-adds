@@ -24,7 +24,7 @@ export default function ResourceViewPage({ id }: ViewPageProps) {
 		<S.ResourceViewPageLayout>
 			<View
 				data={resource!}
-				boardPath={Paths.adds + Paths.resource}
+				basePath={Paths.adds + Paths.resource}
 				prev={prev && { title: prev?.title!, path: Paths.adds + Paths.resource + `/${prev?.id}` }}
 				next={next && { title: next?.title!, path: Paths.adds + Paths.resource + `/${next?.id}` }}
 			/>

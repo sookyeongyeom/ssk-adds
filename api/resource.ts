@@ -40,5 +40,5 @@ export const putResource = ({ id, writer, title, body, file, created_date }: Req
 
 export const deleteResource = ({ id }: RequestResource.Delete) => {
 	const url = `${baseUrl}/${id}`;
-	return request.delete<ResponseResource.Delete, RequestResource.Delete>(url, { id });
+	return request.delete(url);
 };
