@@ -25,6 +25,10 @@ export namespace RequestNotice {
 		file: string;
 		created_date: string;
 	};
+
+	type Delete = {
+		id: number;
+	};
 }
 
 export namespace ResponseNotice {

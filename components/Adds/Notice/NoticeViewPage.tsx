@@ -24,7 +24,7 @@ export default function NoticeViewPage({ id }: ViewPageProps) {
 		<S.NoticeViewPageLayout>
 			<View
 				data={notice!}
-				boardPath={Paths.adds + Paths.notice}
+				basePath={Paths.adds + Paths.notice}
 				prev={prev && { title: prev?.title!, path: Paths.adds + Paths.notice + `/${prev?.id}` }}
 				next={next && { title: next?.title!, path: Paths.adds + Paths.notice + `/${next?.id}` }}
 				isNotice

@@ -36,3 +36,8 @@ export const putNotice = ({ id, writer, title, body, file, created_date }: Reque
 		created_date,
 	});
 };
+
+export const deleteNotice = ({ id }: RequestNotice.Delete) => {
+	const url = `${baseUrl}/${id}`;
+	return request.delete(url);
+};

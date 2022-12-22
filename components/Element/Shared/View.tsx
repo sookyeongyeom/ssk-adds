@@ -10,43 +10,73 @@ import { ResponseNotice } from '../../../@types/api/notice';
 import Link from 'next/link';
 import { getDownloadLinkFromS3 } from '../../../s3';
 import { S3Folders } from '../../../constants/s3';
+import { useRouter } from 'next/router';
+import { Paths } from '../../../constants/paths';
+import AdminButton from '../Admin/AdminButton';
+import getDeleteApiDependsOnPath from '../../../utils/getDeleteApiDependsOnPath';
 
 export default function View<T extends ResponseResource.GetById | ResponseNotice.GetById>({
+	id,
 	data,
-	boardPath,
+	basePath,
 	prev,
 	next,
 	isNotice = false,
+	isAdmin = false,
 }: ViewProps<T>) {
+	if (id === undefined && isAdmin) console.error('isAdmin이지만 id가 제공되지 않았습니다.');
 	const folder = isNotice ? S3Folders.notice : S3Folders.resource;
+	const router = useRouter();
+
+	const onEdit = () => router.push(basePath + Paths.edit + `/${id}`);
+
+	const onDelete = async () => {
+		const api = getDeleteApiDependsOnPath(basePath);
+		if (api && id) {
+			try {
+				await api({ id });
+			} catch (e) {
+				console.log(e);
+			}
+		}
+	};
+
 	return (
-		<S.ViewLayout>
-			{data && (
+		<>
+			{isAdmin && (
 				<>
-					<S.Meta isNotice={isNotice}>
-						<h1>{data.title}</h1>
-						<h2>
-							{data.id}&ensp;|&ensp;{data.writer}&ensp;|&ensp;{data.created_date}
-						</h2>
-					</S.Meta>
-					<S.Content dangerouslySetInnerHTML={{ __html: data.body }} />
-					<S.File isNotice={isNotice}>
-						<h3>첨부파일</h3>
-						<div>
-							{data.file &&
-								JSON.parse(data.file).map((file: FileDataType, i: number) => (
-									<p key={i}>
-										{svgDownload}{' '}
-										<Link href={`${getDownloadLinkFromS3(folder, file.key)}`}>{file.name}</Link>
-									</p>
-								))}
-						</div>
-					</S.File>
-					<BoardButton boardPath={boardPath} />
-					<AdjacentNavigator prev={prev} next={next} />
+					<AdminButton onClick={onEdit}>수정</AdminButton>{' '}
+					<AdminButton onClick={onDelete}>삭제</AdminButton>
 				</>
 			)}
-		</S.ViewLayout>
+			<S.ViewLayout>
+				{data && (
+					<>
+						<S.Meta isNotice={isNotice}>
+							<h1>{data.title}</h1>
+							<h2>
+								{data.id}&ensp;|&ensp;{data.writer}&ensp;|&ensp;{data.created_date}
+							</h2>
+						</S.Meta>
+						<S.Content dangerouslySetInnerHTML={{ __html: data.body }} />
+						<S.File isNotice={isNotice}>
+							<h3>첨부파일</h3>
+							<div>
+								{data.file &&
+									JSON.parse(data.file).map((file: FileDataType, i: number) => (
+										<p key={i}>
+											{svgDownload}{' '}
+											<Link href={`${getDownloadLinkFromS3(folder, file.key)}`}>{file.name}</Link>
+										</p>
+									))}
+							</div>
+						</S.File>
+						<BoardButton boardPath={basePath} />
+						<AdjacentNavigator prev={prev} next={next} />
+					</>
+				)}
+			</S.ViewLayout>
+		</>
 	);
 }
 
