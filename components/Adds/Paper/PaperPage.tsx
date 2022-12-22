@@ -30,7 +30,7 @@ export default function PaperPage() {
 							title={paper.title}
 							year={paper.year}
 							keywords={paper.keywords}
-							researcherName={paper.researcher_name}
+							researcherName={paper.researcherName}
 							doi={paper.doi}
 							key={i}
 						/>

@@ -29,7 +29,7 @@ export default function NoticeNewPage() {
 			title,
 			body,
 			file: JSON.stringify(fileData),
-			created_date: new Date().toISOString().split('T')[0],
+			createdDate: new Date().toISOString().split('T')[0],
 		});
 		console.log(res);
 	};
