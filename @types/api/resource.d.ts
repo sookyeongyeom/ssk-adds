@@ -25,6 +25,10 @@ export namespace RequestResource {
 		file: string;
 		created_date: string;
 	};
+
+	type Delete = {
+		id: number;
+	};
 }
 
 export namespace ResponseResource {
@@ -56,4 +60,6 @@ export namespace ResponseResource {
 	};
 
 	type Put = string;
+
+	type Delete = {};
 }
