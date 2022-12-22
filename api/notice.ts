@@ -1,5 +1,6 @@
 import { RequestNotice, ResponseNotice } from '../@types/api/notice';
 import request from './core';
+import { toSnake } from 'snake-camel';
 
 const baseUrl = '/community/notice';
 
@@ -13,28 +14,20 @@ export const getNoticeById = ({ id }: RequestNotice.GetById) => {
 	return request.get<ResponseNotice.GetById>(url);
 };
 
-export const postNotice = ({ writer, title, body, file, created_date }: RequestNotice.Post) => {
+export const postNotice = (data: RequestNotice.Post) => {
 	const url = `${baseUrl}`;
-	return request.post<ResponseNotice.Post, RequestNotice.Post>(url, {
-		id: 0,
-		writer,
-		title,
-		body,
-		file,
-		created_date,
-	});
+	return request.post<ResponseNotice.Post, RequestNotice.Post>(
+		url,
+		toSnake({
+			id: 0,
+			...data,
+		}),
+	);
 };
 
-export const putNotice = ({ id, writer, title, body, file, created_date }: RequestNotice.Put) => {
-	const url = `${baseUrl}/${id}`;
-	return request.put<ResponseNotice.Put, RequestNotice.Put>(url, {
-		id,
-		writer,
-		title,
-		body,
-		file,
-		created_date,
-	});
+export const putNotice = (data: RequestNotice.Put) => {
+	const url = `${baseUrl}/${data.id}`;
+	return request.put<ResponseNotice.Put, RequestNotice.Put>(url, toSnake(data));
 };
 
 export const deleteNotice = ({ id }: RequestNotice.Delete) => {
