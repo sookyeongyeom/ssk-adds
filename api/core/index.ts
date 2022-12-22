@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toCamel } from 'snake-camel';
 import { GenericInstance } from '../../@types/api/core';
 import { store } from '../../components/Provider/StoreProvider';
 
@@ -29,7 +30,7 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
 	(response) => {
-		return response.data;
+		return toCamel(response.data);
 	},
 	(error) => {
 		return Promise.reject(error);
