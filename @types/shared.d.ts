@@ -120,3 +120,9 @@ type FileUploadElementProps = {
 	onRemoveFile: (targetLastModified: number) => void;
 	onToggleToDelete?: (targetFileKey: string) => void;
 };
+
+/**
+ * @for ImagePreview */
+type ImagePreviewProps = {
+	file: File;
+};
