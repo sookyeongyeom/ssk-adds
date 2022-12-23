@@ -16,7 +16,7 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 	const router = useRouter();
 	const basePath = Paths.admin + Paths.member;
 	const [member, setMember] = useState<ResponseMember.GetById>();
-	const [src, setSrc] = useState<string>(Assets.placeholderImgSrc);
+	const [src, setSrc] = useState<FileDataType>({ key: Assets.placeholderImgSrc, name: '' });
 
 	const onEdit = () => router.push(basePath + Paths.edit + `/${id}`);
 
@@ -38,8 +38,8 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 	useEffect(() => {
 		if (member) {
 			try {
-				const src = getDownloadLinkFromS3(S3Folders.member, JSON.parse(member!.img)[0].key);
-				setSrc(src);
+				const src = JSON.parse(member!.img)[0];
+				if (src) setSrc(src);
 			} catch {
 				/* 유효한 이미지 없음 */
 			}
@@ -50,9 +50,13 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 		<S.MemberViewPageLayout>
 			<AdminButton onClick={onEdit}>수정</AdminButton>{' '}
 			<AdminButton onClick={onDelete}>삭제</AdminButton>
-			{member?.img && (
+			{src.name ? (
 				<div>
-					<img src={src} />
+					<img src={getDownloadLinkFromS3(S3Folders.member, src.key)} />
+				</div>
+			) : (
+				<div>
+					<img src={src.key} />
 				</div>
 			)}
 			<div>{member?.name}</div>
