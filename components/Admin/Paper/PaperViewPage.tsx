@@ -1,28 +1,16 @@
-import { useRouter } from 'next/router';
 import { ViewPageProps } from '../../../@types/pages';
 import { Paths } from '../../../constants/paths';
 import { useEffect, useState } from 'react';
 import { ResponsePaper } from '../../../@types/api/paper';
-import { deletePaper, getPaperById } from '../../../api/paper';
+import { getPaperById } from '../../../api/paper';
 import useGet from '../../../hooks/useGet';
 import AdminButton from '../../Element/Admin/AdminButton';
+import useEditDelete from '../../../hooks/useEditDelete';
 
 export default function PaperViewPage({ id }: ViewPageProps) {
-	const router = useRouter();
 	const basePath = Paths.admin + Paths.paper;
+	const { onEdit, onDelete } = useEditDelete(basePath, id);
 	const [paper, setPaper] = useState<ResponsePaper.GetById>();
-
-	const onEdit = () => router.push(basePath + Paths.edit + `/${id}`);
-
-	const onDelete = async () => {
-		if (id) {
-			try {
-				await deletePaper({ id });
-			} catch (e) {
-				console.log(e);
-			}
-		}
-	};
 
 	useEffect(() => {
 		if (id) useGet(() => getPaperById({ id }), setPaper);
