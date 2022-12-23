@@ -11,4 +11,17 @@ export namespace SC {
 			object-fit: cover;
 		}
 	`;
+
+	export const Keywords = styled.div`
+		display: flex;
+		flex-direction: column;
+		width: fit-content;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	`;
+
+	export const Keyword = styled.input`
+		border: 0.1rem solid black;
+		padding: 0.5rem;
+	`;
 }
