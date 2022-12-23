@@ -31,6 +31,10 @@ export namespace RequestMember {
 		img: string;
 		responsibility: string;
 	};
+
+	type Delete = {
+		id: number;
+	};
 }
 
 export namespace ResponseMember {

@@ -23,3 +23,8 @@ export const putMember = (data: RequestMember.Put) => {
 	const url = `${baseUrl}/${data.id}`;
 	return request.put<ResponseMember.Put, RequestMember.Put>(url, toSnake(data));
 };
+
+export const deleteMember = ({ id }: RequestMember.Delete) => {
+	const url = `${baseUrl}/${id}`;
+	return request.delete(url);
+};
