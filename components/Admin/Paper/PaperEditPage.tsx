@@ -7,6 +7,7 @@ import useInput from '../../../hooks/useInput';
 import Input from '../../Element/Shared/Input';
 import AdminButton from '../../Element/Admin/AdminButton';
 import { SC } from '../../../styles/styled';
+import useKeywords from '../../../hooks/useKeywords';
 
 export default function PaperEditPage({ id }: ViewPageProps) {
 	const [paper, setPaper] = useState<ResponsePaper.GetById>();
@@ -28,26 +29,9 @@ function PaperEditPageInnerShell({
 		data?.researcherName,
 	);
 	const { value: doi, onChange: onChangeDoi } = useInput(data?.doi);
-	const [keywords, setKeywords] = useState<string[]>([...(data?.keywords.split(',') || [''])]);
-
-	const onChangeKeyword = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
-		const copy = [...keywords];
-		copy[idx] = e.target.value;
-		setKeywords(copy);
-	};
-
-	const onAddKeyword = () => {
-		const copy = [...keywords];
-		copy.push('');
-		setKeywords(copy);
-	};
-
-	const onRemoveKeyword = (idx: number) => {
-		const copy = [...keywords];
-		copy.splice(idx, 1);
-		console.log(copy);
-		setKeywords(copy);
-	};
+	const { keywords, onChangeKeyword, onAddKeyword, onRemoveKeyword } = useKeywords(
+		data?.keywords.split(','),
+	);
 
 	const onSubmit = async () => {
 		/* PUT */
