@@ -39,7 +39,7 @@ type BoardProps = PageButtonProps & {
  * @by ResourceViewPage
  * @by NoticeViewPage */
 type ViewProps<T extends ResponseResource.GetById | ResponseNotice.GetById> = {
-	id?: number;
+	id: number;
 	data: T;
 	basePath: string;
 	prev: AdjacentItemType;

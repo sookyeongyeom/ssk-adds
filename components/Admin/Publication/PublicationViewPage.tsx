@@ -7,31 +7,18 @@ import useGet from '../../../hooks/useGet';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { S3Folders } from '../../../constants/s3';
 import AdminButton from '../../Element/Admin/AdminButton';
-import { useRouter } from 'next/router';
 import { Assets } from '../../../constants/assets';
 import { ResponsePublication } from '../../../@types/api/publication';
-import { getPublicationById, deletePublication } from '../../../api/publication';
+import { getPublicationById } from '../../../api/publication';
 import Link from 'next/link';
+import useEditDelete from '../../../hooks/useEditDelete';
 
 export default function PublicationViewPage({ id }: ViewPageProps) {
-	const router = useRouter();
 	const basePath = Paths.admin + Paths.publication;
+	const { onEdit, onDelete } = useEditDelete(basePath, id);
 	const [publication, setPublication] = useState<ResponsePublication.GetById>();
 	const [img, setImg] = useState<FileDataType>({ key: Assets.placeholderImgSrc, name: '' });
 	const [pdf, setPdf] = useState<FileDataType>();
-
-	const onEdit = () => router.push(basePath + Paths.edit + `/${id}`);
-
-	const onDelete = async () => {
-		const api = basePath;
-		if (api && id) {
-			try {
-				await deletePublication({ id });
-			} catch (e) {
-				console.log(e);
-			}
-		}
-	};
 
 	useEffect(() => {
 		if (id) useGet(() => getPublicationById({ id }), setPublication);

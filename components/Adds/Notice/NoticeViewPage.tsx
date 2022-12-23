@@ -23,6 +23,7 @@ export default function NoticeViewPage({ id }: ViewPageProps) {
 	return (
 		<S.NoticeViewPageLayout>
 			<View
+				id={id}
 				data={notice!}
 				basePath={Paths.adds + Paths.notice}
 				prev={prev && { title: prev?.title!, path: Paths.adds + Paths.notice + `/${prev?.id}` }}

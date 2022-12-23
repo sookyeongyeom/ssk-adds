@@ -4,32 +4,19 @@ import BoardButton from '../../Element/Shared/BoardButton';
 import { Paths } from '../../../constants/paths';
 import { useEffect, useState } from 'react';
 import { ResponseMember } from '../../../@types/api/member';
-import { getMemberById, deleteMember } from '../../../api/member';
+import { getMemberById } from '../../../api/member';
 import useGet from '../../../hooks/useGet';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { S3Folders } from '../../../constants/s3';
 import AdminButton from '../../Element/Admin/AdminButton';
-import { useRouter } from 'next/router';
 import { Assets } from '../../../constants/assets';
+import useEditDelete from '../../../hooks/useEditDelete';
 
 export default function MemberViewPage({ id }: ViewPageProps) {
-	const router = useRouter();
 	const basePath = Paths.admin + Paths.member;
+	const { onEdit, onDelete } = useEditDelete(basePath, id);
 	const [member, setMember] = useState<ResponseMember.GetById>();
 	const [src, setSrc] = useState<FileDataType>({ key: Assets.placeholderImgSrc, name: '' });
-
-	const onEdit = () => router.push(basePath + Paths.edit + `/${id}`);
-
-	const onDelete = async () => {
-		const api = basePath;
-		if (api && id) {
-			try {
-				await deleteMember({ id });
-			} catch (e) {
-				console.log(e);
-			}
-		}
-	};
 
 	useEffect(() => {
 		if (id) useGet(() => getMemberById({ id }), setMember);

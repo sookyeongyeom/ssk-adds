@@ -10,10 +10,8 @@ import { ResponseNotice } from '../../../@types/api/notice';
 import Link from 'next/link';
 import { getDownloadLinkFromS3 } from '../../../s3';
 import { S3Folders } from '../../../constants/s3';
-import { useRouter } from 'next/router';
-import { Paths } from '../../../constants/paths';
 import AdminButton from '../Admin/AdminButton';
-import getDeleteApiDependsOnPath from '../../../utils/getDeleteApiDependsOnPath';
+import useEditDelete from '../../../hooks/useEditDelete';
 
 export default function View<T extends ResponseResource.GetById | ResponseNotice.GetById>({
 	id,
@@ -26,20 +24,7 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 }: ViewProps<T>) {
 	if (id === undefined && isAdmin) console.error('isAdmin이지만 id가 제공되지 않았습니다.');
 	const folder = isNotice ? S3Folders.notice : S3Folders.resource;
-	const router = useRouter();
-
-	const onEdit = () => router.push(basePath + Paths.edit + `/${id}`);
-
-	const onDelete = async () => {
-		const api = getDeleteApiDependsOnPath(basePath);
-		if (api && id) {
-			try {
-				await api({ id });
-			} catch (e) {
-				console.log(e);
-			}
-		}
-	};
+	const { onEdit, onDelete } = useEditDelete(basePath, id);
 
 	return (
 		<>
