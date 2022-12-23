@@ -64,9 +64,7 @@ function PaperBoxElement({ id, title, year, keywords, researcherName, doi }: Pap
 				{researcherName}&ensp;|&ensp;{year}&ensp;|&ensp;{doi}
 			</h4>
 			<ul>
-				{keywords.split(',').map((keyword, i) => (
-					<li key={i}>{keyword}</li>
-				))}
+				{!!keywords.length && keywords.split(',').map((keyword, i) => <li key={i}>{keyword}</li>)}
 			</ul>
 		</S.PaperBox>
 	);
