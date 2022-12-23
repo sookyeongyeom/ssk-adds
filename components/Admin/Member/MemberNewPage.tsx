@@ -5,7 +5,6 @@ import { postMember } from '../../../api/member';
 import Input from '../../Element/Shared/Input';
 import AdminButton from '../../Element/Admin/AdminButton';
 import FileUploadElement from '../../Element/Admin/FileUploadElement';
-import { useEffect } from 'react';
 import ImagePreview from '../../Element/Admin/ImagePreview';
 
 export default function MemberNewPage() {
@@ -43,10 +42,6 @@ export default function MemberNewPage() {
 		});
 		console.log(res);
 	};
-
-	useEffect(() => {
-		console.log(files);
-	}, [files]);
 
 	return (
 		<>

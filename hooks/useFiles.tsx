@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { uploadFileToS3 } from '../s3';
 import { S3Folders } from '../constants/s3';
@@ -37,6 +37,14 @@ export default function useFiles(
 		if (wishToDeleteFileKeys.has(targetFileKey)) manipulatedKeys.delete(targetFileKey);
 		else manipulatedKeys.add(targetFileKey);
 		setWishToDeleteFileKeys(manipulatedKeys);
+	};
+
+	const onSelectSingleToDelete = (targetFileKey: string) => {
+		setWishToDeleteFileKeys(new Set<string>().add(targetFileKey));
+	};
+
+	const onResetDeleteWishList = () => {
+		setWishToDeleteFileKeys(new Set<string>());
 	};
 
 	/**
@@ -81,5 +89,7 @@ export default function useFiles(
 		onUploadFile,
 		onDeleteFile,
 		onToggleToDelete,
+		onSelectSingleToDelete,
+		onResetDeleteWishList,
 	};
 }
