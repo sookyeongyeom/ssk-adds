@@ -20,9 +20,3 @@ type EditPageInnerShellProps<T> = ViewPageProps & {
 	data: T | undefined;
 	path: string;
 };
-
-/**
- * @for MemberEditPageInnerShell */
-type MemberEditPageInnerShellProps = ViewPageProps & {
-	member: ResponseMember.GetById;
-};

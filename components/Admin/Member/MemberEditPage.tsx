@@ -6,14 +6,14 @@ import Input from '../../Element/Shared/Input';
 import AdminButton from '../../Element/Admin/AdminButton';
 import FileUploadElement from '../../Element/Admin/FileUploadElement';
 import ImagePreview from '../../Element/Admin/ImagePreview';
-import { MemberEditPageInnerShellProps, ViewPageProps } from '../../../@types/pages';
+import { EditPageInnerShellProps, ViewPageProps } from '../../../@types/pages';
 import { useEffect, useState } from 'react';
 import { ResponseMember } from '../../../@types/api/member';
 import useGet from '../../../hooks/useGet';
 import excludeDeletedFileKeysFromFileString from '../../../utils/excludeDeletedFileKeysFromFileString';
 import pickFileKeysToArrayFromFileString from '../../../utils/pickFileKeysToArrayFromFileString';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
-import styled from 'styled-components';
+import { SC } from '../../../styles/styled';
 
 export default function MemberEditPage({ id }: ViewPageProps) {
 	const [member, setMember] = useState<ResponseMember.GetById>();
@@ -22,19 +22,22 @@ export default function MemberEditPage({ id }: ViewPageProps) {
 		if (id) useGet(() => getMemberById({ id }), setMember);
 	}, [id]);
 
-	return <>{member && <MemberEditPageInnerShell id={id} member={member} />}</>;
+	return <>{member && <MemberEditPageInnerShell id={id} data={member} />}</>;
 }
 
-function MemberEditPageInnerShell({ id, member }: MemberEditPageInnerShellProps) {
-	const prevFileKey = member.img && pickFileKeysToArrayFromFileString(member.img)[0];
-	const { value: name, onChange: onChangeName } = useInput(member.name);
-	const { value: email, onChange: onChangeEmail } = useInput(member.email);
-	const { value: homepage, onChange: onChangeHomepage } = useInput(member.homepage);
-	const { value: phoneNumber, onChange: onChangePhoneNumber } = useInput(member.phoneNumber);
-	const { value: introBody, onChange: onChangeIntroBody } = useInput(member.introBody);
-	const { value: jobTitle, onChange: onChangeJobTitle } = useInput(member.jobTitle);
+function MemberEditPageInnerShell({
+	id,
+	data,
+}: Omit<EditPageInnerShellProps<ResponseMember.GetById>, 'path'>) {
+	const prevFileKey = data?.img && pickFileKeysToArrayFromFileString(data.img)[0];
+	const { value: name, onChange: onChangeName } = useInput(data?.name);
+	const { value: email, onChange: onChangeEmail } = useInput(data?.email);
+	const { value: homepage, onChange: onChangeHomepage } = useInput(data?.homepage);
+	const { value: phoneNumber, onChange: onChangePhoneNumber } = useInput(data?.phoneNumber);
+	const { value: introBody, onChange: onChangeIntroBody } = useInput(data?.introBody);
+	const { value: jobTitle, onChange: onChangeJobTitle } = useInput(data?.jobTitle);
 	/* prettier-ignore */
-	const { value: responsibility, onChange: onChangeResponsibility } = useInput(member.responsibility);
+	const { value: responsibility, onChange: onChangeResponsibility } = useInput(data?.responsibility);
 	const {
 		files,
 		onAddFile,
@@ -69,9 +72,9 @@ function MemberEditPageInnerShell({ id, member }: MemberEditPageInnerShellProps)
 		}
 
 		const manipulatedPrevfiles =
-			!!member &&
+			!!data &&
 			!!deletedFileKeys &&
-			excludeDeletedFileKeysFromFileString(member.img, deletedFileKeys);
+			excludeDeletedFileKeysFromFileString(data.img, deletedFileKeys);
 
 		/* PUT */
 		const res = await putMember({
@@ -107,9 +110,9 @@ function MemberEditPageInnerShell({ id, member }: MemberEditPageInnerShellProps)
 			<Input label={'직무'} value={jobTitle} onChange={onChangeJobTitle} />
 			<Input label={'역할'} value={responsibility} onChange={onChangeResponsibility} />
 			{prevFileKey && (
-				<S.PrevImage>
+				<SC.PrevImage>
 					<img src={getDownloadLinkFromS3(S3Folders.member, prevFileKey)} />
-				</S.PrevImage>
+				</SC.PrevImage>
 			)}
 			<AdminButton onClick={() => onToggleToDelete(prevFileKey)}>기존사진 삭제토글</AdminButton>
 			<ImagePreview file={files[0]} />
@@ -117,17 +120,4 @@ function MemberEditPageInnerShell({ id, member }: MemberEditPageInnerShellProps)
 			<AdminButton onClick={onSubmit}>완료</AdminButton>
 		</>
 	);
-}
-
-namespace S {
-	export const PrevImage = styled.div`
-		width: 15rem;
-		height: 18rem;
-
-		> img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-	`;
 }

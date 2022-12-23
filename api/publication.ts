@@ -24,7 +24,7 @@ export const postPublication = (data: RequestPublication.Post) => {
 
 export const putPublication = (data: RequestPublication.Put) => {
 	const url = `${baseUrl}/${data.id}`;
-	return request.post<ResponsePublication.Put, RequestPublication.Put>(url, toSnake(data));
+	return request.put<ResponsePublication.Put, RequestPublication.Put>(url, toSnake(data));
 };
 
 export const deletePublication = ({ id }: RequestPublication.Delete) => {
