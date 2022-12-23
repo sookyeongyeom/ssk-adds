@@ -9,6 +9,7 @@ export default function FileUploadElement({
 	onAddFile,
 	onRemoveFile,
 	onToggleToDelete,
+	isMultiple = false,
 }: FileUploadElementProps) {
 	const [isDragOver, setIsDragOver] = useState(false);
 	const fileRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -49,7 +50,7 @@ export default function FileUploadElement({
 
 	return (
 		<S.FileUploadElementLayout>
-			<input type={'file'} ref={fileRef} onChange={onSelectFile} multiple />
+			<input type={'file'} ref={fileRef} onChange={onSelectFile} multiple={isMultiple} />
 			{prevFileKeys &&
 				onToggleToDelete &&
 				prevFileKeys.map((fileKey, i) => (

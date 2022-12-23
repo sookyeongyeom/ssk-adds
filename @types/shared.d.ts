@@ -115,7 +115,14 @@ type NewEditorPostProps = FileUploadElementProps & {
 type FileUploadElementProps = {
 	files: File[];
 	prevFileKeys?: string[];
+	isMultiple?: boolean;
 	onAddFile: (files: File[]) => void;
-	onRemoveFile?: (targetLastModified: number) => void;
+	onRemoveFile: (targetLastModified: number) => void;
 	onToggleToDelete?: (targetFileKey: string) => void;
+};
+
+/**
+ * @for ImagePreview */
+type ImagePreviewProps = {
+	file: File;
 };
