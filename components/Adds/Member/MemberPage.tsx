@@ -11,6 +11,7 @@ import PageButton from '../../Element/Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { S3Folders } from '../../../constants/s3';
+import { Assets } from '../../../constants/assets';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();
@@ -53,7 +54,12 @@ function MemberBoxElement({
 	img,
 	responsibility,
 }: MemberBoxElementProps) {
-	const imgSrc = getDownloadLinkFromS3(S3Folders.member, JSON.parse(img)[0].key);
+	let imgSrc: string = Assets.placeholderImgSrc;
+	try {
+		imgSrc = getDownloadLinkFromS3(S3Folders.member, JSON.parse(img)[0].key);
+	} catch (e) {
+		console.log(e);
+	}
 	return (
 		<S.MemberBox>
 			<div>
@@ -103,14 +109,14 @@ namespace S {
 	export const MemberBox = styled.div`
 		display: grid;
 		grid-template-columns: 27rem 1fr;
-		grid-template-rows: max-content max-content;
-		min-height: 32.7rem;
 		box-shadow: ${BoxShadows.smooth};
+		overflow: hidden;
 
 		/* 사진 */
 		> div:first-of-type {
 			grid-row: 1/3;
 			background-color: lightgray;
+			height: 36rem;
 
 			> img {
 				width: 100%;
@@ -127,6 +133,7 @@ namespace S {
 			> p {
 				${Fonts.regular16}
 				margin-bottom: 1rem;
+				padding-top: 0.5rem;
 			}
 
 			> h2 {
@@ -139,6 +146,8 @@ namespace S {
 				grid-template-columns: 1fr 1fr;
 				gap: 2rem;
 				column-gap: 4rem;
+				padding-bottom: 0.5rem;
+				overflow: hidden;
 			}
 		}
 
@@ -169,6 +178,7 @@ namespace S {
 
 		> p {
 			${Fonts.regular14}
+			white-space: nowrap;
 		}
 
 		/* Homepage */

@@ -59,7 +59,7 @@ export default function EditPageInnerShell<
 			title,
 			body,
 			file: JSON.stringify([...(manipulatedPrevfiles || []), ...fileData]),
-			createdDate: new Date().toISOString().split('T')[0],
+			createdDate: data?.createdDate || new Date().toISOString().split('T')[0],
 		});
 		console.log(res);
 	};
