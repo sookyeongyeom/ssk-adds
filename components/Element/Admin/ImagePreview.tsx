@@ -1,16 +1,16 @@
 import { ImagePreviewProps } from '../../../@types/shared';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import { Assets } from '../../../constants/assets';
 
 export default function ImagePreview({ file }: ImagePreviewProps) {
-	const placeholderImgSrc = '/assets/image_preview_placeholder.jpg';
-	const [src, setSrc] = useState<string>(placeholderImgSrc);
+	const [src, setSrc] = useState<string>(Assets.placeholderImgSrc);
 
 	useEffect(() => {
 		if (file) {
 			const src = URL.createObjectURL(file);
 			setSrc(src);
-		} else setSrc(placeholderImgSrc);
+		} else setSrc(Assets.placeholderImgSrc);
 	}, [file]);
 
 	return (
