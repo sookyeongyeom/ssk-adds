@@ -9,6 +9,8 @@ import { getMember } from '../../../api/member';
 import useChangePage from '../../../hooks/useChangePage';
 import PageButton from '../../Element/Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
+import { getDownloadLinkFromS3 } from '../../../s3/index';
+import { S3Folders } from '../../../constants/s3';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();
@@ -20,7 +22,7 @@ export default function MemberPage() {
 
 	return (
 		<S.MemberPageLayout>
-			{members ? (
+			{members &&
 				members.items.map((member, i) => (
 					<MemberBoxElement
 						name={member.name}
@@ -29,23 +31,11 @@ export default function MemberPage() {
 						phoneNumber={member.phoneNumber}
 						introBody={member.introBody}
 						jobTitle={member.jobTitle}
-						img={'/assets/members_example.png'}
+						img={member.img}
 						responsibility={member.responsibility}
 						key={i}
 					/>
-				))
-			) : (
-				<MemberBoxElement
-					name={'김현경 교수님'}
-					email={'yonsei@gmail.com'}
-					homepage={'https://www.naver.com'}
-					phoneNumber={'010-0000-0000'}
-					jobTitle={'연세대학교 아동가족학과 인간생애와 혁신적 디자인 교수'}
-					introBody={'청소년, 바이오마커 수집, 양적 연구 설계 전문성'}
-					img={'/assets/members_example.png'}
-					responsibility={'연구책임자'}
-				/>
-			)}
+				))}
 			<div>
 				<PageButton currentPage={page} totalPosts={members?.total} onChangePage={onChangePage} />
 			</div>
@@ -63,10 +53,11 @@ function MemberBoxElement({
 	img,
 	responsibility,
 }: MemberBoxElementProps) {
+	const imgSrc = getDownloadLinkFromS3(S3Folders.member, JSON.parse(img)[0].key);
 	return (
 		<S.MemberBox>
 			<div>
-				<img src={img} />
+				<img src={imgSrc} />
 			</div>
 			<div>
 				<p>{responsibility}</p>

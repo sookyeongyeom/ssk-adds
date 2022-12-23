@@ -1,10 +1,11 @@
 import useInput from '../../../hooks/useInput';
-import { postResource } from '../../../api/resource';
-import useEditorBody from '../../../hooks/useEditorBody';
-import NewEditorPost from '../../Element/Admin/NewEditorPost';
 import useFiles from '../../../hooks/useFiles';
 import { S3Folders } from '../../../constants/s3';
 import { postMember } from '../../../api/member';
+import Input from '../../Element/Shared/Input';
+import AdminButton from '../../Element/Admin/AdminButton';
+import FileUploadElement from '../../Element/Admin/FileUploadElement';
+import { useEffect } from 'react';
 
 export default function MemberNewPage() {
 	const { value: name, onChange: onChangeName } = useInput();
@@ -13,9 +14,8 @@ export default function MemberNewPage() {
 	const { value: phoneNumber, onChange: onChangePhoneNumber } = useInput();
 	const { value: introBody, onChange: onChangeIntroBody } = useInput();
 	const { value: jobTitle, onChange: onChangeJobTitle } = useInput();
-	const { value: img, onChange: onChangeImg } = useInput();
 	const { value: responsibility, onChange: onChangeResponsibility } = useInput();
-	const { files, onAddFile, onRemoveFile, onUploadFile } = useFiles(S3Folders.member);
+	const { files, onAddFile, onRemoveFile, onUploadFile } = useFiles(S3Folders.member, false);
 
 	const onSubmit = async () => {
 		/* S3 파일 업로드 */
@@ -43,21 +43,22 @@ export default function MemberNewPage() {
 		console.log(res);
 	};
 
+	useEffect(() => {
+		console.log(files);
+	}, [files]);
+
 	return (
 		<>
 			새로운자료안내
-			<NewEditorPost
-				title={title}
-				body={body}
-				writer={writer}
-				files={files}
-				onChangeTitle={onChangeTitle}
-				onChangeWriter={onChangeWriter}
-				onChangeBody={onChangeBody}
-				onAddFile={onAddFile}
-				onRemoveFile={onRemoveFile}
-				onSubmit={onSubmit}
-			/>
+			<Input label={'이름'} onChange={onChangeName} />
+			<Input label={'이메일'} onChange={onChangeEmail} />
+			<Input label={'홈페이지'} onChange={onChangeHomepage} />
+			<Input label={'연락처'} onChange={onChangePhoneNumber} />
+			<Input label={'소개'} onChange={onChangeIntroBody} />
+			<Input label={'직무'} onChange={onChangeJobTitle} />
+			<Input label={'역할'} onChange={onChangeResponsibility} />
+			<FileUploadElement files={files} onAddFile={onAddFile} onRemoveFile={onRemoveFile} />
+			<AdminButton onClick={onSubmit}>완료</AdminButton>
 		</>
 	);
 }
