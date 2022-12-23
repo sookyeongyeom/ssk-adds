@@ -33,6 +33,7 @@ export default function NewEditorPost({
 				onAddFile={onAddFile}
 				onRemoveFile={onRemoveFile}
 				onToggleToDelete={onToggleToDelete}
+				isMultiple
 			/>
 			<Input label={'관리자'} value={writer} onChange={onChangeWriter} />
 			<AdminButton onClick={onSubmit}>완료</AdminButton>
