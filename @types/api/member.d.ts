@@ -4,8 +4,24 @@ export namespace RequestMember {
 		size?: number;
 	};
 
+	type GetById = {
+		id: number;
+	};
+
 	type Post = {
 		id?: 0;
+		name: string;
+		email: string;
+		homepage: string;
+		phoneNumber: string;
+		introBody: string;
+		jobTitle: string;
+		img: string;
+		responsibility: string;
+	};
+
+	type Put = {
+		id: number;
 		name: string;
 		email: string;
 		homepage: string;
@@ -24,6 +40,8 @@ export namespace ResponseMember {
 		page: number;
 		size: number;
 	};
+
+	type GetById = Item;
 
 	type Item = {
 		id: number;
@@ -49,4 +67,6 @@ export namespace ResponseMember {
 		img: string;
 		responsibility: string;
 	};
+
+	type Put = string;
 }
