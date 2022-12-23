@@ -1,5 +1,6 @@
 import { RequestResource, ResponseResource } from '../@types/api/resource';
 import request from './core';
+import { toSnake } from 'snake-camel';
 
 const baseUrl = '/data/intro';
 
@@ -13,29 +14,21 @@ export const getResourceById = ({ id }: RequestResource.GetById) => {
 	return request.get<ResponseResource.GetById>(url);
 };
 
-export const postResource = ({ writer, title, body, file, created_date }: RequestResource.Post) => {
+export const postResource = (data: RequestResource.Post) => {
 	const url = `${baseUrl}`;
-	return request.post<ResponseResource.Post, RequestResource.Post>(url, {
-		id: 0,
-		writer,
-		title,
-		body,
-		file,
-		created_date,
-	});
+	return request.post<ResponseResource.Post, RequestResource.Post>(
+		url,
+		toSnake({
+			id: 0,
+			...data,
+		}),
+	);
 };
 
 /* prettier-ignore */
-export const putResource = ({ id, writer, title, body, file, created_date }: RequestResource.Put) => {
-	const url = `${baseUrl}/${id}`;
-	return request.put<ResponseResource.Put, RequestResource.Put>(url, {
-		id,
-		writer,
-		title,
-		body,
-		file,
-		created_date,
-	});
+export const putResource = (data: RequestResource.Put) => {
+	const url = `${baseUrl}/${data.id}`;
+	return request.put<ResponseResource.Put, RequestResource.Put>(url, toSnake(data));
 };
 
 export const deleteResource = ({ id }: RequestResource.Delete) => {

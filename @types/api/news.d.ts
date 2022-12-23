@@ -24,6 +24,6 @@ export namespace ResponseNews {
 		title: string;
 		body: string;
 		url: string;
-		created_date: string;
+		createdDate: string;
 	};
 }

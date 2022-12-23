@@ -9,7 +9,7 @@ export namespace ResponseContact {
 		id: number;
 		body: string;
 		email: string;
-		phone_number: string;
-		way_to_lab: string;
+		phoneNumber: string;
+		wayToLab: string;
 	};
 }

@@ -16,9 +16,9 @@ export const ResponseMemberKeys: ResponseMember.Item = {
 	name: 'name',
 	email: 'email',
 	homepage: 'homepage',
-	phone_number: 'phone_number',
-	intro_body: 'intro_body',
-	job_title: 'job_title',
+	phoneNumber: 'phoneNumber',
+	introBody: 'introBody',
+	jobTitle: 'jobTitle',
 	img: 'img',
 	responsibility: 'responsibility',
 } as const;
@@ -37,7 +37,7 @@ export const ResponseResourceKeys: ResponseResource.Item = {
 	title: 'title',
 	body: 'body',
 	file: 'file',
-	created_date: 'created_date',
+	createdDate: 'createdDate',
 } as const;
 
 export const ResponsePaperKeys: ResponsePaper.Item = {
@@ -45,7 +45,7 @@ export const ResponsePaperKeys: ResponsePaper.Item = {
 	title: 'title',
 	year: 'year',
 	keywords: 'keywords',
-	researcher_name: 'researcher_name',
+	researcherName: 'researcherName',
 	doi: 'doi',
 } as const;
 
@@ -55,7 +55,7 @@ export const ResponseNoticeKeys: ResponseNotice.Item = {
 	title: 'title',
 	body: 'body',
 	file: 'file',
-	created_date: 'created_date',
+	createdDate: 'createdDate',
 } as const;
 
 export const ResponseNewsKeys: ResponseNews.Item = {
@@ -63,7 +63,7 @@ export const ResponseNewsKeys: ResponseNews.Item = {
 	title: 'title',
 	body: 'body',
 	url: 'url',
-	created_date: 'created_date',
+	createdDate: 'createdDate',
 } as const;
 
 export const ResponseFAQKeys: ResponseFAQ.Item = {
@@ -72,13 +72,13 @@ export const ResponseFAQKeys: ResponseFAQ.Item = {
 	title: 'title',
 	category: 'category',
 	reply: 'reply',
-	created_date: 'created_date',
+	createdDate: 'createdDate',
 } as const;
 
 export const ResponseContactKeys: ResponseContact.Item = {
 	id: 'id' as any,
 	body: 'body',
 	email: 'email',
-	phone_number: 'phone_number',
-	way_to_lab: 'way_to_lab',
+	phoneNumber: 'phoneNumber',
+	wayToLab: 'wayToLab',
 } as const;

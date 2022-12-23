@@ -55,7 +55,7 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 						<S.Meta isNotice={isNotice}>
 							<h1>{data.title}</h1>
 							<h2>
-								{data.id}&ensp;|&ensp;{data.writer}&ensp;|&ensp;{data.created_date}
+								{data.id}&ensp;|&ensp;{data.writer}&ensp;|&ensp;{data.createdDate}
 							</h2>
 						</S.Meta>
 						<S.Content dangerouslySetInnerHTML={{ __html: data.body }} />

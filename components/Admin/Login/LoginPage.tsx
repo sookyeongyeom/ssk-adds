@@ -13,7 +13,7 @@ export default function LoginPage() {
 	const onLogin = async () => {
 		try {
 			const res = await postLogin({ username, password });
-			dispatch(requestAuth({ authToken: res.access_token }));
+			dispatch(requestAuth({ authToken: res.accessToken }));
 		} catch (e) {
 			alert('아이디와 비밀번호를 확인해주세요.');
 		}

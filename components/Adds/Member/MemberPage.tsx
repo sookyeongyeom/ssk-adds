@@ -26,9 +26,9 @@ export default function MemberPage() {
 						name={member.name}
 						email={member.email}
 						homepage={member.homepage}
-						phoneNumber={member.phone_number}
-						introBody={member.intro_body}
-						jobTitle={member.job_title}
+						phoneNumber={member.phoneNumber}
+						introBody={member.introBody}
+						jobTitle={member.jobTitle}
 						img={'/assets/members_example.png'}
 						responsibility={member.responsibility}
 						key={i}

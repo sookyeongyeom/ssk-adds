@@ -3,6 +3,18 @@ export namespace RequestMember {
 		page: number;
 		size?: number;
 	};
+
+	type Post = {
+		id?: 0;
+		name: string;
+		email: string;
+		homepage: string;
+		phoneNumber: string;
+		introBody: string;
+		jobTitle: string;
+		img: string;
+		responsibility: string;
+	};
 }
 
 export namespace ResponseMember {
@@ -18,11 +30,23 @@ export namespace ResponseMember {
 		name: string;
 		email: string;
 		homepage: string;
-		phone_number: string;
-		intro_body: string;
-		job_title: string;
+		phoneNumber: string;
+		introBody: string;
+		jobTitle: string;
 		img: string;
 		responsibility: string;
 		[key: string]: string | number;
+	};
+
+	type Post = {
+		id: number;
+		name: string;
+		email: string;
+		homepage: string;
+		phoneNumber: string;
+		introBody: string;
+		jobTitle: string;
+		img: string;
+		responsibility: string;
 	};
 }

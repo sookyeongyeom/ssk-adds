@@ -18,7 +18,7 @@ export namespace ResponsePaper {
 		title: string;
 		year: string;
 		keywords: string;
-		researcher_name: string;
+		researcherName: string;
 		doi: string;
 	};
 }
