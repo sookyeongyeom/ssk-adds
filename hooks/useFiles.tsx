@@ -4,18 +4,27 @@ import { uploadFileToS3 } from '../s3';
 import { S3Folders } from '../constants/s3';
 import { deleteFileFromS3 } from '../s3/index';
 
-export default function useFiles(folder: typeof S3Folders[keyof typeof S3Folders]) {
+export default function useFiles(
+	folder: typeof S3Folders[keyof typeof S3Folders],
+	isMultiple = true,
+) {
 	const [files, setFiles] = useState<File[]>([]);
 	const [wishToDeleteFileKeys, setWishToDeleteFileKeys] = useState<Set<string>>(new Set<string>());
 
 	const onAddFile = (targetFiles: File[]) => {
-		const includeTargetFiles = [...files];
-		/* 중복 파일은 제외 */
-		const prevFilesLastModified = files.map((file) => file.lastModified);
-		targetFiles.forEach((file) => {
-			if (!prevFilesLastModified.includes(file.lastModified)) includeTargetFiles.push(file);
-		});
-		setFiles(includeTargetFiles);
+		if (isMultiple) {
+			const includeTargetFiles = [...files];
+			/* 중복 파일은 제외 */
+			const prevFilesLastModified = files.map((file) => file.lastModified);
+			targetFiles.forEach((file) => {
+				if (!prevFilesLastModified.includes(file.lastModified)) includeTargetFiles.push(file);
+			});
+			setFiles(includeTargetFiles);
+			return;
+		}
+		/* !isMultiple */
+		if (targetFiles.length !== 1) alert('하나의 사진 파일만 등록할 수 있습니다.');
+		else setFiles(targetFiles);
 	};
 
 	const onRemoveFile = (targetLastModified: number) => {
