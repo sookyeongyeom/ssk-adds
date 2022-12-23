@@ -7,6 +7,26 @@ export namespace RequestPublication {
 	type GetById = {
 		id: number;
 	};
+
+	type Post = {
+		id?: 0;
+		writer: string;
+		title: string;
+		pdf: string;
+		img: string;
+	};
+
+	type Put = {
+		id: number;
+		writer: string;
+		title: string;
+		pdf: string;
+		img: string;
+	};
+
+	type Delete = {
+		id: number;
+	};
 }
 
 export namespace ResponsePublication {
@@ -19,6 +39,8 @@ export namespace ResponsePublication {
 
 	type GetById = Item;
 
+	type Post = Item;
+
 	type Item = {
 		id: number;
 		writer: string;
@@ -26,4 +48,6 @@ export namespace ResponsePublication {
 		pdf: string;
 		img: string;
 	};
+
+	type Put = string;
 }

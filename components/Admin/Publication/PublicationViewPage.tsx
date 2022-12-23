@@ -3,20 +3,22 @@ import styled from 'styled-components';
 import BoardButton from '../../Element/Shared/BoardButton';
 import { Paths } from '../../../constants/paths';
 import { useEffect, useState } from 'react';
-import { ResponseMember } from '../../../@types/api/member';
-import { getMemberById, deleteMember } from '../../../api/member';
 import useGet from '../../../hooks/useGet';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { S3Folders } from '../../../constants/s3';
 import AdminButton from '../../Element/Admin/AdminButton';
 import { useRouter } from 'next/router';
 import { Assets } from '../../../constants/assets';
+import { ResponsePublication } from '../../../@types/api/publication';
+import { getPublicationById, deletePublication } from '../../../api/publication';
+import Link from 'next/link';
 
-export default function MemberViewPage({ id }: ViewPageProps) {
+export default function PublicationViewPage({ id }: ViewPageProps) {
 	const router = useRouter();
-	const basePath = Paths.admin + Paths.member;
-	const [member, setMember] = useState<ResponseMember.GetById>();
-	const [src, setSrc] = useState<FileDataType>({ key: Assets.placeholderImgSrc, name: '' });
+	const basePath = Paths.admin + Paths.publication;
+	const [publication, setPublication] = useState<ResponsePublication.GetById>();
+	const [img, setImg] = useState<FileDataType>({ key: Assets.placeholderImgSrc, name: '' });
+	const [pdf, setPdf] = useState<FileDataType>();
 
 	const onEdit = () => router.push(basePath + Paths.edit + `/${id}`);
 
@@ -24,7 +26,7 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 		const api = basePath;
 		if (api && id) {
 			try {
-				await deleteMember({ id });
+				await deletePublication({ id });
 			} catch (e) {
 				console.log(e);
 			}
@@ -32,40 +34,47 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 	};
 
 	useEffect(() => {
-		if (id) useGet(() => getMemberById({ id }), setMember);
+		if (id) useGet(() => getPublicationById({ id }), setPublication);
 	}, [id]);
 
 	useEffect(() => {
-		if (member) {
+		if (publication) {
 			try {
-				const src = JSON.parse(member!.img)[0];
-				if (src) setSrc(src);
+				const img = JSON.parse(publication!.img)[0];
+				if (img) setImg(img);
 			} catch {
-				/* 유효한 이미지 없음 */
+				/* 유효한 IMG 없음 */
+			}
+			try {
+				const pdf = JSON.parse(publication!.pdf)[0];
+				if (pdf) setPdf(pdf);
+			} catch {
+				/* 유효한 PDF 없음 */
 			}
 		}
-	}, [member]);
+	}, [publication]);
 
 	return (
 		<S.MemberViewPageLayout>
 			<AdminButton onClick={onEdit}>수정</AdminButton>{' '}
 			<AdminButton onClick={onDelete}>삭제</AdminButton>
-			{src.name ? (
+			{img?.name ? (
 				<div>
-					<img src={getDownloadLinkFromS3(S3Folders.member, src.key)} />
+					<img src={getDownloadLinkFromS3(S3Folders.publication, img.key)} />
 				</div>
 			) : (
 				<div>
-					<img src={src.key} />
+					<img src={img.key} />
 				</div>
 			)}
-			<div>{member?.name}</div>
-			<div>{member?.email}</div>
-			<div>{member?.homepage}</div>
-			<div>{member?.phoneNumber}</div>
-			<div>{member?.introBody}</div>
-			<div>{member?.jobTitle}</div>
-			<div>{member?.responsibility}</div>
+			PDF:
+			{pdf?.key ? (
+				<Link href={getDownloadLinkFromS3(S3Folders.publication, pdf?.key)}>{pdf?.name}</Link>
+			) : (
+				'없음'
+			)}
+			<div>제목:{publication?.title}</div>
+			<div>작성자:{publication?.writer}</div>
 			<BoardButton boardPath={basePath} />
 		</S.MemberViewPageLayout>
 	);
