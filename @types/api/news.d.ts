@@ -7,6 +7,26 @@ export namespace RequestNews {
 	type GetById = {
 		id: number;
 	};
+
+	type Post = {
+		id?: 0;
+		title: string;
+		body: string;
+		url: string;
+		createdDate: string;
+	};
+
+	type Put = {
+		id: number;
+		title: string;
+		body: string;
+		url: string;
+		createdDate: string;
+	};
+
+	type Delete = {
+		id: number;
+	};
 }
 
 export namespace ResponseNews {
@@ -19,6 +39,8 @@ export namespace ResponseNews {
 
 	type GetById = Item;
 
+	type Post = Item;
+
 	type Item = {
 		id: number;
 		title: string;
@@ -26,4 +48,6 @@ export namespace ResponseNews {
 		url: string;
 		createdDate: string;
 	};
+
+	type Put = string;
 }
