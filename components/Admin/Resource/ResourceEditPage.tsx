@@ -10,7 +10,7 @@ export default function ResourceEditPage({ id }: ViewPageProps) {
 	const [resource, setResource] = useState<ResponseResource.GetById>();
 
 	useEffect(() => {
-		if (id) useGet(() => getResourceById({ id }), setResource);
+		if (id !== undefined) useGet(() => getResourceById({ id }), setResource);
 	}, [id]);
 
 	return <>{resource && <EditPageInnerShell id={id} data={resource} path={Paths.resource} />}</>;

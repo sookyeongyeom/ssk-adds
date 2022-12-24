@@ -6,7 +6,7 @@ export default function useEditDelete(basePath: string, id: number) {
 	const router = useRouter();
 	const onEdit = () => router.push(basePath + Paths.edit + `/${id}`);
 	const onDelete = async () => {
-		if (id) {
+		if (id !== undefined) {
 			try {
 				const api = getDeleteApiDependsOnPath(basePath);
 				if (api) await api({ id });

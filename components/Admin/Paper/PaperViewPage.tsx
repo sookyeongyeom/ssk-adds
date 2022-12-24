@@ -13,7 +13,7 @@ export default function PaperViewPage({ id }: ViewPageProps) {
 	const [paper, setPaper] = useState<ResponsePaper.GetById>();
 
 	useEffect(() => {
-		if (id) useGet(() => getPaperById({ id }), setPaper);
+		if (id !== undefined) useGet(() => getPaperById({ id }), setPaper);
 	}, [id]);
 
 	return (

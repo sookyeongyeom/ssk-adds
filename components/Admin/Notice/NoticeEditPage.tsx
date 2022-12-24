@@ -10,7 +10,7 @@ export default function NoticeEditPage({ id }: ViewPageProps) {
 	const [notice, setNotice] = useState<ResponseNotice.GetById>();
 
 	useEffect(() => {
-		if (id) useGet(() => getNoticeById({ id }), setNotice);
+		if (id !== undefined) useGet(() => getNoticeById({ id }), setNotice);
 	}, [id]);
 
 	return <>{notice && <EditPageInnerShell id={id} data={notice} path={Paths.notice} />}</>;

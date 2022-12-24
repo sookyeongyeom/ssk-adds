@@ -13,7 +13,7 @@ export default function NoticeViewPage({ id }: ViewPageProps) {
 	const [next, setNext] = useState<ResponseNotice.GetById>();
 
 	useEffect(() => {
-		if (!isNaN(id)) {
+		if (id !== undefined) {
 			useGet(() => getNoticeById({ id }), setNotice);
 			useGet(() => getNoticeById({ id: id - 1 }), setPrev).catch(() => setPrev(undefined));
 			useGet(() => getNoticeById({ id: id + 1 }), setNext).catch(() => setNext(undefined));
