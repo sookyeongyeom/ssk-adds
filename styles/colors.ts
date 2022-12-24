@@ -7,6 +7,7 @@ export const Colors = {
 	gray300: '#767676',
 	gray400: '#333333',
 
+	blue50: '#FCFCFC',
 	blue100: '#E4E9F0',
 	blue200: '#E2EDFB',
 	blue250: '#b3caec',
@@ -15,6 +16,7 @@ export const Colors = {
 	blue350: '#4b85d6',
 	blue400: '#6E98D4',
 	blue450: '#366fbf',
+	blue475: '#2358a1',
 	blue500: '#003276',
 
 	headerDefault: 'rgba(226, 237, 251, 0.9)',
