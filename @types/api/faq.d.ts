@@ -3,6 +3,28 @@ export namespace RequestFAQ {
 		page: number;
 		size?: number;
 	};
+
+	type Post = {
+		id?: 0;
+		writer: string;
+		title: string;
+		category: string;
+		reply: string;
+		createdDate: string;
+	};
+
+	type Put = {
+		id: number;
+		writer: string;
+		title: string;
+		category: string;
+		reply: string;
+		createdDate: string;
+	};
+
+	type Delete = {
+		id: number;
+	};
 }
 
 export namespace ResponseFAQ {
@@ -13,12 +35,16 @@ export namespace ResponseFAQ {
 		size: number;
 	};
 
+	type Post = Item;
+
 	type Item = {
-		writer: string;
 		id: number;
+		writer: string;
 		title: string;
 		category: string;
 		reply: string;
 		createdDate: string;
 	};
+
+	type Put = string;
 }
