@@ -75,3 +75,7 @@ type DragAndDropProps = {
 type SidebarToggleProps = {
 	isSidebarOpen: boolean;
 };
+
+/**
+ * @in AdminSidebar */
+type MenuProps = IsCurrentType & {};
