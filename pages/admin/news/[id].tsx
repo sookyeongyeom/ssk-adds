@@ -1,0 +1,22 @@
+import { ReactElement } from 'react';
+import CustomHead from '../../../components/Seo/CustomHead';
+import { Seo } from '../../../constants/seo';
+import { useRouter } from 'next/router';
+import AdminLayout from '../../../components/Layout/AdminLayout';
+import NewsViewPage from '../../../components/Admin/News/NewsViewPage';
+
+export default function view() {
+	const router = useRouter();
+	const id = router.query.id;
+
+	return (
+		<>
+			<CustomHead title={Seo.Title.news} />
+			<NewsViewPage id={Number(id)} />
+		</>
+	);
+}
+
+view.getLayout = function getLayout(page: ReactElement) {
+	return <AdminLayout>{page}</AdminLayout>;
+};
