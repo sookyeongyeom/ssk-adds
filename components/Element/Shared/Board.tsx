@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import { Fonts } from '../../../styles/fonts';
 import { ResponseCommonKeys } from '../../../constants/responseKeys';
@@ -24,8 +24,12 @@ export default function Board({
 
 	return (
 		<div>
-			{isAdmin && <AdminButton onClick={onNew}>새 글 작성</AdminButton>}
-			<S.BoardLayout>
+			{isAdmin && (
+				<S.ButtonWrapper>
+					<AdminButton onClick={onNew}>새 글 작성</AdminButton>
+				</S.ButtonWrapper>
+			)}
+			<S.BoardLayout isAdmin={isAdmin}>
 				<thead>
 					<tr>
 						{!!dataMaps?.length &&
@@ -60,7 +64,7 @@ export default function Board({
 }
 
 namespace S {
-	export const BoardLayout = styled.table`
+	export const BoardLayout = styled.table<BoardLayoutProps>`
 		width: 100%;
 		text-align: center;
 
@@ -104,5 +108,39 @@ namespace S {
 				${Fonts.regular14}
 			}
 		}
+
+		${(props) => props.isAdmin && AdminStyle}
+	`;
+
+	const AdminStyle = css`
+		background-color: ${Colors.white};
+		border-radius: 0.6rem;
+		overflow: hidden;
+
+		> thead {
+			background-color: ${Colors.blue400};
+
+			th {
+				color: ${Colors.white};
+			}
+		}
+
+		> tbody > tr:last-of-type {
+			border: none;
+		}
+
+		> tbody a {
+			transition: 0.3s ease;
+
+			&:hover {
+				color: ${Colors.blue450};
+			}
+		}
+	`;
+
+	export const ButtonWrapper = styled.div`
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 1rem;
 	`;
 }

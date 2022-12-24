@@ -90,6 +90,7 @@ namespace S {
 			border: 0.05rem solid ${Colors.gray150};
 			display: flex;
 			align-items: center;
+			background-color: ${Colors.white};
 		}
 
 		> button:nth-of-type(1),

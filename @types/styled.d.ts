@@ -79,3 +79,9 @@ type SidebarToggleProps = {
 /**
  * @in AdminSidebar */
 type MenuProps = IsCurrentType & {};
+
+/**
+ * @in Board */
+type BoardLayoutProps = {
+	isAdmin: boolean;
+};

@@ -29,11 +29,14 @@ export default function AdminHeader({ onToggleSidebar }: AdminHeaderProps) {
 namespace S {
 	export const AdminHeaderLayout = styled.header`
 		box-shadow: ${BoxShadows.smooth};
+		background-color: ${Colors.white};
 		height: ${Sizes.desktopAdminHeaderHeight};
 		padding: 2rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		position: relative;
+		z-index: 5;
 
 		> div {
 			display: flex;

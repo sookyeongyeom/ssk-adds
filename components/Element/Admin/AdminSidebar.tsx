@@ -63,6 +63,7 @@ namespace S {
 		position: fixed;
 		left: ${(props) => (props.isSidebarOpen ? '0' : `-${Sizes.desktopAdminSidebarWidth}`)};
 		transition: 0.5s ease;
+		z-index: 10;
 
 		> h1 {
 			height: 10rem;
