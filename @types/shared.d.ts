@@ -126,3 +126,15 @@ type FileUploadElementProps = {
 type ImagePreviewProps = {
 	file: File;
 };
+
+/**
+ * @for AdminSidebar */
+type AdminSidebarProps = {
+	isSidebarOpen: boolean;
+};
+
+/**
+ * @for AdminHeader */
+type AdminHeaderProps = {
+	onToggleSidebar: () => void;
+};

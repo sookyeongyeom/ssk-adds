@@ -68,3 +68,10 @@ type NumberButtonProps = IsCurrentType & {};
 type DragAndDropProps = {
 	isDragOver: boolean;
 };
+
+/**
+ * @in AdminLayout
+ * @in AdminSidebar */
+type SidebarToggleProps = {
+	isSidebarOpen: boolean;
+};
