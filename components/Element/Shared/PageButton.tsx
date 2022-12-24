@@ -54,23 +54,27 @@ export default function PageButton({ currentPage, totalPosts, onChangePage }: Pa
 	}, [totalPosts]);
 
 	return (
-		<S.PageButtonLayout>
-			<button onClick={onFirst}>{svgDoubleLeft7}</button>
-			<button onClick={onPrev}>{svgLeft7}</button>
-			<S.NumberWrapper>
-				{pages &&
-					getPagesInCurrentBlock().map((page, i) => (
-						<S.NumberButton
-							key={i}
-							isCurrent={currentPage === page}
-							onClick={() => onChangePage(page)}>
-							{page}
-						</S.NumberButton>
-					))}
-			</S.NumberWrapper>
-			<button onClick={onNext}>{svgRight7}</button>
-			<button onClick={onLast}>{svgDoubleRight7}</button>
-		</S.PageButtonLayout>
+		<>
+			{!!totalPosts && (
+				<S.PageButtonLayout>
+					<button onClick={onFirst}>{svgDoubleLeft7}</button>
+					<button onClick={onPrev}>{svgLeft7}</button>
+					<S.NumberWrapper>
+						{pages &&
+							getPagesInCurrentBlock().map((page, i) => (
+								<S.NumberButton
+									key={i}
+									isCurrent={currentPage === page}
+									onClick={() => onChangePage(page)}>
+									{page}
+								</S.NumberButton>
+							))}
+					</S.NumberWrapper>
+					<button onClick={onNext}>{svgRight7}</button>
+					<button onClick={onLast}>{svgDoubleRight7}</button>
+				</S.PageButtonLayout>
+			)}
+		</>
 	);
 }
 
