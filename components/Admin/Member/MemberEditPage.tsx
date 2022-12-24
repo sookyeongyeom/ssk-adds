@@ -101,7 +101,6 @@ function MemberEditPageInnerShell({
 
 	return (
 		<>
-			연구진소개수정
 			<Input label={'이름'} value={name} onChange={onChangeName} />
 			<Input label={'이메일'} value={email} onChange={onChangeEmail} />
 			<Input label={'홈페이지'} value={homepage} onChange={onChangeHomepage} />

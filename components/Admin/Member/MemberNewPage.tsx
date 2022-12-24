@@ -45,7 +45,6 @@ export default function MemberNewPage() {
 
 	return (
 		<>
-			새로운자료안내
 			<Input label={'이름'} onChange={onChangeName} />
 			<Input label={'이메일'} onChange={onChangeEmail} />
 			<Input label={'홈페이지'} onChange={onChangeHomepage} />

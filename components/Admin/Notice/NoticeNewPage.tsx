@@ -36,7 +36,6 @@ export default function NoticeNewPage() {
 
 	return (
 		<>
-			새로운공지사항
 			<NewEditorPost
 				title={title}
 				body={body}

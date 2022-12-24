@@ -132,7 +132,6 @@ function PublicationEditPageInnerShell({
 
 	return (
 		<>
-			발간물수정
 			<Input label={'제목'} value={title} onChange={onChangeTitle} />
 			<Input label={'작성자'} value={writer} onChange={onChangeWriter} />
 			IMG

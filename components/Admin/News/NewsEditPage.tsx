@@ -39,7 +39,6 @@ function NewsEditPageInnerShell({
 
 	return (
 		<>
-			보도자료수정
 			<Input label={'제목'} value={title} onChange={onChangeTitle} />
 			<Input label={'내용'} value={body} onChange={onChangeBody} />
 			<Input label={'링크'} value={url} onChange={onChangeUrl} />

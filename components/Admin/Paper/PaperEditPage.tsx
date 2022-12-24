@@ -48,7 +48,6 @@ function PaperEditPageInnerShell({
 
 	return (
 		<>
-			데이터활용논문수정
 			<Input label={'제목'} value={title} onChange={onChangeTitle} />
 			<Input label={'작성연도'} value={year} onChange={onChangeYear} />
 			<SC.Keywords>

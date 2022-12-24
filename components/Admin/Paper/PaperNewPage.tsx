@@ -26,7 +26,6 @@ export default function PaperNewPage() {
 
 	return (
 		<>
-			새로운데이터활용논문
 			<Input label={'제목'} onChange={onChangeTitle} />
 			<Input label={'작성연도'} onChange={onChangeYear} />
 			<SC.Keywords>

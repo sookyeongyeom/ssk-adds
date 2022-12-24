@@ -23,7 +23,6 @@ export default function FAQNewPage() {
 
 	return (
 		<>
-			새로운FAQ
 			<Input label={'제목'} onChange={onChangeTitle} />
 			<Input label={'작성자'} onChange={onChangeWriter} />
 			<Input label={'분류'} onChange={onChangeCategory} />

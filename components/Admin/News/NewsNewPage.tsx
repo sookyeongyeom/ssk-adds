@@ -21,7 +21,6 @@ export default function NewsNewPage() {
 
 	return (
 		<>
-			새로운보도자료
 			<Input label={'제목'} onChange={onChangeTitle} />
 			<Input label={'내용'} onChange={onChangeBody} />
 			<Input label={'링크'} onChange={onChangeUrl} />

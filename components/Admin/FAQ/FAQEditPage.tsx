@@ -41,7 +41,6 @@ function FAQEditPageInnerShell({
 
 	return (
 		<>
-			FAQ수정
 			<Input label={'제목'} value={title} onChange={onChangeTitle} />
 			<Input label={'작성자'} value={writer} onChange={onChangeWriter} />
 			<Input label={'분류'} value={category} onChange={onChangeCategory} />

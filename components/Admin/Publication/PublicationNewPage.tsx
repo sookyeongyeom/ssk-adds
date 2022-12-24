@@ -58,7 +58,6 @@ export default function PublicationNewPage() {
 
 	return (
 		<>
-			새로운발간물
 			<Input label={'제목'} onChange={onChangeTitle} />
 			<Input label={'작성자'} onChange={onChangeWriter} />
 			IMG
