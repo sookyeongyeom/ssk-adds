@@ -6,6 +6,7 @@ import useEditDelete from '../../../hooks/useEditDelete';
 import useGet from '../../../hooks/useGet';
 import AdminButton from '../../Element/Admin/AdminButton';
 import { getFAQById } from '../../../api/faq';
+import AdminBoardButton from '../../Element/Shared/AdminBoardButton';
 
 export default function FAQViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.faq;
@@ -28,6 +29,7 @@ export default function FAQViewPage({ id }: ViewPageProps) {
 					<div>답변:{faq.reply}</div>
 				</>
 			)}
+			<AdminBoardButton boardPath={basePath} />
 		</div>
 	);
 }

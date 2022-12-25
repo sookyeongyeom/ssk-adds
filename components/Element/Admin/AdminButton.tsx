@@ -15,6 +15,17 @@ namespace S {
 		border-radius: 0.6rem;
 		padding: 1rem 1.2rem;
 		transition: 0.3s ease;
+		display: flex;
+		align-items: center;
+
+		> svg {
+			position: relative;
+			top: 0.05rem;
+
+			> path {
+				fill: ${Colors.white};
+			}
+		}
 
 		&:hover {
 			background-color: ${Colors.blue450};

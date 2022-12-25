@@ -1,6 +1,5 @@
 import { ViewPageProps } from '../../../@types/pages';
 import styled from 'styled-components';
-import BoardButton from '../../Element/Shared/BoardButton';
 import { Paths } from '../../../constants/paths';
 import { useEffect, useState } from 'react';
 import { ResponseMember } from '../../../@types/api/member';
@@ -11,6 +10,7 @@ import { S3Folders } from '../../../constants/s3';
 import AdminButton from '../../Element/Admin/AdminButton';
 import { Assets } from '../../../constants/assets';
 import useEditDelete from '../../../hooks/useEditDelete';
+import AdminBoardButton from '../../Element/Shared/AdminBoardButton';
 
 export default function MemberViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.member;
@@ -53,7 +53,7 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 			<div>{member?.introBody}</div>
 			<div>{member?.jobTitle}</div>
 			<div>{member?.responsibility}</div>
-			<BoardButton boardPath={basePath} />
+			<AdminBoardButton boardPath={basePath} />
 		</S.MemberViewPageLayout>
 	);
 }

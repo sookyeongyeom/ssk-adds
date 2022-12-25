@@ -6,6 +6,7 @@ import useEditDelete from '../../../hooks/useEditDelete';
 import useGet from '../../../hooks/useGet';
 import { getNewsById } from '../../../api/news';
 import AdminButton from '../../Element/Admin/AdminButton';
+import AdminBoardButton from '../../Element/Shared/AdminBoardButton';
 
 export default function NewsViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.news;
@@ -27,6 +28,7 @@ export default function NewsViewPage({ id }: ViewPageProps) {
 					<div>링크:{news.url}</div>
 				</>
 			)}
+			<AdminBoardButton boardPath={basePath} />
 		</div>
 	);
 }

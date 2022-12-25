@@ -12,6 +12,7 @@ import { ResponsePublication } from '../../../@types/api/publication';
 import { getPublicationById } from '../../../api/publication';
 import Link from 'next/link';
 import useEditDelete from '../../../hooks/useEditDelete';
+import AdminBoardButton from '../../Element/Shared/AdminBoardButton';
 
 export default function PublicationViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.publication;
@@ -62,7 +63,7 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 			)}
 			<div>제목:{publication?.title}</div>
 			<div>작성자:{publication?.writer}</div>
-			<BoardButton boardPath={basePath} />
+			<AdminBoardButton boardPath={basePath} />
 		</S.MemberViewPageLayout>
 	);
 }

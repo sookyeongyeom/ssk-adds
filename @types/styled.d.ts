@@ -57,6 +57,7 @@ type AdjacentNavigatorLayoutProps = {
  * @in View */
 type ViewLayoutProps = {
 	isNotice: boolean;
+	isAdmin: boolean;
 };
 
 /**

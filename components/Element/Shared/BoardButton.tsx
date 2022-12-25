@@ -20,7 +20,5 @@ namespace S {
 		gap: 0.67rem;
 		padding: 0.8rem 1.7rem;
 		border: 0.1rem solid ${Colors.gray150};
-		margin-left: auto;
-		margin-bottom: 1.8rem;
 	`;
 }

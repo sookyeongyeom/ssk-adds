@@ -6,6 +6,7 @@ import { getPaperById } from '../../../api/paper';
 import useGet from '../../../hooks/useGet';
 import AdminButton from '../../Element/Admin/AdminButton';
 import useEditDelete from '../../../hooks/useEditDelete';
+import AdminBoardButton from '../../Element/Shared/AdminBoardButton';
 
 export default function PaperViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.paper;
@@ -29,6 +30,7 @@ export default function PaperViewPage({ id }: ViewPageProps) {
 					<div>DOI:{paper.doi}</div>
 				</>
 			)}
+			<AdminBoardButton boardPath={basePath} />
 		</div>
 	);
 }
