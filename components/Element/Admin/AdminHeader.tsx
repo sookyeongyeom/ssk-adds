@@ -66,6 +66,7 @@ namespace S {
 
 			> h1 {
 				${Fonts.bold16}
+				white-space: nowrap;
 			}
 		}
 

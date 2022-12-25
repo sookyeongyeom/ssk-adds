@@ -9,6 +9,7 @@ import { Paths } from '../../../constants/paths';
 import PageButton from '../Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
 import { BoardProps } from '../../../@types/shared';
+import { SC } from '../../../styles/styled';
 
 export default function Board({
 	dataMaps,
@@ -25,9 +26,9 @@ export default function Board({
 	return (
 		<div>
 			{isAdmin && (
-				<S.ButtonWrapper>
+				<SC.AlignButtonRight>
 					<AdminButton onClick={onNew}>새 글 작성</AdminButton>
-				</S.ButtonWrapper>
+				</SC.AlignButtonRight>
 			)}
 			<S.BoardLayout isAdmin={isAdmin}>
 				<thead>
@@ -79,6 +80,7 @@ namespace S {
 		> thead th {
 			${Fonts.medium16}
 			padding: 1.1rem;
+			white-space: nowrap;
 		}
 
 		> thead > tr > th {
@@ -97,15 +99,16 @@ namespace S {
 		}
 
 		> tbody td {
+			${Fonts.regular14}
 			padding: 1.3rem;
+			white-space: nowrap;
 
 			&:first-of-type {
 				${Fonts.medium16}
 			}
 
-			&:nth-of-type(3),
-			&:last-of-type {
-				${Fonts.regular14}
+			&:nth-of-type(2) {
+				${Fonts.regular16}
 			}
 		}
 
@@ -136,11 +139,5 @@ namespace S {
 				color: ${Colors.blue450};
 			}
 		}
-	`;
-
-	export const ButtonWrapper = styled.div`
-		display: flex;
-		justify-content: flex-end;
-		margin-bottom: 1rem;
 	`;
 }

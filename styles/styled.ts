@@ -24,4 +24,11 @@ export namespace SC {
 		border: 0.1rem solid black;
 		padding: 0.5rem;
 	`;
+
+	export const AlignButtonRight = styled.div`
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 1rem;
+		gap: 0.5rem;
+	`;
 }
