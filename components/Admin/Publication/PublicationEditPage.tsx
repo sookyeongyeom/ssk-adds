@@ -14,6 +14,8 @@ import pickFileKeysToArrayFromFileString from '../../../utils/pickFileKeysToArra
 import excludeDeletedFileKeysFromFileString from '../../../utils/excludeDeletedFileKeysFromFileString';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { SC } from '../../../styles/styled';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
 
 export default function PublicationEditPage({ id }: ViewPageProps) {
 	const [publication, setPublication] = useState<ResponsePublication.GetById>();
@@ -53,6 +55,7 @@ function PublicationEditPageInnerShell({
 		onResetDeleteWishList: onResetDeleteWishListImgs,
 		onToggleToDelete: onToggleToDeleteImgs,
 	} = useFiles(S3Folders.publication, false);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.publication + `/${id}`);
 
 	const onSubmit = async () => {
 		/* IMG 삭제 */
@@ -112,6 +115,7 @@ function PublicationEditPageInnerShell({
 			pdf: JSON.stringify([...(manipulatedPrevPdfs || []), ...pdfData]),
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	useEffect(() => {

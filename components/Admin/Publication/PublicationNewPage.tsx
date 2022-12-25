@@ -6,6 +6,8 @@ import AdminButton from '../../Element/Admin/AdminButton';
 import FileUploadElement from '../../Element/Admin/FileUploadElement';
 import ImagePreview from '../../Element/Admin/ImagePreview';
 import { postPublication } from '../../../api/publication';
+import useRoute from '../../../hooks/useRoute';
+import { Paths } from '../../../constants/paths';
 
 export default function PublicationNewPage() {
 	const { value: writer, onChange: onChangeWriter } = useInput();
@@ -22,6 +24,7 @@ export default function PublicationNewPage() {
 		onRemoveFile: onRemoveImgs,
 		onUploadFile: onUploadImgs,
 	} = useFiles(S3Folders.publication, false);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.publication);
 
 	const onSubmit = async () => {
 		/* IMG 업로드 */
@@ -54,6 +57,7 @@ export default function PublicationNewPage() {
 			pdf: JSON.stringify(pdfData),
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (

@@ -8,6 +8,8 @@ import Input from '../../Element/Shared/Input';
 import AdminButton from '../../Element/Admin/AdminButton';
 import { SC } from '../../../styles/styled';
 import useKeywords from '../../../hooks/useKeywords';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
 
 export default function PaperEditPage({ id }: ViewPageProps) {
 	const [paper, setPaper] = useState<ResponsePaper.GetById>();
@@ -32,6 +34,7 @@ function PaperEditPageInnerShell({
 	const { keywords, onChangeKeyword, onAddKeyword, onRemoveKeyword } = useKeywords(
 		data?.keywords.split(','),
 	);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.paper + `/${id}`);
 
 	const onSubmit = async () => {
 		/* PUT */
@@ -44,6 +47,7 @@ function PaperEditPageInnerShell({
 			doi,
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (

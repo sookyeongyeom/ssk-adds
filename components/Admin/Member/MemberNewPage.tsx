@@ -6,6 +6,8 @@ import Input from '../../Element/Shared/Input';
 import AdminButton from '../../Element/Admin/AdminButton';
 import FileUploadElement from '../../Element/Admin/FileUploadElement';
 import ImagePreview from '../../Element/Admin/ImagePreview';
+import useRoute from '../../../hooks/useRoute';
+import { Paths } from '../../../constants/paths';
 
 export default function MemberNewPage() {
 	const { value: name, onChange: onChangeName } = useInput();
@@ -16,6 +18,7 @@ export default function MemberNewPage() {
 	const { value: jobTitle, onChange: onChangeJobTitle } = useInput();
 	const { value: responsibility, onChange: onChangeResponsibility } = useInput();
 	const { files, onAddFile, onRemoveFile, onUploadFile } = useFiles(S3Folders.member, false);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.member);
 
 	const onSubmit = async () => {
 		/* S3 파일 업로드 */
@@ -41,6 +44,7 @@ export default function MemberNewPage() {
 			responsibility,
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (

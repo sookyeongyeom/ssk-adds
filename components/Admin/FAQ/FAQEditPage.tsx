@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import useGet from '../../../hooks/useGet';
 import Input from '../../Element/Shared/Input';
 import AdminButton from '../../Element/Admin/AdminButton';
+import useRoute from '../../../hooks/useRoute';
+import { Paths } from '../../../constants/paths';
 
 export default function FAQEditPage({ id }: ViewPageProps) {
 	const [faq, setFaq] = useState<ResponseFAQ.GetById>();
@@ -25,6 +27,7 @@ function FAQEditPageInnerShell({
 	const { value: writer, onChange: onChangeWriter } = useInput(data?.writer);
 	const { value: category, onChange: onChangeCategory } = useInput(data?.category);
 	const { value: reply, onChange: onChangeReply } = useInput(data?.reply);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.faq + `/${id}`);
 
 	const onSubmit = async () => {
 		/* PUT */
@@ -37,6 +40,7 @@ function FAQEditPageInnerShell({
 			createdDate: data?.createdDate || new Date().toISOString().split('T')[0],
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (

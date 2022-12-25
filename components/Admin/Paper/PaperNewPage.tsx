@@ -4,6 +4,8 @@ import Input from '../../Element/Shared/Input';
 import AdminButton from '../../Element/Admin/AdminButton';
 import { SC } from '../../../styles/styled';
 import useKeywords from '../../../hooks/useKeywords';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
 
 export default function PaperNewPage() {
 	const { value: title, onChange: onChangeTitle } = useInput();
@@ -11,6 +13,7 @@ export default function PaperNewPage() {
 	const { value: researcherName, onChange: onChangeResearcherName } = useInput();
 	const { value: doi, onChange: onChangeDoi } = useInput();
 	const { keywords, onChangeKeyword, onAddKeyword, onRemoveKeyword } = useKeywords();
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.paper);
 
 	const onSubmit = async () => {
 		/* POST */
@@ -22,6 +25,7 @@ export default function PaperNewPage() {
 			doi,
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (

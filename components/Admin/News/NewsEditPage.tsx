@@ -6,6 +6,8 @@ import { getNewsById, putNews } from '../../../api/news';
 import useInput from '../../../hooks/useInput';
 import Input from '../../Element/Shared/Input';
 import AdminButton from '../../Element/Admin/AdminButton';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
 
 export default function NewsEditPage({ id }: ViewPageProps) {
 	const [news, setNews] = useState<ResponseNews.GetById>();
@@ -24,6 +26,7 @@ function NewsEditPageInnerShell({
 	const { value: title, onChange: onChangeTitle } = useInput(data?.title);
 	const { value: body, onChange: onChangeBody } = useInput(data?.body);
 	const { value: url, onChange: onChangeUrl } = useInput(data?.url);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.news + `/${id}`);
 
 	const onSubmit = async () => {
 		/* PUT */
@@ -35,6 +38,7 @@ function NewsEditPageInnerShell({
 			createdDate: data?.createdDate || new Date().toISOString().split('T')[0],
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (

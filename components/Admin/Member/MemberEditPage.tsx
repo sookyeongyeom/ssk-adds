@@ -14,6 +14,8 @@ import excludeDeletedFileKeysFromFileString from '../../../utils/excludeDeletedF
 import pickFileKeysToArrayFromFileString from '../../../utils/pickFileKeysToArrayFromFileString';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { SC } from '../../../styles/styled';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
 
 export default function MemberEditPage({ id }: ViewPageProps) {
 	const [member, setMember] = useState<ResponseMember.GetById>();
@@ -48,6 +50,7 @@ function MemberEditPageInnerShell({
 		onResetDeleteWishList,
 		onToggleToDelete,
 	} = useFiles(S3Folders.member, false);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.member + `/${id}`);
 
 	const onSubmit = async () => {
 		/* S3 파일 삭제 */
@@ -89,6 +92,7 @@ function MemberEditPageInnerShell({
 			responsibility,
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	useEffect(() => {

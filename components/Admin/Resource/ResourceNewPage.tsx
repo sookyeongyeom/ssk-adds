@@ -4,12 +4,15 @@ import useEditorBody from '../../../hooks/useEditorBody';
 import NewEditorPost from '../../Element/Admin/NewEditorPost';
 import useFiles from '../../../hooks/useFiles';
 import { S3Folders } from '../../../constants/s3';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
 
 export default function ResourceNewPage() {
 	const { value: title, onChange: onChangeTitle } = useInput();
 	const { value: writer, onChange: onChangeWriter } = useInput();
 	const { body, onChangeBody } = useEditorBody();
 	const { files, onAddFile, onRemoveFile, onUploadFile } = useFiles(S3Folders.resource);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.resource);
 
 	const onSubmit = async () => {
 		/* S3 파일 업로드 */
@@ -32,6 +35,7 @@ export default function ResourceNewPage() {
 			createdDate: new Date().toISOString().split('T')[0],
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (

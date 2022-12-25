@@ -4,12 +4,15 @@ import NewEditorPost from '../../Element/Admin/NewEditorPost';
 import { postNotice } from '../../../api/notice';
 import useFiles from '../../../hooks/useFiles';
 import { S3Folders } from '../../../constants/s3';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
 
 export default function NoticeNewPage() {
 	const { value: title, onChange: onChangeTitle } = useInput();
 	const { value: writer, onChange: onChangeWriter } = useInput();
 	const { body, onChangeBody } = useEditorBody();
 	const { files, onAddFile, onRemoveFile, onUploadFile } = useFiles(S3Folders.notice);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.notice);
 
 	const onSubmit = async () => {
 		/* S3 파일 업로드 */
@@ -32,6 +35,7 @@ export default function NoticeNewPage() {
 			createdDate: new Date().toISOString().split('T')[0],
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (

@@ -11,6 +11,7 @@ import { S3Folders } from '../../../constants/s3';
 import { Paths } from '../../../constants/paths';
 import { putResource } from '../../../api/resource';
 import { putNotice } from '../../../api/notice';
+import useRoute from '../../../hooks/useRoute';
 
 export default function EditPageInnerShell<
 	T extends ResponseResource.GetById | ResponseNotice.GetById,
@@ -24,6 +25,7 @@ export default function EditPageInnerShell<
 	const { body, onChangeBody } = useEditorBody(data?.body);
 	const { files, onAddFile, onRemoveFile, onUploadFile, onDeleteFile, onToggleToDelete } =
 		useFiles(folder);
+	const { onRouteToPath } = useRoute(Paths.admin + path + `/${id}`);
 
 	const onSubmit = async () => {
 		/* S3 파일 삭제 */
@@ -62,6 +64,7 @@ export default function EditPageInnerShell<
 			createdDate: data?.createdDate || new Date().toISOString().split('T')[0],
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (
