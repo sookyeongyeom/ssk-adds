@@ -10,6 +10,8 @@ export default function useEditDelete(basePath: string, id: number) {
 			try {
 				const api = getDeleteApiDependsOnPath(basePath);
 				if (api) await api({ id });
+				alert('게시글을 삭제했습니다.');
+				router.push(basePath);
 			} catch (e) {
 				console.log(e);
 			}

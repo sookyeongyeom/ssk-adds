@@ -43,7 +43,7 @@ namespace S {
 				margin: 4rem auto;
 				padding: 0 2rem;
 				max-width: 120rem;
-				height: calc(100vh - ${Sizes.desktopAdminHeaderHeight} - 8rem);
+				min-height: calc(100vh - ${Sizes.desktopAdminHeaderHeight} - 8rem);
 			}
 		}
 	`;
