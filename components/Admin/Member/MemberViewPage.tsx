@@ -19,7 +19,7 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 	const [src, setSrc] = useState<FileDataType>({ key: Assets.placeholderImgSrc, name: '' });
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getMemberById({ id }), setMember);
+		if (id !== undefined && !isNaN(id)) useGet(() => getMemberById({ id }), setMember);
 	}, [id]);
 
 	useEffect(() => {

@@ -13,7 +13,7 @@ export default function FAQEditPage({ id }: ViewPageProps) {
 	const [faq, setFaq] = useState<ResponseFAQ.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getFAQById({ id }), setFaq);
+		if (id !== undefined && !isNaN(id)) useGet(() => getFAQById({ id }), setFaq);
 	}, [id]);
 
 	return <>{faq && <FAQEditPageInnerShell id={id} data={faq} />}</>;

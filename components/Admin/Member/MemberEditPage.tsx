@@ -21,7 +21,7 @@ export default function MemberEditPage({ id }: ViewPageProps) {
 	const [member, setMember] = useState<ResponseMember.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getMemberById({ id }), setMember);
+		if (id !== undefined && !isNaN(id)) useGet(() => getMemberById({ id }), setMember);
 	}, [id]);
 
 	return <>{member && <MemberEditPageInnerShell id={id} data={member} />}</>;

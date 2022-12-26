@@ -21,7 +21,7 @@ export default function PublicationEditPage({ id }: ViewPageProps) {
 	const [publication, setPublication] = useState<ResponsePublication.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getPublicationById({ id }), setPublication);
+		if (id !== undefined && !isNaN(id)) useGet(() => getPublicationById({ id }), setPublication);
 	}, [id]);
 
 	return <>{publication && <PublicationEditPageInnerShell id={id} data={publication} />}</>;

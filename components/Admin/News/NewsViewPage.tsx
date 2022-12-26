@@ -14,7 +14,7 @@ export default function NewsViewPage({ id }: ViewPageProps) {
 	const [news, setNews] = useState<ResponseNews.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getNewsById({ id }), setNews);
+		if (id !== undefined && !isNaN(id)) useGet(() => getNewsById({ id }), setNews);
 	}, [id]);
 
 	return (

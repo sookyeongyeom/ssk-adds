@@ -22,7 +22,7 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 	const [pdf, setPdf] = useState<FileDataType>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getPublicationById({ id }), setPublication);
+		if (id !== undefined && !isNaN(id)) useGet(() => getPublicationById({ id }), setPublication);
 	}, [id]);
 
 	useEffect(() => {

@@ -13,7 +13,7 @@ export default function NewsEditPage({ id }: ViewPageProps) {
 	const [news, setNews] = useState<ResponseNews.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getNewsById({ id }), setNews);
+		if (id !== undefined && !isNaN(id)) useGet(() => getNewsById({ id }), setNews);
 	}, [id]);
 
 	return <>{news && <NewsEditPageInnerShell id={id} data={news} />}</>;
