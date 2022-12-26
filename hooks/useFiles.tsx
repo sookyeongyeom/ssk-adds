@@ -23,7 +23,7 @@ export default function useFiles(
 			return;
 		}
 		/* !isMultiple */
-		if (targetFiles.length !== 1) alert('하나의 사진 파일만 등록할 수 있습니다.');
+		if (targetFiles.length !== 1) alert('해당 항목에는 하나의 파일만 등록할 수 있습니다.');
 		else setFiles(targetFiles);
 	};
 
