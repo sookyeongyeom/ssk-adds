@@ -111,9 +111,6 @@ export namespace SC {
 			padding: 1.7rem 3rem;
 		}
 
-		> div:last-of-type {
-		}
-
 		/* Label */
 		> div:nth-of-type(even) {
 			${Fonts.medium16}
@@ -140,6 +137,14 @@ export namespace SC {
 					margin-bottom: 0;
 				}
 			}
+		}
+	`;
+
+	export const AdminNewEditGrid = styled(AdminViewGrid)`
+		align-items: center;
+
+		> div:first-of-type {
+			background-color: ${Colors.orange300};
 		}
 	`;
 }

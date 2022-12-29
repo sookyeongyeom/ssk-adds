@@ -6,7 +6,7 @@ export default function Input({ label, value, type, inputRef, onChange }: InputP
 	return (
 		<S.InputLayout>
 			<p>{label}</p>
-			<input value={value} onChange={onChange} type={type} ref={inputRef} multiple />
+			<input value={value} onChange={onChange} type={type} ref={inputRef} multiple placeholder='' />
 		</S.InputLayout>
 	);
 }
@@ -18,7 +18,18 @@ namespace S {
 			display: block;
 			width: 30rem;
 			padding: 1rem;
-			border: 0.1rem solid ${Colors.gray150};
+			border: 0.15rem solid ${Colors.gray150};
+			border-radius: 0.6rem;
+			transition: 0.3s ease;
+
+			&:hover,
+			&:focus {
+				border-color: ${Colors.orange300};
+			}
+
+			&:focus {
+				background-color: ${Colors.orange100};
+			}
 		}
 	`;
 }
