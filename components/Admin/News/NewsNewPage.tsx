@@ -1,9 +1,8 @@
 import useInput from '../../../hooks/useInput';
 import { postNews } from '../../../api/news';
-import Input from '../../Element/Shared/Input';
-import AdminButton from '../../Element/Admin/AdminButton';
 import { Paths } from '../../../constants/paths';
 import useRoute from '../../../hooks/useRoute';
+import NewsNewEdit from './NewsNewEdit';
 
 export default function NewsNewPage() {
 	const { value: title, onChange: onChangeTitle } = useInput();
@@ -25,10 +24,15 @@ export default function NewsNewPage() {
 
 	return (
 		<>
-			<Input label={'제목'} onChange={onChangeTitle} />
-			<Input label={'내용'} onChange={onChangeBody} />
-			<Input label={'링크'} onChange={onChangeUrl} />
-			<AdminButton onClick={onSubmit}>완료</AdminButton>
+			<NewsNewEdit
+				title={title}
+				body={body}
+				url={url}
+				onChangeTitle={onChangeTitle}
+				onChangeBody={onChangeBody}
+				onChangeUrl={onChangeUrl}
+				onSubmit={onSubmit}
+			/>
 		</>
 	);
 }
