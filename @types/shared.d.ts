@@ -107,7 +107,7 @@ type NewEditorPostProps = FileUploadElementProps & {
 	title: string;
 	body: string;
 	writer: string;
-	wishToDeleteFileKeys: Set<string>;
+	wishToDeleteFileKeys?: Set<string>;
 	onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeBody: (text: string) => void;

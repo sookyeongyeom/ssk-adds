@@ -166,9 +166,7 @@ namespace S {
 	`;
 
 	export const Prev = styled(File)<PrevProps>`
-		&:nth-of-type(3) {
-			margin-bottom: 1.5rem;
-		}
+		margin-bottom: 1.5rem;
 
 		> h4 {
 			color: ${Colors.red400};
