@@ -103,7 +103,7 @@ export namespace SC {
 
 		/* NO. */
 		> div:first-of-type {
-			${Fonts.bold23}
+			${Fonts.bold20}
 			color:${Colors.white};
 			grid-column: 1/3;
 			background-color: ${Colors.blue400};

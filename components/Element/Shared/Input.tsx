@@ -6,7 +6,7 @@ export default function Input({ label, value, type, inputRef, onChange }: InputP
 	return (
 		<S.InputLayout>
 			<p>{label}</p>
-			<input value={value} onChange={onChange} type={type} ref={inputRef} multiple placeholder='' />
+			<input value={value} onChange={onChange} type={type} ref={inputRef} />
 		</S.InputLayout>
 	);
 }

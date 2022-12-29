@@ -1,9 +1,8 @@
 import useInput from '../../../hooks/useInput';
 import { postFAQ } from '../../../api/faq';
-import Input from '../../Element/Shared/Input';
-import AdminButton from '../../Element/Admin/AdminButton';
 import { Paths } from '../../../constants/paths';
 import useRoute from '../../../hooks/useRoute';
+import FAQNewEdit from './FAQNewEdit';
 
 export default function FAQNewPage() {
 	const { value: title, onChange: onChangeTitle } = useInput();
@@ -27,11 +26,17 @@ export default function FAQNewPage() {
 
 	return (
 		<>
-			<Input label={'제목'} onChange={onChangeTitle} />
-			<Input label={'작성자'} onChange={onChangeWriter} />
-			<Input label={'분류'} onChange={onChangeCategory} />
-			<Input label={'답변'} onChange={onChangeReply} />
-			<AdminButton onClick={onSubmit}>완료</AdminButton>
+			<FAQNewEdit
+				title={title}
+				writer={writer}
+				category={category}
+				reply={reply}
+				onChangeTitle={onChangeTitle}
+				onChangeWriter={onChangeWriter}
+				onChangeCategory={onChangeCategory}
+				onChangeReply={onChangeReply}
+				onSubmit={onSubmit}
+			/>
 		</>
 	);
 }
