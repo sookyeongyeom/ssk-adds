@@ -55,11 +55,11 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 				</SC.ImageBox>
 				<div>PDF</div>
 				{pdf?.key ? (
-					<SC.PdfBox>
+					<SC.LinkHighlight>
 						<Link href={getDownloadLinkFromS3(S3Folders.publication, pdf?.key)}>
 							{svgDownload} <span>{pdf?.name}</span>
 						</Link>
-					</SC.PdfBox>
+					</SC.LinkHighlight>
 				) : (
 					<SC.Empty>첨부된 PDF가 없습니다</SC.Empty>
 				)}

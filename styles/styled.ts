@@ -46,7 +46,7 @@ export namespace SC {
 		}
 	`;
 
-	export const PdfBox = styled.div`
+	export const LinkHighlight = styled.div`
 		width: fit-content;
 		background: linear-gradient(to top, ${Colors.blue200} 40%, transparent 40%);
 		border-radius: 0 !important;
