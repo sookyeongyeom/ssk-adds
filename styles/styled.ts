@@ -124,5 +124,22 @@ export namespace SC {
 		> div:nth-of-type(odd) {
 			word-break: break-all;
 		}
+
+		ul {
+			padding-left: 1.65rem;
+
+			> li {
+				list-style-type: decimal;
+				margin: 0.7rem 0;
+
+				&:first-of-type {
+					margin-top: 0;
+				}
+
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+			}
+		}
 	`;
 }
