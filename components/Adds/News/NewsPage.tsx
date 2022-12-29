@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Recipes } from '../../../styles/recipes';
+import { SC } from '../../../styles/styled';
 import SelectBox from '../../Element/Adds/SelectBox';
 
 export default function NewsPage() {
@@ -12,6 +12,6 @@ export default function NewsPage() {
 
 namespace S {
 	export const NewsPageLayout = styled.div`
-		${Recipes.AlignSelectBoxForBoard}
+		${SC.AlignSelectBoxForBoard}
 	`;
 }
