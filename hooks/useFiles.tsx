@@ -91,5 +91,6 @@ export default function useFiles(
 		onToggleToDelete,
 		onSelectSingleToDelete,
 		onResetDeleteWishList,
+		wishToDeleteFileKeys,
 	};
 }

@@ -73,12 +73,13 @@ export default function FileUploadElement({
 					Drag files here or click to upload
 				</S.DragAndDrop>
 			</label>
-			<h3>New Files ({files.length})</h3>
 			{files!.map((file, i) => (
 				<S.File key={i}>
 					<h4>{i + 1}</h4>
 					<span>{file.name}</span>
-					<AdminButton onClick={() => onRemoveFile!(file.lastModified)}>{svgCancel}</AdminButton>
+					<AdminButton onClick={() => onRemoveFile!(file.lastModified)} isOrange>
+						{svgCancel}
+					</AdminButton>
 				</S.File>
 			))}
 		</S.FileUploadElementLayout>
@@ -87,8 +88,8 @@ export default function FileUploadElement({
 
 namespace S {
 	export const FileUploadElementLayout = styled.div`
-		border: 0.1rem solid lightgray;
-		padding: 1rem;
+		grid-column: 2/3;
+		padding-left: 0 !important;
 
 		> h3 {
 			${Fonts.bold18}
@@ -99,13 +100,13 @@ namespace S {
 
 	export const DragAndDrop = styled.div<DragAndDropProps>`
 		${Fonts.bold16}
-		color:${Colors.blue400};
+		color:${Colors.orange400};
 		width: 40rem;
 		height: 20rem;
 		border: 0.25rem dashed lightgray;
 		border-radius: 0.6rem;
-		background-color: ${(props) => props.isDragOver && Colors.blue100};
-		border-color: ${(props) => props.isDragOver && Colors.blue400};
+		background-color: ${(props) => props.isDragOver && Colors.orange100};
+		border-color: ${(props) => props.isDragOver && Colors.orange400};
 		transition: 0.3s ease;
 		transition-property: background-color border-color;
 		display: flex;
@@ -116,7 +117,7 @@ namespace S {
 		font-family: Arial;
 
 		&:hover {
-			background-color: ${Colors.blue100};
+			background-color: ${Colors.orange100};
 		}
 
 		> input {
@@ -128,15 +129,11 @@ namespace S {
 		display: flex;
 		align-items: center;
 		gap: 1.5rem;
-		margin: 1rem 0;
-
-		&:last-of-type {
-			margin: 0;
-		}
+		margin-top: 2rem;
 
 		> h4 {
 			${Fonts.medium18}
-			color: ${Colors.blue400};
+			color: ${Colors.orange400};
 		}
 
 		> span {

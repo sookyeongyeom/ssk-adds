@@ -2,20 +2,17 @@ import useInput from '../../../hooks/useInput';
 import useFiles from '../../../hooks/useFiles';
 import { S3Folders } from '../../../constants/s3';
 import { getMemberById, putMember } from '../../../api/member';
-import Input from '../../Element/Shared/Input';
-import AdminButton from '../../Element/Admin/AdminButton';
 import FileUploadElement from '../../Element/Admin/FileUploadElement';
-import ImagePreview from '../../Element/Admin/ImagePreview';
 import { EditPageInnerShellProps, ViewPageProps } from '../../../@types/pages';
 import { useEffect, useState } from 'react';
 import { ResponseMember } from '../../../@types/api/member';
 import useGet from '../../../hooks/useGet';
 import excludeDeletedFileKeysFromFileString from '../../../utils/excludeDeletedFileKeysFromFileString';
 import pickFileKeysToArrayFromFileString from '../../../utils/pickFileKeysToArrayFromFileString';
-import { getDownloadLinkFromS3 } from '../../../s3/index';
-import { SC } from '../../../styles/styled';
 import { Paths } from '../../../constants/paths';
 import useRoute from '../../../hooks/useRoute';
+import MemberNewEdit from './MemberNewEdit';
+import PrevToNewImage from '../../Element/Admin/PrevToNewImage';
 
 export default function MemberEditPage({ id }: ViewPageProps) {
 	const [member, setMember] = useState<ResponseMember.GetById>();
@@ -49,6 +46,7 @@ function MemberEditPageInnerShell({
 		onSelectSingleToDelete,
 		onResetDeleteWishList,
 		onToggleToDelete,
+		wishToDeleteFileKeys,
 	} = useFiles(S3Folders.member, false);
 	const { onRouteToPath } = useRoute(Paths.admin + Paths.member + `/${id}`);
 
@@ -105,22 +103,31 @@ function MemberEditPageInnerShell({
 
 	return (
 		<>
-			<Input label={'이름'} value={name} onChange={onChangeName} />
-			<Input label={'이메일'} value={email} onChange={onChangeEmail} />
-			<Input label={'홈페이지'} value={homepage} onChange={onChangeHomepage} />
-			<Input label={'연락처'} value={phoneNumber} onChange={onChangePhoneNumber} />
-			<Input label={'소개'} value={introBody} onChange={onChangeIntroBody} />
-			<Input label={'직무'} value={jobTitle} onChange={onChangeJobTitle} />
-			<Input label={'역할'} value={responsibility} onChange={onChangeResponsibility} />
-			{prevFileKey && (
-				<SC.PrevImage>
-					<img src={getDownloadLinkFromS3(S3Folders.member, prevFileKey)} />
-				</SC.PrevImage>
-			)}
-			<AdminButton onClick={() => onToggleToDelete(prevFileKey)}>기존사진 삭제토글</AdminButton>
-			<ImagePreview file={files[0]} />
-			<FileUploadElement files={files} onAddFile={onAddFile} onRemoveFile={onRemoveFile} />
-			<AdminButton onClick={onSubmit}>완료</AdminButton>
+			<MemberNewEdit
+				name={name}
+				email={email}
+				homepage={homepage}
+				phoneNumber={phoneNumber}
+				introBody={introBody}
+				jobTitle={jobTitle}
+				responsibility={responsibility}
+				onChangeName={onChangeName}
+				onChangeEmail={onChangeEmail}
+				onChangeHomepage={onChangeHomepage}
+				onChangePhoneNumber={onChangePhoneNumber}
+				onChangeIntroBody={onChangeIntroBody}
+				onChangeJobTitle={onChangeJobTitle}
+				onChangeResponsibility={onChangeResponsibility}
+				onSubmit={onSubmit}>
+				<div>사진</div>
+				<PrevToNewImage
+					prevFileKey={prevFileKey}
+					wishToDeleteFileKeys={wishToDeleteFileKeys}
+					files={files}
+					onToggleToDelete={onToggleToDelete}
+				/>
+				<FileUploadElement files={files} onAddFile={onAddFile} onRemoveFile={onRemoveFile} />
+			</MemberNewEdit>
 		</>
 	);
 }

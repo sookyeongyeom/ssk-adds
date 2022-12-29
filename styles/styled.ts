@@ -113,7 +113,7 @@ export namespace SC {
 
 		/* Label */
 		> div:nth-of-type(even) {
-			${Fonts.medium16}
+			${Fonts.bold16}
 			padding-left: 3rem;
 		}
 
