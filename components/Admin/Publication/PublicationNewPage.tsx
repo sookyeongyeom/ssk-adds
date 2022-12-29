@@ -1,13 +1,13 @@
 import useInput from '../../../hooks/useInput';
 import useFiles from '../../../hooks/useFiles';
 import { S3Folders } from '../../../constants/s3';
-import Input from '../../Element/Shared/Input';
-import AdminButton from '../../Element/Admin/AdminButton';
 import FileUploadElement from '../../Element/Admin/FileUploadElement';
 import ImagePreview from '../../Element/Admin/ImagePreview';
 import { postPublication } from '../../../api/publication';
 import useRoute from '../../../hooks/useRoute';
 import { Paths } from '../../../constants/paths';
+import { SC } from '../../../styles/styled';
+import PublicationNewEdit from './PublicationNewEdit';
 
 export default function PublicationNewPage() {
 	const { value: writer, onChange: onChangeWriter } = useInput();
@@ -62,14 +62,19 @@ export default function PublicationNewPage() {
 
 	return (
 		<>
-			<Input label={'제목'} onChange={onChangeTitle} />
-			<Input label={'작성자'} onChange={onChangeWriter} />
-			IMG
-			<ImagePreview file={imgs[0]} />
-			<FileUploadElement files={imgs} onAddFile={onAddImgs} onRemoveFile={onRemoveImgs} />
-			PDF
-			<FileUploadElement files={pdfs} onAddFile={onAddPdfs} onRemoveFile={onRemovePdfs} />
-			<AdminButton onClick={onSubmit}>완료</AdminButton>
+			<PublicationNewEdit
+				title={title}
+				writer={writer}
+				onChangeTitle={onChangeTitle}
+				onChangeWriter={onChangeWriter}
+				onSubmit={onSubmit}>
+				<SC.Label>사진</SC.Label>
+				<ImagePreview file={imgs[0]} />
+				<FileUploadElement files={imgs} onAddFile={onAddImgs} onRemoveFile={onRemoveImgs} />
+				<SC.Label>PDF</SC.Label>
+				{pdfs[0]?.name || <SC.Empty>PDF 없음</SC.Empty>}
+				<FileUploadElement files={pdfs} onAddFile={onAddPdfs} onRemoveFile={onRemovePdfs} />
+			</PublicationNewEdit>
 		</>
 	);
 }
