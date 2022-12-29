@@ -61,9 +61,11 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 						{isAdmin ? (
 							<AdminBoardButton boardPath={basePath} />
 						) : (
-							<BoardButton boardPath={basePath} />
+							<>
+								<BoardButton boardPath={basePath} />
+								<AdjacentNavigator prev={prev} next={next} />
+							</>
 						)}
-						<AdjacentNavigator prev={prev} next={next} />
 					</>
 				)}
 			</S.ViewLayout>
@@ -149,7 +151,7 @@ namespace S {
 		display: flex;
 		align-items: flex-start;
 		gap: 3rem;
-		margin-bottom: 9.1rem;
+		margin-bottom: ${(props) => (props.isAdmin ? '1rem' : '9.1rem')};
 
 		> h3 {
 			${Fonts.medium16}
