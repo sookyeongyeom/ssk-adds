@@ -10,10 +10,12 @@ import { v4 as uuidv4 } from 'uuid';
 export default function FileUploadElement({
 	files,
 	prevFileKeys,
+	wishToDeleteFileKeys,
 	onAddFile,
 	onRemoveFile,
 	onToggleToDelete,
 	isMultiple = false,
+	isEditor = false,
 }: FileUploadElementProps) {
 	const [isDragOver, setIsDragOver] = useState(false);
 	const fileRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -55,13 +57,22 @@ export default function FileUploadElement({
 
 	return (
 		<S.FileUploadElementLayout>
-			{prevFileKeys &&
-				onToggleToDelete &&
-				prevFileKeys.map((fileKey, i) => (
-					<div onClick={() => onToggleToDelete(fileKey)} key={i}>
-						{fileKey}
-					</div>
-				))}
+			{isEditor && !!prevFileKeys?.length && onToggleToDelete && (
+				<>
+					<h3>기존 파일 ({prevFileKeys.length})</h3>
+					{prevFileKeys.map((fileKey, i) => (
+						<S.Prev
+							key={i}
+							isWishedToDelete={wishToDeleteFileKeys && wishToDeleteFileKeys.has(fileKey)}>
+							<h4>{i + 1}</h4>
+							<span>{fileKey}</span>
+							<AdminButton onClick={() => onToggleToDelete(fileKey)} isRed>
+								{svgCancel}
+							</AdminButton>
+						</S.Prev>
+					))}
+				</>
+			)}
 			<label htmlFor={key}>
 				<S.DragAndDrop
 					onDragOver={onDragOverFile}
@@ -73,6 +84,7 @@ export default function FileUploadElement({
 					Drag files here or click to upload
 				</S.DragAndDrop>
 			</label>
+			{isEditor && !!files.length && <h3>새로운 파일 ({files.length})</h3>}
 			{files!.map((file, i) => (
 				<S.File key={i}>
 					<h4>{i + 1}</h4>
@@ -92,9 +104,21 @@ namespace S {
 		padding-left: 0 !important;
 
 		> h3 {
-			${Fonts.bold18}
-			margin: 2.5rem 0 1rem 0;
-			font-family: Arial;
+			${Fonts.bold16}
+			margin: 0.7rem 0;
+
+			&:last-of-type {
+				margin-top: 2rem;
+			}
+		}
+
+		button {
+			width: 2rem;
+			height: 2rem;
+			padding: 0.3rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 	`;
 
@@ -129,7 +153,7 @@ namespace S {
 		display: flex;
 		align-items: center;
 		gap: 1.5rem;
-		margin-top: 2rem;
+		margin-top: 1.5rem;
 
 		> h4 {
 			${Fonts.medium18}
@@ -139,14 +163,21 @@ namespace S {
 		> span {
 			${Fonts.regular14}
 		}
+	`;
 
-		> button {
-			width: 2rem;
-			height: 2rem;
-			padding: 0.3rem;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+	export const Prev = styled(File)<PrevProps>`
+		&:nth-of-type(3) {
+			margin-bottom: 1.5rem;
+		}
+
+		> h4 {
+			color: ${Colors.red400};
+		}
+
+		> span {
+			text-decoration: ${(props) => props.isWishedToDelete && 'line-through'};
+			text-decoration-thickness: 0.25rem;
+			text-decoration-color: ${Colors.red400};
 		}
 	`;
 }

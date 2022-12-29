@@ -7,6 +7,7 @@ import ImagePreview from '../../Element/Admin/ImagePreview';
 import useRoute from '../../../hooks/useRoute';
 import { Paths } from '../../../constants/paths';
 import MemberNewEdit from './MemberNewEdit';
+import { SC } from '../../../styles/styled';
 
 export default function MemberNewPage() {
 	const { value: name, onChange: onChangeName } = useInput();
@@ -64,7 +65,7 @@ export default function MemberNewPage() {
 				onChangeJobTitle={onChangeJobTitle}
 				onChangeResponsibility={onChangeResponsibility}
 				onSubmit={onSubmit}>
-				<div>사진</div>
+				<SC.Label>사진</SC.Label>
 				<ImagePreview file={files[0]} />
 				<FileUploadElement files={files} onAddFile={onAddFile} onRemoveFile={onRemoveFile} />
 			</MemberNewEdit>

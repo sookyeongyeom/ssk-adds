@@ -48,11 +48,6 @@ namespace S {
 				display: flex;
 				align-items: center;
 
-				> svg {
-					position: relative;
-					top: 0.1rem;
-				}
-
 				> svg > path {
 					transition: 0.3s ease;
 				}

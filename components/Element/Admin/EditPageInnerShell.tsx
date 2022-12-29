@@ -23,8 +23,15 @@ export default function EditPageInnerShell<
 	const { value: title, onChange: onChangeTitle } = useInput(data?.title);
 	const { value: writer, onChange: onChangeWriter } = useInput(data?.writer);
 	const { body, onChangeBody } = useEditorBody(data?.body);
-	const { files, onAddFile, onRemoveFile, onUploadFile, onDeleteFile, onToggleToDelete } =
-		useFiles(folder);
+	const {
+		files,
+		onAddFile,
+		onRemoveFile,
+		onUploadFile,
+		onDeleteFile,
+		onToggleToDelete,
+		wishToDeleteFileKeys,
+	} = useFiles(folder);
 	const { onRouteToPath } = useRoute(Paths.admin + path + `/${id}`);
 
 	const onSubmit = async () => {
@@ -82,6 +89,7 @@ export default function EditPageInnerShell<
 				onRemoveFile={onRemoveFile}
 				onSubmit={onSubmit}
 				onToggleToDelete={onToggleToDelete}
+				wishToDeleteFileKeys={wishToDeleteFileKeys}
 			/>
 		</>
 	);
