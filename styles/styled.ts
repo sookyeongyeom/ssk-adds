@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Colors } from './colors';
 import { Fonts } from './fonts';
-import { BoxShadows } from './shadows';
 
 export namespace SC {
 	export const PrevImage = styled.div`
@@ -113,7 +112,7 @@ export namespace SC {
 		}
 
 		ul {
-			padding-left: 1.65rem;
+			padding-left: 1.8rem;
 
 			> li {
 				list-style-type: decimal;

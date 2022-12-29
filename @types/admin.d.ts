@@ -53,3 +53,21 @@ type PublicationNewEditProps = ChildrenType & {
 	onChangeWriter: (e: ChangeEvent<HTMLInputElement>) => void;
 	onSubmit: () => void;
 };
+
+/**
+ * @for PaperNewEdit */
+type PaperNewEditProps = {
+	title: string;
+	year: string;
+	keywords: string[];
+	researcherName: string;
+	doi: string;
+	onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeYear: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeKeyword: (e: ChangeEvent<HTMLInputElement>, idx: number) => void;
+	onAddKeyword: () => void;
+	onRemoveKeyword: (idx: number) => void;
+	onChangeResearcherName: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeDoi: (e: ChangeEvent<HTMLInputElement>) => void;
+	onSubmit: () => void;
+};
