@@ -36,7 +36,7 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 	return (
 		<S.MemberViewPageLayout>
 			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
-				<div>사진</div>
+				<SC.Label>사진</SC.Label>
 				{src.name ? (
 					<SC.ImageBox>
 						<img src={getDownloadLinkFromS3(S3Folders.member, src.key)} />
@@ -46,19 +46,19 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 						<img src={src.key} />
 					</SC.ImageBox>
 				)}
-				<div>이름</div>
+				<SC.Label>이름</SC.Label>
 				<div>{member?.name}</div>
-				<div>이메일</div>
+				<SC.Label>이메일</SC.Label>
 				<div>{member?.email}</div>
-				<div>홈페이지</div>
+				<SC.Label>홈페이지</SC.Label>
 				<div>{member?.homepage}</div>
-				<div>연락처</div>
+				<SC.Label>연락처</SC.Label>
 				<div>{member?.phoneNumber}</div>
-				<div>소개</div>
+				<SC.Label>소개</SC.Label>
 				<div>{member?.introBody}</div>
-				<div>직무</div>
+				<SC.Label>직무</SC.Label>
 				<div>{member?.jobTitle}</div>
-				<div>역할</div>
+				<SC.Label>역할</SC.Label>
 				<div>{member?.responsibility}</div>
 			</AdminView>
 		</S.MemberViewPageLayout>

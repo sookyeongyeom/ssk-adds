@@ -6,6 +6,7 @@ import useEditDelete from '../../../hooks/useEditDelete';
 import useGet from '../../../hooks/useGet';
 import { getFAQById } from '../../../api/faq';
 import AdminView from '../../Element/Admin/AdminView';
+import { SC } from '../../../styles/styled';
 
 export default function FAQViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.faq;
@@ -19,13 +20,13 @@ export default function FAQViewPage({ id }: ViewPageProps) {
 	return (
 		<div>
 			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
-				<div>제목</div>
+				<SC.Label>제목</SC.Label>
 				<div>{faq?.title}</div>
-				<div>분류</div>
+				<SC.Label>분류</SC.Label>
 				<div>{faq?.category}</div>
-				<div>작성자</div>
+				<SC.Label>작성자</SC.Label>
 				<div>{faq?.writer}</div>
-				<div>답변</div>
+				<SC.Label>답변</SC.Label>
 				<div>{faq?.reply}</div>
 			</AdminView>
 		</div>

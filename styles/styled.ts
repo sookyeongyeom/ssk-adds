@@ -99,6 +99,7 @@ export namespace SC {
 		> div {
 			line-height: 120%;
 			border-radius: 0 0 0.6rem 0.6rem;
+			word-break: break-all;
 		}
 
 		/* NO. */
@@ -109,17 +110,6 @@ export namespace SC {
 			background-color: ${Colors.blue400};
 			border-radius: 0.6rem 0.6rem 0 0;
 			padding: 1.7rem 3rem;
-		}
-
-		/* Label */
-		> div:nth-of-type(even) {
-			${Fonts.bold16}
-			padding-left: 3rem;
-		}
-
-		/* Content */
-		> div:nth-of-type(odd) {
-			word-break: break-all;
 		}
 
 		ul {
@@ -146,5 +136,10 @@ export namespace SC {
 		> div:first-of-type {
 			background-color: ${Colors.orange300};
 		}
+	`;
+
+	export const Label = styled.h3`
+		${Fonts.bold16}
+		padding-left: 3rem;
 	`;
 }

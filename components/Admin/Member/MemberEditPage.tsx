@@ -13,6 +13,7 @@ import { Paths } from '../../../constants/paths';
 import useRoute from '../../../hooks/useRoute';
 import MemberNewEdit from './MemberNewEdit';
 import PrevToNewImage from '../../Element/Admin/PrevToNewImage';
+import { SC } from '../../../styles/styled';
 
 export default function MemberEditPage({ id }: ViewPageProps) {
 	const [member, setMember] = useState<ResponseMember.GetById>();
@@ -119,11 +120,12 @@ function MemberEditPageInnerShell({
 				onChangeJobTitle={onChangeJobTitle}
 				onChangeResponsibility={onChangeResponsibility}
 				onSubmit={onSubmit}>
-				<div>사진</div>
+				<SC.Label>사진</SC.Label>
 				<PrevToNewImage
 					prevFileKey={prevFileKey}
 					wishToDeleteFileKeys={wishToDeleteFileKeys}
 					files={files}
+					folder={S3Folders.member}
 					onToggleToDelete={onToggleToDelete}
 				/>
 				<FileUploadElement files={files} onAddFile={onAddFile} onRemoveFile={onRemoveFile} />

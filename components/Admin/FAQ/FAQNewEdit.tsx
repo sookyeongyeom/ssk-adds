@@ -1,3 +1,4 @@
+import { SC } from '../../../styles/styled';
 import AdminNewEdit from '../../Element/Admin/AdminNewEdit';
 import Input from '../../Element/Shared/Input';
 
@@ -14,13 +15,13 @@ export default function FAQNewEdit({
 }: FAQNewEditProps) {
 	return (
 		<AdminNewEdit onSubmit={onSubmit}>
-			<div>제목</div>
+			<SC.Label>제목</SC.Label>
 			<Input value={title} onChange={onChangeTitle} />
-			<div>작성자</div>
+			<SC.Label>작성자</SC.Label>
 			<Input value={writer} onChange={onChangeWriter} />
-			<div>분류</div>
+			<SC.Label>분류</SC.Label>
 			<Input value={category} onChange={onChangeCategory} />
-			<div>답변</div>
+			<SC.Label>답변</SC.Label>
 			<Input value={reply} onChange={onChangeReply} />
 		</AdminNewEdit>
 	);

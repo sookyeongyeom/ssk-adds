@@ -6,6 +6,7 @@ import { getPaperById } from '../../../api/paper';
 import useGet from '../../../hooks/useGet';
 import useEditDelete from '../../../hooks/useEditDelete';
 import AdminView from '../../Element/Admin/AdminView';
+import { SC } from '../../../styles/styled';
 
 export default function PaperViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.paper;
@@ -19,11 +20,11 @@ export default function PaperViewPage({ id }: ViewPageProps) {
 	return (
 		<div>
 			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
-				<div>제목</div>
+				<SC.Label>제목</SC.Label>
 				<div>{paper?.title}</div>
-				<div>작성연도</div>
+				<SC.Label>작성연도</SC.Label>
 				<div>{paper?.year}</div>
-				<div>키워드</div>
+				<SC.Label>키워드</SC.Label>
 				<div>
 					<ul>
 						{paper?.keywords.split(',').map((keyword, i) => (
@@ -31,9 +32,9 @@ export default function PaperViewPage({ id }: ViewPageProps) {
 						))}
 					</ul>
 				</div>
-				<div>연구자</div>
+				<SC.Label>연구자</SC.Label>
 				<div>{paper?.researcherName}</div>
-				<div>DOI</div>
+				<SC.Label>DOI</SC.Label>
 				<div>{paper?.doi}</div>
 			</AdminView>
 		</div>

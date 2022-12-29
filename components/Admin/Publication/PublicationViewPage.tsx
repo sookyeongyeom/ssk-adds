@@ -45,7 +45,7 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 	return (
 		<S.MemberViewPageLayout>
 			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
-				<div>사진</div>
+				<SC.Label>사진</SC.Label>
 				<SC.ImageBox>
 					{img?.name ? (
 						<img src={getDownloadLinkFromS3(S3Folders.publication, img.key)} />
@@ -53,7 +53,7 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 						<img src={img.key} />
 					)}
 				</SC.ImageBox>
-				<div>PDF</div>
+				<SC.Label>PDF</SC.Label>
 				{pdf?.key ? (
 					<SC.LinkHighlight>
 						<Link href={getDownloadLinkFromS3(S3Folders.publication, pdf?.key)}>
@@ -63,9 +63,9 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 				) : (
 					<SC.Empty>첨부된 PDF가 없습니다</SC.Empty>
 				)}
-				<div>제목</div>
+				<SC.Label>제목</SC.Label>
 				<div>{publication?.title}</div>
-				<div>작성자</div>
+				<SC.Label>작성자</SC.Label>
 				<div>{publication?.writer}</div>
 			</AdminView>
 		</S.MemberViewPageLayout>

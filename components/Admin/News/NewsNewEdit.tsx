@@ -1,3 +1,4 @@
+import { SC } from '../../../styles/styled';
 import AdminNewEdit from '../../Element/Admin/AdminNewEdit';
 import Input from '../../Element/Shared/Input';
 
@@ -12,11 +13,11 @@ export default function NewsNewEdit({
 }: NewsNewEditProps) {
 	return (
 		<AdminNewEdit onSubmit={onSubmit}>
-			<div>제목</div>
+			<SC.Label>제목</SC.Label>
 			<Input value={title} onChange={onChangeTitle} />
-			<div>내용</div>
+			<SC.Label>내용</SC.Label>
 			<Input value={body} onChange={onChangeBody} />
-			<div>Url</div>
+			<SC.Label>Url</SC.Label>
 			<Input value={url} onChange={onChangeUrl} />
 		</AdminNewEdit>
 	);

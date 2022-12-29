@@ -1,3 +1,4 @@
+import { SC } from '../../../styles/styled';
 import AdminNewEdit from '../../Element/Admin/AdminNewEdit';
 import Input from '../../Element/Shared/Input';
 
@@ -21,19 +22,19 @@ export default function MemberNewEdit({
 }: MemberNewEditProps) {
 	return (
 		<AdminNewEdit onSubmit={onSubmit}>
-			<div>이름</div>
+			<SC.Label>이름</SC.Label>
 			<Input value={name} onChange={onChangeName} />
-			<div>이메일</div>
+			<SC.Label>이메일</SC.Label>
 			<Input value={email} onChange={onChangeEmail} />
-			<div>홈페이지</div>
+			<SC.Label>홈페이지</SC.Label>
 			<Input value={homepage} onChange={onChangeHomepage} />
-			<div>연락처</div>
+			<SC.Label>연락처</SC.Label>
 			<Input value={phoneNumber} onChange={onChangePhoneNumber} />
-			<div>소개</div>
+			<SC.Label>소개</SC.Label>
 			<Input value={introBody} onChange={onChangeIntroBody} />
-			<div>직무</div>
+			<SC.Label>직무</SC.Label>
 			<Input value={jobTitle} onChange={onChangeJobTitle} />
-			<div>역할</div>
+			<SC.Label>역할</SC.Label>
 			<Input value={responsibility} onChange={onChangeResponsibility} />
 			{children}
 		</AdminNewEdit>

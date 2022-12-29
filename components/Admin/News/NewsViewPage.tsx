@@ -20,11 +20,11 @@ export default function NewsViewPage({ id }: ViewPageProps) {
 	return (
 		<div>
 			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
-				<div>제목</div>
+				<SC.Label>제목</SC.Label>
 				<div>{news?.title}</div>
-				<div>내용</div>
+				<SC.Label>내용</SC.Label>
 				<div>{news?.body}</div>
-				<div>URL</div>
+				<SC.Label>URL</SC.Label>
 				<SC.LinkHighlight>
 					<a href={`http://${news?.url}`}>{news?.url}</a>
 				</SC.LinkHighlight>
