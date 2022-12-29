@@ -69,6 +69,7 @@ type SelectBoxProps = {
 /**
  * @for AdminButton */
 type AdminButtonProps = ChildrenType & {
+	isOrange?: boolean;
 	onClick: () => void;
 };
 
@@ -82,7 +83,7 @@ type EditorProps = {
 /**
  * @for Input */
 type InputProps = {
-	label: string;
+	label?: string;
 	value?: string;
 	type?: string;
 	inputRef?: MutableRefObject<HTMLInputElement>;
@@ -146,4 +147,10 @@ type AdminViewProps = ChildrenType & {
 	basePath: string;
 	onEdit: () => void;
 	onDelete: () => void;
+};
+
+/**
+ * @for AdminNewEdit */
+type AdminNewEditProps = ChildrenType & {
+	onSubmit: () => void;
 };
