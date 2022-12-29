@@ -93,3 +93,9 @@ type AdminButtonLayoutProps = {
 	isOrange?: boolean;
 	isRed?: boolean;
 };
+
+/**
+ * @in PublicationEditPage */
+type PrevProps = {
+	isWishedToDelete: boolean;
+};

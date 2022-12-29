@@ -12,6 +12,7 @@ export default function PrevToNewImage({
 	prevFileKey,
 	wishToDeleteFileKeys,
 	files,
+	folder,
 	onToggleToDelete,
 }: PrevToNewImageProps) {
 	return (
@@ -19,7 +20,7 @@ export default function PrevToNewImage({
 			{/* 기존 사진 */}
 			{prevFileKey && (!wishToDeleteFileKeys.has(prevFileKey) || files.length) ? (
 				<SC.PrevImage>
-					<img src={getDownloadLinkFromS3(S3Folders.member, prevFileKey)} />
+					<img src={getDownloadLinkFromS3(folder, prevFileKey)} />
 				</SC.PrevImage>
 			) : (
 				<SC.PrevImage>

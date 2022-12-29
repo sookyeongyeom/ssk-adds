@@ -1,6 +1,7 @@
 import { ResponseNotice } from './api/notice';
 import { ResponseResource } from './api/resource';
 import { MutableRefObject } from 'react';
+import { ResponsePublication } from './api/publication';
 
 /**
  * @base */
@@ -162,5 +163,16 @@ type PrevToNewImageProps = {
 	prevFileKey: string;
 	wishToDeleteFileKeys: Set<string>;
 	files: File[];
+	folder: string;
 	onToggleToDelete: (prevFileKey: string) => void;
+};
+
+/**
+ * @for PrevToNewPdf */
+type PrevToNewPdfProps = {
+	pdfs: File[];
+	prevPdfKey: string;
+	prevPdfName?: string;
+	wishToDeletePdfKeys: Set<string>;
+	onToggleToDeletePdfs: (prevFileKey: string) => void;
 };

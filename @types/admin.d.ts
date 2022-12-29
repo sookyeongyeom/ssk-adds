@@ -43,3 +43,13 @@ type MemberNewEditProps = ChildrenType & {
 	onChangeResponsibility: (e: ChangeEvent<HTMLInputElement>) => void;
 	onSubmit: () => void;
 };
+
+/**
+ * @for PublicationNewEdit */
+type PublicationNewEditProps = ChildrenType & {
+	title: string;
+	writer: string;
+	onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeWriter: (e: ChangeEvent<HTMLInputElement>) => void;
+	onSubmit: () => void;
+};
