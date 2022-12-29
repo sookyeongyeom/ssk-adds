@@ -1,11 +1,9 @@
 import useInput from '../../../hooks/useInput';
 import { postPaper } from '../../../api/paper';
-import Input from '../../Element/Shared/Input';
-import AdminButton from '../../Element/Admin/AdminButton';
-import { SC } from '../../../styles/styled';
 import useKeywords from '../../../hooks/useKeywords';
 import { Paths } from '../../../constants/paths';
 import useRoute from '../../../hooks/useRoute';
+import PaperNewEdit from './PaperNewEdit';
 
 export default function PaperNewPage() {
 	const { value: title, onChange: onChangeTitle } = useInput();
@@ -30,20 +28,21 @@ export default function PaperNewPage() {
 
 	return (
 		<>
-			<Input label={'제목'} onChange={onChangeTitle} />
-			<Input label={'작성연도'} onChange={onChangeYear} />
-			<SC.Keywords>
-				{keywords.map((keyword, i) => (
-					<div key={i}>
-						<SC.Keyword value={keyword} onChange={(e) => onChangeKeyword(e, i)} />
-						<AdminButton onClick={() => onRemoveKeyword(i)}>삭제</AdminButton>
-					</div>
-				))}
-			</SC.Keywords>
-			<AdminButton onClick={onAddKeyword}>키워드 추가</AdminButton>
-			<Input label={'연구자'} onChange={onChangeResearcherName} />
-			<Input label={'DOI'} onChange={onChangeDoi} />
-			<AdminButton onClick={onSubmit}>완료</AdminButton>
+			<PaperNewEdit
+				title={title}
+				year={year}
+				keywords={keywords}
+				researcherName={researcherName}
+				doi={doi}
+				onChangeTitle={onChangeTitle}
+				onChangeYear={onChangeYear}
+				onChangeKeyword={onChangeKeyword}
+				onAddKeyword={onAddKeyword}
+				onRemoveKeyword={onRemoveKeyword}
+				onChangeResearcherName={onChangeResearcherName}
+				onChangeDoi={onChangeDoi}
+				onSubmit={onSubmit}
+			/>
 		</>
 	);
 }

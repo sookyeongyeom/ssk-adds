@@ -140,5 +140,6 @@ export namespace SC {
 	export const Label = styled.h3`
 		${Fonts.bold16}
 		padding-left: 3rem;
+		line-height: 120%;
 	`;
 }
