@@ -1,10 +1,7 @@
 import useInput from '../../../hooks/useInput';
 import useFiles from '../../../hooks/useFiles';
 import { S3Folders } from '../../../constants/s3';
-import Input from '../../Element/Shared/Input';
-import AdminButton from '../../Element/Admin/AdminButton';
 import FileUploadElement from '../../Element/Admin/FileUploadElement';
-import ImagePreview from '../../Element/Admin/ImagePreview';
 import { getPublicationById, putPublication } from '../../../api/publication';
 import { EditPageInnerShellProps, ViewPageProps } from '../../../@types/pages';
 import { useState, useEffect } from 'react';
@@ -12,14 +9,21 @@ import useGet from '../../../hooks/useGet';
 import { ResponsePublication } from '../../../@types/api/publication';
 import pickFileKeysToArrayFromFileString from '../../../utils/pickFileKeysToArrayFromFileString';
 import excludeDeletedFileKeysFromFileString from '../../../utils/excludeDeletedFileKeysFromFileString';
-import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { SC } from '../../../styles/styled';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
+import PublicationNewEdit from './PublicationNewEdit';
+import PrevToNewImage from '../../Element/Admin/PrevToNewImage';
+import { svgRight } from '../../../styles/svgs';
+import pickFileNamesToArrayFromFileString from '../../../utils/pickFileNamesToArrayFromFileString';
+import styled from 'styled-components';
+import PrevToNewPdf from '../../Element/Admin/PrevToNewPdf';
 
 export default function PublicationEditPage({ id }: ViewPageProps) {
 	const [publication, setPublication] = useState<ResponsePublication.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getPublicationById({ id }), setPublication);
+		if (id !== undefined && !isNaN(id)) useGet(() => getPublicationById({ id }), setPublication);
 	}, [id]);
 
 	return <>{publication && <PublicationEditPageInnerShell id={id} data={publication} />}</>;
@@ -42,6 +46,7 @@ function PublicationEditPageInnerShell({
 		onSelectSingleToDelete: onSelectSingleToDeletePdfs,
 		onResetDeleteWishList: onResetDeleteWishListPdfs,
 		onToggleToDelete: onToggleToDeletePdfs,
+		wishToDeleteFileKeys: wishToDeletePdfKeys,
 	} = useFiles(S3Folders.publication, false);
 	const {
 		files: imgs,
@@ -52,7 +57,9 @@ function PublicationEditPageInnerShell({
 		onSelectSingleToDelete: onSelectSingleToDeleteImgs,
 		onResetDeleteWishList: onResetDeleteWishListImgs,
 		onToggleToDelete: onToggleToDeleteImgs,
+		wishToDeleteFileKeys: wishToDeleteImgKeys,
 	} = useFiles(S3Folders.publication, false);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.publication + `/${id}`);
 
 	const onSubmit = async () => {
 		/* IMG 삭제 */
@@ -112,6 +119,7 @@ function PublicationEditPageInnerShell({
 			pdf: JSON.stringify([...(manipulatedPrevPdfs || []), ...pdfData]),
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	useEffect(() => {
@@ -131,24 +139,30 @@ function PublicationEditPageInnerShell({
 	}, [pdfs]);
 
 	return (
-		<>
-			발간물수정
-			<Input label={'제목'} value={title} onChange={onChangeTitle} />
-			<Input label={'작성자'} value={writer} onChange={onChangeWriter} />
-			IMG
-			{prevImgKey && (
-				<SC.PrevImage>
-					<img src={getDownloadLinkFromS3(S3Folders.publication, prevImgKey)} />
-				</SC.PrevImage>
-			)}
-			<AdminButton onClick={() => onToggleToDeleteImgs(prevImgKey)}>기존IMG 삭제토글</AdminButton>
-			<ImagePreview file={imgs[0]} />
+		<PublicationNewEdit
+			title={title}
+			writer={writer}
+			onChangeTitle={onChangeTitle}
+			onChangeWriter={onChangeWriter}
+			onSubmit={onSubmit}>
+			<SC.Label>사진</SC.Label>
+			<PrevToNewImage
+				prevFileKey={prevImgKey}
+				wishToDeleteFileKeys={wishToDeleteImgKeys}
+				files={imgs}
+				folder={S3Folders.publication}
+				onToggleToDelete={onToggleToDeleteImgs}
+			/>
 			<FileUploadElement files={imgs} onAddFile={onAddImgs} onRemoveFile={onRemoveImgs} />
-			PDF
-			{prevPdfKey}
-			<AdminButton onClick={() => onToggleToDeletePdfs(prevPdfKey)}>기존PDF 삭제토글</AdminButton>
+			<SC.Label>PDF</SC.Label>
+			<PrevToNewPdf
+				pdfs={pdfs}
+				prevPdfName={pickFileNamesToArrayFromFileString(data?.img)[0]}
+				prevPdfKey={prevPdfKey}
+				wishToDeletePdfKeys={wishToDeletePdfKeys}
+				onToggleToDeletePdfs={onToggleToDeletePdfs}
+			/>
 			<FileUploadElement files={pdfs} onAddFile={onAddPdfs} onRemoveFile={onRemovePdfs} />
-			<AdminButton onClick={onSubmit}>완료</AdminButton>
-		</>
+		</PublicationNewEdit>
 	);
 }

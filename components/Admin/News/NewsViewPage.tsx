@@ -5,7 +5,8 @@ import { Paths } from '../../../constants/paths';
 import useEditDelete from '../../../hooks/useEditDelete';
 import useGet from '../../../hooks/useGet';
 import { getNewsById } from '../../../api/news';
-import AdminButton from '../../Element/Admin/AdminButton';
+import AdminView from '../../Element/Admin/AdminView';
+import { SC } from '../../../styles/styled';
 
 export default function NewsViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.news;
@@ -13,20 +14,21 @@ export default function NewsViewPage({ id }: ViewPageProps) {
 	const [news, setNews] = useState<ResponseNews.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getNewsById({ id }), setNews);
+		if (id !== undefined && !isNaN(id)) useGet(() => getNewsById({ id }), setNews);
 	}, [id]);
 
 	return (
 		<div>
-			<AdminButton onClick={onEdit}>수정</AdminButton>{' '}
-			<AdminButton onClick={onDelete}>삭제</AdminButton>
-			{news && (
-				<>
-					<div>제목:{news.title}</div>
-					<div>내용:{news.body}</div>
-					<div>링크:{news.url}</div>
-				</>
-			)}
+			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
+				<SC.Label>제목</SC.Label>
+				<div>{news?.title}</div>
+				<SC.Label>내용</SC.Label>
+				<div>{news?.body}</div>
+				<SC.Label>URL</SC.Label>
+				<SC.LinkHighlight>
+					<a href={`http://${news?.url}`}>{news?.url}</a>
+				</SC.LinkHighlight>
+			</AdminView>
 		</div>
 	);
 }

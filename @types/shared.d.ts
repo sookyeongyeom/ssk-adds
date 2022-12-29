@@ -1,6 +1,7 @@
 import { ResponseNotice } from './api/notice';
 import { ResponseResource } from './api/resource';
 import { MutableRefObject } from 'react';
+import { ResponsePublication } from './api/publication';
 
 /**
  * @base */
@@ -69,6 +70,8 @@ type SelectBoxProps = {
 /**
  * @for AdminButton */
 type AdminButtonProps = ChildrenType & {
+	isOrange?: boolean;
+	isRed?: boolean;
 	onClick: () => void;
 };
 
@@ -82,10 +85,11 @@ type EditorProps = {
 /**
  * @for Input */
 type InputProps = {
-	label: string;
+	label?: string;
 	value?: string;
 	type?: string;
 	inputRef?: MutableRefObject<HTMLInputElement>;
+	placeholder?: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -103,6 +107,7 @@ type NewEditorPostProps = FileUploadElementProps & {
 	title: string;
 	body: string;
 	writer: string;
+	wishToDeleteFileKeys?: Set<string>;
 	onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeBody: (text: string) => void;
@@ -116,6 +121,8 @@ type FileUploadElementProps = {
 	files: File[];
 	prevFileKeys?: string[];
 	isMultiple?: boolean;
+	isEditor?: boolean;
+	wishToDeleteFileKeys?: Set<string>;
 	onAddFile: (files: File[]) => void;
 	onRemoveFile: (targetLastModified: number) => void;
 	onToggleToDelete?: (targetFileKey: string) => void;
@@ -125,4 +132,51 @@ type FileUploadElementProps = {
  * @for ImagePreview */
 type ImagePreviewProps = {
 	file: File;
+};
+
+/**
+ * @for AdminSidebar */
+type AdminSidebarProps = {
+	isSidebarOpen: boolean;
+};
+
+/**
+ * @for AdminHeader */
+type AdminHeaderProps = {
+	onToggleSidebar: () => void;
+};
+
+/**
+ * @for AdminView */
+type AdminViewProps = ChildrenType & {
+	id: number;
+	basePath: string;
+	onEdit: () => void;
+	onDelete: () => void;
+};
+
+/**
+ * @for AdminNewEdit */
+type AdminNewEditProps = ChildrenType & {
+	onSubmit: () => void;
+};
+
+/**
+ * @for PrevToNewImage */
+type PrevToNewImageProps = {
+	prevFileKey: string;
+	wishToDeleteFileKeys: Set<string>;
+	files: File[];
+	folder: string;
+	onToggleToDelete: (prevFileKey: string) => void;
+};
+
+/**
+ * @for PrevToNewPdf */
+type PrevToNewPdfProps = {
+	pdfs: File[];
+	prevPdfKey: string;
+	prevPdfName?: string;
+	wishToDeletePdfKeys: Set<string>;
+	onToggleToDeletePdfs: (prevFileKey: string) => void;
 };

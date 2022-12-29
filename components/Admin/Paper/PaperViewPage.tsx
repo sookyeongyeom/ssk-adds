@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { ResponsePaper } from '../../../@types/api/paper';
 import { getPaperById } from '../../../api/paper';
 import useGet from '../../../hooks/useGet';
-import AdminButton from '../../Element/Admin/AdminButton';
 import useEditDelete from '../../../hooks/useEditDelete';
+import AdminView from '../../Element/Admin/AdminView';
+import { SC } from '../../../styles/styled';
 
 export default function PaperViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.paper;
@@ -13,22 +14,29 @@ export default function PaperViewPage({ id }: ViewPageProps) {
 	const [paper, setPaper] = useState<ResponsePaper.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getPaperById({ id }), setPaper);
+		if (id !== undefined && !isNaN(id)) useGet(() => getPaperById({ id }), setPaper);
 	}, [id]);
 
 	return (
 		<div>
-			<AdminButton onClick={onEdit}>수정</AdminButton>{' '}
-			<AdminButton onClick={onDelete}>삭제</AdminButton>
-			{paper && (
-				<>
-					<div>제목:{paper.title}</div>
-					<div>작성연도:{paper.year}</div>
-					<div>키워드:{paper.keywords}</div>
-					<div>연구자:{paper.researcherName}</div>
-					<div>DOI:{paper.doi}</div>
-				</>
-			)}
+			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
+				<SC.Label>제목</SC.Label>
+				<div>{paper?.title}</div>
+				<SC.Label>작성연도</SC.Label>
+				<div>{paper?.year}</div>
+				<SC.Label>키워드</SC.Label>
+				<div>
+					<ul>
+						{paper?.keywords.split(',').map((keyword, i) => (
+							<li key={i}>{keyword}</li>
+						))}
+					</ul>
+				</div>
+				<SC.Label>연구자</SC.Label>
+				<div>{paper?.researcherName}</div>
+				<SC.Label>DOI</SC.Label>
+				<div>{paper?.doi}</div>
+			</AdminView>
 		</div>
 	);
 }

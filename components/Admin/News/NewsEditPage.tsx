@@ -4,14 +4,15 @@ import { EditPageInnerShellProps, ViewPageProps } from '../../../@types/pages';
 import useGet from '../../../hooks/useGet';
 import { getNewsById, putNews } from '../../../api/news';
 import useInput from '../../../hooks/useInput';
-import Input from '../../Element/Shared/Input';
-import AdminButton from '../../Element/Admin/AdminButton';
+import { Paths } from '../../../constants/paths';
+import useRoute from '../../../hooks/useRoute';
+import NewsNewEdit from './NewsNewEdit';
 
 export default function NewsEditPage({ id }: ViewPageProps) {
 	const [news, setNews] = useState<ResponseNews.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getNewsById({ id }), setNews);
+		if (id !== undefined && !isNaN(id)) useGet(() => getNewsById({ id }), setNews);
 	}, [id]);
 
 	return <>{news && <NewsEditPageInnerShell id={id} data={news} />}</>;
@@ -24,6 +25,7 @@ function NewsEditPageInnerShell({
 	const { value: title, onChange: onChangeTitle } = useInput(data?.title);
 	const { value: body, onChange: onChangeBody } = useInput(data?.body);
 	const { value: url, onChange: onChangeUrl } = useInput(data?.url);
+	const { onRouteToPath } = useRoute(Paths.admin + Paths.news + `/${id}`);
 
 	const onSubmit = async () => {
 		/* PUT */
@@ -35,15 +37,20 @@ function NewsEditPageInnerShell({
 			createdDate: data?.createdDate || new Date().toISOString().split('T')[0],
 		});
 		console.log(res);
+		onRouteToPath();
 	};
 
 	return (
 		<>
-			보도자료수정
-			<Input label={'제목'} value={title} onChange={onChangeTitle} />
-			<Input label={'내용'} value={body} onChange={onChangeBody} />
-			<Input label={'링크'} value={url} onChange={onChangeUrl} />
-			<AdminButton onClick={onSubmit}>완료</AdminButton>
+			<NewsNewEdit
+				title={title}
+				body={body}
+				url={url}
+				onChangeTitle={onChangeTitle}
+				onChangeBody={onChangeBody}
+				onChangeUrl={onChangeUrl}
+				onSubmit={onSubmit}
+			/>
 		</>
 	);
 }

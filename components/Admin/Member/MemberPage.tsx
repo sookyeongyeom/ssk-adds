@@ -19,7 +19,6 @@ export default function MemberPage() {
 
 	return (
 		<>
-			<h1>Admin 연구진소개</h1>
 			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.member}

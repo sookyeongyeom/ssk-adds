@@ -12,6 +12,8 @@ import { getDownloadLinkFromS3 } from '../../../s3';
 import { S3Folders } from '../../../constants/s3';
 import AdminButton from '../Admin/AdminButton';
 import useEditDelete from '../../../hooks/useEditDelete';
+import { SC } from '../../../styles/styled';
+import AdminBoardButton from './AdminBoardButton';
 
 export default function View<T extends ResponseResource.GetById | ResponseNotice.GetById>({
 	id,
@@ -29,22 +31,22 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 	return (
 		<>
 			{isAdmin && (
-				<>
+				<SC.AlignButtonRight>
 					<AdminButton onClick={onEdit}>수정</AdminButton>{' '}
 					<AdminButton onClick={onDelete}>삭제</AdminButton>
-				</>
+				</SC.AlignButtonRight>
 			)}
 			<S.ViewLayout>
 				{data && (
 					<>
-						<S.Meta isNotice={isNotice}>
+						<S.Meta isNotice={isNotice} isAdmin={isAdmin}>
 							<h1>{data.title}</h1>
 							<h2>
 								{data.id}&ensp;|&ensp;{data.writer}&ensp;|&ensp;{data.createdDate}
 							</h2>
 						</S.Meta>
 						<S.Content dangerouslySetInnerHTML={{ __html: data.body }} />
-						<S.File isNotice={isNotice}>
+						<S.File isNotice={isNotice} isAdmin={isAdmin}>
 							<h3>첨부파일</h3>
 							<div>
 								{data.file &&
@@ -56,8 +58,14 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 									))}
 							</div>
 						</S.File>
-						<BoardButton boardPath={basePath} />
-						<AdjacentNavigator prev={prev} next={next} />
+						{isAdmin ? (
+							<AdminBoardButton boardPath={basePath} />
+						) : (
+							<>
+								<BoardButton boardPath={basePath} />
+								<AdjacentNavigator prev={prev} next={next} />
+							</>
+						)}
 					</>
 				)}
 			</S.ViewLayout>
@@ -66,13 +74,19 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 }
 
 namespace S {
-	export const ViewLayout = styled.div``;
+	export const ViewLayout = styled.div`
+		> button {
+			margin-left: auto;
+			margin-bottom: 1.8rem;
+		}
+	`;
 
 	export const Meta = styled.div<ViewLayoutProps>`
 		padding: 2.5rem 1.3rem;
 		padding-top: 3.5rem;
-		border-bottom: ${(props) => (props.isNotice ? '' : `0.1rem solid ${Colors.gray150}`)};
-		background-color: ${(props) => (props.isNotice ? Colors.blue100 : '')};
+		border-bottom: ${(props) =>
+			props.isNotice && !props.isAdmin ? '' : `0.1rem solid ${Colors.gray150}`};
+		background-color: ${(props) => (props.isNotice && !props.isAdmin ? Colors.blue100 : '')};
 
 		> h1 {
 			${Fonts.medium24}
@@ -126,17 +140,22 @@ namespace S {
 
 	export const File = styled.div<ViewLayoutProps>`
 		background-color: ${(props) => (props.isNotice ? '' : Colors.blue100)};
-		border-top: ${(props) => (props.isNotice ? `0.1rem solid ${Colors.gray150}` : '')};
-		border-bottom: ${(props) => (props.isNotice ? `0.1rem solid ${Colors.gray150}` : '')};
+		background-color: ${(props) => props.isAdmin && Colors.blue400};
+		border-top: ${(props) =>
+			props.isNotice && !props.isAdmin ? `0.1rem solid ${Colors.gray150}` : ''};
+		border-bottom: ${(props) =>
+			props.isNotice && !props.isAdmin ? `0.1rem solid ${Colors.gray150}` : ''};
+		border-radius: ${(props) => props.isAdmin && '0.6rem'};
 		min-height: 4.9rem;
 		padding: 1.5rem 3rem;
 		display: flex;
 		align-items: flex-start;
 		gap: 3rem;
-		margin-bottom: 9.1rem;
+		margin-bottom: ${(props) => (props.isAdmin ? '1rem' : '9.1rem')};
 
 		> h3 {
 			${Fonts.medium16}
+			color: ${(props) => props.isAdmin && Colors.white};
 		}
 
 		> div {
@@ -149,16 +168,20 @@ namespace S {
 				gap: 0.5rem;
 				cursor: pointer;
 				transition: 0.5s ease;
+				color: ${(props) => props.isAdmin && Colors.white};
 
 				> svg > path {
 					transition: 0.5s ease;
+					fill: ${(props) => props.isAdmin && Colors.white};
 				}
 
 				&:hover {
 					color: ${Colors.blue300};
+					color: ${(props) => props.isAdmin && Colors.blue100};
 
 					> svg > path {
 						fill: ${Colors.blue300};
+						fill: ${(props) => props.isAdmin && Colors.blue100};
 					}
 				}
 			}

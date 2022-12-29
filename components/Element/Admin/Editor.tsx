@@ -2,6 +2,7 @@ import QuillEditor from 'react-quill';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 import { EditorProps } from '../../../@types/shared';
+import { Colors } from '../../../styles/colors';
 
 const modules = {
 	toolbar: [
@@ -39,7 +40,6 @@ export default function Editor({ value, onChange }: EditorProps) {
 				modules={modules}
 				formats={formats}
 				theme={'snow'}
-				placeholder={'게시글을 작성해주세요'}
 				style={{ height: '50rem' }}
 				value={value}
 				onChange={onChange as any}
@@ -51,8 +51,22 @@ export default function Editor({ value, onChange }: EditorProps) {
 namespace S {
 	export const EditorLayout = styled.div`
 		box-sizing: content-box;
-		margin: 1rem 3rem;
-		height: 54.1rem;
-		background-color: white;
+
+		> div {
+			> div:first-of-type {
+				border: 0.15rem solid ${Colors.gray150};
+				border-radius: 0.6rem 0.6rem 0 0;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+
+			> div:nth-of-type(2) {
+				border: 0.15rem solid ${Colors.gray150};
+				border-radius: 0 0 0.6rem 0.6rem;
+				background-color: white;
+				height: 60rem;
+				overflow: hidden;
+			}
+		}
 	`;
 }

@@ -17,6 +17,7 @@ export const Fonts = {
 	/* 500 */
 	medium12: 'font-size:1.2rem; font-weight:500;',
 	medium14: 'font-size:1.4rem; font-weight:500;',
+	medium15: 'font-size:1.5rem; font-weight:500;',
 	medium16: 'font-size:1.6rem; font-weight:500;',
 	medium18: 'font-size:1.8rem; font-weight:500;',
 	medium20: 'font-size:2rem; font-weight:500;',
@@ -25,6 +26,9 @@ export const Fonts = {
 	medium25: 'font-size:2.5rem; font-weight:500;',
 
 	/* 700 */
+	bold12: 'font-size:1.2rem; font-weight:700;',
+	bold14: 'font-size:1.4rem; font-weight:700;',
+	bold16: 'font-size:1.6rem; font-weight:700;',
 	bold18: 'font-size:1.8rem; font-weight:700;',
 	bold20: 'font-size:2rem; font-weight:700;',
 	bold23: 'font-size:2.3rem; font-weight:700;',

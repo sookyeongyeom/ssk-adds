@@ -1,17 +1,18 @@
 import { ViewPageProps } from '../../../@types/pages';
 import styled from 'styled-components';
-import BoardButton from '../../Element/Shared/BoardButton';
 import { Paths } from '../../../constants/paths';
 import { useEffect, useState } from 'react';
 import useGet from '../../../hooks/useGet';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { S3Folders } from '../../../constants/s3';
-import AdminButton from '../../Element/Admin/AdminButton';
 import { Assets } from '../../../constants/assets';
 import { ResponsePublication } from '../../../@types/api/publication';
 import { getPublicationById } from '../../../api/publication';
 import Link from 'next/link';
 import useEditDelete from '../../../hooks/useEditDelete';
+import AdminView from '../../Element/Admin/AdminView';
+import { SC } from '../../../styles/styled';
+import { svgDownload } from '../../../styles/svgs';
 
 export default function PublicationViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.publication;
@@ -21,7 +22,7 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 	const [pdf, setPdf] = useState<FileDataType>();
 
 	useEffect(() => {
-		if (id !== undefined) useGet(() => getPublicationById({ id }), setPublication);
+		if (id !== undefined && !isNaN(id)) useGet(() => getPublicationById({ id }), setPublication);
 	}, [id]);
 
 	useEffect(() => {
@@ -43,41 +44,34 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 
 	return (
 		<S.MemberViewPageLayout>
-			<AdminButton onClick={onEdit}>수정</AdminButton>{' '}
-			<AdminButton onClick={onDelete}>삭제</AdminButton>
-			{img?.name ? (
-				<div>
-					<img src={getDownloadLinkFromS3(S3Folders.publication, img.key)} />
-				</div>
-			) : (
-				<div>
-					<img src={img.key} />
-				</div>
-			)}
-			PDF:
-			{pdf?.key ? (
-				<Link href={getDownloadLinkFromS3(S3Folders.publication, pdf?.key)}>{pdf?.name}</Link>
-			) : (
-				'없음'
-			)}
-			<div>제목:{publication?.title}</div>
-			<div>작성자:{publication?.writer}</div>
-			<BoardButton boardPath={basePath} />
+			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
+				<SC.Label>사진</SC.Label>
+				<SC.ImageBox>
+					{img?.name ? (
+						<img src={getDownloadLinkFromS3(S3Folders.publication, img.key)} />
+					) : (
+						<img src={img.key} />
+					)}
+				</SC.ImageBox>
+				<SC.Label>PDF</SC.Label>
+				{pdf?.key ? (
+					<SC.LinkHighlight>
+						<Link href={getDownloadLinkFromS3(S3Folders.publication, pdf?.key)}>
+							{svgDownload} <span>{pdf?.name}</span>
+						</Link>
+					</SC.LinkHighlight>
+				) : (
+					<SC.Empty>첨부된 PDF가 없습니다</SC.Empty>
+				)}
+				<SC.Label>제목</SC.Label>
+				<div>{publication?.title}</div>
+				<SC.Label>작성자</SC.Label>
+				<div>{publication?.writer}</div>
+			</AdminView>
 		</S.MemberViewPageLayout>
 	);
 }
 
 namespace S {
-	export const MemberViewPageLayout = styled.div`
-		> div:first-of-type {
-			width: 15rem;
-			height: 18rem;
-
-			> img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-		}
-	`;
+	export const MemberViewPageLayout = styled.div``;
 }

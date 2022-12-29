@@ -19,7 +19,6 @@ export default function NoticePage() {
 
 	return (
 		<>
-			<h1>Admin 공지사항</h1>
 			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.notice}

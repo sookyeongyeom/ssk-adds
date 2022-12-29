@@ -57,6 +57,7 @@ type AdjacentNavigatorLayoutProps = {
  * @in View */
 type ViewLayoutProps = {
 	isNotice: boolean;
+	isAdmin: boolean;
 };
 
 /**
@@ -67,4 +68,34 @@ type NumberButtonProps = IsCurrentType & {};
  * @in FileUploadElement */
 type DragAndDropProps = {
 	isDragOver: boolean;
+};
+
+/**
+ * @in AdminLayout
+ * @in AdminSidebar */
+type SidebarToggleProps = {
+	isSidebarOpen: boolean;
+};
+
+/**
+ * @in AdminSidebar */
+type MenuProps = IsCurrentType & {};
+
+/**
+ * @in Board */
+type BoardLayoutProps = {
+	isAdmin: boolean;
+};
+
+/**
+ * @in AdminButton */
+type AdminButtonLayoutProps = {
+	isOrange?: boolean;
+	isRed?: boolean;
+};
+
+/**
+ * @in PublicationEditPage */
+type PrevProps = {
+	isWishedToDelete?: boolean;
 };

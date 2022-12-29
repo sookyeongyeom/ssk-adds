@@ -19,7 +19,6 @@ export default function ResourcePage() {
 
 	return (
 		<>
-			<h1>Admin 자료안내</h1>
 			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.resource}

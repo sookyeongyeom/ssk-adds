@@ -19,7 +19,6 @@ export default function NewsPage() {
 
 	return (
 		<>
-			<h1>Admin 보도자료</h1>
 			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.news}

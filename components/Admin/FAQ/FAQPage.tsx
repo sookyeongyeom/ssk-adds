@@ -19,7 +19,6 @@ export default function FAQPage() {
 
 	return (
 		<>
-			<h1>Admin FAQ</h1>
 			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.faq}

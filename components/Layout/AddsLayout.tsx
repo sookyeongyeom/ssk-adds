@@ -1,20 +1,10 @@
 import Sidebar from '../Element/Adds/Sidebar';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { Seo } from '../../constants/seo';
 import { Fonts } from '../../styles/fonts';
+import useTitlePath from '../../hooks/useTitlePath';
 
 export default function AddsLayout({ children }: ChildrenType) {
-	const router = useRouter();
-	const [title, setTitle] = useState('');
-	const [path, setPath] = useState('');
-
-	useEffect(() => {
-		const path = router.pathname.split('/')[2];
-		setPath('/' + path);
-		setTitle(Seo.Title[path]);
-	}, [router.pathname]);
+	const { title, path } = useTitlePath();
 
 	return (
 		<S.Layout>

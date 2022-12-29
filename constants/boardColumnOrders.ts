@@ -40,6 +40,5 @@ export const BoardColumnOrders = {
 		.set(ResponseFAQKeys.id, '번호')
 		.set(ResponseFAQKeys.title, '제목')
 		.set(ResponseFAQKeys.category, '분류')
-		.set(ResponseFAQKeys.writer, '작성자')
 		.set(ResponseFAQKeys.createdDate, '날짜'),
 } as const;

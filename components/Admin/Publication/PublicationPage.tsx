@@ -19,7 +19,6 @@ export default function PublicationPage() {
 
 	return (
 		<>
-			<h1>Admin 발간물</h1>
 			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.publication}

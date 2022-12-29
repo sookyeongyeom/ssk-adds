@@ -13,7 +13,7 @@ export default function ResourceViewPage({ id }: ViewPageProps) {
 	const [next, setNext] = useState<ResponseResource.GetById>();
 
 	useEffect(() => {
-		if (id !== undefined) {
+		if (id !== undefined && !isNaN(id)) {
 			useGet(() => getResourceById({ id }), setResource);
 			useGet(() => getResourceById({ id: id - 1 }), setPrev).catch(() => setPrev(undefined));
 			useGet(() => getResourceById({ id: id + 1 }), setNext).catch(() => setNext(undefined));

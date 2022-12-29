@@ -19,7 +19,6 @@ export default function PaperPage() {
 
 	return (
 		<>
-			<h1>Admin 데이터활용논문</h1>
 			<Board
 				dataMaps={maps}
 				basePath={Paths.admin + Paths.paper}

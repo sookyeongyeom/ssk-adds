@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import { Fonts } from '../../../styles/fonts';
 import { ResponseCommonKeys } from '../../../constants/responseKeys';
@@ -9,6 +9,7 @@ import { Paths } from '../../../constants/paths';
 import PageButton from '../Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
 import { BoardProps } from '../../../@types/shared';
+import { SC } from '../../../styles/styled';
 
 export default function Board({
 	dataMaps,
@@ -24,8 +25,12 @@ export default function Board({
 
 	return (
 		<div>
-			{isAdmin && <AdminButton onClick={onNew}>새 글 작성</AdminButton>}
-			<S.BoardLayout>
+			{isAdmin && (
+				<SC.AlignButtonRight>
+					<AdminButton onClick={onNew}>새 글 작성</AdminButton>
+				</SC.AlignButtonRight>
+			)}
+			<S.BoardLayout isAdmin={isAdmin}>
 				<thead>
 					<tr>
 						{!!dataMaps?.length &&
@@ -60,7 +65,7 @@ export default function Board({
 }
 
 namespace S {
-	export const BoardLayout = styled.table`
+	export const BoardLayout = styled.table<BoardLayoutProps>`
 		width: 100%;
 		text-align: center;
 
@@ -75,6 +80,7 @@ namespace S {
 		> thead th {
 			${Fonts.medium16}
 			padding: 1.1rem;
+			white-space: nowrap;
 		}
 
 		> thead > tr > th {
@@ -93,15 +99,46 @@ namespace S {
 		}
 
 		> tbody td {
+			${Fonts.regular14}
 			padding: 1.3rem;
+			white-space: nowrap;
 
 			&:first-of-type {
 				${Fonts.medium16}
 			}
 
-			&:nth-of-type(3),
-			&:last-of-type {
-				${Fonts.regular14}
+			&:nth-of-type(2) {
+				${Fonts.regular16}
+			}
+		}
+
+		${(props) => props.isAdmin && AdminStyle}
+	`;
+
+	const AdminStyle = css`
+		background-color: ${Colors.white};
+		border-radius: 0.6rem;
+		overflow: hidden;
+
+		> thead {
+			background-color: ${Colors.blue400};
+
+			th {
+				${Fonts.bold16}
+				color: ${Colors.white};
+				padding: 1.3rem;
+			}
+		}
+
+		> tbody > tr:last-of-type {
+			border: none;
+		}
+
+		> tbody a {
+			transition: 0.3s ease;
+
+			&:hover {
+				color: ${Colors.blue450};
 			}
 		}
 	`;

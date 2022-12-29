@@ -16,6 +16,11 @@ export default function useKeywords(initialKeywords: string[] = ['']) {
 	};
 
 	const onRemoveKeyword = (idx: number) => {
+		if (keywords.length === 1) {
+			alert('하나 이상의 키워드를 등록해야합니다.');
+			setKeywords(['']);
+			return;
+		}
 		const copy = [...keywords];
 		copy.splice(idx, 1);
 		setKeywords(copy);
