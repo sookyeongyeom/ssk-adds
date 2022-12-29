@@ -70,6 +70,7 @@ type SelectBoxProps = {
  * @for AdminButton */
 type AdminButtonProps = ChildrenType & {
 	isOrange?: boolean;
+	isRed?: boolean;
 	onClick: () => void;
 };
 
@@ -153,4 +154,13 @@ type AdminViewProps = ChildrenType & {
  * @for AdminNewEdit */
 type AdminNewEditProps = ChildrenType & {
 	onSubmit: () => void;
+};
+
+/**
+ * @for PrevToNewImage */
+type PrevToNewImageProps = {
+	prevFileKey: string;
+	wishToDeleteFileKeys: Set<string>;
+	files: File[];
+	onToggleToDelete: (prevFileKey: string) => void;
 };

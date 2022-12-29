@@ -4,9 +4,9 @@ import { Colors } from '../../../styles/colors';
 import { Fonts } from '../../../styles/fonts';
 import { css } from 'styled-components';
 
-export default function AdminButton({ children, isOrange, onClick }: AdminButtonProps) {
+export default function AdminButton({ children, isOrange, isRed, onClick }: AdminButtonProps) {
 	return (
-		<S.AdminButtonLayout onClick={onClick} isOrange={isOrange}>
+		<S.AdminButtonLayout onClick={onClick} isOrange={isOrange} isRed={isRed}>
 			{children}
 		</S.AdminButtonLayout>
 	);
@@ -14,7 +14,7 @@ export default function AdminButton({ children, isOrange, onClick }: AdminButton
 
 namespace S {
 	export const AdminButtonLayout = styled.button<AdminButtonLayoutProps>`
-		${Fonts.medium14}
+		${Fonts.bold14}
 		background-color: ${Colors.blue400};
 		color: ${Colors.white};
 		border-radius: 0.6rem;
@@ -41,6 +41,7 @@ namespace S {
 		}
 
 		${(props) => props.isOrange && OrangeColor}
+		${(props) => props.isRed && RedColor}
 	`;
 
 	const OrangeColor = css`
@@ -52,6 +53,18 @@ namespace S {
 
 		&:active {
 			background-color: ${Colors.orange500};
+		}
+	`;
+
+	const RedColor = css`
+		background-color: ${Colors.red300};
+
+		&:hover {
+			background-color: ${Colors.red400};
+		}
+
+		&:active {
+			background-color: ${Colors.red500};
 		}
 	`;
 }

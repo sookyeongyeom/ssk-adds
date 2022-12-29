@@ -124,7 +124,9 @@ namespace S {
 			background-color: ${Colors.blue400};
 
 			th {
+				${Fonts.bold16}
 				color: ${Colors.white};
+				padding: 1.3rem;
 			}
 		}
 

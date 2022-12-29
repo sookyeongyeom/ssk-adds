@@ -91,4 +91,5 @@ type BoardLayoutProps = {
  * @in AdminButton */
 type AdminButtonLayoutProps = {
 	isOrange?: boolean;
+	isRed?: boolean;
 };
