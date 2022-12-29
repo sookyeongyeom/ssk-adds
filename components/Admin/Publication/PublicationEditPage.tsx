@@ -157,7 +157,7 @@ function PublicationEditPageInnerShell({
 			<SC.Label>PDF</SC.Label>
 			<PrevToNewPdf
 				pdfs={pdfs}
-				prevPdfName={pickFileNamesToArrayFromFileString(data?.img)[0]}
+				prevPdfName={pickFileNamesToArrayFromFileString(data?.pdf)[0]}
 				prevPdfKey={prevPdfKey}
 				wishToDeletePdfKeys={wishToDeletePdfKeys}
 				onToggleToDeletePdfs={onToggleToDeletePdfs}
