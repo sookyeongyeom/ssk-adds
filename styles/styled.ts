@@ -46,6 +46,46 @@ export namespace SC {
 		}
 	`;
 
+	export const PdfBox = styled.div`
+		width: fit-content;
+		background: linear-gradient(to top, ${Colors.blue200} 40%, transparent 40%);
+		border-radius: 0 !important;
+
+		> a {
+			${Fonts.medium16}
+			color:${Colors.blue400};
+			display: flex;
+			align-items: center;
+			gap: 0.3rem;
+			transition: 0.3s ease;
+
+			> svg {
+				position: relative;
+				top: 0.1rem;
+
+				path {
+					transition: 0.3s ease;
+					fill: ${Colors.blue400};
+				}
+			}
+		}
+
+		&:hover {
+			> a {
+				color: ${Colors.blue450};
+
+				> svg path {
+					fill: ${Colors.blue450};
+				}
+			}
+		}
+	`;
+
+	export const Empty = styled.div`
+		color: ${Colors.gray150};
+		font-style: italic;
+	`;
+
 	export const AdminViewGrid = styled.div`
 		display: grid;
 		grid-template-columns: max-content 1fr;

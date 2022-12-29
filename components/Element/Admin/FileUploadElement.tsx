@@ -5,6 +5,7 @@ import { Fonts } from '../../../styles/fonts';
 import AdminButton from './AdminButton';
 import { svgCancel } from '../../../styles/svgs';
 import { Colors } from '../../../styles/colors';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function FileUploadElement({
 	files,
@@ -16,6 +17,7 @@ export default function FileUploadElement({
 }: FileUploadElementProps) {
 	const [isDragOver, setIsDragOver] = useState(false);
 	const fileRef = useRef() as MutableRefObject<HTMLInputElement>;
+	const key = uuidv4();
 
 	const onDragOverFile = (e: React.DragEvent) => {
 		e.preventDefault();
@@ -60,14 +62,14 @@ export default function FileUploadElement({
 						{fileKey}
 					</div>
 				))}
-			<label htmlFor='file'>
+			<label htmlFor={key}>
 				<S.DragAndDrop
 					onDragOver={onDragOverFile}
 					isDragOver={isDragOver}
 					onDragLeave={onDragLeaveFile}
 					onDrop={onDragDropFile}>
 					{/* prettier-ignore */}
-					<input type={'file'} ref={fileRef} onChange={onSelectFile} multiple={isMultiple} id='file' />
+					<input type={'file'} ref={fileRef} onChange={onSelectFile} multiple={isMultiple} id={key} />
 					Drag files here or click to upload
 				</S.DragAndDrop>
 			</label>
