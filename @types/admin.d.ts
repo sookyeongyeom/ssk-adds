@@ -23,3 +23,23 @@ type FAQNewEditProps = {
 	onChangeReply: (e: ChangeEvent<HTMLInputElement>) => void;
 	onSubmit: () => void;
 };
+
+/**
+ * @for MemberNewEdit */
+type MemberNewEditProps = ChildrenType & {
+	name: string;
+	email: string;
+	homepage: string;
+	phoneNumber: string;
+	introBody: string;
+	jobTitle: string;
+	responsibility: string;
+	onChangeName: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeHomepage: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangePhoneNumber: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeIntroBody: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeJobTitle: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeResponsibility: (e: ChangeEvent<HTMLInputElement>) => void;
+	onSubmit: () => void;
+};
