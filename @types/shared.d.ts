@@ -89,6 +89,7 @@ type InputProps = {
 	value?: string;
 	type?: string;
 	inputRef?: MutableRefObject<HTMLInputElement>;
+	placeholder?: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -106,6 +107,7 @@ type NewEditorPostProps = FileUploadElementProps & {
 	title: string;
 	body: string;
 	writer: string;
+	wishToDeleteFileKeys: Set<string>;
 	onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onChangeBody: (text: string) => void;
@@ -119,6 +121,8 @@ type FileUploadElementProps = {
 	files: File[];
 	prevFileKeys?: string[];
 	isMultiple?: boolean;
+	isEditor?: boolean;
+	wishToDeleteFileKeys?: Set<string>;
 	onAddFile: (files: File[]) => void;
 	onRemoveFile: (targetLastModified: number) => void;
 	onToggleToDelete?: (targetFileKey: string) => void;
