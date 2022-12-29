@@ -7,10 +7,10 @@ import { getMemberById } from '../../../api/member';
 import useGet from '../../../hooks/useGet';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { S3Folders } from '../../../constants/s3';
-import AdminButton from '../../Element/Admin/AdminButton';
 import { Assets } from '../../../constants/assets';
 import useEditDelete from '../../../hooks/useEditDelete';
-import AdminBoardButton from '../../Element/Shared/AdminBoardButton';
+import { SC } from '../../../styles/styled';
+import AdminView from '../../Element/Admin/AdminView';
 
 export default function MemberViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.member;
@@ -35,40 +35,36 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 
 	return (
 		<S.MemberViewPageLayout>
-			<AdminButton onClick={onEdit}>수정</AdminButton>{' '}
-			<AdminButton onClick={onDelete}>삭제</AdminButton>
-			{src.name ? (
-				<div>
-					<img src={getDownloadLinkFromS3(S3Folders.member, src.key)} />
-				</div>
-			) : (
-				<div>
-					<img src={src.key} />
-				</div>
-			)}
-			<div>{member?.name}</div>
-			<div>{member?.email}</div>
-			<div>{member?.homepage}</div>
-			<div>{member?.phoneNumber}</div>
-			<div>{member?.introBody}</div>
-			<div>{member?.jobTitle}</div>
-			<div>{member?.responsibility}</div>
-			<AdminBoardButton boardPath={basePath} />
+			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
+				<div>사진</div>
+				{src.name ? (
+					<SC.ImageBox>
+						<img src={getDownloadLinkFromS3(S3Folders.member, src.key)} />
+					</SC.ImageBox>
+				) : (
+					<SC.ImageBox>
+						<img src={src.key} />
+					</SC.ImageBox>
+				)}
+				<div>이름</div>
+				<div>{member?.name}</div>
+				<div>이메일</div>
+				<div>{member?.email}</div>
+				<div>홈페이지</div>
+				<div>{member?.homepage}</div>
+				<div>연락처</div>
+				<div>{member?.phoneNumber}</div>
+				<div>소개</div>
+				<div>{member?.introBody}</div>
+				<div>직무</div>
+				<div>{member?.jobTitle}</div>
+				<div>역할</div>
+				<div>{member?.responsibility}</div>
+			</AdminView>
 		</S.MemberViewPageLayout>
 	);
 }
 
 namespace S {
-	export const MemberViewPageLayout = styled.div`
-		> div:first-of-type {
-			width: 15rem;
-			height: 18rem;
-
-			> img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-		}
-	`;
+	export const MemberViewPageLayout = styled.div``;
 }

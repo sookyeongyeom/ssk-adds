@@ -138,3 +138,12 @@ type AdminSidebarProps = {
 type AdminHeaderProps = {
 	onToggleSidebar: () => void;
 };
+
+/**
+ * @for AdminView */
+type AdminViewProps = ChildrenType & {
+	id: number;
+	basePath: string;
+	onEdit: () => void;
+	onDelete: () => void;
+};
