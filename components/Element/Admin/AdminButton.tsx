@@ -2,13 +2,18 @@ import styled from 'styled-components';
 import { AdminButtonProps } from '../../../@types/shared';
 import { Colors } from '../../../styles/colors';
 import { Fonts } from '../../../styles/fonts';
+import { css } from 'styled-components';
 
-export default function AdminButton({ children, onClick }: AdminButtonProps) {
-	return <S.AdminButtonLayout onClick={onClick}>{children}</S.AdminButtonLayout>;
+export default function AdminButton({ children, isOrange, onClick }: AdminButtonProps) {
+	return (
+		<S.AdminButtonLayout onClick={onClick} isOrange={isOrange}>
+			{children}
+		</S.AdminButtonLayout>
+	);
 }
 
 namespace S {
-	export const AdminButtonLayout = styled.button`
+	export const AdminButtonLayout = styled.button<AdminButtonLayoutProps>`
 		${Fonts.medium14}
 		background-color: ${Colors.blue400};
 		color: ${Colors.white};
@@ -33,6 +38,20 @@ namespace S {
 
 		&:active {
 			background-color: ${Colors.blue475};
+		}
+
+		${(props) => props.isOrange && OrangeColor}
+	`;
+
+	const OrangeColor = css`
+		background-color: ${Colors.orange300};
+
+		&:hover {
+			background-color: ${Colors.orange400};
+		}
+
+		&:active {
+			background-color: ${Colors.orange500};
 		}
 	`;
 }

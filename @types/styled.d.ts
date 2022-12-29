@@ -86,3 +86,9 @@ type MenuProps = IsCurrentType & {};
 type BoardLayoutProps = {
 	isAdmin: boolean;
 };
+
+/**
+ * @in AdminButton */
+type AdminButtonLayoutProps = {
+	isOrange?: boolean;
+};
