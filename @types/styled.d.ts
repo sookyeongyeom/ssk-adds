@@ -99,3 +99,9 @@ type AdminButtonLayoutProps = {
 type PrevProps = {
 	isWishedToDelete?: boolean;
 };
+
+/**
+ * @in Input */
+type InputLayoutProps = {
+	isBlue?: boolean;
+};

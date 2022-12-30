@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { InputProps } from '../../../@types/shared';
 import { Colors } from '../../../styles/colors';
+import { css } from 'styled-components';
 
 export default function Input({
 	label,
@@ -11,9 +12,10 @@ export default function Input({
 	onChange,
 	maxLength,
 	minLength,
+	isBlue,
 }: InputProps) {
 	return (
-		<S.InputLayout>
+		<S.InputLayout isBlue={isBlue}>
 			<p>{label}</p>
 			<input
 				value={value}
@@ -29,7 +31,7 @@ export default function Input({
 }
 
 namespace S {
-	export const InputLayout = styled.div`
+	export const InputLayout = styled.div<InputLayoutProps>`
 		> input {
 			background-color: ${Colors.white};
 			display: block;
@@ -47,6 +49,25 @@ namespace S {
 			&:focus {
 				background-color: ${Colors.orange100};
 			}
+
+			&::placeholder {
+				color: ${Colors.gray200};
+			}
+		}
+
+		> input {
+			${(props) => props.isBlue && BlueColor}
+		}
+	`;
+
+	const BlueColor = css`
+		&:hover,
+		&:focus {
+			border-color: ${Colors.blue400};
+		}
+
+		&:focus {
+			background-color: ${Colors.blue200};
 		}
 	`;
 }

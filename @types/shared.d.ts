@@ -93,6 +93,7 @@ type InputProps = {
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	maxLength?: number;
 	minLength?: number;
+	isBlue?: boolean;
 };
 
 /**
