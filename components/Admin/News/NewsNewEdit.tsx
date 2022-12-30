@@ -30,11 +30,11 @@ export default function NewsNewEdit({
 		/* prettier-ignore */
 		<AdminNewEdit onSubmit={onValidation}>
 			<SC.Label>제목<Required/></SC.Label>
-			<Input value={title} onChange={onChangeTitle} inputRef={titleRef} />
+			<Input value={title} onChange={onChangeTitle} inputRef={titleRef} maxLength={50} />
 			<SC.Label>내용<Required/></SC.Label>
-			<Input value={body} onChange={onChangeBody} inputRef={bodyRef} />
+			<Input value={body} onChange={onChangeBody} inputRef={bodyRef} maxLength={1000} />
 			<SC.Label>Url<Required/></SC.Label>
-			<Input value={url} onChange={onChangeUrl} inputRef={urlRef} />
+			<Input value={url} onChange={onChangeUrl} inputRef={urlRef} maxLength={200} />
 		</AdminNewEdit>
 	);
 }

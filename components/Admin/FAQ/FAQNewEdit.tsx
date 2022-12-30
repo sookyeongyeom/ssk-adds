@@ -34,13 +34,13 @@ export default function FAQNewEdit({
 		/* prettier-ignore */
 		<AdminNewEdit onSubmit={onValidation}>
 			<SC.Label>제목<Required/></SC.Label>
-			<Input value={title} onChange={onChangeTitle} inputRef={titleRef} />
+			<Input value={title} onChange={onChangeTitle} inputRef={titleRef} maxLength={100} />
 			<SC.Label>작성자<Required/></SC.Label>
-			<Input value={writer} onChange={onChangeWriter} inputRef={writerRef} />
+			<Input value={writer} onChange={onChangeWriter} inputRef={writerRef} maxLength={15} />
 			<SC.Label>분류<Required/></SC.Label>
 			<Input value={category} onChange={onChangeCategory} inputRef={categoryRef} />
 			<SC.Label>답변<Required/></SC.Label>
-			<Input value={reply} onChange={onChangeReply} inputRef={replyRef} />
+			<Input value={reply} onChange={onChangeReply} inputRef={replyRef} maxLength={300} />
 		</AdminNewEdit>
 	);
 }

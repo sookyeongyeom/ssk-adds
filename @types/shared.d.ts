@@ -91,6 +91,8 @@ type InputProps = {
 	inputRef?: MutableRefObject<HTMLInputElement>;
 	placeholder?: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	maxLength?: number;
+	minLength?: number;
 };
 
 /**

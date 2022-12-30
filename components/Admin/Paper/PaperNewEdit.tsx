@@ -43,9 +43,9 @@ export default function PaperNewEdit({
 		/* prettier-ignore */
 		<AdminNewEdit onSubmit={onValidation}>
 			<SC.Label>제목<Required /></SC.Label>
-			<Input value={title} onChange={onChangeTitle} inputRef={titleRef} />
+			<Input value={title} onChange={onChangeTitle} inputRef={titleRef} maxLength={200} />
 			<SC.Label>작성연도<Required /></SC.Label>
-			<Input value={year} onChange={onChangeYear} inputRef={yearRef} />
+			<Input value={year} onChange={onChangeYear} inputRef={yearRef} maxLength={10} />
 			<SC.Label>키워드<Required/></SC.Label>
 			<S.Keywords>
 				{keywords.map((keyword, i) => (
@@ -59,9 +59,9 @@ export default function PaperNewEdit({
 				<AdminButton onClick={onAddKeyword} isOrange>{svgPlus}</AdminButton>
 			</S.Keywords>
 			<SC.Label>연구자<Required /></SC.Label>
-			<Input value={researcherName} onChange={onChangeResearcherName} inputRef={researcherNameRef} />
+			<Input value={researcherName} onChange={onChangeResearcherName} inputRef={researcherNameRef} maxLength={100} />
 			<SC.Label>DOI<Required /></SC.Label>
-			<Input value={doi} onChange={onChangeDoi} inputRef={doiRef} />
+			<Input value={doi} onChange={onChangeDoi} inputRef={doiRef} maxLength={200} />
 		</AdminNewEdit>
 	);
 }

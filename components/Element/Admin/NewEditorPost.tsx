@@ -44,8 +44,8 @@ export default function NewEditorPost({
 				<AdminButton onClick={onValidation} isOrange>작성 완료</AdminButton>
 			</SC.AlignButtonRight>
 			<S.NewEditorPostLayout>
-				<Input value={title} onChange={onChangeTitle} placeholder={'제목'} inputRef={titleRef} />
-				<Input value={writer} onChange={onChangeWriter} placeholder={'작성자'} inputRef={writerRef} />
+				<Input value={title} onChange={onChangeTitle} placeholder={'제목'} inputRef={titleRef} maxLength={100} />
+				<Input value={writer} onChange={onChangeWriter} placeholder={'작성자'} inputRef={writerRef} maxLength={15} />
 				<Editor value={body} onChange={onChangeBody} />
 				<FileUploadElement
 					files={files}

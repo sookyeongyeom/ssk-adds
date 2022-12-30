@@ -27,9 +27,9 @@ export default function PublicationNewEdit({
 		/* prettier-ignore */
 		<AdminNewEdit onSubmit={onValidation}>
 			<SC.Label>제목<Required/></SC.Label>
-			<Input value={title} onChange={onChangeTitle} inputRef={titleRef} />
+			<Input value={title} onChange={onChangeTitle} inputRef={titleRef} maxLength={50} />
 			<SC.Label>작성자<Required/></SC.Label>
-			<Input value={writer} onChange={onChangeWriter} inputRef={writerRef} />
+			<Input value={writer} onChange={onChangeWriter} inputRef={writerRef} maxLength={15} />
 			{children}
 		</AdminNewEdit>
 	);

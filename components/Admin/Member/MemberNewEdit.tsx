@@ -43,19 +43,19 @@ export default function MemberNewEdit({
 		/* prettier-ignore */
 		<AdminNewEdit onSubmit={onValidation}>
 			<SC.Label>이름<Required/></SC.Label>
-			<Input value={name} onChange={onChangeName} inputRef={nameRef} />
+			<Input value={name} onChange={onChangeName} inputRef={nameRef} maxLength={30} />
 			<SC.Label>이메일<Required/></SC.Label>
-			<Input value={email} onChange={onChangeEmail} inputRef={emailRef} />
+			<Input value={email} onChange={onChangeEmail} inputRef={emailRef} maxLength={50} />
 			<SC.Label>홈페이지</SC.Label>
-			<Input value={homepage} onChange={onChangeHomepage} />
+			<Input value={homepage} onChange={onChangeHomepage} maxLength={100} />
 			<SC.Label>연락처</SC.Label>
-			<Input value={phoneNumber} onChange={onChangePhoneNumber} />
+			<Input value={phoneNumber} onChange={onChangePhoneNumber} placeholder={'010-0000-0000 형식으로 입력해주세요'} maxLength={13} />
 			<SC.Label>소개<Required/></SC.Label>
-			<Input value={introBody} onChange={onChangeIntroBody} inputRef={introBodyRef} />
+			<Input value={introBody} onChange={onChangeIntroBody} inputRef={introBodyRef} maxLength={200} />
 			<SC.Label>직무<Required/></SC.Label>
-			<Input value={jobTitle} onChange={onChangeJobTitle} inputRef={jobTitleRef} />
+			<Input value={jobTitle} onChange={onChangeJobTitle} inputRef={jobTitleRef} maxLength={200} />
 			<SC.Label>역할<Required/></SC.Label>
-			<Input value={responsibility} onChange={onChangeResponsibility} inputRef={responsibilityRef} />
+			<Input value={responsibility} onChange={onChangeResponsibility} inputRef={responsibilityRef} maxLength={30} />
 			{children}
 		</AdminNewEdit>
 	);
