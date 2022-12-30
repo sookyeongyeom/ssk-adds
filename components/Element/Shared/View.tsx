@@ -14,6 +14,7 @@ import AdminButton from '../Admin/AdminButton';
 import useEditDelete from '../../../hooks/useEditDelete';
 import { SC } from '../../../styles/styled';
 import AdminBoardButton from './AdminBoardButton';
+import stringToJson from '../../../utils/stringToJson';
 
 export default function View<T extends ResponseResource.GetById | ResponseNotice.GetById>({
 	id,
@@ -26,8 +27,8 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 }: ViewProps<T>) {
 	if (id === undefined && isAdmin) console.error('isAdmin이지만 id가 제공되지 않았습니다.');
 	const folder = isNotice ? S3Folders.notice : S3Folders.resource;
+	const parsedFiles = data?.file && stringToJson(data.file);
 	const { onEdit, onDelete } = useEditDelete(basePath, id);
-
 	return (
 		<>
 			{isAdmin && (
@@ -49,8 +50,8 @@ export default function View<T extends ResponseResource.GetById | ResponseNotice
 						<S.File isNotice={isNotice} isAdmin={isAdmin}>
 							<h3>첨부파일</h3>
 							<div>
-								{data.file &&
-									JSON.parse(data.file).map((file: FileDataType, i: number) => (
+								{parsedFiles &&
+									parsedFiles.map((file: FileDataType, i: number) => (
 										<p key={i}>
 											{svgDownload}{' '}
 											<Link href={`${getDownloadLinkFromS3(folder, file.key)}`}>{file.name}</Link>

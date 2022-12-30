@@ -11,12 +11,13 @@ import { Assets } from '../../../constants/assets';
 import useEditDelete from '../../../hooks/useEditDelete';
 import { SC } from '../../../styles/styled';
 import AdminView from '../../Element/Admin/AdminView';
+import stringToJson from '../../../utils/stringToJson';
 
 export default function MemberViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.member;
 	const { onEdit, onDelete } = useEditDelete(basePath, id);
 	const [member, setMember] = useState<ResponseMember.GetById>();
-	const [src, setSrc] = useState<FileDataType>({ key: Assets.placeholderImgSrc, name: '' });
+	const [img, setImg] = useState<FileDataType>();
 
 	useEffect(() => {
 		if (id !== undefined && !isNaN(id)) useGet(() => getMemberById({ id }), setMember);
@@ -24,12 +25,8 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 
 	useEffect(() => {
 		if (member) {
-			try {
-				const src = JSON.parse(member!.img)[0];
-				if (src) setSrc(src);
-			} catch {
-				/* 유효한 이미지 없음 */
-			}
+			const parsedImg: FileDataType = stringToJson(member!.img)[0];
+			if (parsedImg) setImg(parsedImg);
 		}
 	}, [member]);
 
@@ -37,13 +34,13 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 		<S.MemberViewPageLayout>
 			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
 				<SC.Label>사진</SC.Label>
-				{src.name ? (
+				{img ? (
 					<SC.ImageBox>
-						<img src={getDownloadLinkFromS3(S3Folders.member, src.key)} />
+						<img src={getDownloadLinkFromS3(S3Folders.member, img.key)} />
 					</SC.ImageBox>
 				) : (
 					<SC.ImageBox>
-						<img src={src.key} />
+						<img src={Assets.placeholderImgSrc} />
 					</SC.ImageBox>
 				)}
 				<SC.Label>이름</SC.Label>

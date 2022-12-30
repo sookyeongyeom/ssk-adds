@@ -13,12 +13,13 @@ import useEditDelete from '../../../hooks/useEditDelete';
 import AdminView from '../../Element/Admin/AdminView';
 import { SC } from '../../../styles/styled';
 import { svgDownload } from '../../../styles/svgs';
+import stringToJson from '../../../utils/stringToJson';
 
 export default function PublicationViewPage({ id }: ViewPageProps) {
 	const basePath = Paths.admin + Paths.publication;
 	const { onEdit, onDelete } = useEditDelete(basePath, id);
 	const [publication, setPublication] = useState<ResponsePublication.GetById>();
-	const [img, setImg] = useState<FileDataType>({ key: Assets.placeholderImgSrc, name: '' });
+	const [img, setImg] = useState<FileDataType>();
 	const [pdf, setPdf] = useState<FileDataType>();
 
 	useEffect(() => {
@@ -27,18 +28,10 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 
 	useEffect(() => {
 		if (publication) {
-			try {
-				const img = JSON.parse(publication!.img)[0];
-				if (img) setImg(img);
-			} catch {
-				/* 유효한 IMG 없음 */
-			}
-			try {
-				const pdf = JSON.parse(publication!.pdf)[0];
-				if (pdf) setPdf(pdf);
-			} catch {
-				/* 유효한 PDF 없음 */
-			}
+			const parsedImg = stringToJson(publication!.img)[0];
+			if (parsedImg) setImg(parsedImg);
+			const parsedPdf = stringToJson(publication!.pdf)[0];
+			if (parsedPdf) setPdf(parsedPdf);
 		}
 	}, [publication]);
 
@@ -47,14 +40,14 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 			<AdminView id={id} basePath={basePath} onEdit={onEdit} onDelete={onDelete}>
 				<SC.Label>사진</SC.Label>
 				<SC.ImageBox>
-					{img?.name ? (
+					{img ? (
 						<img src={getDownloadLinkFromS3(S3Folders.publication, img.key)} />
 					) : (
-						<img src={img.key} />
+						<img src={Assets.placeholderImgSrc} />
 					)}
 				</SC.ImageBox>
 				<SC.Label>PDF</SC.Label>
-				{pdf?.key ? (
+				{pdf ? (
 					<SC.LinkHighlight>
 						<Link href={getDownloadLinkFromS3(S3Folders.publication, pdf?.key)}>
 							{svgDownload} <span>{pdf?.name}</span>

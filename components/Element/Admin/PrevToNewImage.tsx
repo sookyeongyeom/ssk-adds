@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { PrevToNewImageProps } from '../../../@types/shared';
 import { Assets } from '../../../constants/assets';
-import { S3Folders } from '../../../constants/s3';
 import { getDownloadLinkFromS3 } from '../../../s3';
 import { SC } from '../../../styles/styled';
 import { svgRight } from '../../../styles/svgs';
@@ -9,18 +8,18 @@ import AdminButton from './AdminButton';
 import ImagePreview from './ImagePreview';
 
 export default function PrevToNewImage({
-	prevFileKey,
-	wishToDeleteFileKeys,
-	files,
+	imgs,
+	prevImg,
 	folder,
+	wishToDeleteFileKeys,
 	onToggleToDelete,
 }: PrevToNewImageProps) {
 	return (
 		<S.Photo>
 			{/* 기존 사진 */}
-			{prevFileKey && (!wishToDeleteFileKeys.has(prevFileKey) || files.length) ? (
+			{prevImg && (!wishToDeleteFileKeys.has(prevImg.key) || imgs.length) ? (
 				<SC.PrevImage>
-					<img src={getDownloadLinkFromS3(folder, prevFileKey)} />
+					<img src={getDownloadLinkFromS3(folder, prevImg.key)} />
 				</SC.PrevImage>
 			) : (
 				<SC.PrevImage>
@@ -28,18 +27,18 @@ export default function PrevToNewImage({
 				</SC.PrevImage>
 			)}
 			{/* 새로운 사진 */}
-			{!!files.length && (
+			{!!imgs.length && (
 				<>
 					<div>{svgRight}</div>
-					<ImagePreview file={files[0]} />
+					<ImagePreview file={imgs[0]} />
 				</>
 			)}
-			{prevFileKey && !files.length && (
+			{prevImg && !imgs.length && (
 				<AdminButton
-					onClick={() => onToggleToDelete(prevFileKey)}
-					isRed={wishToDeleteFileKeys.has(prevFileKey)}
+					onClick={() => onToggleToDelete(prevImg.key)}
+					isRed={wishToDeleteFileKeys.has(prevImg.key)}
 					isOrange>
-					{wishToDeleteFileKeys.has(prevFileKey) ? '기존 사진 삭제 취소' : '기존 사진 삭제하기'}
+					{wishToDeleteFileKeys.has(prevImg.key) ? '기존 사진 삭제 취소' : '기존 사진 삭제하기'}
 				</AdminButton>
 			)}
 		</S.Photo>

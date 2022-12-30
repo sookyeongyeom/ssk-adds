@@ -8,12 +8,12 @@ import { useEffect, useState } from 'react';
 import { ResponseMember } from '../../../@types/api/member';
 import useGet from '../../../hooks/useGet';
 import excludeDeletedFileKeysFromFileString from '../../../utils/excludeDeletedFileKeysFromFileString';
-import pickFileKeysToArrayFromFileString from '../../../utils/pickFileKeysToArrayFromFileString';
 import { Paths } from '../../../constants/paths';
 import useRoute from '../../../hooks/useRoute';
 import MemberNewEdit from './MemberNewEdit';
 import PrevToNewImage from '../../Element/Admin/PrevToNewImage';
 import { SC } from '../../../styles/styled';
+import stringToJson from '../../../utils/stringToJson';
 
 export default function MemberEditPage({ id }: ViewPageProps) {
 	const [member, setMember] = useState<ResponseMember.GetById>();
@@ -29,7 +29,7 @@ function MemberEditPageInnerShell({
 	id,
 	data,
 }: Omit<EditPageInnerShellProps<ResponseMember.GetById>, 'path'>) {
-	const prevFileKey = data?.img && pickFileKeysToArrayFromFileString(data.img)[0];
+	const prevImg: FileDataType = data?.img && stringToJson(data.img)[0];
 	const { value: name, onChange: onChangeName } = useInput(data?.name);
 	const { value: email, onChange: onChangeEmail } = useInput(data?.email);
 	const { value: homepage, onChange: onChangeHomepage } = useInput(data?.homepage);
@@ -95,8 +95,8 @@ function MemberEditPageInnerShell({
 	};
 
 	useEffect(() => {
-		if (files.length) {
-			onSelectSingleToDelete(prevFileKey);
+		if (files.length && prevImg) {
+			onSelectSingleToDelete(prevImg.key);
 			return;
 		}
 		onResetDeleteWishList();
@@ -122,9 +122,9 @@ function MemberEditPageInnerShell({
 				onSubmit={onSubmit}>
 				<SC.Label>사진</SC.Label>
 				<PrevToNewImage
-					prevFileKey={prevFileKey}
+					prevImg={prevImg}
 					wishToDeleteFileKeys={wishToDeleteFileKeys}
-					files={files}
+					imgs={files}
 					folder={S3Folders.member}
 					onToggleToDelete={onToggleToDelete}
 				/>

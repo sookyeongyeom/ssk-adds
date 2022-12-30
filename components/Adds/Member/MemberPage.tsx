@@ -12,6 +12,7 @@ import { Sizes } from '../../../styles/sizes';
 import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { S3Folders } from '../../../constants/s3';
 import { Assets } from '../../../constants/assets';
+import stringToJson from '../../../utils/stringToJson';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();
@@ -55,11 +56,8 @@ function MemberBoxElement({
 	responsibility,
 }: MemberBoxElementProps) {
 	let imgSrc: string = Assets.placeholderImgSrc;
-	try {
-		imgSrc = getDownloadLinkFromS3(S3Folders.member, JSON.parse(img)[0].key);
-	} catch (e) {
-		console.log(e);
-	}
+	const parsedImg: FileDataType = stringToJson(img)[0];
+	if (parsedImg) imgSrc = getDownloadLinkFromS3(S3Folders.member, parsedImg.key);
 	return (
 		<S.MemberBox>
 			<div>

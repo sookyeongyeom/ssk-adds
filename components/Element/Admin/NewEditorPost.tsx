@@ -17,7 +17,7 @@ export default function NewEditorPost({
 	writer,
 	body,
 	files,
-	prevFileKeys,
+	prevFiles,
 	wishToDeleteFileKeys,
 	onChangeTitle,
 	onChangeWriter,
@@ -49,7 +49,7 @@ export default function NewEditorPost({
 				<Editor value={body} onChange={onChangeBody} />
 				<FileUploadElement
 					files={files}
-					prevFileKeys={prevFileKeys}
+					prevFiles={prevFiles}
 					onAddFile={onAddFile}
 					onRemoveFile={onRemoveFile}
 					onToggleToDelete={onToggleToDelete}

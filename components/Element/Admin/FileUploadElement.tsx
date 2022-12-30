@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function FileUploadElement({
 	files,
-	prevFileKeys,
+	prevFiles,
 	wishToDeleteFileKeys,
 	onAddFile,
 	onRemoveFile,
@@ -57,16 +57,16 @@ export default function FileUploadElement({
 
 	return (
 		<S.FileUploadElementLayout>
-			{isEditor && !!prevFileKeys?.length && onToggleToDelete && (
+			{isEditor && !!prevFiles?.length && onToggleToDelete && (
 				<div>
-					<h3>기존 파일 ({prevFileKeys.length})</h3>
-					{prevFileKeys.map((fileKey, i) => (
+					<h3>기존 파일 ({prevFiles.length})</h3>
+					{prevFiles.map((file, i) => (
 						<S.Prev
 							key={i}
-							isWishedToDelete={wishToDeleteFileKeys && wishToDeleteFileKeys.has(fileKey)}>
+							isWishedToDelete={wishToDeleteFileKeys && wishToDeleteFileKeys.has(file.key)}>
 							<h4>{i + 1}</h4>
-							<span>{fileKey}</span>
-							<AdminButton onClick={() => onToggleToDelete(fileKey)} isRed>
+							<span>{file.name}</span>
+							<AdminButton onClick={() => onToggleToDelete(file.key)} isRed>
 								{svgCancel}
 							</AdminButton>
 						</S.Prev>

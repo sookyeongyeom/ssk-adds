@@ -9,29 +9,15 @@ import { ViewPageProps } from '../../../@types/pages';
 
 export default function NoticeViewPage({ id }: ViewPageProps) {
 	const [notice, setNotice] = useState<ResponseNotice.GetById>();
-	const [prev, setPrev] = useState<ResponseNotice.GetById>();
-	const [next, setNext] = useState<ResponseNotice.GetById>();
 
 	useEffect(() => {
-		if (!isNaN(id)) {
-			useGet(() => getNoticeById({ id }), setNotice);
-			useGet(() => getNoticeById({ id: id - 1 }), setPrev).catch(() => setPrev(undefined));
-			useGet(() => getNoticeById({ id: id + 1 }), setNext).catch(() => setNext(undefined));
-		}
+		if (!isNaN(id)) useGet(() => getNoticeById({ id }), setNotice);
 	}, [id]);
 
 	return (
 		<>
 			<S.NoticeViewPageLayout>
-				<View
-					id={id}
-					data={notice!}
-					basePath={Paths.admin + Paths.notice}
-					prev={prev && { title: prev?.title!, path: Paths.admin + Paths.notice + `/${prev?.id}` }}
-					next={next && { title: next?.title!, path: Paths.admin + Paths.notice + `/${next?.id}` }}
-					isNotice
-					isAdmin
-				/>
+				<View id={id} data={notice!} basePath={Paths.admin + Paths.notice} isNotice isAdmin />
 			</S.NoticeViewPageLayout>
 		</>
 	);

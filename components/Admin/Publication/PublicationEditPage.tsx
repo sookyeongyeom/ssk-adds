@@ -7,17 +7,14 @@ import { EditPageInnerShellProps, ViewPageProps } from '../../../@types/pages';
 import { useState, useEffect } from 'react';
 import useGet from '../../../hooks/useGet';
 import { ResponsePublication } from '../../../@types/api/publication';
-import pickFileKeysToArrayFromFileString from '../../../utils/pickFileKeysToArrayFromFileString';
 import excludeDeletedFileKeysFromFileString from '../../../utils/excludeDeletedFileKeysFromFileString';
 import { SC } from '../../../styles/styled';
 import { Paths } from '../../../constants/paths';
 import useRoute from '../../../hooks/useRoute';
 import PublicationNewEdit from './PublicationNewEdit';
 import PrevToNewImage from '../../Element/Admin/PrevToNewImage';
-import { svgRight } from '../../../styles/svgs';
-import pickFileNamesToArrayFromFileString from '../../../utils/pickFileNamesToArrayFromFileString';
-import styled from 'styled-components';
 import PrevToNewPdf from '../../Element/Admin/PrevToNewPdf';
+import stringToJson from '../../../utils/stringToJson';
 
 export default function PublicationEditPage({ id }: ViewPageProps) {
 	const [publication, setPublication] = useState<ResponsePublication.GetById>();
@@ -33,8 +30,8 @@ function PublicationEditPageInnerShell({
 	id,
 	data,
 }: Omit<EditPageInnerShellProps<ResponsePublication.GetById>, 'path'>) {
-	const prevImgKey = data?.img && pickFileKeysToArrayFromFileString(data.img)[0];
-	const prevPdfKey = data?.pdf && pickFileKeysToArrayFromFileString(data.pdf)[0];
+	const prevImg: FileDataType = data?.img && stringToJson(data.img)[0];
+	const prevPdf: FileDataType = data?.pdf && stringToJson(data.pdf)[0];
 	const { value: writer, onChange: onChangeWriter } = useInput(data?.writer);
 	const { value: title, onChange: onChangeTitle } = useInput(data?.title);
 	const {
@@ -123,16 +120,16 @@ function PublicationEditPageInnerShell({
 	};
 
 	useEffect(() => {
-		if (imgs.length) {
-			onSelectSingleToDeleteImgs(prevImgKey);
+		if (imgs.length && prevImg) {
+			onSelectSingleToDeleteImgs(prevImg.key);
 			return;
 		}
 		onResetDeleteWishListImgs();
 	}, [imgs]);
 
 	useEffect(() => {
-		if (pdfs.length) {
-			onSelectSingleToDeletePdfs(prevPdfKey);
+		if (pdfs.length && prevPdf) {
+			onSelectSingleToDeletePdfs(prevPdf.key);
 			return;
 		}
 		onResetDeleteWishListPdfs();
@@ -147,9 +144,9 @@ function PublicationEditPageInnerShell({
 			onSubmit={onSubmit}>
 			<SC.Label>사진</SC.Label>
 			<PrevToNewImage
-				prevFileKey={prevImgKey}
+				prevImg={prevImg}
 				wishToDeleteFileKeys={wishToDeleteImgKeys}
-				files={imgs}
+				imgs={imgs}
 				folder={S3Folders.publication}
 				onToggleToDelete={onToggleToDeleteImgs}
 			/>
@@ -157,8 +154,7 @@ function PublicationEditPageInnerShell({
 			<SC.Label>PDF</SC.Label>
 			<PrevToNewPdf
 				pdfs={pdfs}
-				prevPdfName={pickFileNamesToArrayFromFileString(data?.pdf)[0]}
-				prevPdfKey={prevPdfKey}
+				prevPdf={prevPdf}
 				wishToDeletePdfKeys={wishToDeletePdfKeys}
 				onToggleToDeletePdfs={onToggleToDeletePdfs}
 			/>

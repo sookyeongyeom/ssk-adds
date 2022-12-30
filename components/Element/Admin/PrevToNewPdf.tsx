@@ -6,17 +6,16 @@ import AdminButton from './AdminButton';
 
 export default function PrevToNewPdf({
 	pdfs,
-	prevPdfKey,
-	prevPdfName,
+	prevPdf,
 	wishToDeletePdfKeys,
 	onToggleToDeletePdfs,
 }: PrevToNewPdfProps) {
 	return (
 		<S.PDF>
 			{/* 기존 PDF */}
-			{prevPdfKey ? (
-				<S.Prev isWishedToDelete={wishToDeletePdfKeys.has(prevPdfKey) && !pdfs.length}>
-					{prevPdfName}
+			{prevPdf ? (
+				<S.Prev isWishedToDelete={wishToDeletePdfKeys.has(prevPdf.key) && !pdfs.length}>
+					{prevPdf.name}
 				</S.Prev>
 			) : (
 				<SC.Empty>PDF 없음</SC.Empty>
@@ -28,12 +27,12 @@ export default function PrevToNewPdf({
 					{pdfs[0].name}
 				</>
 			)}
-			{prevPdfKey && !pdfs.length && (
+			{prevPdf && !pdfs.length && (
 				<AdminButton
-					onClick={() => onToggleToDeletePdfs(prevPdfKey)}
-					isRed={wishToDeletePdfKeys.has(prevPdfKey)}
+					onClick={() => onToggleToDeletePdfs(prevPdf.key)}
+					isRed={wishToDeletePdfKeys.has(prevPdf.key)}
 					isOrange>
-					{wishToDeletePdfKeys.has(prevPdfKey) ? '기존 PDF 삭제 취소' : '기존 PDF 삭제하기'}
+					{wishToDeletePdfKeys.has(prevPdf.key) ? '기존 PDF 삭제 취소' : '기존 PDF 삭제하기'}
 				</AdminButton>
 			)}
 		</S.PDF>

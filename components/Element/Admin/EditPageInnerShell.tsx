@@ -5,20 +5,20 @@ import useEditorBody from '../../../hooks/useEditorBody';
 import useFiles from '../../../hooks/useFiles';
 import useInput from '../../../hooks/useInput';
 import excludeDeletedFileKeysFromFileString from '../../../utils/excludeDeletedFileKeysFromFileString';
-import pickFileKeysToArrayFromFileString from '../../../utils/pickFileKeysToArrayFromFileString';
 import NewEditorPost from './NewEditorPost';
 import { S3Folders } from '../../../constants/s3';
 import { Paths } from '../../../constants/paths';
 import { putResource } from '../../../api/resource';
 import { putNotice } from '../../../api/notice';
 import useRoute from '../../../hooks/useRoute';
+import stringToJson from '../../../utils/stringToJson';
 
 export default function EditPageInnerShell<
 	T extends ResponseResource.GetById | ResponseNotice.GetById,
 >({ id, data, path }: EditPageInnerShellProps<T>) {
 	const folder = path === Paths.notice ? S3Folders.notice : S3Folders.resource;
 	const api = path === Paths.notice ? putNotice : putResource;
-	const prevFileKeys = data?.file && pickFileKeysToArrayFromFileString(data?.file);
+	const prevFiles = data?.file && stringToJson(data?.file);
 
 	const { value: title, onChange: onChangeTitle } = useInput(data?.title);
 	const { value: writer, onChange: onChangeWriter } = useInput(data?.writer);
@@ -81,7 +81,7 @@ export default function EditPageInnerShell<
 				body={body}
 				writer={writer}
 				files={files}
-				prevFileKeys={prevFileKeys}
+				prevFiles={prevFiles}
 				onChangeTitle={onChangeTitle}
 				onChangeWriter={onChangeWriter}
 				onChangeBody={onChangeBody}

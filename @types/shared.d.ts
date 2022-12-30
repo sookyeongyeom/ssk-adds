@@ -43,8 +43,8 @@ type ViewProps<T extends ResponseResource.GetById | ResponseNotice.GetById> = {
 	id: number;
 	data: T;
 	basePath: string;
-	prev: AdjacentItemType;
-	next: AdjacentItemType;
+	prev?: AdjacentItemType;
+	next?: AdjacentItemType;
 	isNotice?: boolean;
 	isAdmin?: boolean;
 };
@@ -122,7 +122,7 @@ type NewEditorPostProps = FileUploadElementProps & {
  * @in NewEditorPost */
 type FileUploadElementProps = {
 	files: File[];
-	prevFileKeys?: string[];
+	prevFiles?: FileDataType[];
 	isMultiple?: boolean;
 	isEditor?: boolean;
 	wishToDeleteFileKeys?: Set<string>;
@@ -167,10 +167,10 @@ type AdminNewEditProps = ChildrenType & {
 /**
  * @for PrevToNewImage */
 type PrevToNewImageProps = {
-	prevFileKey: string;
-	wishToDeleteFileKeys: Set<string>;
-	files: File[];
+	imgs: File[];
+	prevImg: FileDataType;
 	folder: string;
+	wishToDeleteFileKeys: Set<string>;
 	onToggleToDelete: (prevFileKey: string) => void;
 };
 
@@ -178,8 +178,7 @@ type PrevToNewImageProps = {
  * @for PrevToNewPdf */
 type PrevToNewPdfProps = {
 	pdfs: File[];
-	prevPdfKey: string;
-	prevPdfName?: string;
+	prevPdf: FileDataType;
 	wishToDeletePdfKeys: Set<string>;
 	onToggleToDeletePdfs: (prevFileKey: string) => void;
 };
