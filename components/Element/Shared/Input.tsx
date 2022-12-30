@@ -2,7 +2,16 @@ import styled from 'styled-components';
 import { InputProps } from '../../../@types/shared';
 import { Colors } from '../../../styles/colors';
 
-export default function Input({ label, value, type, inputRef, placeholder, onChange }: InputProps) {
+export default function Input({
+	label,
+	value,
+	type,
+	inputRef,
+	placeholder,
+	onChange,
+	maxLength,
+	minLength,
+}: InputProps) {
 	return (
 		<S.InputLayout>
 			<p>{label}</p>
@@ -12,6 +21,8 @@ export default function Input({ label, value, type, inputRef, placeholder, onCha
 				type={type}
 				ref={inputRef}
 				placeholder={placeholder}
+				maxLength={maxLength}
+				minLength={minLength}
 			/>
 		</S.InputLayout>
 	);

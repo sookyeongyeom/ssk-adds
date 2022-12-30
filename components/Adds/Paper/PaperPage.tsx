@@ -6,10 +6,10 @@ import { ResponsePaper } from '../../../@types/api/paper';
 import useGet from '../../../hooks/useGet';
 import { getPaper } from '../../../api/paper';
 import SelectBox from '../../Element/Adds/SelectBox';
-import { Recipes } from '../../../styles/recipes';
 import useChangePage from '../../../hooks/useChangePage';
 import PageButton from '../../Element/Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
+import { SC } from '../../../styles/styled';
 
 export default function PaperPage() {
 	const [paper, setPaper] = useState<ResponsePaper.Get>();
@@ -72,7 +72,7 @@ function PaperBoxElement({ id, title, year, keywords, researcherName, doi }: Pap
 
 namespace S {
 	export const PaperPageLayout = styled.div`
-		${Recipes.AlignSelectBoxForBoard}
+		${SC.AlignSelectBoxForBoard}
 
 		>div:nth-of-type(2) {
 			display: flex;

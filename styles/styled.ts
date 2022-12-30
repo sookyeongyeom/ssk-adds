@@ -1,8 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Colors } from './colors';
 import { Fonts } from './fonts';
 
 export namespace SC {
+	export const AlignSelectBoxForBoard = css`
+		> div:first-of-type {
+			margin-left: auto;
+			margin-bottom: 1rem;
+		}
+	`;
+
 	export const PrevImage = styled.div`
 		width: 15rem;
 		height: 18rem;
@@ -141,5 +148,10 @@ export namespace SC {
 		${Fonts.bold16}
 		padding-left: 3rem;
 		line-height: 120%;
+	`;
+
+	export const Required = styled.span`
+		color: ${Colors.red400};
+		margin-left: 0.3rem;
 	`;
 }

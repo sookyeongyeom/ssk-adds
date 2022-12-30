@@ -13,3 +13,11 @@ type useBoard<T> = {
 	dep: T | undefined;
 	order: Map<string, string>;
 };
+
+/**
+ * @for useValidation */
+type useValidationTargetsType = {
+	value: string;
+	name: string;
+	ref: MutableRefObject<HTMLInputElement>;
+}[];

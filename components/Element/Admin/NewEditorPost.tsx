@@ -2,10 +2,11 @@ import dynamic from 'next/dynamic';
 import { NewEditorPostProps } from '../../../@types/shared';
 import AdminButton from './AdminButton';
 import Input from '../Shared/Input';
-import React from 'react';
+import React, { MutableRefObject, useRef } from 'react';
 import FileUploadElement from './FileUploadElement';
 import { SC } from '../../../styles/styled';
 import styled from 'styled-components';
+import useValidation from '../../../hooks/useValidation';
 
 const Editor = dynamic(() => import('./Editor'), {
 	ssr: false,
@@ -26,16 +27,25 @@ export default function NewEditorPost({
 	onSubmit,
 	onToggleToDelete,
 }: NewEditorPostProps) {
+	const titleRef = useRef() as MutableRefObject<HTMLInputElement>;
+	const writerRef = useRef() as MutableRefObject<HTMLInputElement>;
+
+	const required = [
+		{ value: title, name: '제목', ref: titleRef },
+		{ value: writer, name: '작성자', ref: writerRef },
+	];
+
+	const onValidation = useValidation(onSubmit, required);
+
 	return (
+		/* prettier-ignore */
 		<>
 			<SC.AlignButtonRight>
-				<AdminButton onClick={onSubmit} isOrange>
-					작성 완료
-				</AdminButton>
+				<AdminButton onClick={onValidation} isOrange>작성 완료</AdminButton>
 			</SC.AlignButtonRight>
 			<S.NewEditorPostLayout>
-				<Input value={title} onChange={onChangeTitle} placeholder={'제목'} />
-				<Input value={writer} onChange={onChangeWriter} placeholder={'작성자'} />
+				<Input value={title} onChange={onChangeTitle} placeholder={'제목'} inputRef={titleRef} maxLength={100} />
+				<Input value={writer} onChange={onChangeWriter} placeholder={'작성자'} inputRef={writerRef} maxLength={15} />
 				<Editor value={body} onChange={onChangeBody} />
 				<FileUploadElement
 					files={files}
