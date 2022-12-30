@@ -149,4 +149,9 @@ export namespace SC {
 		padding-left: 3rem;
 		line-height: 120%;
 	`;
+
+	export const Required = styled.span`
+		color: ${Colors.red400};
+		margin-left: 0.3rem;
+	`;
 }
