@@ -28,9 +28,9 @@ export default function PublicationViewPage({ id }: ViewPageProps) {
 
 	useEffect(() => {
 		if (publication) {
-			const parsedImg = stringToJson(publication!.img)[0];
+			const parsedImg = stringToJson(publication!.img)?.[0];
 			if (parsedImg) setImg(parsedImg);
-			const parsedPdf = stringToJson(publication!.pdf)[0];
+			const parsedPdf = stringToJson(publication!.pdf)?.[0];
 			if (parsedPdf) setPdf(parsedPdf);
 		}
 	}, [publication]);

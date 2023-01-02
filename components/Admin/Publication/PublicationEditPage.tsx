@@ -30,8 +30,8 @@ function PublicationEditPageInnerShell({
 	id,
 	data,
 }: Omit<EditPageInnerShellProps<ResponsePublication.GetById>, 'path'>) {
-	const prevImg: FileDataType = data?.img && stringToJson(data.img)[0];
-	const prevPdf: FileDataType = data?.pdf && stringToJson(data.pdf)[0];
+	const prevImg: FileDataType = data?.img && stringToJson(data.img)?.[0];
+	const prevPdf: FileDataType = data?.pdf && stringToJson(data.pdf)?.[0];
 	const { value: writer, onChange: onChangeWriter } = useInput(data?.writer);
 	const { value: title, onChange: onChangeTitle } = useInput(data?.title);
 	const {

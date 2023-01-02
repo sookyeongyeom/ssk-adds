@@ -29,7 +29,7 @@ function MemberEditPageInnerShell({
 	id,
 	data,
 }: Omit<EditPageInnerShellProps<ResponseMember.GetById>, 'path'>) {
-	const prevImg: FileDataType = data?.img && stringToJson(data.img)[0];
+	const prevImg: FileDataType = data?.img && stringToJson(data.img)?.[0];
 	const { value: name, onChange: onChangeName } = useInput(data?.name);
 	const { value: email, onChange: onChangeEmail } = useInput(data?.email);
 	const { value: homepage, onChange: onChangeHomepage } = useInput(data?.homepage);

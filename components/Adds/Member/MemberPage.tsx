@@ -56,7 +56,7 @@ function MemberBoxElement({
 	responsibility,
 }: MemberBoxElementProps) {
 	let imgSrc: string = Assets.placeholderImgSrc;
-	const parsedImg: FileDataType = stringToJson(img)[0];
+	const parsedImg: FileDataType = stringToJson(img)?.[0];
 	if (parsedImg) imgSrc = getDownloadLinkFromS3(S3Folders.member, parsedImg.key);
 	return (
 		<S.MemberBox>

@@ -25,7 +25,7 @@ export default function MemberViewPage({ id }: ViewPageProps) {
 
 	useEffect(() => {
 		if (member) {
-			const parsedImg: FileDataType = stringToJson(member!.img)[0];
+			const parsedImg: FileDataType = stringToJson(member!.img)?.[0];
 			if (parsedImg) setImg(parsedImg);
 		}
 	}, [member]);
