@@ -5,6 +5,7 @@ import { Times } from '../../constants/times';
 import { Sizes } from '../../styles/sizes';
 import { Colors } from '../../styles/colors';
 import { Fonts } from '../../styles/fonts';
+import { Devices } from '../../styles/devices';
 
 export default function HomeSlider() {
 	const [slideIdx, setSlideIdx] = useState(0);
@@ -75,6 +76,12 @@ namespace S {
 		position: relative;
 		z-index: -10;
 		margin-bottom: 4.5rem;
+
+		@media ${Devices.mobile} {
+			width: 100vw;
+			height: ${Sizes.mobileHomeSliderHeight};
+			margin-bottom: 3.7rem;
+		}
 	`;
 
 	export const SliderImageWrapper = styled.div<SliderImageWrapperProps>`
@@ -84,6 +91,10 @@ namespace S {
 		left: ${(props) =>
 			`${props.slideIdx * Number(Sizes.desktopHomeWidth.replace('rem', '')) * -1}rem`};
 		transition: ${(props) => (props.isFlashed ? 'none' : '2s cubic-bezier(0,.72,.3,1.01)')};
+
+		@media ${Devices.mobile} {
+			left: ${(props) => `${props.slideIdx * Number(100 * -1)}vw`};
+		}
 	`;
 
 	export const SliderImage = styled.div`
@@ -94,6 +105,10 @@ namespace S {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+		}
+
+		@media ${Devices.mobile} {
+			width: 100vw;
 		}
 	`;
 
@@ -124,16 +139,37 @@ namespace S {
 		}
 
 		> h2 {
-			${Fonts.regular16}margin-bottom: 0.3rem;
+			${Fonts.regular16}
+			margin-bottom: 0.3rem;
 			margin-right: 0.5rem;
 		}
 
+		/* Slider Indicator Wrapper */
 		> div {
 			position: absolute;
 			left: 7.3rem;
 			bottom: 5.3rem;
 			display: flex;
 			gap: 1rem;
+		}
+
+		@media ${Devices.mobile} {
+			padding: 7.6rem 2.7rem;
+
+			> h1 {
+				${Fonts.bold23}
+			}
+
+			> h2 {
+				${Fonts.regular12}
+				margin-right: 0;
+			}
+
+			/* Slider Indicator Wrapper */
+			> div {
+				left: 3.8rem;
+				bottom: 3.2rem;
+			}
 		}
 	`;
 
@@ -143,5 +179,10 @@ namespace S {
 		border-radius: 50%;
 		border: 0.15rem solid ${Colors.white};
 		background-color: ${(props) => props.isCurrent && Colors.white};
+
+		@media ${Devices.mobile} {
+			width: 1rem;
+			height: 1rem;
+		}
 	`;
 }

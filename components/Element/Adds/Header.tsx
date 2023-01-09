@@ -8,12 +8,29 @@ import { Seo } from '../../../constants/seo';
 import LinkItem from '../Shared/LinkItem';
 import { Colors } from '../../../styles/colors';
 import SelectBox from './SelectBox';
+import { Devices } from '../../../styles/devices';
+import { svgMenu30 } from '../../../styles/svgs';
+import { SC } from '../../../styles/styled';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
+	const [isShorten, setIsShorten] = useState(false);
+
+	const onScroll = () => {
+		if (window.scrollY > 30) setIsShorten(true);
+		else setIsShorten(false);
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', onScroll);
+		return () => window.removeEventListener('scroll', onScroll);
+	}, []);
+
 	return (
-		<S.HeaderLayout>
+		<S.HeaderLayout isShorten={isShorten}>
+			<S.MobileMenu>{svgMenu30}</S.MobileMenu>
 			<S.LogoLink href='/home'>
-				<img src='/assets/header_logo.png' />
+				{!isShorten ? <img src='/assets/header_logo.png' /> : <img src='/assets/footer_logo.png' />}
 			</S.LogoLink>
 			<section>
 				<S.MenuWrapper>
@@ -55,7 +72,7 @@ export default function Header() {
 }
 
 namespace S {
-	export const HeaderLayout = styled.header`
+	export const HeaderLayout = styled.header<isShortenType>`
 		min-width: ${Sizes.desktopAddsWidth};
 		height: ${Sizes.desktopHeaderHeight};
 		box-shadow: ${BoxShadows.smooth};
@@ -66,14 +83,39 @@ namespace S {
 		> section {
 			display: flex;
 		}
+
+		@media ${Devices.mobile} {
+			min-width: unset;
+			width: 100%;
+			gap: unset;
+			justify-content: space-between;
+			padding: 0 2.4rem;
+			position: fixed;
+			z-index: 50;
+			background-color: ${Colors.white};
+			height: ${(props) => props.isShorten && Sizes.mobileShortenHeaderHeight};
+			transition: 0.5s ease height;
+
+			/* Shorten Yonsei Logo */
+			> a {
+				width: ${(props) => props.isShorten && '3.5rem'};
+			}
+
+			> section {
+				display: none;
+			}
+		}
 	`;
 
 	export const LogoLink = styled(Link)`
 		align-self: center;
 		display: flex;
+		width: 18rem;
 
 		> img {
-			width: 18rem;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
 		}
 	`;
 
@@ -126,6 +168,16 @@ namespace S {
 			> ul {
 				display: block;
 			}
+		}
+	`;
+
+	export const MobileMenu = styled(SC.ShowIfMobile)`
+		display: none;
+		cursor: pointer;
+
+		@media ${Devices.mobile} {
+			display: flex;
+			align-items: center;
 		}
 	`;
 }

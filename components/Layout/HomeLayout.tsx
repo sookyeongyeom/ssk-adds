@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Footer from '../Element/Adds/Footer';
 import Header from '../Element/Adds/Header';
+import { Devices } from '../../styles/devices';
 import { Sizes } from '../../styles/sizes';
 
 export default function HomeLayout({ children }: ChildrenType) {
@@ -18,8 +19,19 @@ namespace S {
 		min-height: 100vh;
 		position: relative;
 
-		> main {
-			padding-bottom: ${Sizes.desktopFooterHeight};
+		@media ${Devices.desktop} {
+			> main {
+				padding-bottom: ${Sizes.desktopFooterHeight};
+			}
+		}
+
+		@media ${Devices.mobile} {
+			width: 100vw;
+			overflow: hidden;
+
+			> main {
+				padding-top: ${Sizes.desktopHeaderHeight};
+			}
 		}
 	`;
 }

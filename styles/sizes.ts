@@ -10,5 +10,8 @@ export const Sizes = {
 	desktopPageButtonMarginTop: '6.4rem',
 	desktopAdminSidebarWidth: '30rem',
 	desktopAdminHeaderHeight: '6rem',
-	mobileFooterHeight: '23.9rem',
+
+	mobileAddsWidth: '100vw',
+	mobileHomeSliderHeight: '29rem',
+	mobileShortenHeaderHeight: '6rem',
 } as const;
