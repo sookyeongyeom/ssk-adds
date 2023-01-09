@@ -105,3 +105,9 @@ type PrevProps = {
 type InputLayoutProps = {
 	isBlue?: boolean;
 };
+
+/**
+ * @in Header */
+type isShortenType = {
+	isShorten: boolean;
+};
