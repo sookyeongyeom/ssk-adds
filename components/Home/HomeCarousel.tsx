@@ -3,6 +3,7 @@ import { svgLeft14, svgRight14 } from '../../styles/svgs';
 import { MutableRefObject, useRef, useState } from 'react';
 import { Colors } from '../../styles/colors';
 import { Sizes } from '../../styles/sizes';
+import { Devices } from '../../styles/devices';
 
 export default function HomeCarousel() {
 	const [itemIdx, setItemIdx] = useState(0);
@@ -99,6 +100,16 @@ namespace S {
 			gap: 1.3rem;
 			padding: 1.2rem 0;
 		}
+
+		@media ${Devices.mobile} {
+			width: 100vw;
+			margin-bottom: 3.7rem;
+
+			> div:first-of-type {
+				gap: 2.1rem;
+				padding: 0 2rem;
+			}
+		}
 	`;
 
 	export const CarouselWindow = styled.div`
@@ -115,6 +126,11 @@ namespace S {
 				(${(props) => props.itemIdx} + 1)
 		);
 		transition: 0.3s ease;
+
+		@media ${Devices.mobile} {
+			gap: unset;
+			left: calc(-100% * (${(props) => props.itemIdx} + 1));
+		}
 	`;
 
 	export const CarouselItem = styled.li`
@@ -127,6 +143,11 @@ namespace S {
 			height: 100%;
 			object-fit: contain;
 		}
+
+		@media ${Devices.mobile} {
+			width: 100%;
+			padding: 0.5rem;
+		}
 	`;
 
 	export const ItemIndicator = styled.div<IndicatorProps>`
@@ -135,5 +156,10 @@ namespace S {
 		border-radius: 50%;
 		border: 0.1rem solid ${Colors.gray400};
 		background-color: ${(props) => props.isCurrent && Colors.gray400};
+
+		@media ${Devices.mobile} {
+			width: 0.8rem;
+			height: 0.8rem;
+		}
 	`;
 }
