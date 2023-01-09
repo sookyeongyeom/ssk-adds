@@ -1,4 +1,4 @@
-const BreakPoints = {
+export const BreakPoints = {
 	general: '1200px',
 } as const;
 

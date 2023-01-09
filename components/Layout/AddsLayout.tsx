@@ -2,6 +2,7 @@ import Sidebar from '../Element/Adds/Sidebar';
 import styled from 'styled-components';
 import { Fonts } from '../../styles/fonts';
 import useTitlePath from '../../hooks/useTitlePath';
+import { Devices } from '../../styles/devices';
 
 export default function AddsLayout({ children }: ChildrenType) {
 	const { title, path } = useTitlePath();
@@ -33,6 +34,22 @@ namespace S {
 		> h1 {
 			${Fonts.regular40}
 			grid-column: 2/3;
+		}
+
+		@media ${Devices.mobile} {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			padding-bottom: 7.7rem;
+
+			> aside {
+				display: none;
+			}
+
+			> h1 {
+				${Fonts.regular25}
+				padding-left: 2rem;
+			}
 		}
 	`;
 }

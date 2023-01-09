@@ -8,7 +8,7 @@ import { Seo } from '../../../constants/seo';
 import LinkItem from '../Shared/LinkItem';
 import { Colors } from '../../../styles/colors';
 import SelectBox from './SelectBox';
-import { Devices } from '../../../styles/devices';
+import { Devices, BreakPoints } from '../../../styles/devices';
 import { svgMenu30 } from '../../../styles/svgs';
 import { SC } from '../../../styles/styled';
 import { useEffect, useState } from 'react';
@@ -17,8 +17,10 @@ export default function Header() {
 	const [isShorten, setIsShorten] = useState(false);
 
 	const onScroll = () => {
-		if (window.scrollY > 30) setIsShorten(true);
-		else setIsShorten(false);
+		/* Shorten if scroll && mobile */
+		if (window.scrollY > 30 && window.innerWidth <= +BreakPoints.general.replace(/[a-z]/g, '')) {
+			setIsShorten(true);
+		} else setIsShorten(false);
 	};
 
 	useEffect(() => {
