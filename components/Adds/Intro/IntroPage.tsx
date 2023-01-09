@@ -5,6 +5,7 @@ import { BoxShadows } from '../../../styles/shadows';
 import { svgDownload } from '../../../styles/svgs';
 import Link from 'next/link';
 import { Secrets } from '../../../constants/secrets';
+import { Devices } from '../../../styles/devices';
 
 export default function IntroPage() {
 	return (
@@ -66,10 +67,16 @@ export default function IntroPage() {
 
 namespace S {
 	export const IntroPageLayout = styled.div`
+		> div:not(:first-of-type) {
+			padding: 0 2rem;
+		}
+
 		/* ADDS */
 		> div:first-of-type {
 			text-align: center;
 			background-image: url(/assets/pattern_blue.png);
+			background-repeat: no-repeat;
+			background-size: cover;
 			padding: 4.7rem 0;
 			margin-bottom: 5rem;
 
@@ -86,6 +93,19 @@ namespace S {
 			> h3 {
 				${Fonts.regular30}
 			}
+
+			@media ${Devices.mobile} {
+				padding: 3rem 0;
+				margin-bottom: 2.4rem;
+
+				> h2 {
+					${Fonts.bold25}
+				}
+
+				> h3 {
+					${Fonts.regular18}
+				}
+			}
 		}
 
 		/* 알파 세대에 대한 새로운 이해의 필요성 */
@@ -97,6 +117,13 @@ namespace S {
 			position: relative;
 			margin-top: 10.6rem;
 			margin-bottom: 13.6rem;
+
+			@media ${Devices.mobile} {
+				flex-direction: column;
+				width: 100%;
+				margin-top: 2.4rem;
+				margin-bottom: 4.1rem;
+			}
 		}
 
 		/* 연도별 조사 실시 계획 */
@@ -109,6 +136,10 @@ namespace S {
 				width: 100%;
 				height: 100%;
 				object-fit: contain;
+			}
+
+			@media ${Devices.mobile} {
+				margin-bottom: 4.1rem;
 			}
 		}
 
@@ -139,6 +170,11 @@ namespace S {
 			> svg > path {
 				fill: ${Colors.white};
 			}
+
+			@media ${Devices.mobile} {
+				margin-left: auto;
+				margin-right: auto;
+			}
 		}
 	`;
 
@@ -152,12 +188,20 @@ namespace S {
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: -1;
+
+		@media ${Devices.mobile} {
+			display: none;
+		}
 	`;
 
 	export const Subtitle = styled.h4`
 		${Fonts.bold20}
 		border-left: 0.5rem solid ${Colors.blue300};
 		padding: 0.5rem 1.6rem;
+
+		@media ${Devices.mobile} {
+			${Fonts.bold18}
+		}
 	`;
 
 	export const IntroBoxDouble = styled.div`
@@ -186,6 +230,26 @@ namespace S {
 				${Fonts.medium16}
 			}
 		}
+
+		@media ${Devices.mobile} {
+			> h5 {
+				${Fonts.bold18}
+				width: 100%;
+			}
+
+			> div {
+				grid-template-columns: max-content max-content;
+				justify-content: space-around;
+
+				> h6 {
+					${Fonts.medium14}
+				}
+
+				> div {
+					${Fonts.regular14}
+				}
+			}
+		}
 	`;
 
 	export const IntroBoxSingle = styled(IntroBoxDouble)`
@@ -195,6 +259,12 @@ namespace S {
 			flex-direction: column;
 			text-align: center;
 			justify-content: center;
+		}
+
+		@media ${Devices.mobile} {
+			> div {
+				padding: 4.4rem 2rem;
+			}
 		}
 	`;
 }
