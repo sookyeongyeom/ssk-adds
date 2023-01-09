@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
+import { Devices } from '../../../styles/devices';
 import { Fonts } from '../../../styles/fonts';
 import { Sizes } from '../../../styles/sizes';
 
@@ -33,6 +34,15 @@ namespace S {
 		gap: 2.4rem;
 		position: absolute;
 		bottom: 0;
+
+		@media ${Devices.mobile} {
+			min-width: unset;
+			flex-direction: column;
+			text-align: center;
+			gap: 0.8rem;
+			padding: 2.7rem 2rem;
+			position: relative;
+		}
 	`;
 
 	export const Logo = styled.img`
@@ -45,11 +55,21 @@ namespace S {
 		${Fonts.medium16}
 		line-height: 130%;
 		word-break: keep-all;
+
+		@media ${Devices.mobile} {
+			line-height: 140%;
+			margin-bottom: 0.8rem;
+		}
 	`;
 
 	export const Contact = styled.div`
 		${Fonts.regular14}
 		line-height: 150%;
 		word-break: keep-all;
+
+		@media ${Devices.mobile} {
+			${Fonts.regular12}
+			line-height: 160%;
+		}
 	`;
 }
