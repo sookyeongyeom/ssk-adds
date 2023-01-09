@@ -8,17 +8,19 @@ import { Seo } from '../../../constants/seo';
 import LinkItem from '../Shared/LinkItem';
 import { Colors } from '../../../styles/colors';
 import SelectBox from './SelectBox';
-import { Devices, BreakPoints } from '../../../styles/devices';
+import { Devices } from '../../../styles/devices';
 import { svgMenu30 } from '../../../styles/svgs';
 import { SC } from '../../../styles/styled';
 import { useEffect, useState } from 'react';
+import useMobile from '../../../hooks/useMobile';
 
 export default function Header() {
 	const [isShorten, setIsShorten] = useState(false);
+	const isMobile = useMobile();
 
 	const onScroll = () => {
-		/* Shorten if scroll && mobile */
-		if (window.scrollY > 30 && window.innerWidth <= +BreakPoints.general.replace(/[a-z]/g, '')) {
+		/* Shorten if mobile scrolled */
+		if (window.scrollY > 30 && isMobile) {
 			setIsShorten(true);
 		} else setIsShorten(false);
 	};
@@ -26,7 +28,7 @@ export default function Header() {
 	useEffect(() => {
 		window.addEventListener('scroll', onScroll);
 		return () => window.removeEventListener('scroll', onScroll);
-	}, []);
+	}, [isMobile]);
 
 	return (
 		<S.HeaderLayout isShorten={isShorten}>
