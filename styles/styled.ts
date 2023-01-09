@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Colors } from './colors';
+import { Devices } from './devices';
 import { Fonts } from './fonts';
 
 export namespace SC {
@@ -153,5 +154,13 @@ export namespace SC {
 	export const Required = styled.span`
 		color: ${Colors.red400};
 		margin-left: 0.3rem;
+	`;
+
+	export const ShowIfMobile = styled.div`
+		display: none;
+
+		@media ${Devices.mobile} {
+			display: block;
+		}
 	`;
 }
