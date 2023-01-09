@@ -15,4 +15,4 @@ export const Paths: PathsType = {
 	new: '/new',
 	edit: '/edit',
 	delete: '/delete',
-};
+} as const;

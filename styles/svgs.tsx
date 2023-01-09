@@ -203,3 +203,26 @@ export const svgPlus = (
 		/>
 	</svg>
 );
+
+export const svgMenu30 = (
+	<svg
+		width='30'
+		height='30'
+		viewBox='0 0 30 30'
+		fill='none'
+		xmlns='http://www.w3.org/2000/svg'
+		xmlnsXlink='http://www.w3.org/1999/xlink'>
+		<rect width='30' height='30' fill='url(#pattern0)' />
+		<defs>
+			<pattern id='pattern0' patternContentUnits='objectBoundingBox' width='1' height='1'>
+				<use xlinkHref='#image0_613_193' transform='scale(0.0104167)' />
+			</pattern>
+			<image
+				id='image0_613_193'
+				width='96'
+				height='96'
+				xlinkHref='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAABQklEQVR4nO3aoU4cURiG4W+LQZDqEdxBg9qswUBFk97ACq6jQXAFmPZi6gCFws2uaNpb2ARFaP1BgEGwM21me4blefSfyZ85OTPmTQAAAAAAAADYVpM+Q7PZ7EMp5byUcpTk/YZ3eu3uSynXpZSz5XL5q2u48wCm0+lBkpske0Ns94b8SXLYtu2PdUPvejzoW7z8f7GX5GvX0NoDmM/nO0mOh9roDfr49A5f1OcGsEF9/gFXST79h1220WXbtp/XDfS5AV/y+EPh7/xOcto1tPb7lCSr1eq2aZrvk8lkP0mTZHeA5bbZXZKLUsrJYrH4WXsZAAAAAACgPl3Q8HRBI6ELqkwXNAK6oLHTBW2WLqgiXVAluiAAAAAAAOAZXdDwdEEjoQuqTBc0ArqgsdMFbZYuqCJdUCW6IAAAAAAAAACSJA8IA5T2hJEZTAAAAABJRU5ErkJggg=='
+			/>
+		</defs>
+	</svg>
+);
