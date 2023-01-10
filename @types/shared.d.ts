@@ -24,6 +24,7 @@ type LinkItemProps = {
  * @for Sidebar */
 type SidebarProps = {
 	path: string;
+	isDrawer?: boolean;
 };
 
 /**

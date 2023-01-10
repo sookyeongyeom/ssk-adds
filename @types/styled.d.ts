@@ -111,3 +111,9 @@ type InputLayoutProps = {
 type isShortenType = {
 	isShorten: boolean;
 };
+
+/**
+ * @in Drawer */
+type isOpenType = {
+	isOpen: boolean;
+};

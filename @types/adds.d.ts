@@ -1,3 +1,5 @@
+import { MutableRefObject } from 'react';
+
 /**
  * @for FAQBoxElement
  * @in FAQPage */
@@ -40,4 +42,17 @@ type PaperBoxElementProps = {
 	keywords: string;
 	researcherName: string;
 	doi: string;
+};
+
+/**
+ * @for Header */
+type HeaderProps = {
+	onOpenDrawer: (e: React.MouseEvent) => void;
+};
+
+/**
+ * @for Drawer */
+type DrawerProps = {
+	isDrawerOpen: boolean;
+	drawerRef: MutableRefObject<HTMLDivElement>;
 };
