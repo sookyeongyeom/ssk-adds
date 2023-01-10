@@ -6,6 +6,7 @@ import { Sizes } from '../../styles/sizes';
 import Drawer from '../Element/Adds/Drawer';
 import { useState, useEffect, useRef, MutableRefObject } from 'react';
 import useTitlePath from '../../hooks/useTitlePath';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 export default function HomeLayout({ children }: ChildrenType) {
 	const { path } = useTitlePath();
@@ -19,16 +20,7 @@ export default function HomeLayout({ children }: ChildrenType) {
 
 	const onCloseDrawer = () => setIsDrawerOpen(false);
 
-	const onClickOutside = (e: CustomEvent<MouseEvent>) => {
-		if (!drawerRef?.current?.contains(e.target as Node)) {
-			onCloseDrawer();
-		}
-	};
-
-	useEffect(() => {
-		window.addEventListener('click', onClickOutside as EventListener);
-		return () => window.removeEventListener('click', onClickOutside as EventListener);
-	}, []);
+	useOutsideClick(drawerRef, onCloseDrawer);
 
 	useEffect(() => {
 		onCloseDrawer();
