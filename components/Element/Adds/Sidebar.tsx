@@ -7,16 +7,15 @@ import LinkItem from '../Shared/LinkItem';
 import { useRouter } from 'next/router';
 import { SidebarProps } from '../../../@types/shared';
 
-export default function Sidebar({ path }: SidebarProps) {
+export default function Sidebar({ path, isDrawer = false }: SidebarProps) {
 	const router = useRouter();
 	const routeTo = (path: string) => router.push(path);
-
 	return (
 		<S.SidebarLayout>
 			<div>
 				<S.Top
-					onClick={() => routeTo(Paths.adds + Paths.intro)}
-					isCurrent={[Paths.intro, Paths.member, Paths.research].includes(path)}>
+					onClick={() => !isDrawer && routeTo(Paths.adds + Paths.intro)}
+					isCurrent={isDrawer || [Paths.intro, Paths.member, Paths.research].includes(path)}>
 					{Seo.Title.intro}
 				</S.Top>
 				<ul>
@@ -39,8 +38,8 @@ export default function Sidebar({ path }: SidebarProps) {
 			</div>
 			<div>
 				<S.Top
-					onClick={() => routeTo(Paths.adds + Paths.publication)}
-					isCurrent={[Paths.publication].includes(path)}>
+					onClick={() => !isDrawer && routeTo(Paths.adds + Paths.publication)}
+					isCurrent={isDrawer || [Paths.publication].includes(path)}>
 					{Seo.Title.publication}
 				</S.Top>
 				<ul>
@@ -53,8 +52,8 @@ export default function Sidebar({ path }: SidebarProps) {
 			</div>
 			<div>
 				<S.Top
-					onClick={() => routeTo(Paths.adds + Paths.resource)}
-					isCurrent={[Paths.resource, Paths.paper].includes(path)}>
+					onClick={() => !isDrawer && routeTo(Paths.adds + Paths.resource)}
+					isCurrent={isDrawer || [Paths.resource, Paths.paper].includes(path)}>
 					{'데이터'}
 				</S.Top>
 				<ul>
@@ -72,8 +71,9 @@ export default function Sidebar({ path }: SidebarProps) {
 			</div>
 			<div>
 				<S.Top
-					onClick={() => routeTo(Paths.adds + Paths.notice)}
-					isCurrent={[Paths.notice, Paths.news, Paths.faq, Paths.contact].includes(path)}>
+					onClick={() => !isDrawer && routeTo(Paths.adds + Paths.notice)}
+					/* prettier-ignore */
+					isCurrent={isDrawer || [Paths.notice, Paths.news, Paths.faq, Paths.contact].includes(path)}>
 					{'소통공간'}
 				</S.Top>
 				<ul>
