@@ -13,8 +13,9 @@ import { svgMenu30 } from '../../../styles/svgs';
 import { SC } from '../../../styles/styled';
 import { useEffect, useState } from 'react';
 import useMobile from '../../../hooks/useMobile';
+import { HeaderProps } from '../../../@types/adds';
 
-export default function Header() {
+export default function Header({ onOpenDrawer }: HeaderProps) {
 	const [isShorten, setIsShorten] = useState(false);
 	const isMobile = useMobile();
 
@@ -32,7 +33,7 @@ export default function Header() {
 
 	return (
 		<S.HeaderLayout isShorten={isShorten}>
-			<S.MobileMenu>{svgMenu30}</S.MobileMenu>
+			<S.MobileMenu onClick={onOpenDrawer}>{svgMenu30}</S.MobileMenu>
 			<S.LogoLink href='/home'>
 				{!isShorten ? <img src='/assets/header_logo.png' /> : <img src='/assets/footer_logo.png' />}
 			</S.LogoLink>
