@@ -10,6 +10,7 @@ import useChangePage from '../../../hooks/useChangePage';
 import PageButton from '../../Element/Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
 import { SC } from '../../../styles/styled';
+import { PaperBoxElementProps } from '../../../@types/adds';
 
 export default function PaperPage() {
 	const [paper, setPaper] = useState<ResponsePaper.Get>();

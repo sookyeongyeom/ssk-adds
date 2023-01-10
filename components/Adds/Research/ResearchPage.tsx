@@ -5,6 +5,7 @@ import { Colors } from '../../../styles/colors';
 import { BoxShadows } from '../../../styles/shadows';
 import { Devices } from '../../../styles/devices';
 import useMobile from '../../../hooks/useMobile';
+import { ResearchBoxElementProps } from '../../../@types/adds';
 
 export default function ResearchPage() {
 	const isMobile = useMobile();

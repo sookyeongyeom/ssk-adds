@@ -13,6 +13,7 @@ import { getDownloadLinkFromS3 } from '../../../s3/index';
 import { S3Folders } from '../../../constants/s3';
 import { Assets } from '../../../constants/assets';
 import stringToJson from '../../../utils/stringToJson';
+import { MemberBoxElementProps } from '../../../@types/adds';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();

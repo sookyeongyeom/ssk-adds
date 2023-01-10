@@ -11,6 +11,7 @@ import { getFAQ } from '../../../api/faq';
 import PageButton from '../../Element/Shared/PageButton';
 import useChangePage from '../../../hooks/useChangePage';
 import { Sizes } from '../../../styles/sizes';
+import { FAQBoxElementProps } from '../../../@types/adds';
 
 export default function FAQPage() {
 	const [faqs, setFaqs] = useState<ResponseFAQ.Get>();
