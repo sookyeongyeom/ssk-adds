@@ -1,10 +1,20 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { ResponseContact } from '../../../@types/api/contact';
+import useGet from '../../../hooks/useGet';
 import { Colors } from '../../../styles/colors';
 import { Devices } from '../../../styles/devices';
 import { Fonts } from '../../../styles/fonts';
 import { Sizes } from '../../../styles/sizes';
+import { getContact } from '../../../api/contact';
 
 export default function Footer() {
+	const [contact, setContact] = useState<ResponseContact.Get>();
+
+	useEffect(() => {
+		useGet(getContact, setContact);
+	}, []);
+
 	return (
 		<S.FooterLayout>
 			<S.Logo src='/assets/footer_logo.png' />
@@ -14,7 +24,7 @@ export default function Footer() {
 				Alpha generation Digital Daily Survey
 			</S.Description>
 			<S.Contact>
-				(03722) 서울시 서대문구 연세로 50 연세우유(708동) 309호
+				{contact && contact[0]?.wayToLab}
 				<br />
 				COPYRIGHTS (C) COLLEGE OF HUMAN ECOLOGY OF YONSEI. ALL RIGHTS RESERVED.
 			</S.Contact>
