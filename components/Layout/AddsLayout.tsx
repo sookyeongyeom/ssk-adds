@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Fonts } from '../../styles/fonts';
 import useTitlePath from '../../hooks/useTitlePath';
 import { Devices } from '../../styles/devices';
+import { Paths } from '../../constants/paths';
 
 export default function AddsLayout({ children }: ChildrenType) {
 	const { title, path } = useTitlePath();
-
 	return (
-		<S.Layout>
+		<S.Layout hasPadding={path !== Paths.intro}>
 			<Sidebar path={path}></Sidebar>
 			<h1>{title}</h1>
 			<section>{children}</section>
@@ -17,7 +17,7 @@ export default function AddsLayout({ children }: ChildrenType) {
 }
 
 namespace S {
-	export const Layout = styled.div`
+	export const Layout = styled.div<hasPaddingType>`
 		width: fit-content;
 		margin: 0 auto;
 		display: grid;
@@ -49,6 +49,10 @@ namespace S {
 			> h1 {
 				${Fonts.regular25}
 				padding-left: 2rem;
+			}
+
+			> section {
+				padding: ${(props) => props.hasPadding && '0 2rem'};
 			}
 		}
 	`;

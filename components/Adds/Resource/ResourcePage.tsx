@@ -10,11 +10,16 @@ import useBoard from '../../../hooks/useBoard';
 import { Paths } from '../../../constants/paths';
 import { BoardColumnOrders } from '../../../constants/boardColumnOrders';
 import { SC } from '../../../styles/styled';
+import useMobile from '../../../hooks/useMobile';
 
 export default function ResourcePage() {
 	const [resource, setResource] = useState<ResponseResource.Get>();
 	const { page, onChangePage } = useChangePage();
-	const maps = useBoard({ dep: resource, order: BoardColumnOrders.resource });
+
+	const isMobile = useMobile();
+	const maps = !isMobile
+		? useBoard({ dep: resource, order: BoardColumnOrders.resource })
+		: useBoard({ dep: resource, order: BoardColumnOrders.mobile });
 
 	useEffect(() => {
 		useGet(() => getResource({ page }), setResource);

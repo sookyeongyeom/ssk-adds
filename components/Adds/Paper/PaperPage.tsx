@@ -91,10 +91,6 @@ namespace S {
 				margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 4rem);
 			}
 		}
-
-		@media ${Devices.mobile} {
-			padding: 0 2rem;
-		}
 	`;
 
 	export const PaperBox = styled.div`

@@ -15,6 +15,7 @@ import useEditDelete from '../../../hooks/useEditDelete';
 import { SC } from '../../../styles/styled';
 import AdminBoardButton from './AdminBoardButton';
 import stringToJson from '../../../utils/stringToJson';
+import { Devices } from '../../../styles/devices';
 
 export default function View<T extends ResponseResource.GetById | ResponseNotice.GetById>({
 	id,
@@ -98,6 +99,18 @@ namespace S {
 			${Fonts.light12}
 			text-align: right;
 		}
+
+		@media ${Devices.mobile} {
+			padding: 2.4rem;
+
+			> h1 {
+				margin-bottom: 1rem;
+			}
+
+			> h2 {
+				text-align: center;
+			}
+		}
 	`;
 
 	export const Content = styled.pre`
@@ -137,6 +150,10 @@ namespace S {
 		li {
 			line-height: 120%;
 		}
+
+		@media ${Devices.mobile} {
+			padding: 3.8rem 1rem;
+		}
 	`;
 
 	export const File = styled.div<ViewLayoutProps>`
@@ -157,6 +174,7 @@ namespace S {
 		> h3 {
 			${Fonts.medium16}
 			color: ${(props) => props.isAdmin && Colors.white};
+			white-space: nowrap;
 		}
 
 		> div {
@@ -171,9 +189,13 @@ namespace S {
 				transition: 0.5s ease;
 				color: ${(props) => props.isAdmin && Colors.white};
 
-				> svg > path {
-					transition: 0.5s ease;
-					fill: ${(props) => props.isAdmin && Colors.white};
+				> svg {
+					flex-shrink: 0;
+
+					> path {
+						transition: 0.5s ease;
+						fill: ${(props) => props.isAdmin && Colors.white};
+					}
 				}
 
 				&:hover {
@@ -185,6 +207,20 @@ namespace S {
 						fill: ${(props) => props.isAdmin && Colors.blue100};
 					}
 				}
+			}
+		}
+
+		@media ${Devices.mobile} {
+			padding: 1.8rem 2rem;
+
+			> h3 {
+				${Fonts.medium15}
+			}
+
+			> div > p {
+				${Fonts.regular14}
+				line-height: 130%;
+				word-break: break-all;
 			}
 		}
 	`;

@@ -6,6 +6,7 @@ import {
 	ResponsePaperKeys,
 	ResponsePublicationKeys,
 	ResponseResourceKeys,
+	ResponseCommonKeys,
 } from './responseKeys';
 
 export const BoardColumnOrders = {
@@ -41,4 +42,7 @@ export const BoardColumnOrders = {
 		.set(ResponseFAQKeys.title, '제목')
 		.set(ResponseFAQKeys.category, '분류')
 		.set(ResponseFAQKeys.createdDate, '날짜'),
+	mobile: new Map() //
+		.set(ResponseCommonKeys.id, '번호')
+		.set(ResponseCommonKeys.title, '제목'),
 } as const;
