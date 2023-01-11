@@ -1,0 +1,24 @@
+name: Dev CI/CD
+
+on:
+  push:
+    branches: [develop]
+
+env:
+  BRANCH_NAME: develop
+  DOCKER_IMAGE: sookyeong/ssk-front
+  DOCKER_NAME: ssk-front
+
+jobs:
+  CI_CD:
+    name: CI/CD
+    runs-on: [self-hosted, ssk-front]
+    steps:
+      - name: Deploy
+        run: |
+          cd ~/ssk-adds
+          git fetch --all && git reset --hard origin/${{ env.BRANCH_NAME }} && git pull origin ${{ env.BRANCH_NAME }}
+          cp ../.env ./.env
+          docker build -t ${{ env.DOCKER_IMAGE }}:latest .
+          docker stop ${{ env.DOCKER_NAME }} && docker rm ${{ env.DOCKER_NAME }}
+          docker run -d -p 80:3000 --name ${{ env.DOCKER_NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
