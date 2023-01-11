@@ -67,12 +67,12 @@ function FAQBoxElement({ idx, category, question, answer }: FAQBoxElementProps) 
 	useSlide<HTMLPreElement>({ targetRef, isOpen });
 
 	return (
-		<S.FAQBox onClick={onToggle} isOpen={isOpen}>
+		<S.FAQBox isOpen={isOpen}>
 			<h3>
 				<S.Accent>Q</S.Accent>
 				<S.SemiAccent>{idx}</S.SemiAccent> <span>{category}</span>
 			</h3>
-			<div>
+			<div onClick={onToggle}>
 				<pre>{question}</pre>
 				<pre ref={targetRef}>
 					<S.Accent>A</S.Accent>

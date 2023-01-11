@@ -71,3 +71,15 @@ type PaperNewEditProps = {
 	onChangeDoi: (e: ChangeEvent<HTMLInputElement>) => void;
 	onSubmit: () => void;
 };
+
+/**
+ * @for ContactEdit */
+type ContactEditProps = {
+	email: string;
+	phoneNumber: string;
+	wayToLab: string;
+	onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangePhoneNumber: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeWayToLab: (e: ChangeEvent<HTMLInputElement>) => void;
+	onSubmit: () => void;
+};

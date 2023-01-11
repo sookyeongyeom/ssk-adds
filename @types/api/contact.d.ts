@@ -1,5 +1,11 @@
 export namespace RequestContact {
-	type Get = {};
+	type Put = {
+		id?: number;
+		body?: string;
+		email: string;
+		phoneNumber: string;
+		wayToLab: string;
+	};
 }
 
 export namespace ResponseContact {
@@ -12,4 +18,6 @@ export namespace ResponseContact {
 		phoneNumber: string;
 		wayToLab: string;
 	};
+
+	type Put = string;
 }

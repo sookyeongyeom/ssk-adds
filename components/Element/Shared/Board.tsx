@@ -117,6 +117,8 @@ namespace S {
 
 			&:nth-of-type(2) {
 				${Fonts.regular16}
+				white-space: normal;
+				line-height: 140%;
 			}
 		}
 

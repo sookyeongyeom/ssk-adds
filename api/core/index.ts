@@ -30,7 +30,7 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
 	(response) => {
-		return toCamel(response.data);
+		return toCamel({ ...response.data });
 	},
 	(error) => {
 		return Promise.reject(error);
