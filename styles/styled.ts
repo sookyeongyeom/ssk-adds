@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { Colors } from './colors';
 import { Devices } from './devices';
 import { Fonts } from './fonts';
+import { Sizes } from './sizes';
 
 export namespace SC {
 	export const AlignSelectBoxForBoard = css`
@@ -161,6 +162,96 @@ export namespace SC {
 
 		@media ${Devices.mobile} {
 			display: block;
+		}
+	`;
+
+	export const PaperNewsPageLayout = styled.div`
+		${SC.AlignSelectBoxForBoard}
+
+		>div:nth-of-type(2) {
+			display: flex;
+			flex-direction: column;
+			gap: 4rem;
+			margin-top: 2rem;
+
+			> div:last-of-type {
+				margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 4rem);
+			}
+		}
+	`;
+
+	export const PaperNewsBox = styled.div`
+		display: grid;
+		grid-template-columns: 3rem 64rem 1fr;
+		column-gap: 1rem;
+		row-gap: 0.4rem;
+
+		> h2 {
+			${Fonts.medium18}
+			color:${Colors.blue300};
+			position: relative;
+			top: 0.3rem;
+		}
+
+		> h3 {
+			${Fonts.medium16}
+			line-height:140%
+		}
+
+		> h4 {
+			${Fonts.light14}
+			line-height: 140%;
+			grid-row: 2/2;
+			grid-column: 2/3;
+		}
+
+		> ul {
+			grid-row: 1/4;
+			grid-column: 3/4;
+			position: relative;
+			top: -0.5rem;
+			margin-left: 0.8rem;
+
+			> li {
+				${Fonts.regular14}
+				background-color: ${Colors.blue275};
+				color: ${Colors.white};
+				border-radius: 1.3rem;
+				padding: 0.6rem 1.1rem;
+				padding-bottom: 0.7rem;
+				width: fit-content;
+				display: inline-block;
+				margin: 0.4rem;
+			}
+		}
+
+		@media ${Devices.mobile} {
+			grid-template-columns: 3rem 1fr;
+			row-gap: 0.5rem;
+
+			> h2 {
+				text-align: center;
+			}
+
+			> h4 {
+				grid-column: 2/4;
+			}
+
+			> ul {
+				top: 0;
+				margin: 0;
+				margin-top: 0.3rem;
+				grid-row: 3/4;
+				grid-column: 2/4;
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 0.8rem 1rem;
+
+				> li {
+					margin: 0;
+				}
+			}
 		}
 	`;
 }
