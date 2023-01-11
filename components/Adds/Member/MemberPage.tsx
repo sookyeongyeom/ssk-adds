@@ -14,6 +14,7 @@ import { S3Folders } from '../../../constants/s3';
 import { Assets } from '../../../constants/assets';
 import stringToJson from '../../../utils/stringToJson';
 import { MemberBoxElementProps } from '../../../@types/adds';
+import { Devices } from '../../../styles/devices';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();
@@ -78,7 +79,7 @@ function MemberBoxElement({
 						<p>{email}</p>
 					</S.Contact>
 					<S.Contact>
-						<h4>Tel</h4>
+						<h4>Telephone</h4>
 						<p>{phoneNumber}</p>
 					</S.Contact>
 					<S.Contact>
@@ -116,6 +117,10 @@ namespace S {
 		box-shadow: ${BoxShadows.smooth};
 		overflow: hidden;
 
+		@media ${Devices.mobile} {
+			grid-template-columns: 1fr;
+		}
+
 		/* 사진 */
 		> div:first-of-type {
 			grid-row: 1/3;
@@ -126,6 +131,13 @@ namespace S {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+			}
+
+			@media ${Devices.mobile} {
+				width: 70vw;
+				height: 93vw;
+				margin: 0 auto;
+				margin-top: 3.4rem;
 			}
 		}
 
@@ -153,6 +165,21 @@ namespace S {
 				padding-bottom: 0.5rem;
 				overflow: hidden;
 			}
+
+			@media ${Devices.mobile} {
+				text-align: center;
+				padding: 2rem;
+
+				> p {
+					padding-top: 0;
+				}
+
+				> div {
+					display: flex;
+					flex-direction: column;
+					gap: 1.5rem;
+				}
+			}
 		}
 
 		/* 소개 */
@@ -167,6 +194,15 @@ namespace S {
 			> p {
 				${Fonts.regular16}
 				line-height: 120%;
+			}
+
+			@media ${Devices.mobile} {
+				padding: 1.5rem;
+				gap: 0.5rem;
+
+				> p {
+					${Fonts.regular14}
+				}
 			}
 		}
 	`;
