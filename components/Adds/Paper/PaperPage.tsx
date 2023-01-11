@@ -11,6 +11,7 @@ import PageButton from '../../Element/Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
 import { SC } from '../../../styles/styled';
 import { PaperBoxElementProps } from '../../../@types/adds';
+import { Devices } from '../../../styles/devices';
 
 export default function PaperPage() {
 	const [paper, setPaper] = useState<ResponsePaper.Get>();
@@ -90,6 +91,10 @@ namespace S {
 				margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 4rem);
 			}
 		}
+
+		@media ${Devices.mobile} {
+			padding: 0 2rem;
+		}
 	`;
 
 	export const PaperBox = styled.div`
@@ -135,6 +140,35 @@ namespace S {
 				width: fit-content;
 				display: inline-block;
 				margin: 0.4rem;
+			}
+		}
+
+		@media ${Devices.mobile} {
+			grid-template-columns: 3rem 1fr;
+			row-gap: 0.5rem;
+
+			> h2 {
+				text-align: center;
+			}
+
+			> h4 {
+				grid-column: 2/4;
+			}
+
+			> ul {
+				top: 0;
+				margin: 0;
+				margin-top: 0.3rem;
+				grid-row: 3/4;
+				grid-column: 2/4;
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 0.8rem 1rem;
+
+				> li {
+					margin: 0;
+				}
 			}
 		}
 	`;
