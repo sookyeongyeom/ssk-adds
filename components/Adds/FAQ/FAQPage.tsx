@@ -93,10 +93,6 @@ namespace S {
 		> div:last-of-type {
 			margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 4rem);
 		}
-
-		@media ${Devices.mobile} {
-			padding: 0 2rem;
-		}
 	`;
 
 	export const FAQBox = styled.div<FAQBoxProps>`

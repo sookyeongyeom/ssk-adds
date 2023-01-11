@@ -25,13 +25,13 @@ export default function Board({
 	const onNew = () => router.push(basePath + Paths.new);
 
 	return (
-		<div>
+		<S.BoardLayout>
 			{isAdmin && (
 				<SC.AlignButtonRight>
 					<AdminButton onClick={onNew}>새 글 작성</AdminButton>
 				</SC.AlignButtonRight>
 			)}
-			<S.BoardLayout isAdmin={isAdmin}>
+			<S.BoardTable isAdmin={isAdmin}>
 				<thead>
 					<tr>
 						{!!dataMaps?.length &&
@@ -57,7 +57,7 @@ export default function Board({
 							</tr>
 						))}
 				</tbody>
-			</S.BoardLayout>
+			</S.BoardTable>
 			<div>
 				<PageButton
 					currentPage={currentPage}
@@ -66,12 +66,14 @@ export default function Board({
 					onChangePage={onChangePage}
 				/>
 			</div>
-		</div>
+		</S.BoardLayout>
 	);
 }
 
 namespace S {
-	export const BoardLayout = styled.table<BoardLayoutProps>`
+	export const BoardLayout = styled.div``;
+
+	export const BoardTable = styled.table<BoardLayoutProps>`
 		width: 100%;
 		text-align: center;
 

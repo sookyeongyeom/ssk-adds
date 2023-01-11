@@ -95,8 +95,6 @@ namespace S {
 		}
 
 		@media ${Devices.mobile} {
-			padding: 0 2rem;
-
 			/* 생체지표 */
 			> div:last-of-type {
 				height: 38rem;
