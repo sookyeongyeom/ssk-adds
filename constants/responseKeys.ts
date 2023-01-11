@@ -9,6 +9,7 @@ import { ResponseResource } from '../@types/api/resource';
 
 export const ResponseCommonKeys = {
 	id: 'id',
+	title: 'title',
 } as const;
 
 export const ResponseMemberKeys: ResponseMember.Item = {
