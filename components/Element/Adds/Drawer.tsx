@@ -6,11 +6,11 @@ import Sidebar from './Sidebar';
 import useTitlePath from '../../../hooks/useTitlePath';
 import { DrawerProps } from '../../../@types/adds';
 import { Fonts } from '../../../styles/fonts';
-import usePreventScroll from '../../../hooks/usePreventScroll';
+import usePreventBodyScroll from '../../../hooks/usePreventBodyScroll';
 
 export default function Drawer({ isDrawerOpen, drawerRef }: DrawerProps) {
 	const { path } = useTitlePath();
-	usePreventScroll(isDrawerOpen);
+	usePreventBodyScroll(isDrawerOpen);
 	return (
 		<>
 			<S.DrawerLayout isOpen={isDrawerOpen} ref={drawerRef}>
