@@ -55,6 +55,16 @@ type NewsBoxElementProps = {
 };
 
 /**
+ * @for PublicationBoxElement
+ * @in PublicationPage */
+type PublicationBoxElementProps = {
+	title: string;
+	writer: string;
+	img: string;
+	pdf: string;
+};
+
+/**
  * @for Header */
 type HeaderProps = {
 	onOpenDrawer: (e: React.MouseEvent) => void;
