@@ -25,6 +25,7 @@ export default function NewsPage() {
 				order={BoardColumnOrders.news}
 				currentPage={page}
 				totalPosts={news?.total}
+				size={news?.size}
 				onChangePage={onChangePage}
 				isAdmin
 			/>

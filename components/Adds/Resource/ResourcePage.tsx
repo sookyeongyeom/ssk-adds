@@ -29,6 +29,7 @@ export default function ResourcePage() {
 				order={BoardColumnOrders.resource}
 				currentPage={page}
 				totalPosts={resource?.total}
+				size={resource?.size}
 				onChangePage={onChangePage}
 			/>
 		</S.ResourcePageLayout>

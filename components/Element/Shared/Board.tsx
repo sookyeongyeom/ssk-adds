@@ -17,6 +17,7 @@ export default function Board({
 	order,
 	currentPage,
 	totalPosts,
+	size,
 	onChangePage,
 	isAdmin = false,
 }: BoardProps) {
@@ -58,7 +59,12 @@ export default function Board({
 				</tbody>
 			</S.BoardLayout>
 			<div>
-				<PageButton currentPage={currentPage} totalPosts={totalPosts} onChangePage={onChangePage} />
+				<PageButton
+					currentPage={currentPage}
+					totalPosts={totalPosts}
+					size={size}
+					onChangePage={onChangePage}
+				/>
 			</div>
 		</div>
 	);

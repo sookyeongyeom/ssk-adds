@@ -25,6 +25,7 @@ export default function PublicationPage() {
 				order={BoardColumnOrders.publication}
 				currentPage={page}
 				totalPosts={publication?.total}
+				size={publication?.size}
 				onChangePage={onChangePage}
 				isAdmin
 			/>

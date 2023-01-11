@@ -46,7 +46,12 @@ export default function FAQPage() {
 				/>
 			)}
 			<div>
-				<PageButton currentPage={page} totalPosts={faqs?.total} onChangePage={onChangePage} />
+				<PageButton
+					currentPage={page}
+					totalPosts={faqs?.total}
+					size={faqs?.size}
+					onChangePage={onChangePage}
+				/>
 			</div>
 		</S.FAQPageLayout>
 	);

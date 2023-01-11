@@ -25,6 +25,7 @@ export default function FAQPage() {
 				order={BoardColumnOrders.faq}
 				currentPage={page}
 				totalPosts={faq?.total}
+				size={faq?.size}
 				onChangePage={onChangePage}
 				isAdmin
 			/>

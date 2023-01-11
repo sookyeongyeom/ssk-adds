@@ -40,7 +40,12 @@ export default function MemberPage() {
 					/>
 				))}
 			<div>
-				<PageButton currentPage={page} totalPosts={members?.total} onChangePage={onChangePage} />
+				<PageButton
+					currentPage={page}
+					totalPosts={members?.total}
+					size={members?.size}
+					onChangePage={onChangePage}
+				/>
 			</div>
 		</S.MemberPageLayout>
 	);

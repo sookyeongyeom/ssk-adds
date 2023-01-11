@@ -5,7 +5,12 @@ import { Fonts } from '../../../styles/fonts';
 import { PageButtonProps } from '../../../@types/shared';
 import { useState, useEffect } from 'react';
 
-export default function PageButton({ currentPage, totalPosts, onChangePage }: PageButtonProps) {
+export default function PageButton({
+	currentPage,
+	totalPosts,
+	size = 10,
+	onChangePage,
+}: PageButtonProps) {
 	const [pages, setPages] = useState<number[]>([]);
 	const [block, setBlock] = useState(1);
 
@@ -43,7 +48,7 @@ export default function PageButton({ currentPage, totalPosts, onChangePage }: Pa
 
 	useEffect(() => {
 		if (totalPosts) {
-			const pagesCnt = Math.ceil(totalPosts / 10);
+			const pagesCnt = Math.ceil(totalPosts / size);
 			const pages = [
 				...Array(pagesCnt)
 					.fill(0)
