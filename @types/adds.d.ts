@@ -45,6 +45,16 @@ type PaperBoxElementProps = {
 };
 
 /**
+ * @for NewsBoxElement
+ * @in NewsPage */
+type NewsBoxElementProps = {
+	id: number;
+	title: string;
+	body: string;
+	url: string;
+};
+
+/**
  * @for Header */
 type HeaderProps = {
 	onOpenDrawer: (e: React.MouseEvent) => void;
