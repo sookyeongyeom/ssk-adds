@@ -25,6 +25,7 @@ export default function PaperPage() {
 				order={BoardColumnOrders.paper}
 				currentPage={page}
 				totalPosts={paper?.total}
+				size={paper?.size}
 				onChangePage={onChangePage}
 				isAdmin
 			/>

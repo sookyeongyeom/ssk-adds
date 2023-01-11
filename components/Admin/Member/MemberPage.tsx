@@ -25,6 +25,7 @@ export default function MemberPage() {
 				order={BoardColumnOrders.member}
 				currentPage={page}
 				totalPosts={member?.total}
+				size={member?.size}
 				onChangePage={onChangePage}
 				isAdmin
 			/>

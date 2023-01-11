@@ -25,6 +25,7 @@ export default function NoticePage() {
 				order={BoardColumnOrders.notice}
 				currentPage={page}
 				totalPosts={notice?.total}
+				size={notice?.size}
 				onChangePage={onChangePage}
 				isAdmin
 			/>

@@ -49,7 +49,12 @@ export default function PaperPage() {
 					/>
 				)}
 				<div>
-					<PageButton currentPage={page} totalPosts={paper?.total} onChangePage={onChangePage} />
+					<PageButton
+						currentPage={page}
+						totalPosts={paper?.total}
+						size={paper?.size}
+						onChangePage={onChangePage}
+					/>
 				</div>
 			</div>
 		</S.PaperPageLayout>
