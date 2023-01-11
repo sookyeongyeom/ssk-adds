@@ -117,3 +117,9 @@ type isShortenType = {
 type isOpenType = {
 	isOpen: boolean;
 };
+
+/**
+ * @in AddsLayout */
+type hasPaddingType = {
+	hasPadding: boolean;
+};
