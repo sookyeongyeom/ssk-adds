@@ -12,6 +12,7 @@ import PageButton from '../../Element/Shared/PageButton';
 import useChangePage from '../../../hooks/useChangePage';
 import { Sizes } from '../../../styles/sizes';
 import { FAQBoxElementProps } from '../../../@types/adds';
+import { Devices } from '../../../styles/devices';
 
 export default function FAQPage() {
 	const [faqs, setFaqs] = useState<ResponseFAQ.Get>();
@@ -92,6 +93,10 @@ namespace S {
 		> div:last-of-type {
 			margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 4rem);
 		}
+
+		@media ${Devices.mobile} {
+			padding: 0 2rem;
+		}
 	`;
 
 	export const FAQBox = styled.div<FAQBoxProps>`
@@ -104,6 +109,10 @@ namespace S {
 			> span {
 				${Fonts.medium14}
 			}
+
+			@media ${Devices.mobile} {
+				padding-left: 0.5rem;
+			}
 		}
 
 		/* 질문 및 답변 박스 */
@@ -113,12 +122,21 @@ namespace S {
 			border-radius: 1rem;
 			padding: 3rem;
 
+			@media ${Devices.mobile} {
+				padding: 2.5rem;
+			}
+
 			/* 질문 */
 			> pre:first-of-type {
 				${Fonts.medium18}
 				white-space: pre-wrap;
 				line-height: 140%;
 				margin-bottom: 2.3rem;
+
+				@media ${Devices.mobile} {
+					${Fonts.medium16}
+					word-break: keep-all;
+				}
 			}
 
 			/* 답변 */
@@ -131,6 +149,11 @@ namespace S {
 					line-height: 140%;
 					position: relative;
 					top: 0.3rem;
+
+					@media ${Devices.mobile} {
+						${Fonts.regular16}
+						word-break: keep-all;
+					}
 				}
 			}
 
