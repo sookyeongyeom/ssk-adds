@@ -157,7 +157,7 @@ type AdminViewProps = ChildrenType & {
 	id: number;
 	basePath: string;
 	onEdit: () => void;
-	onDelete: () => void;
+	onDelete?: () => void;
 };
 
 /**
