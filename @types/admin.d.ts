@@ -73,13 +73,21 @@ type PaperNewEditProps = {
 };
 
 /**
+ * @for usePhoneNumbers */
+type PhoneNumberType = {
+	name: string;
+	phoneNumber: string;
+};
+
+/**
  * @for ContactEdit */
 type ContactEditProps = {
 	email: string;
-	phoneNumber: string;
+	phoneNumbers: PhoneNumberType[];
 	wayToLab: string;
 	onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
-	onChangePhoneNumber: (e: ChangeEvent<HTMLInputElement>) => void;
+	onChangeName: (e: ChangeEvent<HTMLInputElement>, idx: number) => void;
+	onChangePhoneNumber: (e: ChangeEvent<HTMLInputElement>, idx: number) => void;
 	onChangeWayToLab: (e: ChangeEvent<HTMLInputElement>) => void;
 	onSubmit: () => void;
 };

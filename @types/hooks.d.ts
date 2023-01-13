@@ -21,3 +21,10 @@ type useValidationTargetsType = {
 	name: string;
 	ref: MutableRefObject<HTMLInputElement>;
 }[];
+
+/**
+ * @for usePhoneNumbers */
+type PhoneNumberType = {
+	name: string;
+	phoneNumber: string;
+};
