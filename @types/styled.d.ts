@@ -123,3 +123,9 @@ type isOpenType = {
 type hasPaddingType = {
 	hasPadding: boolean;
 };
+
+/**
+ * @in ContactPage */
+type isHoverType = {
+	isHover: boolean;
+};
