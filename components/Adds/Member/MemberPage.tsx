@@ -15,6 +15,9 @@ import { Assets } from '../../../constants/assets';
 import stringToJson from '../../../utils/stringToJson';
 import { MemberBoxElementProps } from '../../../@types/adds';
 import { Devices } from '../../../styles/devices';
+import { svgMemberEmail, svgMemberTelephone, svgMemberHomepage } from '../../../styles/svgs';
+import useRoute from '../../../hooks/useRoute';
+import breakLineByAt from '../../../utils/breakLineByAt';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();
@@ -62,6 +65,7 @@ function MemberBoxElement({
 	img,
 	responsibility,
 }: MemberBoxElementProps) {
+	const { onRouteToPath } = useRoute(`http://${homepage}`);
 	let imgSrc: string = Assets.placeholderImgSrc;
 	const parsedImg: FileDataType = stringToJson(img)?.[0];
 	if (parsedImg) imgSrc = getDownloadLinkFromS3(S3Folders.member, parsedImg.key);
@@ -75,22 +79,15 @@ function MemberBoxElement({
 				<h2>{name}</h2>
 				<div>
 					<S.Contact>
-						<h4>E-mail</h4>
-						<p>{email}</p>
-					</S.Contact>
-					<S.Contact>
-						<h4>Telephone</h4>
+						<div>{svgMemberTelephone}</div>
 						<p>{phoneNumber}</p>
 					</S.Contact>
 					<S.Contact>
-						<h4>Homepage</h4>
-						<p>
-							<a href={homepage} target='_blank'>
-								{homepage}
-							</a>
-						</p>
+						<div>{svgMemberEmail}</div>
+						<p>{breakLineByAt(email)}</p>
 					</S.Contact>
 				</div>
+				<S.Homepage onClick={onRouteToPath}>{svgMemberHomepage}</S.Homepage>
 			</div>
 			<div>
 				<p>{jobTitle}</p>
@@ -102,18 +99,24 @@ function MemberBoxElement({
 
 namespace S {
 	export const MemberPageLayout = styled.div`
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 		gap: 3rem;
+
+		> div:first-of-type {
+			grid-column: 1/3;
+		}
 
 		> div:last-of-type {
 			margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 3rem);
+			grid-column: 1/3;
 		}
 	`;
 
 	export const MemberBox = styled.div`
 		display: grid;
-		grid-template-columns: 27rem 1fr;
+		grid-template-columns: 24rem 1fr;
+		grid-template-rows: 26.5rem 1fr;
 		box-shadow: ${BoxShadows.smooth};
 		overflow: hidden;
 
@@ -123,9 +126,8 @@ namespace S {
 
 		/* 사진 */
 		> div:first-of-type {
-			grid-row: 1/3;
+			grid-row: 1/2;
 			background-color: lightgray;
-			height: 36rem;
 
 			> img {
 				width: 100%;
@@ -144,26 +146,26 @@ namespace S {
 		/* 프로필 */
 		> div:nth-of-type(2) {
 			background-color: ${Colors.white};
-			padding: 3.4rem;
+			padding: 2rem;
+			padding-top: 6.5rem;
+			position: relative;
 
 			> p {
-				${Fonts.regular16}
+				${Fonts.regular18}
 				margin-bottom: 1rem;
 				padding-top: 0.5rem;
 			}
 
 			> h2 {
-				${Fonts.bold28}
-				margin-bottom: 2rem;
+				${Fonts.bold32}
+				margin-bottom: 3rem;
 			}
 
+			/* Contact Wrapper */
 			> div {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 2rem;
-				column-gap: 4rem;
-				padding-bottom: 0.5rem;
-				overflow: hidden;
+				display: flex;
+				flex-direction: column;
+				gap: 1.7rem;
 			}
 
 			@media ${Devices.mobile} {
@@ -184,12 +186,13 @@ namespace S {
 
 		/* 소개 */
 		> div:last-of-type {
-			background-color: ${Colors.blue100};
+			grid-column: 1/3;
+			background: linear-gradient(90deg, #e4e9f0 -7.97%, rgba(228, 233, 240, 0) 104.66%);
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			gap: 0.8rem;
-			padding: 2.3rem 3.4rem;
+			gap: 0.5rem;
+			padding: 2rem;
 
 			> p {
 				${Fonts.regular16}
@@ -208,22 +211,29 @@ namespace S {
 	`;
 
 	export const Contact = styled.div`
-		> h4 {
-			${Fonts.regular12}
-			border-bottom: 0.1rem dashed ${Colors.blue100};
-			padding: 0.6rem 0;
-			margin-bottom: 0.5rem;
-			color: ${Colors.gray200};
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+
+		> div {
+			width: 3rem;
+			display: flex;
+			justify-content: center;
 		}
 
 		> p {
 			${Fonts.regular14}
-			white-space: nowrap;
+			white-space: pre-wrap;
+			line-height: 140%;
 		}
+	`;
 
-		/* Homepage */
-		&:last-of-type {
-			grid-column: 1/3;
-		}
+	export const Homepage = styled.div`
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: ${Colors.blue200};
+		padding: 1.22rem 1rem;
+		cursor: pointer;
 	`;
 }
