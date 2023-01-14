@@ -8,8 +8,11 @@ import { Fonts } from '../../../styles/fonts';
 import { svgEmail, svgTelephone, svgMap } from '../../../styles/svgs';
 import stringToJson from '../../../utils/stringToJson';
 import { BoxShadows } from '../../../styles/shadows';
+import useMobile from '../../../hooks/useMobile';
+import { Devices } from '../../../styles/devices';
 
 export default function ContactPage() {
+	const isMobile = useMobile();
 	const [contact, setContact] = useState<ResponseContact.Get>();
 	const [isHover, setIsHover] = useState(false);
 
@@ -55,23 +58,53 @@ export default function ContactPage() {
 						)}
 					</div>
 				</S.SmallCircle>
-			</div>
-			<div>
-				{contact && (
+				{isMobile && (
 					<>
-						<S.ExtraPhoneNumber isHover={isHover}>
+						<S.SmallCircle isHover={isHover}>
 							<div>{svgTelephone}</div>
-							<div>{stringToJson(contact[0]?.phoneNumber)[1].name}</div>
-							<div>{stringToJson(contact[0]?.phoneNumber)[1].phoneNumber}</div>
-						</S.ExtraPhoneNumber>
-						<S.ExtraPhoneNumber isHover={isHover}>
+							<div>
+								{contact && (
+									<>
+										{stringToJson(contact[0]?.phoneNumber)[1].name}
+										<br />
+										{stringToJson(contact[0]?.phoneNumber)[1].phoneNumber}
+									</>
+								)}
+							</div>
+						</S.SmallCircle>
+						<S.SmallCircle isHover={isHover}>
 							<div>{svgTelephone}</div>
-							<div>{stringToJson(contact[0]?.phoneNumber)[2].name}</div>
-							<div>{stringToJson(contact[0]?.phoneNumber)[2].phoneNumber}</div>
-						</S.ExtraPhoneNumber>
+							<div>
+								{contact && (
+									<>
+										{stringToJson(contact[0]?.phoneNumber)[2].name}
+										<br />
+										{stringToJson(contact[0]?.phoneNumber)[2].phoneNumber}
+									</>
+								)}
+							</div>
+						</S.SmallCircle>
 					</>
 				)}
 			</div>
+			{!isMobile && (
+				<div>
+					{contact && (
+						<>
+							<S.ExtraPhoneNumber isHover={isHover}>
+								<div>{svgTelephone}</div>
+								<div>{stringToJson(contact[0]?.phoneNumber)[1].name}</div>
+								<div>{stringToJson(contact[0]?.phoneNumber)[1].phoneNumber}</div>
+							</S.ExtraPhoneNumber>
+							<S.ExtraPhoneNumber isHover={isHover}>
+								<div>{svgTelephone}</div>
+								<div>{stringToJson(contact[0]?.phoneNumber)[2].name}</div>
+								<div>{stringToJson(contact[0]?.phoneNumber)[2].phoneNumber}</div>
+							</S.ExtraPhoneNumber>
+						</>
+					)}
+				</div>
+			)}
 		</S.ContactPageLayout>
 	);
 }
@@ -84,11 +117,16 @@ namespace S {
 		background-position: center center;
 		padding-bottom: 10rem;
 
+		/* Announce */
 		> div:first-of-type {
 			${Fonts.medium20}
 			line-height: 170%;
 			text-align: center;
 			padding: 1.9rem 0 3.9rem 0;
+
+			@media ${Devices.mobile} {
+				${Fonts.medium14}
+			}
 		}
 
 		/* Circle Wrapper */
@@ -98,9 +136,17 @@ namespace S {
 			justify-content: center;
 			gap: 4.2rem;
 			padding: 3.5rem 0;
+
+			@media ${Devices.mobile} {
+				flex-direction: column;
+				padding: 0;
+				margin-top: 1rem;
+				gap: 3rem;
+			}
 		}
 
-		> div:last-of-type {
+		/* Extra Phone Numbers */
+		> div:nth-of-type(3) {
 			padding: ${(props) => (!props.isHover ? '3rem 4rem' : '3.5rem 4.5rem')};
 			background-color: ${(props) => (!props.isHover ? Colors.blue200 : Colors.white)};
 			width: fit-content;
@@ -109,6 +155,10 @@ namespace S {
 			margin-top: 3.9rem;
 			transition: 0.5s ease;
 			display: flex;
+		}
+
+		@media ${Devices.mobile} {
+			padding-bottom: 0;
 		}
 	`;
 
