@@ -79,6 +79,29 @@ namespace S {
 			h3 {
 				border: none !important;
 			}
+
+			> div {
+				margin-bottom: 1rem;
+			}
+
+			h3 {
+				${Fonts.medium15}
+				padding: 0;
+				padding-left: 0.5rem;
+				background-color: transparent;
+				color: ${Colors.blue450};
+				-webkit-tap-highlight-color: transparent;
+
+				&:before {
+					content: url(/assets/drawer_menu.svg);
+					margin-right: 0.5rem;
+				}
+
+				+ ul {
+					padding-top: 1.2rem;
+					padding-left: 3rem;
+				}
+			}
 		}
 	`;
 
