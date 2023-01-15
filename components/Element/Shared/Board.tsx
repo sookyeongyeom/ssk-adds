@@ -10,6 +10,7 @@ import PageButton from '../Shared/PageButton';
 import { Sizes } from '../../../styles/sizes';
 import { BoardProps } from '../../../@types/shared';
 import { SC } from '../../../styles/styled';
+import { Devices } from '../../../styles/devices';
 
 export default function Board({
 	dataMaps,
@@ -119,6 +120,18 @@ namespace S {
 				${Fonts.regular16}
 				white-space: normal;
 				line-height: 140%;
+
+				@media ${Devices.mobile} {
+					text-align: left;
+					padding: 1.3rem 0.5rem;
+				}
+			}
+		}
+
+		> thead > tr > th:not(:nth-of-type(2)),
+		> tbody > tr > td:not(:nth-of-type(2)) {
+			@media ${Devices.mobile} {
+				display: none;
 			}
 		}
 
