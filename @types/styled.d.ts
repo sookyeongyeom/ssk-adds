@@ -129,3 +129,9 @@ type hasPaddingType = {
 type isHoverType = {
 	isHover: boolean;
 };
+
+/**
+ * @in MemberPage */
+type isPinnedType = {
+	isPinned: boolean;
+};
