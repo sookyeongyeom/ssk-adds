@@ -30,6 +30,7 @@ type MemberBoxElementProps = {
 	jobTitle: string;
 	img: string;
 	responsibility: string;
+	isPinned: boolean;
 };
 
 /**

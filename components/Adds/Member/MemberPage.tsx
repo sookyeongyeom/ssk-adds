@@ -15,6 +15,13 @@ import { Assets } from '../../../constants/assets';
 import stringToJson from '../../../utils/stringToJson';
 import { MemberBoxElementProps } from '../../../@types/adds';
 import { Devices } from '../../../styles/devices';
+import { svgMemberEmail, svgMemberTelephone, svgMemberHomepage } from '../../../styles/svgs';
+import breakLineByAt from '../../../utils/breakLineByAt';
+import { Responsibilities } from '../../../constants/responsibilities';
+import removeWhiteSpaces from '../../../utils/removeWhiteSpaces';
+import { css } from 'styled-components';
+import Link from 'next/link';
+import attachProtocol from '../../../utils/attachProtocol';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();
@@ -37,6 +44,7 @@ export default function MemberPage() {
 						jobTitle={member.jobTitle}
 						img={member.img}
 						responsibility={member.responsibility}
+						isPinned={removeWhiteSpaces(member.responsibility) === Responsibilities.leader}
 						key={i}
 					/>
 				))}
@@ -61,12 +69,13 @@ function MemberBoxElement({
 	introBody,
 	img,
 	responsibility,
+	isPinned,
 }: MemberBoxElementProps) {
 	let imgSrc: string = Assets.placeholderImgSrc;
 	const parsedImg: FileDataType = stringToJson(img)?.[0];
 	if (parsedImg) imgSrc = getDownloadLinkFromS3(S3Folders.member, parsedImg.key);
 	return (
-		<S.MemberBox>
+		<S.MemberBox isPinned={isPinned}>
 			<div>
 				<img src={imgSrc} />
 			</div>
@@ -75,22 +84,17 @@ function MemberBoxElement({
 				<h2>{name}</h2>
 				<div>
 					<S.Contact>
-						<h4>E-mail</h4>
-						<p>{email}</p>
-					</S.Contact>
-					<S.Contact>
-						<h4>Telephone</h4>
+						<div>{svgMemberTelephone}</div>
 						<p>{phoneNumber}</p>
 					</S.Contact>
 					<S.Contact>
-						<h4>Homepage</h4>
-						<p>
-							<a href={homepage} target='_blank'>
-								{homepage}
-							</a>
-						</p>
+						<div>{svgMemberEmail}</div>
+						<p>{breakLineByAt(email)}</p>
 					</S.Contact>
 				</div>
+				<Link href={attachProtocol(homepage)} passHref>
+					<S.Homepage>{svgMemberHomepage}</S.Homepage>
+				</Link>
 			</div>
 			<div>
 				<p>{jobTitle}</p>
@@ -102,128 +106,224 @@ function MemberBoxElement({
 
 namespace S {
 	export const MemberPageLayout = styled.div`
-		display: flex;
-		flex-direction: column;
-		gap: 3rem;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 2.7rem;
+		row-gap: 9rem;
 
 		> div:last-of-type {
 			margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 3rem);
+			grid-column: 1/3;
+		}
+
+		@media ${Devices.mobile} {
+			display: flex;
+			flex-direction: column;
+			gap: 3.6rem;
 		}
 	`;
 
-	export const MemberBox = styled.div`
+	export const MemberBox = styled.div<isPinnedType>`
 		display: grid;
-		grid-template-columns: 27rem 1fr;
+		grid-template-columns: 20.5rem 1fr;
+		grid-template-rows: 22.5rem 1fr;
 		box-shadow: ${BoxShadows.smooth};
 		overflow: hidden;
 
-		@media ${Devices.mobile} {
-			grid-template-columns: 1fr;
-		}
-
 		/* 사진 */
 		> div:first-of-type {
-			grid-row: 1/3;
+			grid-row: 1/2;
 			background-color: lightgray;
-			height: 36rem;
 
 			> img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
 			}
-
-			@media ${Devices.mobile} {
-				width: 70vw;
-				height: 93vw;
-				margin: 0 auto;
-				margin-top: 3.4rem;
-			}
 		}
 
 		/* 프로필 */
 		> div:nth-of-type(2) {
 			background-color: ${Colors.white};
-			padding: 3.4rem;
+			padding: 0 4rem;
+			padding-top: 0.7rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			position: relative;
 
 			> p {
-				${Fonts.regular16}
+				${Fonts.regular18}
 				margin-bottom: 1rem;
-				padding-top: 0.5rem;
 			}
 
 			> h2 {
-				${Fonts.bold28}
-				margin-bottom: 2rem;
+				${Fonts.bold32}
+				margin-bottom: 2.5rem;
 			}
 
+			/* Contact Wrapper */
 			> div {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 2rem;
-				column-gap: 4rem;
-				padding-bottom: 0.5rem;
-				overflow: hidden;
-			}
-
-			@media ${Devices.mobile} {
-				text-align: center;
-				padding: 2rem;
-
-				> p {
-					padding-top: 0;
-				}
-
-				> div {
-					display: flex;
-					flex-direction: column;
-					gap: 1.5rem;
-				}
+				display: flex;
+				flex-direction: column;
+				gap: 1.7rem;
 			}
 		}
 
 		/* 소개 */
 		> div:last-of-type {
-			background-color: ${Colors.blue100};
+			grid-column: 1/3;
+			background: ${Colors.blue100};
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			gap: 0.8rem;
-			padding: 2.3rem 3.4rem;
+			gap: 0.5rem;
+			padding: 1.5rem 2rem;
 
 			> p {
 				${Fonts.regular16}
 				line-height: 120%;
 			}
+		}
 
-			@media ${Devices.mobile} {
-				padding: 1.5rem;
-				gap: 0.5rem;
+		@media ${Devices.desktop} {
+			${(props) => props.isPinned && PinnedMemberBox}
+		}
+
+		@media ${Devices.mobile} {
+			order: ${(props) => props.isPinned && -1};
+			display: flex;
+			flex-direction: column;
+			position: relative;
+
+			> div:first-of-type {
+				width: 60vw;
+				height: 70vw;
+				margin: 0 auto;
+				margin-top: 5.63rem;
+			}
+
+			> div:nth-of-type(2) {
+				position: static;
+				align-items: center;
+				padding: 2rem 0;
 
 				> p {
-					${Fonts.regular14}
+					${Fonts.regular16}
+				}
+
+				> h2 {
+					${Fonts.bold30}
+					margin-bottom: 1.5rem;
+				}
+
+				> div {
+					gap: 0.5rem;
+
+					> div {
+						gap: 0.8rem;
+
+						> div > svg {
+							width: 2.5rem;
+						}
+
+						> p {
+							${Fonts.regular12}
+						}
+
+						&:last-of-type {
+							> div > svg {
+								width: 2.3rem;
+							}
+						}
+					}
+				}
+			}
+
+			> div:last-of-type {
+				padding: 1.45rem 1.5rem;
+
+				> p {
+					${Fonts.regular12}
 				}
 			}
 		}
 	`;
 
 	export const Contact = styled.div`
-		> h4 {
-			${Fonts.regular12}
-			border-bottom: 0.1rem dashed ${Colors.blue100};
-			padding: 0.6rem 0;
-			margin-bottom: 0.5rem;
-			color: ${Colors.gray200};
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+
+		> div {
+			width: 3rem;
+			display: flex;
+			justify-content: center;
 		}
 
 		> p {
 			${Fonts.regular14}
-			white-space: nowrap;
+			white-space: pre-wrap;
+			line-height: 140%;
+		}
+	`;
+
+	export const Homepage = styled.div`
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: ${Colors.blue200};
+		padding: 1.22rem 1rem;
+		cursor: pointer;
+	`;
+
+	const PinnedMemberBox = css`
+		width: 95%;
+		margin: 0 auto;
+		grid-column: 1/3;
+		grid-row: 1/2;
+		grid-template-columns: 27rem 1fr;
+		grid-template-rows: 1fr min-content;
+		height: 33.6rem;
+
+		> div:first-of-type {
+			grid-row: 1/3;
 		}
 
-		/* Homepage */
-		&:last-of-type {
-			grid-column: 1/3;
+		> div:nth-of-type(2) {
+			justify-content: flex-end;
+			padding-bottom: 4rem;
+
+			> h2 {
+				margin-bottom: 3.7rem;
+			}
+		}
+
+		> div:nth-of-type(2) > div {
+			flex-direction: row;
+
+			> div {
+				flex-grow: 1;
+
+				&:last-of-type > div > svg {
+					position: relative;
+					top: 0.15rem;
+				}
+			}
+
+			> div > p {
+				${Fonts.regular16}
+				white-space: nowrap;
+			}
+		}
+
+		> div:last-of-type {
+			grid-column: 2/3;
+			padding: 1.7rem 2rem;
+
+			> p {
+				${Fonts.regular18}
+			}
 		}
 	`;
 }
