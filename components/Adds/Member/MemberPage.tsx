@@ -115,6 +115,12 @@ namespace S {
 			margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 3rem);
 			grid-column: 1/3;
 		}
+
+		@media ${Devices.mobile} {
+			display: flex;
+			flex-direction: column;
+			gap: 3.6rem;
+		}
 	`;
 
 	export const MemberBox = styled.div<isPinnedType>`
@@ -123,10 +129,6 @@ namespace S {
 		grid-template-rows: 22.5rem 1fr;
 		box-shadow: ${BoxShadows.smooth};
 		overflow: hidden;
-
-		@media ${Devices.mobile} {
-			grid-template-columns: 1fr;
-		}
 
 		/* 사진 */
 		> div:first-of-type {
@@ -137,13 +139,6 @@ namespace S {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
-			}
-
-			@media ${Devices.mobile} {
-				width: 70vw;
-				height: 93vw;
-				margin: 0 auto;
-				margin-top: 3.4rem;
 			}
 		}
 
@@ -173,21 +168,6 @@ namespace S {
 				flex-direction: column;
 				gap: 1.7rem;
 			}
-
-			@media ${Devices.mobile} {
-				text-align: center;
-				padding: 2rem;
-
-				> p {
-					padding-top: 0;
-				}
-
-				> div {
-					display: flex;
-					flex-direction: column;
-					gap: 1.5rem;
-				}
-			}
 		}
 
 		/* 소개 */
@@ -204,18 +184,70 @@ namespace S {
 				${Fonts.regular16}
 				line-height: 120%;
 			}
+		}
 
-			@media ${Devices.mobile} {
-				padding: 1.5rem;
-				gap: 0.5rem;
+		@media ${Devices.desktop} {
+			${(props) => props.isPinned && PinnedMemberBox}
+		}
+
+		@media ${Devices.mobile} {
+			order: ${(props) => props.isPinned && -1};
+			display: flex;
+			flex-direction: column;
+			position: relative;
+
+			> div:first-of-type {
+				width: 60vw;
+				height: 70vw;
+				margin: 0 auto;
+				margin-top: 5.63rem;
+			}
+
+			> div:nth-of-type(2) {
+				position: static;
+				align-items: center;
+				padding: 2rem 0;
 
 				> p {
-					${Fonts.regular14}
+					${Fonts.regular16}
+				}
+
+				> h2 {
+					${Fonts.bold30}
+					margin-bottom: 1.5rem;
+				}
+
+				> div {
+					gap: 0.5rem;
+
+					> div {
+						gap: 0.8rem;
+
+						> div > svg {
+							width: 2.5rem;
+						}
+
+						> p {
+							${Fonts.regular12}
+						}
+
+						&:last-of-type {
+							> div > svg {
+								width: 2.3rem;
+							}
+						}
+					}
+				}
+			}
+
+			> div:last-of-type {
+				padding: 1.45rem 1.5rem;
+
+				> p {
+					${Fonts.regular12}
 				}
 			}
 		}
-
-		${(props) => props.isPinned && PinnedMemberBox}
 	`;
 
 	export const Contact = styled.div`
@@ -245,7 +277,7 @@ namespace S {
 		cursor: pointer;
 	`;
 
-	export const PinnedMemberBox = css`
+	const PinnedMemberBox = css`
 		width: 95%;
 		margin: 0 auto;
 		grid-column: 1/3;
@@ -263,7 +295,7 @@ namespace S {
 			padding-bottom: 4rem;
 
 			> h2 {
-				margin-bottom: 4rem;
+				margin-bottom: 3.7rem;
 			}
 		}
 
