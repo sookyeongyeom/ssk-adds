@@ -55,22 +55,22 @@ export default function ResearchPage() {
 }
 
 function ResearchBoxElement({ title, description }: ResearchBoxElementProps) {
-	const [isHover, setIsHover] = useState(false);
-	const isMobile = useMobile();
+	const [isHover, setIsHover] = useState(true);
+	// const isMobile = useMobile();
 
-	const onMouseEnter = () => !isMobile && setIsHover(true);
-	const onMouseLeave = () => !isMobile && setIsHover(false);
-	const onClick = () => isMobile && setIsHover(!isHover);
+	// const onMouseEnter = () => !isMobile && setIsHover(true);
+	// const onMouseLeave = () => !isMobile && setIsHover(false);
+	// const onClick = () => isMobile && setIsHover(!isHover);
 
-	useEffect(() => {
-		setIsHover(false);
-	}, [isMobile]);
+	// useEffect(() => {
+	// 	setIsHover(false);
+	// }, [isMobile]);
 
 	return (
 		<S.ResearchBox
-			onMouseEnter={onMouseEnter}
-			onMouseLeave={onMouseLeave}
-			onClick={onClick}
+			// onMouseEnter={onMouseEnter}
+			// onMouseLeave={onMouseLeave}
+			// onClick={onClick}
 			isHover={isHover}>
 			<S.Title as={!isHover ? 'pre' : 'h2'} isHover={isHover}>
 				{title}
@@ -89,7 +89,7 @@ namespace S {
 
 		/* 생체지표 */
 		> div:last-of-type {
-			height: 30rem;
+			/* height: 30rem; */
 			gap: 2.5rem;
 			line-height: 130%;
 		}
@@ -97,14 +97,14 @@ namespace S {
 		@media ${Devices.mobile} {
 			/* 생체지표 */
 			> div:last-of-type {
-				height: 38rem;
+				/* height: 38rem; */
 			}
 		}
 	`;
 
 	export const ResearchBox = styled.div<ResearchBoxProps>`
 		width: 100%;
-		height: 24rem;
+		/* height: 24rem; */
 		background-image: ${(props) =>
 			!props.isHover ? 'url(/assets/pattern_white.png)' : 'url(/assets/pattern_blue.png)'};
 		background-repeat: no-repeat;
@@ -115,16 +115,16 @@ namespace S {
 		flex-direction: column;
 		gap: 3rem;
 		justify-content: center;
-		padding: ${(props) => (!props.isHover ? '7rem' : '4.5rem 4.8rem 5.5rem 4.8rem')};
+		padding: ${(props) => (!props.isHover ? '7rem' : '4.5rem 4.8rem 5rem 4.8rem')};
 		position: relative;
 		box-shadow: ${BoxShadows.smooth};
 
 		@media ${Devices.mobile} {
-			padding: ${(props) => (!props.isHover ? '3.9rem' : '3rem')};
-			justify-content: ${(props) => props.isHover && 'flex-start'};
+			padding: ${(props) => (!props.isHover ? '3.9rem' : '3rem 3rem 3.5rem 3rem')};
+			/* justify-content: ${(props) => props.isHover && 'flex-start'}; */
 			gap: 2rem;
 			overflow: scroll;
-			height: 26rem;
+			/* height: 26rem; */
 		}
 	`;
 
