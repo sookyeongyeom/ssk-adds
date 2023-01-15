@@ -13,6 +13,7 @@ import useChangePage from '../../../hooks/useChangePage';
 import { Sizes } from '../../../styles/sizes';
 import { FAQBoxElementProps } from '../../../@types/adds';
 import { Devices } from '../../../styles/devices';
+import getAscendingIndex from '../../../utils/getAscendingIndex';
 
 export default function FAQPage() {
 	const [faqs, setFaqs] = useState<ResponseFAQ.Get>();
@@ -24,28 +25,18 @@ export default function FAQPage() {
 
 	return (
 		<S.FAQPageLayout>
-			{faqs ? (
+			{faqs &&
 				faqs.items.map((faq, i) => (
 					<FAQBoxElement
-						idx={faq.id + 1}
+						idx={i + 1}
 						category={faq.category}
 						question={faq.title}
 						answer={faq.reply}
 						key={i}
+						currentPage={page}
+						size={faqs.size}
 					/>
-				))
-			) : (
-				<FAQBoxElement
-					idx={0 + 1}
-					category={'OOOOOO프로젝트'}
-					question={
-						'OOOOOO프로젝트에 참여하는 사람입니다.\n하루에 세 번 OOOO을 하라고 안내 받았는데, 놓친 날이 있다면 어떻게 해야할까요?'
-					}
-					answer={
-						'OOOOOO프로젝트에 참여하시는 분들은 하루에 세 번 OOOO을 하시기를 권장드립니다.\n그러나 놓친 날이 있는 경우엔 데일리 설문조사에서 놓친 날짜, 시간에 대한 정보를 꼭 기입해주시기 바랍니다.\n혹시 설문조사에서 쓰지 않은 경우엔 reaiqwhl@yonsei.ac.kr로 연락 주세요.'
-					}
-				/>
-			)}
+				))}
 			<div>
 				<PageButton
 					currentPage={page}
@@ -58,7 +49,7 @@ export default function FAQPage() {
 	);
 }
 
-function FAQBoxElement({ idx, category, question, answer }: FAQBoxElementProps) {
+function FAQBoxElement({ idx, category, question, answer, currentPage, size }: FAQBoxElementProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const targetRef = useRef() as MutableRefObject<HTMLPreElement>;
 
@@ -70,7 +61,8 @@ function FAQBoxElement({ idx, category, question, answer }: FAQBoxElementProps) 
 		<S.FAQBox isOpen={isOpen}>
 			<h3>
 				<S.Accent>Q</S.Accent>
-				<S.SemiAccent>{idx}</S.SemiAccent> <span>{category}</span>
+				<S.SemiAccent>{getAscendingIndex(currentPage, size, idx)}</S.SemiAccent>{' '}
+				<span>{category}</span>
 			</h3>
 			<div onClick={onToggle}>
 				<pre>{question}</pre>
