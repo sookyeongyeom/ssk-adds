@@ -16,8 +16,12 @@ import stringToJson from '../../../utils/stringToJson';
 import { MemberBoxElementProps } from '../../../@types/adds';
 import { Devices } from '../../../styles/devices';
 import { svgMemberEmail, svgMemberTelephone, svgMemberHomepage } from '../../../styles/svgs';
-import useRoute from '../../../hooks/useRoute';
 import breakLineByAt from '../../../utils/breakLineByAt';
+import { Responsibilities } from '../../../constants/responsibilities';
+import removeWhiteSpaces from '../../../utils/removeWhiteSpaces';
+import { css } from 'styled-components';
+import Link from 'next/link';
+import attachProtocol from '../../../utils/attachProtocol';
 
 export default function MemberPage() {
 	const [members, setMembers] = useState<ResponseMember.Get>();
@@ -40,6 +44,7 @@ export default function MemberPage() {
 						jobTitle={member.jobTitle}
 						img={member.img}
 						responsibility={member.responsibility}
+						isPinned={removeWhiteSpaces(member.responsibility) === Responsibilities.leader}
 						key={i}
 					/>
 				))}
@@ -64,13 +69,13 @@ function MemberBoxElement({
 	introBody,
 	img,
 	responsibility,
+	isPinned,
 }: MemberBoxElementProps) {
-	const { onRouteToPath } = useRoute(`http://${homepage}`);
 	let imgSrc: string = Assets.placeholderImgSrc;
 	const parsedImg: FileDataType = stringToJson(img)?.[0];
 	if (parsedImg) imgSrc = getDownloadLinkFromS3(S3Folders.member, parsedImg.key);
 	return (
-		<S.MemberBox>
+		<S.MemberBox isPinned={isPinned}>
 			<div>
 				<img src={imgSrc} />
 			</div>
@@ -87,7 +92,9 @@ function MemberBoxElement({
 						<p>{breakLineByAt(email)}</p>
 					</S.Contact>
 				</div>
-				<S.Homepage onClick={onRouteToPath}>{svgMemberHomepage}</S.Homepage>
+				<Link href={attachProtocol(homepage)} passHref>
+					<S.Homepage>{svgMemberHomepage}</S.Homepage>
+				</Link>
 			</div>
 			<div>
 				<p>{jobTitle}</p>
@@ -101,11 +108,8 @@ namespace S {
 	export const MemberPageLayout = styled.div`
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 3rem;
-
-		> div:first-of-type {
-			grid-column: 1/3;
-		}
+		column-gap: 2.7rem;
+		row-gap: 9rem;
 
 		> div:last-of-type {
 			margin-top: calc(${Sizes.desktopPageButtonMarginTop} - 3rem);
@@ -113,10 +117,10 @@ namespace S {
 		}
 	`;
 
-	export const MemberBox = styled.div`
+	export const MemberBox = styled.div<isPinnedType>`
 		display: grid;
-		grid-template-columns: 24rem 1fr;
-		grid-template-rows: 26.5rem 1fr;
+		grid-template-columns: 20.5rem 1fr;
+		grid-template-rows: 22.5rem 1fr;
 		box-shadow: ${BoxShadows.smooth};
 		overflow: hidden;
 
@@ -146,19 +150,21 @@ namespace S {
 		/* 프로필 */
 		> div:nth-of-type(2) {
 			background-color: ${Colors.white};
-			padding: 2rem;
-			padding-top: 6.5rem;
+			padding: 0 4rem;
+			padding-top: 0.7rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
 			position: relative;
 
 			> p {
 				${Fonts.regular18}
 				margin-bottom: 1rem;
-				padding-top: 0.5rem;
 			}
 
 			> h2 {
 				${Fonts.bold32}
-				margin-bottom: 3rem;
+				margin-bottom: 2.5rem;
 			}
 
 			/* Contact Wrapper */
@@ -187,12 +193,12 @@ namespace S {
 		/* 소개 */
 		> div:last-of-type {
 			grid-column: 1/3;
-			background: linear-gradient(90deg, #e4e9f0 -7.97%, rgba(228, 233, 240, 0) 104.66%);
+			background: ${Colors.blue100};
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			gap: 0.5rem;
-			padding: 2rem;
+			padding: 1.5rem 2rem;
 
 			> p {
 				${Fonts.regular16}
@@ -208,6 +214,8 @@ namespace S {
 				}
 			}
 		}
+
+		${(props) => props.isPinned && PinnedMemberBox}
 	`;
 
 	export const Contact = styled.div`
@@ -235,5 +243,55 @@ namespace S {
 		background-color: ${Colors.blue200};
 		padding: 1.22rem 1rem;
 		cursor: pointer;
+	`;
+
+	export const PinnedMemberBox = css`
+		width: 95%;
+		margin: 0 auto;
+		grid-column: 1/3;
+		grid-row: 1/2;
+		grid-template-columns: 27rem 1fr;
+		grid-template-rows: 1fr min-content;
+		height: 33.6rem;
+
+		> div:first-of-type {
+			grid-row: 1/3;
+		}
+
+		> div:nth-of-type(2) {
+			justify-content: flex-end;
+			padding-bottom: 4rem;
+
+			> h2 {
+				margin-bottom: 4rem;
+			}
+		}
+
+		> div:nth-of-type(2) > div {
+			flex-direction: row;
+
+			> div {
+				flex-grow: 1;
+
+				&:last-of-type > div > svg {
+					position: relative;
+					top: 0.15rem;
+				}
+			}
+
+			> div > p {
+				${Fonts.regular16}
+				white-space: nowrap;
+			}
+		}
+
+		> div:last-of-type {
+			grid-column: 2/3;
+			padding: 1.7rem 2rem;
+
+			> p {
+				${Fonts.regular18}
+			}
+		}
 	`;
 }
