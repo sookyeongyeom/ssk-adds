@@ -10,16 +10,12 @@ import useBoard from '../../../hooks/useBoard';
 import { Paths } from '../../../constants/paths';
 import { BoardColumnOrders } from '../../../constants/boardColumnOrders';
 import { SC } from '../../../styles/styled';
-import useMobile from '../../../hooks/useMobile';
 
 export default function NoticePage() {
 	const [notice, setNotice] = useState<ResponseNotice.Get>();
 	const { page, onChangePage } = useChangePage();
 
-	const isMobile = useMobile();
-	const maps = !isMobile
-		? useBoard({ dep: notice, order: BoardColumnOrders.notice })
-		: useBoard({ dep: notice, order: BoardColumnOrders.mobile });
+	const maps = useBoard({ dep: notice, order: BoardColumnOrders.notice });
 
 	useEffect(() => {
 		useGet(() => getNotice({ page }), setNotice);
