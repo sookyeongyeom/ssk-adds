@@ -8,6 +8,8 @@ type FAQBoxElementProps = {
 	category: string;
 	question: string;
 	answer: string;
+	currentPage: number;
+	size: number;
 };
 
 /**
