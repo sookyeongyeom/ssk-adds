@@ -89,7 +89,7 @@ function MemberBoxElement({
 					</S.Contact>
 					<S.Contact>
 						<div>{svgMemberEmail}</div>
-						<p>{breakLineByAt(email)}</p>
+						<p>{isPinned ? email : breakLineByAt(email)}</p>
 					</S.Contact>
 				</div>
 				<Link href={attachProtocol(homepage)} passHref>
