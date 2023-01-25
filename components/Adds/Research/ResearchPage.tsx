@@ -15,13 +15,13 @@ export default function ResearchPage() {
 			<ResearchBoxElement
 				title={!isMobile ? '기초 설문조사 (ADDS-C; Core)' : '기초 설문조사\n(ADDS-C; Core)'}
 				description={
-					'알파 세대의 사회정서 발달(기질, 우울, 불안 등), 가족 내 상호작용, 학교 적응에 대한 양적 설문조사\n\n알파 세대 400명 대상 1~3차년도 연차별 1회 반복 수집'
+					'알파세대 아동의 일상과 사회정서발달을 파악하기 위한 기초 설문조사입니다.\n아동의 기질, 우울, 불안, 스트레스, 문제행동, 학교 적응 뿐 아니라 아동의 디지털 또래관계, 디지털 가정환경 등 아동의 디지털 일상을 다각도로 파악합니다.\n연중 1회 온라인 설문을 통해 진행합니다'
 				}
 			/>
 			<ResearchBoxElement
 				title={'알파 세대 디지털 일상 데이터\n(ADDS-D; Daily)'}
 				description={
-					'알파 세대의 사회정서 발달(기질, 우울, 불안 등), 가족 내 상호작용, 학교 적응에 대한 양적 설문조사\n\n알파 세대 400명 대상 1~3차년도 연차별 1회 반복 수집'
+					'알파세대 아동의 디지털 관련 일상을 EMA (Ecological momentary assessment) 방식으로 측정합니다.\n아동의 하루동안의 정서, 스트레스, 활동성 그리고 디지털 사용을 수집하며 1주일간 매일 같은 시간에 측정해 아동의 일상생활과 밀접한 데이터를 수집하고자 하였습니다.\n기초설문조사(ADDS-C), 스마트디바이스 측정(ADDS-S) 데이터와 함께 활용해 알파 세대 아동의 일상과 디지털 활동을 심도있게 파악할 수 있습니다 '
 				}
 			/>
 			<ResearchBoxElement
@@ -31,7 +31,7 @@ export default function ResearchPage() {
 						: '알파 세대의 사회화 과정에 관한\n질적 데이터\n(ADDS-Q; Qualitative)'
 				}
 				description={
-					'알파 세대의 부모(1차년도), 교사(2차년도), 알파 세대 본인(3차년도) 대상 심층 인터뷰\n\n알파 세대 청소년과 주요 체계를 대상으로 디지털 일상과 사회화 과정 및 특성, 새로운 이슈에 대한 심층 인터뷰'
+					'알파세대 아동과 주양육자의 디지털 일상과 사회화을 파악하기 위한 질적 연구입니다.\n아동의 일상, 사회 연결망, 디지털 환경, 모바일/인공지능 기기 사용, 환경감수성, 놀이성 등 변화한 환경에 따른 아동의 일상생활과 관련된 질적 데이터를 수집하고 있습니다.\n아동과 주양육자를 대상으로 연중 1회 온라인 인터뷰를 진행합니다.'
 				}
 			/>
 			<ResearchBoxElement
@@ -41,7 +41,7 @@ export default function ResearchPage() {
 						: '알파 세대 일상에 대한\n스마트 디바이스 측정\n(ADDS-S; Smart)'
 				}
 				description={
-					'스마트 디바이스(스마트 워치)의 전기반응 센서와 행동기반 기술을 활용하여 알파 세대의 운동, 식사, 수면, 디지털 사용을 추적\n\n2차와 3차년도에 200명을 대상으로 1일 3회(아침,점심,저녁) 1주일간 측정'
+					'알파세대 아동의 일상 활동량 파악을 위한 스마트 디바이스 측정 조사입니다.\n약 10일 간의 Fitbit 스마트워치 착용을 통해 아동의 신체활동시간, 수면시간, 걸음 수 등 신체활동 관련 일상정보를 수집하고자 합니다.\n디지털 일상 데이터(ADDS-D)와 함께 활용해 알파 세대 아동의 일상과 신체 활동을 깊이 이해할 수 있습니다.'
 				}
 			/>
 			<ResearchBoxElement
@@ -90,8 +90,8 @@ namespace S {
 		/* 생체지표 */
 		> div:last-of-type {
 			/* height: 30rem; */
-			gap: 2.5rem;
-			line-height: 130%;
+			/* gap: 2.5rem; */
+			/* line-height: 130%; */
 		}
 
 		@media ${Devices.mobile} {
@@ -113,9 +113,9 @@ namespace S {
 		transition-property: background;
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 2.5rem;
 		justify-content: center;
-		padding: ${(props) => (!props.isHover ? '7rem' : '4.5rem 4.8rem 5rem 4.8rem')};
+		padding: ${(props) => (!props.isHover ? '7rem' : '4.5rem 4.8rem 4.8rem 4.8rem')};
 		position: relative;
 		box-shadow: ${BoxShadows.smooth};
 
@@ -142,11 +142,12 @@ namespace S {
 	export const Description = styled.pre`
 		${Fonts.medium16}
 		padding: 0 3rem;
+		line-height: 150%;
 
 		@media ${Devices.mobile} {
 			${Fonts.medium14}
 			padding: 0 1rem;
-			line-height: 130%;
+			/* line-height: 130%; */
 		}
 	`;
 
