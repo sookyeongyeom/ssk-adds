@@ -4,6 +4,8 @@ import { MutableRefObject, useRef, useState } from 'react';
 import { Colors } from '../../styles/colors';
 import { Sizes } from '../../styles/sizes';
 import { Devices } from '../../styles/devices';
+import { Urls } from '../../constants/urls';
+import Link from 'next/link';
 
 export default function HomeCarousel() {
 	const [itemIdx, setItemIdx] = useState(0);
@@ -38,31 +40,49 @@ export default function HomeCarousel() {
 				<S.CarouselWindow>
 					<S.CarouselWrapper itemIdx={itemIdx} ref={carouselWrapperRef}>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_life.svg' />
+							<Link href={Urls.carouselLife}>
+								<img src='/assets/home_carousel_life.svg' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/header_logo.png' />
+							<Link href={Urls.carouselYonsei}>
+								<img src='/assets/header_logo.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_nrf.jpeg' />
+							<Link href={Urls.carouselNrf}>
+								<img src='/assets/home_carousel_nrf.jpeg' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_youth.png' />
+							<Link href={Urls.carouselYouth}>
+								<img src='/assets/home_carousel_youth.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_ssk.png' />
+							<Link href={Urls.carouselSsk}>
+								<img src='/assets/home_carousel_ssk.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_life.svg' />
+							<Link href={Urls.carouselLife}>
+								<img src='/assets/home_carousel_life.svg' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/header_logo.png' />
+							<Link href={Urls.carouselYonsei}>
+								<img src='/assets/header_logo.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_nrf.jpeg' />
+							<Link href={Urls.carouselNrf}>
+								<img src='/assets/home_carousel_nrf.jpeg' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_youth.png' />
+							<Link href={Urls.carouselYouth}>
+								<img src='/assets/home_carousel_youth.png' />
+							</Link>
 						</S.CarouselItem>
 					</S.CarouselWrapper>
 				</S.CarouselWindow>
@@ -138,7 +158,7 @@ namespace S {
 		width: ${Sizes.desktopCarouselItemWidth};
 		height: ${Sizes.desktopCarouselItemHeight};
 
-		> img {
+		img {
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
