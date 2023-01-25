@@ -4,6 +4,8 @@ import { MutableRefObject, useRef, useState } from 'react';
 import { Colors } from '../../styles/colors';
 import { Sizes } from '../../styles/sizes';
 import { Devices } from '../../styles/devices';
+import { Urls } from '../../constants/urls';
+import Link from 'next/link';
 
 export default function HomeCarousel() {
 	const [itemIdx, setItemIdx] = useState(0);
@@ -15,7 +17,7 @@ export default function HomeCarousel() {
 		if (itemIdx === 0) {
 			setTimeout(() => {
 				carouselWrapperRef.current.style.transition = 'none';
-				setItemIdx(4);
+				setItemIdx(5);
 			}, 300);
 		}
 	};
@@ -23,7 +25,7 @@ export default function HomeCarousel() {
 	const onNext = () => {
 		carouselWrapperRef.current.style.transition = '0.3s ease';
 		setItemIdx(itemIdx + 1);
-		if (itemIdx === 4) {
+		if (itemIdx === 5) {
 			setTimeout(() => {
 				carouselWrapperRef.current.style.transition = 'none';
 				setItemIdx(0);
@@ -38,42 +40,71 @@ export default function HomeCarousel() {
 				<S.CarouselWindow>
 					<S.CarouselWrapper itemIdx={itemIdx} ref={carouselWrapperRef}>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_life.svg' />
+							<Link href={Urls.carouselLife}>
+								<img src='/assets/home_carousel_life.svg' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/header_logo.png' />
+							<Link href={Urls.carouselYonsei}>
+								<img src='/assets/header_logo.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_nrf.jpeg' />
+							<Link href={Urls.carouselNrf}>
+								<img src='/assets/home_carousel_nrf.jpeg' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_youth.png' />
+							<Link href={Urls.carouselYouth}>
+								<img src='/assets/home_carousel_youth.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_ssk.png' />
+							<Link href={Urls.carouselSsk}>
+								<img src='/assets/home_carousel_ssk.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_life.svg' />
+							<Link href={Urls.carouselChe}>
+								<img src='/assets/home_carousel_che.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/header_logo.png' />
+							<Link href={Urls.carouselLife}>
+								<img src='/assets/home_carousel_life.svg' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_nrf.jpeg' />
+							<Link href={Urls.carouselYonsei}>
+								<img src='/assets/header_logo.png' />
+							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
-							<img src='/assets/home_carousel_youth.png' />
+							<Link href={Urls.carouselNrf}>
+								<img src='/assets/home_carousel_nrf.jpeg' />
+							</Link>
+						</S.CarouselItem>
+						<S.CarouselItem>
+							<Link href={Urls.carouselYouth}>
+								<img src='/assets/home_carousel_youth.png' />
+							</Link>
+						</S.CarouselItem>
+						<S.CarouselItem>
+							<Link href={Urls.carouselChe}>
+								<img src='/assets/home_carousel_che.png' />
+							</Link>
 						</S.CarouselItem>
 					</S.CarouselWrapper>
 				</S.CarouselWindow>
 				<div onClick={onNext}>{svgRight14}</div>
 			</div>
 			<div>
-				<S.ItemIndicator isCurrent={itemIdx === 0 || itemIdx === 5} />
+				<S.ItemIndicator isCurrent={itemIdx === 0 || itemIdx === 6} />
 				<S.ItemIndicator isCurrent={itemIdx === 1} />
 				<S.ItemIndicator isCurrent={itemIdx === 2} />
 				<S.ItemIndicator isCurrent={itemIdx === 3} />
-				<S.ItemIndicator isCurrent={itemIdx === 4 || itemIdx === -1} />
+				<S.ItemIndicator isCurrent={itemIdx === 4} />
+				<S.ItemIndicator isCurrent={itemIdx === 5 || itemIdx === -1} />
 			</div>
 		</S.HomeCarouselLayout>
 	);
@@ -138,7 +169,7 @@ namespace S {
 		width: ${Sizes.desktopCarouselItemWidth};
 		height: ${Sizes.desktopCarouselItemHeight};
 
-		> img {
+		img {
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
