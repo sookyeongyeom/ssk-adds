@@ -17,7 +17,7 @@ export default function HomeCarousel() {
 		if (itemIdx === 0) {
 			setTimeout(() => {
 				carouselWrapperRef.current.style.transition = 'none';
-				setItemIdx(4);
+				setItemIdx(5);
 			}, 300);
 		}
 	};
@@ -25,7 +25,7 @@ export default function HomeCarousel() {
 	const onNext = () => {
 		carouselWrapperRef.current.style.transition = '0.3s ease';
 		setItemIdx(itemIdx + 1);
-		if (itemIdx === 4) {
+		if (itemIdx === 5) {
 			setTimeout(() => {
 				carouselWrapperRef.current.style.transition = 'none';
 				setItemIdx(0);
@@ -65,6 +65,11 @@ export default function HomeCarousel() {
 							</Link>
 						</S.CarouselItem>
 						<S.CarouselItem>
+							<Link href={Urls.carouselChe}>
+								<img src='/assets/home_carousel_che.png' />
+							</Link>
+						</S.CarouselItem>
+						<S.CarouselItem>
 							<Link href={Urls.carouselLife}>
 								<img src='/assets/home_carousel_life.svg' />
 							</Link>
@@ -84,16 +89,22 @@ export default function HomeCarousel() {
 								<img src='/assets/home_carousel_youth.png' />
 							</Link>
 						</S.CarouselItem>
+						<S.CarouselItem>
+							<Link href={Urls.carouselChe}>
+								<img src='/assets/home_carousel_che.png' />
+							</Link>
+						</S.CarouselItem>
 					</S.CarouselWrapper>
 				</S.CarouselWindow>
 				<div onClick={onNext}>{svgRight14}</div>
 			</div>
 			<div>
-				<S.ItemIndicator isCurrent={itemIdx === 0 || itemIdx === 5} />
+				<S.ItemIndicator isCurrent={itemIdx === 0 || itemIdx === 6} />
 				<S.ItemIndicator isCurrent={itemIdx === 1} />
 				<S.ItemIndicator isCurrent={itemIdx === 2} />
 				<S.ItemIndicator isCurrent={itemIdx === 3} />
-				<S.ItemIndicator isCurrent={itemIdx === 4 || itemIdx === -1} />
+				<S.ItemIndicator isCurrent={itemIdx === 4} />
+				<S.ItemIndicator isCurrent={itemIdx === 5 || itemIdx === -1} />
 			</div>
 		</S.HomeCarouselLayout>
 	);
