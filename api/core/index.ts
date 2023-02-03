@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { toCamel } from 'snake-camel';
 import { GenericInstance } from '../../@types/api/core';
 import { store } from '../../components/Provider/StoreProvider';

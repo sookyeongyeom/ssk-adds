@@ -35,7 +35,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.DOCKER_IMAGE }}:latest
+          tags: ${{ env.DOCKER_IMAGE }}:ssl
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -45,7 +45,4 @@ jobs:
     steps:
       - name: Deploy
         run: |
-          docker stop ${{ env.DOCKER_NAME }} && docker rm ${{ env.DOCKER_NAME }}
-          docker system prune -a -f
-          docker pull ${{ env.DOCKER_IMAGE }}:latest
-          docker run -d -p 80:3000 --name ${{ env.DOCKER_NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker pull ${{ env.DOCKER_IMAGE }}:ssl
