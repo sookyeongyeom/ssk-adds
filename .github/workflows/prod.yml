@@ -46,3 +46,5 @@ jobs:
       - name: Deploy
         run: |
           docker pull ${{ env.DOCKER_IMAGE }}:ssl
+          cd /home/ubuntu/SSK_WEB_BACK
+          docker-compose up --build -d
