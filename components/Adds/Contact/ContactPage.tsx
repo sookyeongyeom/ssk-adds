@@ -49,7 +49,7 @@ export default function ContactPage() {
 				<S.SmallCircle isHover={isHover}>
 					<div>{svgTelephone}</div>
 					<div>
-						{contact && (
+						{!!contact?.length && (
 							<>
 								{stringToJson(contact[0]?.phoneNumber)[0].name}
 								<br />
@@ -63,7 +63,7 @@ export default function ContactPage() {
 						<S.SmallCircle isHover={isHover}>
 							<div>{svgTelephone}</div>
 							<div>
-								{contact && (
+								{!!contact?.length && (
 									<>
 										{stringToJson(contact[0]?.phoneNumber)[1].name}
 										<br />
@@ -75,7 +75,7 @@ export default function ContactPage() {
 						<S.SmallCircle isHover={isHover}>
 							<div>{svgTelephone}</div>
 							<div>
-								{contact && (
+								{!!contact?.length && (
 									<>
 										{stringToJson(contact[0]?.phoneNumber)[2].name}
 										<br />
@@ -89,7 +89,7 @@ export default function ContactPage() {
 			</div>
 			{!isMobile && (
 				<div>
-					{contact && (
+					{!!contact?.length && (
 						<>
 							<S.ExtraPhoneNumber isHover={isHover}>
 								<div>{svgTelephone}</div>

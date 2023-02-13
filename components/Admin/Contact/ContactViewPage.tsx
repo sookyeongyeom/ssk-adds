@@ -21,11 +21,12 @@ export default function ContactViewPage() {
 		<div>
 			<AdminView id={1} basePath={basePath} onEdit={onEdit}>
 				<SC.Label>이메일</SC.Label>
-				<div>{contact && contact[0].email}</div>
+				<div>{contact && !!contact.length && contact[0].email}</div>
 				<SC.Label>연락처</SC.Label>
 				<div>
 					<ul>
 						{contact &&
+							!!contact.length &&
 							stringToJson(contact[0].phoneNumber).map(
 								(phoneNumber: PhoneNumberType, i: number) => (
 									<li key={i}>
@@ -36,7 +37,7 @@ export default function ContactViewPage() {
 					</ul>
 				</div>
 				<SC.Label>위치</SC.Label>
-				<div>{contact && contact[0].wayToLab}</div>
+				<div>{contact && !!contact.length && contact[0].wayToLab}</div>
 			</AdminView>
 		</div>
 	);

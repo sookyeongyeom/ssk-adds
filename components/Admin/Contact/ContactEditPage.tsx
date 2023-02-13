@@ -24,11 +24,11 @@ function FAQEditPageInnerShell({
 	data,
 }: Omit<EditPageInnerShellProps<ResponseContact.Get>, 'id' | 'path'>) {
 	const { onRouteToPath } = useRoute(Paths.admin + Paths.contact);
-	const { value: email, onChange: onChangeEmail } = useInput(data && data[0].email);
+	const { value: email, onChange: onChangeEmail } = useInput(data && data[0]?.email);
 	/* prettier-ignore */
-	const { value: wayToLab, onChange: onChangeWayToLab } = useInput(data && data[0].wayToLab);
+	const { value: wayToLab, onChange: onChangeWayToLab } = useInput(data && data[0]?.wayToLab);
 	/* prettier-ignore */
-	const { phoneNumbers, onChangeName, onChangePhoneNumber } = usePhoneNumbers(data && stringToJson(data[0].phoneNumber));
+	const { phoneNumbers, onChangeName, onChangePhoneNumber } = usePhoneNumbers(data && stringToJson(data[0]?.phoneNumber));
 
 	const onSubmit = async () => {
 		/* PUT */
