@@ -11,10 +11,13 @@ import usePhoneNumbers from '../../../hooks/usePhoneNumbers';
 import stringToJson from '../../../utils/stringToJson';
 
 export default function ContactEditPage() {
-	const [contact, setContact] = useState<ResponseContact.Get>();
+	const [contact, setContact] = useState<ResponseContact.Item>();
 
 	useEffect(() => {
-		useGet(() => getContact(), setContact);
+		useGet(
+			() => getContact(),
+			(contacts) => contacts && setContact(Object.values(contacts)[0]),
+		);
 	}, []);
 
 	return <>{contact && <FAQEditPageInnerShell data={contact} />}</>;
@@ -22,17 +25,20 @@ export default function ContactEditPage() {
 
 function FAQEditPageInnerShell({
 	data,
-}: Omit<EditPageInnerShellProps<ResponseContact.Get>, 'id' | 'path'>) {
+}: Omit<EditPageInnerShellProps<ResponseContact.Item>, 'id' | 'path'>) {
 	const { onRouteToPath } = useRoute(Paths.admin + Paths.contact);
-	const { value: email, onChange: onChangeEmail } = useInput(data && data[0]?.email);
+	const { value: email, onChange: onChangeEmail } = useInput(data?.email);
 	/* prettier-ignore */
-	const { value: wayToLab, onChange: onChangeWayToLab } = useInput(data && data[0]?.wayToLab);
+	const { value: wayToLab, onChange: onChangeWayToLab } = useInput(data?.wayToLab);
 	/* prettier-ignore */
-	const { phoneNumbers, onChangeName, onChangePhoneNumber } = usePhoneNumbers(data && stringToJson(data[0]?.phoneNumber));
+	const { phoneNumbers, onChangeName, onChangePhoneNumber } = usePhoneNumbers(data && stringToJson(data?.phoneNumber));
 
 	const onSubmit = async () => {
+		const id = data?.id ?? 0;
+
 		/* PUT */
 		const res = await putContact({
+			id,
 			email,
 			phoneNumber: JSON.stringify(phoneNumbers),
 			wayToLab,

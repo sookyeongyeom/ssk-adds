@@ -13,14 +13,14 @@ import { Devices } from '../../../styles/devices';
 
 export default function ContactPage() {
 	const isMobile = useMobile();
-	const [contact, setContact] = useState<ResponseContact.Get>();
+	const [contact, setContact] = useState<ResponseContact.Item>();
 	const [isHover, setIsHover] = useState(false);
 
 	const onMouseOver = () => !isMobile && setIsHover(true);
 	const onMouseLeave = () => !isMobile && setIsHover(false);
 
 	useEffect(() => {
-		useGet(getContact, setContact);
+		useGet(getContact, (contacts) => contacts && setContact(Object.values(contacts)[0]));
 	}, []);
 
 	return (
@@ -34,26 +34,24 @@ export default function ContactPage() {
 				<S.SmallCircle isHover={isHover}>
 					<div>{svgEmail}</div>
 					<div>
-						{contact && (
-							<>
-								{contact[0]?.email.split('@')[0]}
-								<br />@{contact[0]?.email.split('@')[1]}
-							</>
-						)}
+						<>
+							{contact?.email.split('@')[0]}
+							<br />@{contact?.email.split('@')[1]}
+						</>
 					</div>
 				</S.SmallCircle>
 				<S.BigCircle isHover={isHover}>
 					<div>{svgMap}</div>
-					<div>{contact && contact[0]?.wayToLab}</div>
+					<div>{contact?.wayToLab}</div>
 				</S.BigCircle>
 				<S.SmallCircle isHover={isHover}>
 					<div>{svgTelephone}</div>
 					<div>
-						{!!contact?.length && (
+						{contact && (
 							<>
-								{stringToJson(contact[0]?.phoneNumber)[0].name}
+								{stringToJson(contact?.phoneNumber)[0].name}
 								<br />
-								{stringToJson(contact[0]?.phoneNumber)[0].phoneNumber}
+								{stringToJson(contact?.phoneNumber)[0].phoneNumber}
 							</>
 						)}
 					</div>
@@ -63,11 +61,11 @@ export default function ContactPage() {
 						<S.SmallCircle isHover={isHover}>
 							<div>{svgTelephone}</div>
 							<div>
-								{!!contact?.length && (
+								{contact && (
 									<>
-										{stringToJson(contact[0]?.phoneNumber)[1].name}
+										{stringToJson(contact?.phoneNumber)[1].name}
 										<br />
-										{stringToJson(contact[0]?.phoneNumber)[1].phoneNumber}
+										{stringToJson(contact?.phoneNumber)[1].phoneNumber}
 									</>
 								)}
 							</div>
@@ -75,11 +73,11 @@ export default function ContactPage() {
 						<S.SmallCircle isHover={isHover}>
 							<div>{svgTelephone}</div>
 							<div>
-								{!!contact?.length && (
+								{contact && (
 									<>
-										{stringToJson(contact[0]?.phoneNumber)[2].name}
+										{stringToJson(contact?.phoneNumber)[2].name}
 										<br />
-										{stringToJson(contact[0]?.phoneNumber)[2].phoneNumber}
+										{stringToJson(contact?.phoneNumber)[2].phoneNumber}
 									</>
 								)}
 							</div>
@@ -89,17 +87,17 @@ export default function ContactPage() {
 			</div>
 			{!isMobile && (
 				<div>
-					{!!contact?.length && (
+					{contact && (
 						<>
 							<S.ExtraPhoneNumber isHover={isHover}>
 								<div>{svgTelephone}</div>
-								<div>{stringToJson(contact[0]?.phoneNumber)[1].name}</div>
-								<div>{stringToJson(contact[0]?.phoneNumber)[1].phoneNumber}</div>
+								<div>{stringToJson(contact?.phoneNumber)[1].name}</div>
+								<div>{stringToJson(contact?.phoneNumber)[1].phoneNumber}</div>
 							</S.ExtraPhoneNumber>
 							<S.ExtraPhoneNumber isHover={isHover}>
 								<div>{svgTelephone}</div>
-								<div>{stringToJson(contact[0]?.phoneNumber)[2].name}</div>
-								<div>{stringToJson(contact[0]?.phoneNumber)[2].phoneNumber}</div>
+								<div>{stringToJson(contact?.phoneNumber)[2].name}</div>
+								<div>{stringToJson(contact?.phoneNumber)[2].phoneNumber}</div>
 							</S.ExtraPhoneNumber>
 						</>
 					)}
