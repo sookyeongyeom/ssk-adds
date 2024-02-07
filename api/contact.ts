@@ -10,12 +10,11 @@ export const getContact = () => {
 };
 
 export const putContact = (data: RequestContact.Put) => {
-	const url = `${baseUrl}`;
+	const url = `${baseUrl}?id=${data.id}`;
 	return request.put<ResponseContact.Put, RequestContact.Put>(
 		url,
 		toSnake({
 			...data,
-			id: 0,
 			body: 'body',
 		}),
 	);

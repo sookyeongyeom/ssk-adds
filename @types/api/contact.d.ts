@@ -1,15 +1,17 @@
 export namespace RequestContact {
 	type Put = {
-		id?: number;
-		body?: string;
+		id: number;
 		email: string;
 		phoneNumber: string;
 		wayToLab: string;
+		body?: string;
 	};
 }
 
 export namespace ResponseContact {
-	type Get = Item[];
+	type Get = {
+		[key: number]: Item;
+	};
 
 	type Item = {
 		id: number;
