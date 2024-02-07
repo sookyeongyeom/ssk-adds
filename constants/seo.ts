@@ -7,7 +7,7 @@ export const Seo: SeoType = {
 		member: '연구진 소개',
 		news: '보도자료',
 		notice: '공지사항',
-		paper: '데이터활용논문',
+		paper: '연구실적',
 		publication: '발간물',
 		research: '조사설계',
 		resource: '자료안내',

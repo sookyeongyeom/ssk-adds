@@ -31,7 +31,7 @@ export default function AdminSidebar({ isSidebarOpen }: AdminSidebarProps) {
 					<Link href={Paths.admin + Paths.resource}>자료안내</Link>
 				</S.Menu>
 				<S.Menu isCurrent={path === Paths.paper}>
-					<Link href={Paths.admin + Paths.paper}>데이터활용논문</Link>
+					<Link href={Paths.admin + Paths.paper}>연구실적</Link>
 				</S.Menu>
 				<S.Menu isCurrent={path === Paths.notice}>
 					<Link href={Paths.admin + Paths.notice}>공지사항</Link>
